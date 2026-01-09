@@ -15,3 +15,10 @@ __pycache__/
 dist/
 build/
 *.log
+
+# Generated diagram artifacts (source lives in .mmd/.md)
+/docs/diagrams/*.png
+/docs/diagrams/*.jpg
+/docs/diagrams/*.jpeg
+/docs/diagrams/*.webp
+/docs/diagrams/*.gif
