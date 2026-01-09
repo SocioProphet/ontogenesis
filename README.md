@@ -25,3 +25,9 @@ make validate
 - `examples/*.ttl` — example datasets
 - `tests/*.rq` — SPARQL invariant tests (should return 0 rows)
 - `capd/*.json` — CapD descriptor for capability packaging
+
+## Diagrams
+
+![Agentic Flow Architecture](docs/diagrams/agentic-flow-architecture.png)
+
+![Agentic Flow Architecture — Human Twin](docs/diagrams/agentic-flow-architecture-body.png)
