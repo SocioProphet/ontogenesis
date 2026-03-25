@@ -1,0 +1,129 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix capd: <https://socioprophet.github.io/ontogenesis/prophet#capd#> .
+@prefix nl:   <https://socioprophet.github.io/ontogenesis/noether#> .
+@prefix epi:  <https://socioprophet.github.io/ontogenesis/epi#> .
+
+<shapes/core.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass upper:InformationArtifact ;
+  sh:message "Core SHACL bundle loaded." .
+
+### CapD / CapabilityDescriptor gates
+capd:CapabilityShape a sh:NodeShape ;
+  sh:targetClass prop:CapabilityDescriptor ;
+  sh:property [
+    sh:path prop:descriptorId ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path prop:semver ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path prop:declaresPlane ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path prop:declaresVerb ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path prop:rolloutStrategy ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path prop:gateName ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+### Noetherian layer contract gates
+nl:LayerContractShape a sh:NodeShape ;
+  sh:targetClass nl:LayerContract ;
+  sh:property [ sh:path nl:forLayer ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path nl:algebra ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path nl:group ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path nl:invariantForm ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path nl:integrator ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path nl:hasCharge ; sh:minCount 1 ] .
+
+# If algebra is octonions, require at least one coercion witness with associator norm
+nl:OctonionWitnessRule a sh:NodeShape ;
+  sh:targetClass nl:LayerContract ;
+  sh:rule [
+    a sh:SPARQLRule ;
+    sh:construct """
+      PREFIX nl: <https://socioprophet.github.io/ontogenesis/noether#>
+      PREFIX sh: <http://www.w3.org/ns/shacl#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      CONSTRUCT {
+        ?this sh:result [
+          a sh:ValidationResult ;
+          sh:resultSeverity sh:Violation ;
+          sh:resultMessage "Octonion contracts must record a coercion witness associator norm." ;
+          sh:focusNode ?this ;
+        ] .
+      }
+      WHERE {
+        ?this nl:algebra nl:O .
+        FILTER NOT EXISTS {
+          ?this (nl:coercionIn|nl:coercionOut) ?c .
+          ?c nl:hasWitness ?w .
+          ?w nl:associatorNorm ?n .
+        }
+      }
+    """ ;
+  ] .
+
+### Quantum lane gates
+epi:QuantumLaneShape a sh:NodeShape ;
+  sh:targetClass epi:QuantumLane ;
+  sh:property [
+    sh:path epi:hardwareOptIn ;
+    sh:minCount 1 ;
+    sh:datatype xsd:boolean ;
+  ] ;
+  sh:property [
+    sh:path epi:qubitBudget ;
+    sh:minCount 1 ;
+    sh:datatype xsd:integer ;
+  ] .
+
+# If hardwareOptIn true, require provider + backend to be explicitly recorded
+epi:QuantumHardwareOptInShape a sh:NodeShape ;
+  sh:targetClass epi:QuantumLane ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "When hardwareOptIn=true, usesProvider and tasks' usesBackend must be present." ;
+    sh:select """
+      PREFIX epi: <https://socioprophet.github.io/ontogenesis/epi#>
+      SELECT ?this WHERE {
+        ?this epi:hardwareOptIn true .
+        FILTER NOT EXISTS { ?this epi:usesProvider ?p . }
+      }
+    """ ;
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "When hardwareOptIn=true, every QuantumTask must have usesBackend set." ;
+    sh:select """
+      PREFIX epi: <https://socioprophet.github.io/ontogenesis/epi#>
+      SELECT ?this WHERE {
+        ?this epi:hardwareOptIn true .
+        ?this epi:runsTask ?t .
+        FILTER NOT EXISTS { ?t epi:usesBackend ?b . }
+      }
+    """ ;
+  ] .
+

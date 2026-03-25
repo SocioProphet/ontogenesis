@@ -1,0 +1,8 @@
+Ontogenesis
+
+- Source code (scripts, tooling): Apache-2.0
+- Ontology content (Turtle/JSON-LD/SHACL): CC-BY-4.0 unless otherwise noted.
+
+Third-party ontologies referenced in `imports/ontologies.yaml` are not bundled by default.
+Check each upstream license before vendoring.
+

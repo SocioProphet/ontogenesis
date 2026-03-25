@@ -1,0 +1,22 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/Twin.ttl> a owl:Ontology ;
+  dct:title "Twin Ontology" ;
+  dct:description "Twin Bridge handshake, snapshots, replication, macro federation." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/platform.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> .
+
+plat:Snapshot a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Snapshot" .
+plat:Handshake a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Handshake" .
+plat:Replicator a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Replicator" .
+
+plat:producesSnapshot a owl:ObjectProperty ; rdfs:domain plat:Handshake ; rdfs:range plat:Snapshot ; rdfs:label "produces snapshot" .
+plat:replicates a owl:ObjectProperty ; rdfs:domain plat:Replicator ; rdfs:range plat:Snapshot ; rdfs:label "replicates" .

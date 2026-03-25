@@ -1,0 +1,31 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix math: <https://socioprophet.github.io/ontogenesis/domains/math#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/math.ttl> a owl:Ontology ;
+  dct:title "Domain — Mathematics (Core)" ;
+  dct:description "A pragmatic math core for modeling algebras, groups, manifolds, proofs, and equations used by Noetherian learning and symbolic regression. For full coverage, map to OpenMath/OntoMathPro as imports." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+math:MathematicalObject a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Mathematical object" .
+math:Structure a owl:Class ; rdfs:subClassOf math:MathematicalObject ; rdfs:label "Structure" .
+math:AlgebraicStructure a owl:Class ; rdfs:subClassOf math:Structure ; rdfs:label "Algebraic structure" .
+math:Group a owl:Class ; rdfs:subClassOf math:AlgebraicStructure ; rdfs:label "Group" .
+math:Ring a owl:Class ; rdfs:subClassOf math:AlgebraicStructure ; rdfs:label "Ring" .
+math:Field a owl:Class ; rdfs:subClassOf math:AlgebraicStructure ; rdfs:label "Field" .
+
+math:Manifold a owl:Class ; rdfs:subClassOf math:Structure ; rdfs:label "Manifold" .
+math:SymplecticManifold a owl:Class ; rdfs:subClassOf math:Manifold ; rdfs:label "Symplectic manifold" .
+math:RiemannianManifold a owl:Class ; rdfs:subClassOf math:Manifold ; rdfs:label "Riemannian manifold" .
+
+math:Equation a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Equation" .
+math:Proof a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Proof" .
+math:Theorem a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Theorem" .
+
+math:hasStatement a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "has statement" .
+math:usesSymbol a owl:DatatypeProperty ; rdfs:domain math:Equation ; rdfs:range xsd:string ; rdfs:label "uses symbol" .

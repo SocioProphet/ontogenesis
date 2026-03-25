@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Artifacts
+dist/
+audit/
+*.zip
+*.tar.gz
+
+# OS
+.DS_Store

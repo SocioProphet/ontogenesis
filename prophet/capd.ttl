@@ -1,0 +1,29 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix capd: <https://socioprophet.github.io/ontogenesis/prophet#capd#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<prophet/capd.ttl> a owl:Ontology ;
+  dct:title "CapD Ontology" ;
+  dct:description "Detailed Capability Descriptor vocabulary aligned to Prophet's dynamic registration flow and SHACL gates." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <prophet/prophet_cli.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> .
+
+capd:Capability a owl:Class ; rdfs:subClassOf prop:CapabilityDescriptor ; rdfs:label "Capability" .
+capd:requires a owl:ObjectProperty ; rdfs:domain capd:Capability ; rdfs:range capd:Requirements ; rdfs:label "requires" .
+capd:Requirements a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Requirements" .
+
+capd:requiresSpace a owl:ObjectProperty ; rdfs:domain capd:Capability ; rdfs:range middle:Space ; rdfs:label "requires space" .
+capd:requiresSecretRef a owl:DatatypeProperty ; rdfs:domain capd:Requirements ; rdfs:range xsd:string ; rdfs:label "requires secret ref" .
+capd:artifactImage a owl:DatatypeProperty ; rdfs:domain capd:Capability ; rdfs:range xsd:string ; rdfs:label "artifact image" .
+capd:artifactChart a owl:DatatypeProperty ; rdfs:domain capd:Capability ; rdfs:range xsd:string ; rdfs:label "artifact chart" .
+
+capd:policyPrivacy a owl:DatatypeProperty ; rdfs:domain capd:Capability ; rdfs:range xsd:string ; rdfs:label "policy privacy" .
+capd:policyCapability a owl:DatatypeProperty ; rdfs:domain capd:Capability ; rdfs:range xsd:string ; rdfs:label "policy capability" .
+

@@ -1,0 +1,8 @@
+[project]
+name = "ontogenesis-tools"
+version = "0.1.0"
+description = "Build/audit tools for Ontogenesis ontologies"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

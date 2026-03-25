@@ -1,0 +1,41 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix hum: <https://socioprophet.github.io/ontogenesis/domains/human#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/human.ttl> a owl:Ontology ;
+  dct:title "Domain — Human (Persons, Sex/Gender, Phenotypes)" ;
+  dct:description "Neutral modeling of persons and observable phenotypes. Phenotypes should be represented as coded traits/measurements (e.g., HPO) rather than essentialized categories. This ontology is intended for description and clinical/scientific interoperability, not discrimination." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+hum:Person a owl:Class ; rdfs:subClassOf upper:Agent ; rdfs:label "Person" .
+hum:BiologicalSex a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Biological sex (assigned at birth)" .
+hum:GenderIdentity a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Gender identity" .
+hum:PhenotypeTrait a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Phenotype trait" .
+hum:PhenotypeObservation a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Phenotype observation" .
+
+hum:sexAssignedAtBirth a owl:ObjectProperty ; rdfs:domain hum:Person ; rdfs:range hum:BiologicalSex ; rdfs:label "sex assigned at birth" .
+hum:genderIdentity a owl:ObjectProperty ; rdfs:domain hum:Person ; rdfs:range hum:GenderIdentity ; rdfs:label "gender identity" .
+hum:hasPhenotype a owl:ObjectProperty ; rdfs:domain hum:Person ; rdfs:range hum:PhenotypeObservation ; rdfs:label "has phenotype observation" .
+hum:trait a owl:ObjectProperty ; rdfs:domain hum:PhenotypeObservation ; rdfs:range hum:PhenotypeTrait ; rdfs:label "trait" .
+
+hum:codeSystem a owl:DatatypeProperty ; rdfs:domain hum:PhenotypeTrait ; rdfs:range xsd:string ; rdfs:label "code system" .
+hum:code a owl:DatatypeProperty ; rdfs:domain hum:PhenotypeTrait ; rdfs:range xsd:string ; rdfs:label "code" .
+hum:value a owl:DatatypeProperty ; rdfs:domain hum:PhenotypeObservation ; rdfs:range xsd:string ; rdfs:label "value" .
+hum:unit a owl:DatatypeProperty ; rdfs:domain hum:PhenotypeObservation ; rdfs:range xsd:string ; rdfs:label "unit" .
+hum:effectiveTime a owl:DatatypeProperty ; rdfs:domain hum:PhenotypeObservation ; rdfs:range xsd:dateTime ; rdfs:label "effective time" .
+
+### Minimal controlled individuals
+hum:Male a hum:BiologicalSex ; rdfs:label "male" .
+hum:Female a hum:BiologicalSex ; rdfs:label "female" .
+hum:Intersex a hum:BiologicalSex ; rdfs:label "intersex" .
+hum:UnknownSex a hum:BiologicalSex ; rdfs:label "unknown" .
+
+hum:Man a hum:GenderIdentity ; rdfs:label "man" .
+hum:Woman a hum:GenderIdentity ; rdfs:label "woman" .
+hum:Nonbinary a hum:GenderIdentity ; rdfs:label "nonbinary" .
+hum:OtherGender a hum:GenderIdentity ; rdfs:label "other/unspecified" .

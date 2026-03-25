@@ -1,0 +1,40 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Middle/registries.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Registries" ;
+  dct:description "Backend registry, sync specs, routes, IO claims; designed for Hyper‑B/GIB catalogs." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> .
+
+middle:RegistryRecord a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Registry Record" .
+middle:Backend a owl:Class ; rdfs:subClassOf middle:RegistryRecord ; rdfs:label "Backend" .
+middle:SyncSpec a owl:Class ; rdfs:subClassOf middle:RegistryRecord ; rdfs:label "Sync Spec" .
+middle:Route a owl:Class ; rdfs:subClassOf middle:RegistryRecord ; rdfs:label "Route" .
+middle:IOClaim a owl:Class ; rdfs:subClassOf middle:RegistryRecord ; rdfs:label "IO Claim" .
+
+middle:backendType a owl:DatatypeProperty ; rdfs:domain middle:Backend ; rdfs:range xsd:string ; rdfs:label "backend type" .
+middle:endpoint a owl:DatatypeProperty ; rdfs:domain middle:Backend ; rdfs:range xsd:string ; rdfs:label "endpoint" .
+
+middle:where a owl:ObjectProperty ; rdfs:domain middle:RegistryRecord ; rdfs:range middle:Space ; rdfs:label "where (space)" .
+middle:tags a owl:DatatypeProperty ; rdfs:domain middle:RegistryRecord ; rdfs:range xsd:string ; rdfs:label "tags (csv)" .
+
+middle:from a owl:DatatypeProperty ; rdfs:domain middle:SyncSpec ; rdfs:range xsd:string ; rdfs:label "from" .
+middle:to a owl:DatatypeProperty ; rdfs:domain middle:SyncSpec ; rdfs:range xsd:string ; rdfs:label "to" .
+middle:schedule a owl:DatatypeProperty ; rdfs:domain middle:SyncSpec ; rdfs:range xsd:string ; rdfs:label "schedule" .
+middle:privacyTransform a owl:DatatypeProperty ; rdfs:domain middle:SyncSpec ; rdfs:range xsd:string ; rdfs:label "privacy transform" .
+
+middle:host a owl:DatatypeProperty ; rdfs:domain middle:Route ; rdfs:range xsd:string ; rdfs:label "host" .
+middle:path a owl:DatatypeProperty ; rdfs:domain middle:Route ; rdfs:range xsd:string ; rdfs:label "path" .
+middle:tlsMode a owl:DatatypeProperty ; rdfs:domain middle:Route ; rdfs:range xsd:string ; rdfs:label "tls mode" .
+middle:routesTo a owl:DatatypeProperty ; rdfs:domain middle:Route ; rdfs:range xsd:string ; rdfs:label "routes to (target)" .
+
+middle:resource a owl:DatatypeProperty ; rdfs:domain middle:IOClaim ; rdfs:range xsd:string ; rdfs:label "resource" .
+middle:ttl a owl:DatatypeProperty ; rdfs:domain middle:IOClaim ; rdfs:range xsd:string ; rdfs:label "ttl" .
+

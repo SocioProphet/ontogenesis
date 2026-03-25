@@ -1,0 +1,27 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix nl:   <https://socioprophet.github.io/ontogenesis/noether#> .
+@prefix epi:  <https://socioprophet.github.io/ontogenesis/epi#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Example instance graph for a quaternion SU(2) layer contract
+<examples/layer_contract_demo.ttl> a owl:Ontology ;
+  owl:imports <epi/noether.ttl> ;
+  rdfs:label "Example: layer contract demo" .
+
+nl:Layer0 a nl:Layer ; rdfs:label "h_block_1" .
+nl:AngularMomentum a nl:Charge ; rdfs:label "angular momentum" .
+nl:QuatNorm a nl:InvariantForm ; rdfs:label "quaternion norm" .
+nl:LieMidpoint a nl:Integrator ; rdfs:label "lie midpoint" .
+nl:LeftHamilton a nl:Representation ; rdfs:label "left hamilton" .
+nl:HopfS3 a nl:Connection ; rdfs:label "Hopf S3→S7→S4" .
+
+nl:Layer0Contract a nl:LayerContract ;
+  nl:forLayer nl:Layer0 ;
+  nl:algebra nl:H ;
+  nl:group nl:SU2 ;
+  nl:representation nl:LeftHamilton ;
+  nl:invariantForm nl:QuatNorm ;
+  nl:connection nl:HopfS3 ;
+  nl:integrator nl:LieMidpoint ;
+  nl:hasCharge nl:AngularMomentum .

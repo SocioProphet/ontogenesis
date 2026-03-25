@@ -1,0 +1,19 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/cyber.ttl> a owl:Ontology ;
+  dct:title "Domain — Cyber & Security" ;
+  dct:description "Security events, policies, controls, and audit artifacts. Intended to align to STIX/Sigma/OpenC2 by mapping, not copying." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+cyber:SecurityEvent a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Security event" .
+cyber:Control a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Control" .
+cyber:Finding a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Finding" .
+cyber:severity a owl:DatatypeProperty ; rdfs:domain cyber:Finding ; rdfs:range xsd:string ; rdfs:label "severity" .
+cyber:mapsToStandard a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "maps to standard" .

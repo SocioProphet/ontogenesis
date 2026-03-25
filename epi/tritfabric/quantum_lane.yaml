@@ -1,0 +1,16 @@
+quantum:
+  provider: "qiskit"          # default "aer"; set "ibm" to hit hardware
+  backend_policy:
+    prefer: ["heron"]         # "osprey","condor" optional
+    qubit_budget: 64
+  estimator:
+    mitigation: ["m3","zne"]  # runtime knobs (provider-specific)
+  tasks:
+    - name: estimate_su2_charge
+      algebra: H
+      group: SU(2)
+      observable: "J = a1*Z0 + a2*Z1Z2 + a3*X0X1"
+    - name: qaoa_schedule_pick
+      graph: "heavy_hex_subgraph_k=64"
+      p_layers: 2
+      objective: "routing_entropy_min"

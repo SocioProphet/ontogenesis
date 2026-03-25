@@ -1,0 +1,26 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix lower: <https://socioprophet.github.io/ontogenesis/lower#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/Inception.ttl> a owl:Ontology ;
+  dct:title "Inception Ontology" ;
+  dct:description "Local kind/k3s inception kit: MinIO, SAPIEN, ROCKZDB, GIB registry, Redpanda/Kafka; offline-first orchestration." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/platform.ttl> ;
+  owl:imports <Middle/registries.ttl> ;
+  owl:imports <Lower/bindings-core.ttl> .
+
+plat:InceptionService a owl:Class ; rdfs:subClassOf lower:Service ; rdfs:label "Inception service" .
+plat:MinIO a owl:Class ; rdfs:subClassOf plat:InceptionService ; rdfs:label "MinIO" .
+plat:SAPIEN a owl:Class ; rdfs:subClassOf plat:InceptionService ; rdfs:label "SAPIEN" .
+plat:ROCKZDB a owl:Class ; rdfs:subClassOf plat:InceptionService ; rdfs:label "ROCKZDB" .
+plat:GIBRegistry a owl:Class ; rdfs:subClassOf plat:InceptionService ; rdfs:label "GIB Registry" .
+plat:Bus a owl:Class ; rdfs:subClassOf plat:InceptionService ; rdfs:label "Bus (Kafka/Redpanda)" .
+
+plat:sharePath a owl:DatatypeProperty ; rdfs:domain plat:InceptionService ; rdfs:range xsd:string ; rdfs:label "share path" .

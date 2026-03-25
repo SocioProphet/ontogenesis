@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-json
+
+  - repo: local
+    hooks:
+      - id: block-generated-dirs
+        name: Block direct edits to dist/ and audit/
+        entry: python scripts/policy_block_generated.py
+        language: system
+        pass_filenames: false
+      - id: validate-rdf
+        name: Validate Turtle parses
+        entry: python scripts/validate_rdf.py
+        language: system
+        pass_filenames: false
+      - id: shacl-gate
+        name: SHACL gates
+        entry: python scripts/shacl_gate.py
+        language: system
+        pass_filenames: false

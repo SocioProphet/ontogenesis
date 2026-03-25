@@ -1,0 +1,38 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix learn: <https://socioprophet.github.io/ontogenesis/middle/learning#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix nl: <https://socioprophet.github.io/ontogenesis/noether#> .
+@prefix epi: <https://socioprophet.github.io/ontogenesis/epi#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Middle/learning-ontogenesis.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Learning Ontogenesis" ;
+  dct:description "Curricula, competencies, assessments, and optimization loops. Designed to reference Noetherian contracts and EPI reports as evidence." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <epi/noether.ttl> ;
+  owl:imports <epi/epi.ttl> .
+
+learn:Curriculum a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Curriculum" .
+learn:Module a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Learning module" .
+learn:Lesson a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Lesson" .
+learn:Competency a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Competency" .
+learn:Assessment a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Assessment" .
+learn:OptimizationLoop a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Optimization loop" .
+
+learn:hasModule a owl:ObjectProperty ; rdfs:domain learn:Curriculum ; rdfs:range learn:Module ; rdfs:label "has module" .
+learn:hasLesson a owl:ObjectProperty ; rdfs:domain learn:Module ; rdfs:range learn:Lesson ; rdfs:label "has lesson" .
+learn:targetsCompetency a owl:ObjectProperty ; rdfs:domain learn:Lesson ; rdfs:range learn:Competency ; rdfs:label "targets competency" .
+learn:hasAssessment a owl:ObjectProperty ; rdfs:domain learn:Lesson ; rdfs:range learn:Assessment ; rdfs:label "has assessment" .
+
+learn:usesEvidence a owl:ObjectProperty ; rdfs:domain learn:Assessment ; rdfs:range upper:Evidence ; rdfs:label "uses evidence" .
+learn:usesReport a owl:ObjectProperty ; rdfs:domain learn:Assessment ; rdfs:range epi:Report ; rdfs:label "uses report" .
+learn:usesLayerContract a owl:ObjectProperty ; rdfs:domain learn:OptimizationLoop ; rdfs:range nl:LayerContract ; rdfs:label "uses layer contract" .
+
+learn:score a owl:DatatypeProperty ; rdfs:domain learn:Assessment ; rdfs:range xsd:decimal ; rdfs:label "score" .
+learn:gate a owl:DatatypeProperty ; rdfs:domain learn:Assessment ; rdfs:range xsd:string ; rdfs:label "gate name" .
+
