@@ -1,0 +1,5 @@
+Imported from archive wrapper: /Users/michaelheller/dev/_incoming_repo_ingest_zipbatch/20260325-final-batch/extracted/21-ontogenesis-repo-full-v1-1-with-chat-index
+Candidate root: /Users/michaelheller/dev/_incoming_repo_ingest_zipbatch/20260325-final-batch/extracted/21-ontogenesis-repo-full-v1-1-with-chat-index
+Suggested slug: 21-ontogenesis-repo-full-v1-1-with-chat-index
+Suggested target: SocioProphet/21-ontogenesis-repo-full-v1-1-with-chat-index
+Lane: socioprophet-doctrine

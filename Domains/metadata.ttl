@@ -1,0 +1,23 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix dom: <https://socioprophet.github.io/ontogenesis/domains/metadata#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<Domains/metadata.ttl> a owl:Ontology ;
+  dct:title "Domain — Metadata & Cataloging" ;
+  dct:description "Metadata, catalogs, dataset/service descriptors. Aligns to DCAT/PROV/DCTERMS by reference." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <http://purl.org/dc/terms/> ;
+  owl:imports <http://www.w3.org/ns/prov-o> .
+
+dom:Catalog a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Catalog" .
+dom:Dataset a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Dataset" .
+dom:ServiceDescription a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Service description" .
+dom:hasLicense a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "has license" .
+dom:hasChecksum a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "has checksum" .
+

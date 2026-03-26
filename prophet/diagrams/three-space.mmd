@@ -1,0 +1,8 @@
+%% Three-Space Architecture & Outside→Inside Update Flow
+flowchart LR
+  OUT[Outside / Internet] -->|Updates flow| USER[USER space]
+  USER -->|metered| INC[INCEPTION space]
+  INC -->|G0/G1 gates| SYS[SYSTEM space]
+  style SYS stroke-width:2px
+  note1([Rule: updates MUST NOT reach SYSTEM until INCEPTION+GENESIS prove stability])
+  note1 --- SYS

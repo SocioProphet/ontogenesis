@@ -1,0 +1,23 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix web: <https://socioprophet.github.io/ontogenesis/domains/web#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/web.ttl> a owl:Ontology ;
+  dct:title "Domain — Web Presence (SocioProphet)" ;
+  dct:description "Models SocioProphet domain endpoints and their roles." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+web:DomainName a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Domain name" .
+web:purpose a owl:DatatypeProperty ; rdfs:domain web:DomainName ; rdfs:range xsd:string ; rdfs:label "purpose" .
+web:url a owl:DatatypeProperty ; rdfs:domain web:DomainName ; rdfs:range xsd:string ; rdfs:label "url" .
+
+web:socioprophet_dev a web:DomainName ; web:url "https://socioprophet.dev" ; web:purpose "developer docs, tooling" ; rdfs:label "socioprophet.dev" .
+web:socioprophet_ai a web:DomainName ; web:url "https://socioprophet.ai" ; web:purpose "AI services, model endpoints" ; rdfs:label "socioprophet.ai" .
+web:socioprophet_com a web:DomainName ; web:url "https://socioprophet.com" ; web:purpose "main site" ; rdfs:label "socioprophet.com" .
+web:socioprophet_blog a web:DomainName ; web:url "https://socioprophet.blog" ; web:purpose "blog/content" ; rdfs:label "socioprophet.blog" .
+web:socioprophet_cloud a web:DomainName ; web:url "https://socioprophet.cloud" ; web:purpose "cloud control plane" ; rdfs:label "socioprophet.cloud" .

@@ -1,0 +1,42 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix lower: <https://socioprophet.github.io/ontogenesis/lower#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/platform.ttl> a owl:Ontology ;
+  dct:title "SocioProphet Platform Ontology" ;
+  dct:description "Platform modules: SourceOS, Genesis, Inception, Twin, Mesh; aligned to the three-space model." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> ;
+  owl:imports <Middle/registries.ttl> ;
+  owl:imports <Lower/bindings-core.ttl> .
+
+plat:Platform a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Platform" .
+plat:Component a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Component" .
+
+plat:SourceOS a owl:Class ; rdfs:subClassOf plat:Component ; rdfs:label "SourceOS" .
+plat:Genesis a owl:Class ; rdfs:subClassOf plat:Component ; rdfs:label "Genesis" .
+plat:Inception a owl:Class ; rdfs:subClassOf plat:Component ; rdfs:label "Inception" .
+plat:Twin a owl:Class ; rdfs:subClassOf plat:Component ; rdfs:label "Twin" .
+plat:Mesh a owl:Class ; rdfs:subClassOf plat:Component ; rdfs:label "Mesh" .
+
+plat:includes a owl:ObjectProperty ; rdfs:domain plat:Platform ; rdfs:range plat:Component ; rdfs:label "includes" .
+plat:runsInSpace a owl:ObjectProperty ; rdfs:domain plat:Component ; rdfs:range middle:Space ; rdfs:label "runs in space" .
+
+### Instances (canonical components)
+plat:SocioProphetPlatform a plat:Platform ;
+  rdfs:label "SocioProphet Platform" ;
+  plat:includes plat:SourceOSCore, plat:GenesisCore, plat:InceptionCore, plat:TwinCore, plat:MeshCore .
+
+plat:SourceOSCore a plat:SourceOS ; rdfs:label "SourceOS Core" ; plat:runsInSpace middle:SYSTEM .
+plat:GenesisCore a plat:Genesis ; rdfs:label "Genesis Core" ; plat:runsInSpace middle:SYSTEM .
+plat:InceptionCore a plat:Inception ; rdfs:label "Inception Core" ; plat:runsInSpace middle:INCEPTION .
+plat:TwinCore a plat:Twin ; rdfs:label "Twin Core" ; plat:runsInSpace middle:REGION .
+plat:MeshCore a plat:Mesh ; rdfs:label "Mesh Core" ; plat:runsInSpace middle:SYSTEM .
+

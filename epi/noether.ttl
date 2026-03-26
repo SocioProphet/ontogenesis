@@ -1,0 +1,64 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix nl:   <https://socioprophet.github.io/ontogenesis/noether#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<epi/noether.ttl> a owl:Ontology ;
+  dct:title "Noetherian Multi‑Algebra Learning Ontology" ;
+  dct:description "Contract vocabulary for Noetherian layers: algebra, group action, invariant form, integrator, charges, coercions, and SR heads." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core concepts
+nl:LayerContract a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Layer contract" .
+nl:Layer a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Layer" .
+
+nl:Algebra a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Algebra" .
+nl:Group a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Symmetry group" .
+nl:Representation a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Representation" .
+nl:InvariantForm a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Invariant form" .
+nl:Connection a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Connection" .
+nl:Integrator a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Integrator" .
+nl:Charge a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Noether charge" .
+
+nl:Coercion a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Inter‑algebra coercion" .
+nl:CoercionWitness a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Coercion witness" .
+
+nl:SymbolicRegressionHead a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Symbolic regression head" .
+
+### Contract fields
+nl:forLayer a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Layer ; rdfs:label "for layer" .
+nl:algebra a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Algebra ; rdfs:label "algebra" .
+nl:group a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Group ; rdfs:label "group" .
+nl:representation a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Representation ; rdfs:label "representation" .
+nl:invariantForm a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:InvariantForm ; rdfs:label "invariant form" .
+nl:connection a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Connection ; rdfs:label "connection" .
+nl:integrator a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Integrator ; rdfs:label "integrator" .
+nl:hasCharge a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Charge ; rdfs:label "has charge" .
+
+nl:coercionIn a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Coercion ; rdfs:label "coercion in" .
+nl:coercionOut a owl:ObjectProperty ; rdfs:domain nl:LayerContract ; rdfs:range nl:Coercion ; rdfs:label "coercion out" .
+nl:hasWitness a owl:ObjectProperty ; rdfs:domain nl:Coercion ; rdfs:range nl:CoercionWitness ; rdfs:label "has witness" .
+
+nl:associatorNorm a owl:DatatypeProperty ; rdfs:domain nl:CoercionWitness ; rdfs:range xsd:decimal ; rdfs:label "associator norm" .
+nl:ruleName a owl:DatatypeProperty ; rdfs:domain nl:Coercion ; rdfs:range xsd:string ; rdfs:label "rule name" .
+
+nl:srTargets a owl:DatatypeProperty ; rdfs:domain nl:SymbolicRegressionHead ; rdfs:range xsd:string ; rdfs:label "SR targets (csv)" .
+nl:srGateR2Min a owl:DatatypeProperty ; rdfs:domain nl:SymbolicRegressionHead ; rdfs:range xsd:decimal ; rdfs:label "SR gate R² min" .
+
+### Canonical algebra individuals (minimal)
+nl:C a nl:Algebra ; rdfs:label "Complex ℂ" .
+nl:H a nl:Algebra ; rdfs:label "Quaternions ℍ" .
+nl:O a nl:Algebra ; rdfs:label "Octonions 𝕆" .
+nl:Clifford a nl:Algebra ; rdfs:label "Clifford algebra Cl(p,q)" .
+nl:SPD a nl:Algebra ; rdfs:label "SPD(n)" .
+nl:Grassmann a nl:Algebra ; rdfs:label "Grassmann(k,n)" .
+nl:Lagrangian a nl:Algebra ; rdfs:label "Lagrangian (symplectic)" .
+
+### Canonical symmetry group individuals (minimal)
+nl:U1 a nl:Group ; rdfs:label "U(1)" .
+nl:SU2 a nl:Group ; rdfs:label "SU(2)" .
+nl:G2 a nl:Group ; rdfs:label "G₂" .

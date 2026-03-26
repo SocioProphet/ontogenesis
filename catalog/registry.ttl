@@ -1,0 +1,49 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<catalog/registry.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Module Registry" ;
+  dct:description "Machine-readable index of Ontogenesis modules, SemVer, layer, and import relations." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+og:Module a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Module" .
+og:layer a owl:DatatypeProperty ; rdfs:domain og:Module ; rdfs:range xsd:string ; rdfs:label "layer" .
+og:path a owl:DatatypeProperty ; rdfs:domain og:Module ; rdfs:range xsd:string ; rdfs:label "path" .
+og:baseIRI a owl:DatatypeProperty ; rdfs:domain og:Module ; rdfs:range xsd:string ; rdfs:label "base IRI" .
+og:semver a owl:DatatypeProperty ; rdfs:domain og:Module ; rdfs:range xsd:string ; rdfs:label "semver" .
+og:status a owl:DatatypeProperty ; rdfs:domain og:Module ; rdfs:range xsd:string ; rdfs:label "status" .
+
+og:UpperCore a og:Module ; og:layer "Upper" ; og:path "Upper/upper-core.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/upper#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Upper core" .
+og:MiddleSystem a og:Module ; og:layer "Middle" ; og:path "Middle/system-architecture.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "System architecture" .
+og:MiddleRegistries a og:Module ; og:layer "Middle" ; og:path "Middle/registries.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Registries" .
+og:LowerBindings a og:Module ; og:layer "Lower" ; og:path "Lower/bindings-core.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/lower#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Lower bindings" .
+
+og:PlatformCore a og:Module ; og:layer "Platform" ; og:path "Platform/platform.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Platform core" .
+og:SourceOS a og:Module ; og:layer "Platform" ; og:path "Platform/SourceOS.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "SourceOS" .
+og:Genesis a og:Module ; og:layer "Platform" ; og:path "Platform/Genesis.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Genesis" .
+og:Inception a og:Module ; og:layer "Platform" ; og:path "Platform/Inception.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Inception" .
+og:Twin a og:Module ; og:layer "Platform" ; og:path "Platform/Twin.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Twin" .
+og:Mesh a og:Module ; og:layer "Platform" ; og:path "Platform/Mesh.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Mesh" .
+
+og:ProphetCLI a og:Module ; og:layer "Prophet" ; og:path "prophet/prophet_cli.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Prophet CLI" .
+og:CapD a og:Module ; og:layer "Prophet" ; og:path "prophet/capd.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#capd#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Capability Descriptor" .
+
+og:Noether a og:Module ; og:layer "EPI" ; og:path "epi/noether.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/noether#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Noetherian learning" .
+og:EPI a og:Module ; og:layer "EPI" ; og:path "epi/epi.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/epi#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Epi‑Onto‑Learning" .
+
+og:DomainHuman a og:Module ; og:layer "Domains" ; og:path "Domains/human.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/human#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Human domain" .
+og:DomainMath a og:Module ; og:layer "Domains" ; og:path "Domains/math.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/math#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Math domain" .
+og:DomainK8s a og:Module ; og:layer "Domains" ; og:path "Domains/kubernetes.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/kubernetes#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Kubernetes domain" .
+og:DomainCyber a og:Module ; og:layer "Domains" ; og:path "Domains/cyber.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/cyber#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Cyber domain" .
+og:DomainWeb a og:Module ; og:layer "Domains" ; og:path "Domains/web.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/web#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Web domain" .
+
+    og:MiddleLearningOntogenesis a og:Module ; og:layer "Middle" ; og:path "Middle/learning-ontogenesis.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/learning#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Learning ontogenesis" .
+    og:DomainCCRunners a og:Module ; og:layer "Domains" ; og:path "Domains/cc_runners.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/cc#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "CC runners" .
+    og:UpperAlignments a og:Module ; og:layer "Upper" ; og:path "Upper/upper-alignments.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/upper#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Upper alignments" .
+    og:Genesys a og:Module ; og:layer "Platform" ; og:path "Platform/Genesys.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Genesys (alias)" .

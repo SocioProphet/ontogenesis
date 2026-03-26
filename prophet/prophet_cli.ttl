@@ -1,0 +1,97 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<prophet/prophet_cli.ttl> a owl:Ontology ;
+  dct:title "Prophet CLI Ontology" ;
+  dct:description "Models Prophet CLI planes/commands, profiles, build recipes (3×3), dynamic registration, and provenance surfaces." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> ;
+  owl:imports <Middle/registries.ttl> ;
+  owl:imports <Platform/platform.ttl> ;
+  owl:imports <Platform/Genesis.ttl> ;
+  owl:imports <Platform/Inception.ttl> ;
+  owl:imports <Platform/Twin.ttl> ;
+  owl:imports <Platform/SourceOS.ttl> ;
+  owl:imports <Platform/Mesh.ttl> .
+
+### CLI primitives
+prop:Plane a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Plane" .
+prop:Command a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Command" .
+prop:Profile a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Profile" .
+
+prop:inPlane a owl:ObjectProperty ; rdfs:domain prop:Command ; rdfs:range prop:Plane ; rdfs:label "in plane" .
+prop:subcommandOf a owl:ObjectProperty ; rdfs:domain prop:Command ; rdfs:range prop:Command ; rdfs:label "subcommand of" .
+prop:affectsSpace a owl:ObjectProperty ; rdfs:domain prop:Command ; rdfs:range middle:Space ; rdfs:label "affects space" .
+prop:requiresScope a owl:DatatypeProperty ; rdfs:domain prop:Command ; rdfs:range xsd:string ; rdfs:label "requires scope" .
+
+### Planes (canonical)
+prop:cloud a prop:Plane ; rdfs:label "cloud" .
+prop:ai a prop:Plane ; rdfs:label "ai" .
+prop:serve a prop:Plane ; rdfs:label "serve" .
+prop:msg a prop:Plane ; rdfs:label "msg" .
+prop:svc a prop:Plane ; rdfs:label "svc" .
+prop:pkg a prop:Plane ; rdfs:label "pkg" .
+prop:r a prop:Plane ; rdfs:label "r" .
+prop:fs a prop:Plane ; rdfs:label "fs" .
+prop:graph a prop:Plane ; rdfs:label "graph" .
+prop:gib a prop:Plane ; rdfs:label "gib" .
+prop:twin a prop:Plane ; rdfs:label "twin" .
+prop:agents a prop:Plane ; rdfs:label "agents" .
+prop:task a prop:Plane ; rdfs:label "task" .
+prop:net a prop:Plane ; rdfs:label "net" .
+prop:route a prop:Plane ; rdfs:label "route" .
+prop:io a prop:Plane ; rdfs:label "io" .
+prop:dev a prop:Plane ; rdfs:label "dev" .
+prop:diag a prop:Plane ; rdfs:label "diag" .
+prop:secrets a prop:Plane ; rdfs:label "secrets" .
+prop:flake a prop:Plane ; rdfs:label "flake" .
+prop:os a prop:Plane ; rdfs:label "os" .
+prop:backend a prop:Plane ; rdfs:label "backend" .
+prop:sync a prop:Plane ; rdfs:label "sync" .
+
+### Build recipes (3×3)
+prop:BuildRecipe a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Build recipe" .
+prop:BuildStep a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Build step" .
+
+prop:hasStep a owl:ObjectProperty ; rdfs:domain prop:BuildRecipe ; rdfs:range prop:BuildStep ; rdfs:label "has step" .
+prop:stepOrder a owl:DatatypeProperty ; rdfs:domain prop:BuildStep ; rdfs:range xsd:integer ; rdfs:label "step order" .
+prop:runsCommand a owl:ObjectProperty ; rdfs:domain prop:BuildStep ; rdfs:range prop:Command ; rdfs:label "runs command" .
+
+prop:localRecipe a prop:BuildRecipe ; rdfs:label "local" .
+prop:regionRecipe a prop:BuildRecipe ; rdfs:label "region" .
+prop:macroRecipe a prop:BuildRecipe ; rdfs:label "macro" .
+
+### Dynamic registration (services/capabilities)
+prop:ServiceDescriptor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Service descriptor" .
+prop:CapabilityDescriptor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Capability descriptor (CapD)" .
+prop:PluginDescriptor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Plugin descriptor" .
+
+prop:descriptorId a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "descriptor id" .
+prop:semver a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "semver" .
+prop:owner a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "owner" .
+
+prop:declaresPlane a owl:ObjectProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range prop:Plane ; rdfs:label "declares plane" .
+prop:declaresVerb a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "declares verb" .
+prop:requiresBackendId a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "requires backend id" .
+prop:requiresSchemaSubject a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "requires schema subject" .
+prop:requiresIO a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "requires IO" .
+prop:requiresPackage a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "requires package" .
+
+prop:rolloutStrategy a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "rollout strategy" .
+prop:gateName a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "gate name" .
+prop:successSLO a owl:DatatypeProperty ; rdfs:domain prop:CapabilityDescriptor ; rdfs:range xsd:string ; rdfs:label "success SLO" .
+
+### Provenance carriers (schemaRef + leafRef)
+prop:Carrier a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Carrier" .
+prop:schemaRef a owl:DatatypeProperty ; rdfs:domain prop:Carrier ; rdfs:range xsd:string ; rdfs:label "schemaRef" .
+prop:leafRef a owl:DatatypeProperty ; rdfs:domain prop:Carrier ; rdfs:range xsd:string ; rdfs:label "leafRef" .
+prop:classId a owl:DatatypeProperty ; rdfs:domain prop:Carrier ; rdfs:range xsd:string ; rdfs:label "class id" .
+

@@ -1,0 +1,22 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix lower: <https://socioprophet.github.io/ontogenesis/lower#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/Mesh.ttl> a owl:Ontology ;
+  dct:title "Mesh Ontology" ;
+  dct:description "WireGuard tunnels, routes, boundary interfaces for Twin Bridge and replication." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/platform.ttl> ;
+  owl:imports <Lower/bindings-core.ttl> .
+
+plat:VPN a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "VPN" .
+plat:WireGuardTunnel a owl:Class ; rdfs:subClassOf plat:VPN ; rdfs:label "WireGuard tunnel" .
+plat:Peer a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Peer" .
+
+plat:hasPeer a owl:ObjectProperty ; rdfs:domain plat:WireGuardTunnel ; rdfs:range plat:Peer ; rdfs:label "has peer" .
+plat:allowedIPs a owl:DatatypeProperty ; rdfs:domain plat:Peer ; rdfs:range xsd:string ; rdfs:label "allowed IPs" .

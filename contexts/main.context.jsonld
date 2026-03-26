@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "middle": "https://socioprophet.github.io/ontogenesis/middle#",
+    "lower": "https://socioprophet.github.io/ontogenesis/lower#",
+    "plat": "https://socioprophet.github.io/ontogenesis/platform#",
+    "prop": "https://socioprophet.github.io/ontogenesis/prophet#",
+    "nl": "https://socioprophet.github.io/ontogenesis/noether#",
+    "epi": "https://socioprophet.github.io/ontogenesis/epi#",
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label"
+  }
+}

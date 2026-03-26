@@ -1,0 +1,13 @@
+{
+  "@context": "../prophet/contexts/prophet.context.jsonld",
+  "id": "https://socioprophet.github.io/ontogenesis/prophet#capabilities/demo",
+  "type": "prop:CapabilityDescriptor",
+  "prop:descriptorId": "demo.capability.echo",
+  "prop:semver": "0.1.0",
+  "prop:owner": "socioprophet",
+  "prop:declaresPlane": "https://socioprophet.github.io/ontogenesis/prophet#dev",
+  "prop:declaresVerb": "echo",
+  "prop:rolloutStrategy": "canary",
+  "prop:gateName": "G1",
+  "prop:successSLO": "ok>=0.99"
+}

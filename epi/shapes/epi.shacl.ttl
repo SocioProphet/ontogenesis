@@ -1,0 +1,12 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix epi:  <https://socioprophet.github.io/ontogenesis/epi#> .
+
+<epi/shapes/epi.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass epi:LearningRun ;
+  sh:message "Learning runs must emit at least one diagnostic report." ;
+  sh:property [
+    sh:path epi:emitsDiagnostic ;
+    sh:minCount 1 ;
+  ] .

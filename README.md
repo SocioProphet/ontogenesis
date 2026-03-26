@@ -1,33 +1,64 @@
-# Ontogenesis — Human Digital Twin Ontology
-Base IRI: `https://socioprophet.dev/ont/ontogenesis#`, Version IRI: `https://socioprophet.dev/ont/ontogenesis#v0.3.0`, Generated: 2025-08-28T22:28:24.218856Z
+# Ontogenesis
 
-Contents: OWL (`ontogenesis.ttl`), SKOS (`skos/*.ttl`), SHACL (`shapes/*.ttl`), mappings, JSON-LD context, examples, tests, CapD.
+An auditable, policy-gated, supply-chain–traceable Git repository for RDF/OWL/JSON-LD ontologies and semantic web assets used across the **SocioProphet** stack.
 
-## Quickstart
+This repo is designed to support:
 
-Install validation deps (local dev):
-```bash
-python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
-```
+- **Repeatable builds** of ontology distributions (`dist/`) from source ontologies.
+- **Deterministic hashing** + an append-only **ledger** (`ledger/ledger.csv`) for audit.
+- **Artifact signing** (COSE_Sign1) for `dist/*` artifacts.
+- **SHACL gates** for structural and policy constraints (promotion checks).
+- A machine-readable **catalog/registry** that enumerates modules, SemVer, status, and compatibility notes.
+- A layered ontology architecture: **Upper**, **Middle**, **Lower**, plus product/platform modules (**Platform / SourceOS / Genesis / Inception / Twin / Mesh**), and the **Prophet CLI ontology**.
 
-Validate ontology + examples:
-```bash
-make validate
-```
+Base IRI (recommended): `https://socioprophet.github.io/ontogenesis/`
 
 ## Repo layout
 
-- `ontogenesis.ttl` — core ontology (Turtle)
-- `skos/*.ttl` — SKOS concept schemes/vocab
-- `shapes/*.ttl` — SHACL shapes (constraints)
-- `mappings/*.ttl` — interoperability mappings (e.g., PROV, FHIR, IEML)
-- `context.jsonld` — JSON-LD context
-- `examples/*.ttl` — example datasets
-- `tests/*.rq` — SPARQL invariant tests (should return 0 rows)
-- `capd/*.json` — CapD descriptor for capability packaging
+- `Upper/` — high-level concepts (foundational primitives and alignments)
+- `Middle/` — general concepts (systems, governance, provenance, policy, capabilities)
+- `Lower/` — atomic bindings to on-device data/services/IO (files, processes, ports, k8s, packages)
+- `Domains/` — domain modules (health/FHIR, cyber, metadata, math, etc.)
+- `Platform/` — platform modules (SourceOS, Genesis, Inception, Twin, Mesh)
+- `prophet/` — **Prophet CLI & system architecture ontology** + SHACL gates
+- `epi/` — **Epi‑Onto‑Learning** (Noetherian + quantum lane + publishing provenance)
+- `catalog/` — `registry.ttl` + `registry.jsonld` (machine-readable module index)
+- `imports/` — curated external ontologies (pin-and-fetch manifest)
+- `shapes/` — SHACL policy bundles (gates)
+- `contexts/` — JSON-LD contexts + frames for strict round-trip tests
+- `scripts/` — build, audit, sign, verify, SBOM/SPDX
+- `dist/` and `audit/` — generated only (CI/build outputs); **no direct edits**
 
-## Diagrams
+## One-command verification (local)
 
-![Agentic Flow Architecture](docs/diagrams/agentic-flow-architecture.png)
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
 
-![Agentic Flow Architecture — Human Twin](docs/diagrams/agentic-flow-architecture-body.png)
+python scripts/validate_rdf.py
+python scripts/shacl_gate.py
+python scripts/jsonld_roundtrip.py
+
+python scripts/build_dist.py
+python scripts/ledger_build.py
+python scripts/ledger_verify.py
+```
+
+## Release discipline (CI)
+
+On a tag `v*`, CI will:
+
+1. Build `dist/` deterministically (`SOURCE_DATE_EPOCH` fixed).
+2. Validate RDF + SHACL gates.
+3. Build/verify `ledger/ledger.csv`.
+4. COSE-sign each `dist/*` and record signature URIs in the ledger.
+5. Emit a minimal SPDX SBOM (`sbom/spdx.json`) with checksums.
+
+## Policy
+
+- `dist/` and `audit/` are **generated only**.
+- Changes under `Upper/`, `Middle/`, `Lower/`, `Domains/`, `Platform/`, `prophet/`, `epi/` must be accompanied by `scripts/build_dist.py` + `scripts/ledger_build.py` output changes.
+- Promotion gates are enforced via SHACL bundles in `shapes/`.
+
+See `docs/` for the design plan and module map.
+
