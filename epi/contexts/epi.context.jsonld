@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "epi": "https://socioprophet.github.io/ontogenesis/epi#",
+    "nl": "https://socioprophet.github.io/ontogenesis/noether#",
+    "prop": "https://socioprophet.github.io/ontogenesis/prophet#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "middle": "https://socioprophet.github.io/ontogenesis/middle#",
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "hardwareOptIn": {
+      "@id": "https://socioprophet.github.io/ontogenesis/epi#hardwareOptIn",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "qubitBudget": {
+      "@id": "https://socioprophet.github.io/ontogenesis/epi#qubitBudget",
+      "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "mitigation": "https://socioprophet.github.io/ontogenesis/epi#mitigation"
+  }
+}

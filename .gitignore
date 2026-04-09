@@ -1,24 +1,16 @@
-# macOS
-.DS_Store
-__MACOSX/
-
-# editors
-.vscode/
-.idea/
-
-# python
-.venv/
+# Python
 __pycache__/
 *.pyc
+.venv/
+venv/
 
-# build/artifacts
+# Artifacts
 dist/
-build/
-*.log
+audit/
+ledger/ledger.csv
+sbom/spdx.json
+*.zip
+*.tar.gz
 
-# Generated diagram artifacts (source lives in .mmd/.md)
-/docs/diagrams/*.png
-/docs/diagrams/*.jpg
-/docs/diagrams/*.jpeg
-/docs/diagrams/*.webp
-/docs/diagrams/*.gif
+# OS
+.DS_Store

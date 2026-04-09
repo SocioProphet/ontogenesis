@@ -1,0 +1,26 @@
+flowchart TB
+  subgraph CLI[Prophet CLI planes]
+    cloud
+    ai
+    serve
+    msg
+    svc
+    pkg
+    fs
+    graph
+    gib
+    twin
+    agents
+  end
+
+  subgraph Providers
+    GIB[(GIB)]
+    Kafka[(Kafka/SSB)]
+    HyperB[(Hyper-B)]
+    Twin[(Twin)]
+    Search[(Search)]
+  end
+
+  CLI -->|mutating ops emit signed carriers| GIB
+  GIB --> Kafka --> HyperB --> Twin --> Search
+  GIB ---|carrier has schemaRef + leafRef| HyperB

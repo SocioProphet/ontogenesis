@@ -1,0 +1,23 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/SourceOS.ttl> a owl:Ontology ;
+  dct:title "SourceOS Ontology" ;
+  dct:description "Immutable base OS (ostree) + Nix flakes three-space update model; rollback semantics." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/platform.ttl> .
+
+plat:OSTreeDeployment a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "ostree deployment" .
+plat:FlakeGeneration a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "flake generation" .
+plat:hasGeneration a owl:ObjectProperty ; rdfs:domain middle:Space ; rdfs:range plat:FlakeGeneration ; rdfs:label "has generation" .
+plat:canRollbackTo a owl:ObjectProperty ; rdfs:domain middle:Space ; rdfs:range plat:FlakeGeneration ; rdfs:label "can rollback to" .
+
+plat:UpdatePolicy a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "update policy" .
+plat:outsideInsideRule a owl:DatatypeProperty ; rdfs:domain plat:UpdatePolicy ; rdfs:range xsd:string ; rdfs:label "outside→inside rule" .
+

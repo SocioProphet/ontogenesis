@@ -1,0 +1,32 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<prophet/prophet_diagrams.ttl> a owl:Ontology ;
+  dct:title "Prophet Architecture Diagrams (Metadata)" ;
+  dct:description "Pointers to Mermaid diagram sources that render the Prophet CLI/system architecture." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <prophet/prophet_cli.ttl> .
+
+prop:Diagram a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Diagram" .
+prop:diagramSource a owl:DatatypeProperty ; rdfs:domain prop:Diagram ; rdfs:range xsd:string ; rdfs:label "diagram source path" .
+prop:diagramType a owl:DatatypeProperty ; rdfs:domain prop:Diagram ; rdfs:range xsd:string ; rdfs:label "diagram type" .
+
+prop:ThreeSpaceFlow a prop:Diagram ;
+  rdfs:label "Three-Space Architecture & Outside→Inside Update Flow" ;
+  prop:diagramType "mermaid" ;
+  prop:diagramSource "prophet/diagrams/three-space.mmd" .
+
+prop:TwinBridgeHandshake a prop:Diagram ;
+  rdfs:label "K3 Twin Bridge Handshake" ;
+  prop:diagramType "mermaid" ;
+  prop:diagramSource "prophet/diagrams/twin-bridge-handshake.mmd" .
+
+prop:EverythingAPISurface a prop:Diagram ;
+  rdfs:label "Everything‑API Surface & Carrier Flow" ;
+  prop:diagramType "mermaid" ;
+  prop:diagramSource "prophet/diagrams/everything-api.mmd" .

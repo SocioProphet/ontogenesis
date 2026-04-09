@@ -1,0 +1,16 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<Platform/Genesys.ttl> a owl:Ontology ;
+  dct:title "Genesys Ontology (Alias)" ;
+  dct:description "Alias module for Genesis/GeneSys naming; use to preserve compatibility across naming conventions." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/Genesis.ttl> .
+
+# Alias class name
+plat:Genesys a owl:Class ;
+  owl:equivalentClass plat:Genesis ;
+  rdfs:label "Genesys" .

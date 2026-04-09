@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Validate RDF parses
+        run: python scripts/validate_rdf.py
+
+      - name: SHACL gates
+        run: python scripts/shacl_gate.py
+
+      - name: JSON-LD roundtrip
+        run: python scripts/jsonld_roundtrip.py
+
+      - name: Build dist + ledger + verify
+        run: |
+          python scripts/build_dist.py
+          python scripts/ledger_build.py
+          python scripts/ledger_verify.py
+
+      - name: Emit SPDX SBOM
+        run: python scripts/spdx_emit.py

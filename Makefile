@@ -1,22 +1,30 @@
-.PHONY: help venv validate shacl sparql
-
-help:
-	@printf "%s\\n" \\
-	  "Targets:" \\
-	  "  make venv     - create .venv and install deps" \\
-	  "  make validate  - run SHACL + SPARQL sanity checks" \\
-	  "  make shacl    - run SHACL validation (pyshacl)" \\
-	  "  make sparql   - run SPARQL tests (rdflib)"
+.PHONY: venv deps validate shacl jsonld build ledger verify sbom all
 
 venv:
-	python3 -m venv .venv
-	./.venv/bin/python -m pip install -U pip wheel setuptools
-	./.venv/bin/python -m pip install -r requirements.txt
+	python -m venv .venv
 
-validate: shacl sparql
+deps:
+	.venv/bin/pip install -r requirements-dev.txt
+
+validate:
+	.venv/bin/python scripts/validate_rdf.py
 
 shacl:
-	./.venv/bin/python tools/validate.py --shacl 2>/dev/null || python3 tools/validate.py --shacl
+	.venv/bin/python scripts/shacl_gate.py
 
-sparql:
-	./.venv/bin/python tools/validate.py --sparql 2>/dev/null || python3 tools/validate.py --sparql
+jsonld:
+	.venv/bin/python scripts/jsonld_roundtrip.py
+
+build:
+	.venv/bin/python scripts/build_dist.py
+
+ledger:
+	.venv/bin/python scripts/ledger_build.py
+
+verify:
+	.venv/bin/python scripts/ledger_verify.py
+
+sbom:
+	.venv/bin/python scripts/spdx_emit.py
+
+all: validate shacl jsonld build ledger verify sbom

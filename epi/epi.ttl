@@ -1,0 +1,67 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix epi:  <https://socioprophet.github.io/ontogenesis/epi#> .
+@prefix nl:   <https://socioprophet.github.io/ontogenesis/noether#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<epi/epi.ttl> a owl:Ontology ;
+  dct:title "Epi‑Onto‑Learning Ontology" ;
+  dct:description "Epi‑Onto‑Learning: Noetherian multi‑algebra learning + optional quantum co‑processors + publishing/provenance (Epiphany→Shifu→signed PDFs)." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <epi/noether.ttl> ;
+  owl:imports <prophet/prophet_cli.ttl> .
+
+### Publishing stack
+epi:PublishingPipeline a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Publishing pipeline" .
+epi:Artifact a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Artifact" .
+epi:SignedPDF a owl:Class ; rdfs:subClassOf epi:Artifact ; rdfs:label "Signed PDF" .
+epi:Report a owl:Class ; rdfs:subClassOf epi:Artifact ; rdfs:label "Report" .
+
+epi:producesArtifact a owl:ObjectProperty ; rdfs:domain epi:PublishingPipeline ; rdfs:range epi:Artifact ; rdfs:label "produces artifact" .
+epi:hasCommit a owl:DatatypeProperty ; rdfs:domain epi:Artifact ; rdfs:range xsd:string ; rdfs:label "has commit" .
+epi:hasSigner a owl:DatatypeProperty ; rdfs:domain epi:Artifact ; rdfs:range xsd:string ; rdfs:label "has signer" .
+epi:hasSignatureURI a owl:DatatypeProperty ; rdfs:domain epi:Artifact ; rdfs:range xsd:string ; rdfs:label "has signature URI" .
+
+### Learning run & diagnostics
+epi:LearningRun a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Learning run" .
+epi:usesLayerContract a owl:ObjectProperty ; rdfs:domain epi:LearningRun ; rdfs:range nl:LayerContract ; rdfs:label "uses layer contract" .
+epi:emitsDiagnostic a owl:ObjectProperty ; rdfs:domain epi:LearningRun ; rdfs:range epi:Report ; rdfs:label "emits diagnostic" .
+
+epi:chargeDrift a owl:DatatypeProperty ; rdfs:domain epi:Report ; rdfs:range xsd:decimal ; rdfs:label "charge drift (summary)" .
+epi:invarianceDelta a owl:DatatypeProperty ; rdfs:domain epi:Report ; rdfs:range xsd:decimal ; rdfs:label "invariance delta (summary)" .
+
+### Quantum lane (optional, gated)
+epi:QuantumLane a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Quantum lane" .
+epi:QuantumProvider a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Quantum provider" .
+epi:QuantumBackend a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Quantum backend" .
+epi:QuantumTask a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Quantum task" .
+
+epi:providerName a owl:DatatypeProperty ; rdfs:domain epi:QuantumProvider ; rdfs:range xsd:string ; rdfs:label "provider name" .
+epi:backendName a owl:DatatypeProperty ; rdfs:domain epi:QuantumBackend ; rdfs:range xsd:string ; rdfs:label "backend name" .
+epi:mitigation a owl:DatatypeProperty ; rdfs:domain epi:QuantumTask ; rdfs:range xsd:string ; rdfs:label "mitigation (csv)" .
+epi:qubitBudget a owl:DatatypeProperty ; rdfs:domain epi:QuantumLane ; rdfs:range xsd:integer ; rdfs:label "qubit budget" .
+epi:hardwareOptIn a owl:DatatypeProperty ; rdfs:domain epi:QuantumLane ; rdfs:range xsd:boolean ; rdfs:label "hardware opt-in" .
+
+epi:runsTask a owl:ObjectProperty ; rdfs:domain epi:QuantumLane ; rdfs:range epi:QuantumTask ; rdfs:label "runs task" .
+epi:usesBackend a owl:ObjectProperty ; rdfs:domain epi:QuantumTask ; rdfs:range epi:QuantumBackend ; rdfs:label "uses backend" .
+epi:usesProvider a owl:ObjectProperty ; rdfs:domain epi:QuantumLane ; rdfs:range epi:QuantumProvider ; rdfs:label "uses provider" .
+
+### Provenance linkouts (Whyis/PROV)
+epi:provActivity a owl:ObjectProperty ;
+  rdfs:subPropertyOf prov:wasGeneratedBy ;
+  rdfs:domain epi:Artifact ;
+  rdfs:range prov:Activity ;
+  rdfs:label "prov activity" .
+
+### Canonical providers/backends (examples)
+epi:Qiskit a epi:QuantumProvider ; epi:providerName "qiskit" ; rdfs:label "Qiskit" .
+epi:IBMQuantum a epi:QuantumProvider ; epi:providerName "ibm" ; rdfs:label "IBM Quantum Runtime" .
+epi:AerSim a epi:QuantumBackend ; epi:backendName "aer" ; rdfs:label "Aer simulator" .
+
