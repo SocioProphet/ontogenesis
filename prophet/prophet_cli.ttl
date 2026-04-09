@@ -65,9 +65,41 @@ prop:hasStep a owl:ObjectProperty ; rdfs:domain prop:BuildRecipe ; rdfs:range pr
 prop:stepOrder a owl:DatatypeProperty ; rdfs:domain prop:BuildStep ; rdfs:range xsd:integer ; rdfs:label "step order" .
 prop:runsCommand a owl:ObjectProperty ; rdfs:domain prop:BuildStep ; rdfs:range prop:Command ; rdfs:label "runs command" .
 
-prop:localRecipe a prop:BuildRecipe ; rdfs:label "local" .
-prop:regionRecipe a prop:BuildRecipe ; rdfs:label "region" .
-prop:macroRecipe a prop:BuildRecipe ; rdfs:label "macro" .
+### Build recipe instances (3×3: local / region / macro, each with 3 canonical steps)
+
+## Placeholder commands referenced by recipe steps
+prop:localConfigureCmd a prop:Command ; rdfs:label "local:configure" ; prop:inPlane prop:dev .
+prop:localBuildCmd     a prop:Command ; rdfs:label "local:build"     ; prop:inPlane prop:dev .
+prop:localTestCmd      a prop:Command ; rdfs:label "local:test"      ; prop:inPlane prop:dev .
+
+prop:regionPlanCmd     a prop:Command ; rdfs:label "region:plan"   ; prop:inPlane prop:cloud .
+prop:regionDeployCmd   a prop:Command ; rdfs:label "region:deploy" ; prop:inPlane prop:cloud .
+prop:regionVerifyCmd   a prop:Command ; rdfs:label "region:verify" ; prop:inPlane prop:cloud .
+
+prop:macroScaffoldCmd  a prop:Command ; rdfs:label "macro:scaffold"  ; prop:inPlane prop:cloud .
+prop:macroIntegrateCmd a prop:Command ; rdfs:label "macro:integrate" ; prop:inPlane prop:cloud .
+prop:macroReleaseCmd   a prop:Command ; rdfs:label "macro:release"   ; prop:inPlane prop:cloud .
+
+## Step instances
+prop:localStep1 a prop:BuildStep ; prop:stepOrder 1 ; prop:runsCommand prop:localConfigureCmd .
+prop:localStep2 a prop:BuildStep ; prop:stepOrder 2 ; prop:runsCommand prop:localBuildCmd .
+prop:localStep3 a prop:BuildStep ; prop:stepOrder 3 ; prop:runsCommand prop:localTestCmd .
+
+prop:regionStep1 a prop:BuildStep ; prop:stepOrder 1 ; prop:runsCommand prop:regionPlanCmd .
+prop:regionStep2 a prop:BuildStep ; prop:stepOrder 2 ; prop:runsCommand prop:regionDeployCmd .
+prop:regionStep3 a prop:BuildStep ; prop:stepOrder 3 ; prop:runsCommand prop:regionVerifyCmd .
+
+prop:macroStep1 a prop:BuildStep ; prop:stepOrder 1 ; prop:runsCommand prop:macroScaffoldCmd .
+prop:macroStep2 a prop:BuildStep ; prop:stepOrder 2 ; prop:runsCommand prop:macroIntegrateCmd .
+prop:macroStep3 a prop:BuildStep ; prop:stepOrder 3 ; prop:runsCommand prop:macroReleaseCmd .
+
+## Recipes with steps attached
+prop:localRecipe  a prop:BuildRecipe ; rdfs:label "local"  ;
+  prop:hasStep prop:localStep1 ; prop:hasStep prop:localStep2 ; prop:hasStep prop:localStep3 .
+prop:regionRecipe a prop:BuildRecipe ; rdfs:label "region" ;
+  prop:hasStep prop:regionStep1 ; prop:hasStep prop:regionStep2 ; prop:hasStep prop:regionStep3 .
+prop:macroRecipe  a prop:BuildRecipe ; rdfs:label "macro"  ;
+  prop:hasStep prop:macroStep1 ; prop:hasStep prop:macroStep2 ; prop:hasStep prop:macroStep3 .
 
 ### Dynamic registration (services/capabilities)
 prop:ServiceDescriptor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Service descriptor" .
