@@ -7,6 +7,8 @@ venv/
 # Artifacts
 dist/
 audit/
+ledger/ledger.csv
+sbom/spdx.json
 *.zip
 *.tar.gz
 
