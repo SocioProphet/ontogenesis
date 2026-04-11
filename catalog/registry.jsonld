@@ -23,6 +23,12 @@
       "semver": "0.1.0"
     },
     {
+      "id": "https://socioprophet.github.io/ontogenesis/og#MiddleActionOntology",
+      "layer": "Middle",
+      "path": "Middle/action-ontology.ttl",
+      "semver": "0.1.0"
+    },
+    {
       "id": "https://socioprophet.github.io/ontogenesis/og#LowerBindings",
       "layer": "Lower",
       "path": "Lower/bindings-core.ttl",

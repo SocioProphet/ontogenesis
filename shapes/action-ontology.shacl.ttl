@@ -1,0 +1,94 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix action: <https://socioprophet.github.io/ontogenesis/middle/action#> .
+
+<shapes/action-ontology.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass action:Action ;
+  sh:message "Action Ontology SHACL bundle loaded." .
+
+action:ActionShape a sh:NodeShape ;
+  sh:targetClass action:Action ;
+  sh:property [
+    sh:path action:performedBy ;
+    sh:minCount 1 ;
+    sh:class upper:Agent ;
+  ] ;
+  sh:property [
+    sh:path action:hasActionType ;
+    sh:minCount 1 ;
+    sh:class action:ActionType ;
+  ] ;
+  sh:property [
+    sh:path action:fromState ;
+    sh:minCount 1 ;
+    sh:class action:State ;
+  ] ;
+  sh:property [
+    sh:path action:toState ;
+    sh:minCount 1 ;
+    sh:class action:State ;
+  ] ;
+  sh:property [
+    sh:path action:timestamp ;
+    sh:minCount 1 ;
+    sh:datatype xsd:dateTime ;
+  ] .
+
+action:StateShape a sh:NodeShape ;
+  sh:targetClass action:State ;
+  sh:property [
+    sh:path action:hasAffordance ;
+    sh:minCount 1 ;
+    sh:class action:ActionType ;
+  ] .
+
+action:TraceShape a sh:NodeShape ;
+  sh:targetClass action:Trace ;
+  sh:property [
+    sh:path action:medium ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path action:traceKind ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path action:traceTimestamp ;
+    sh:minCount 1 ;
+    sh:datatype xsd:dateTime ;
+  ] .
+
+action:PreferenceShape a sh:NodeShape ;
+  sh:targetClass action:Preference ;
+  sh:property [
+    sh:path action:targetsGoalState ;
+    sh:minCount 1 ;
+    sh:class action:State ;
+  ] ;
+  sh:property [
+    sh:path action:priority ;
+    sh:minCount 1 ;
+    sh:datatype xsd:integer ;
+  ] .
+
+# If a trace claims to be a completion event, it must reference an action.
+action:DoneTraceShape a sh:NodeShape ;
+  sh:targetClass action:Trace ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A done trace must refer to an action." ;
+    sh:select """
+      PREFIX action: <https://socioprophet.github.io/ontogenesis/middle/action#>
+      SELECT ?this WHERE {
+        ?this action:traceKind ?kind .
+        FILTER(LCASE(STR(?kind)) = \"done\")
+        FILTER NOT EXISTS { ?this action:refersToAction ?a . }
+      }
+    """ ;
+  ] .

@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "action": "https://socioprophet.github.io/ontogenesis/middle/action#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "id": "@id",
+    "type": "@type",
+    "label": "rdfs:label",
+
+    "Action": "action:Action",
+    "ActionType": "action:ActionType",
+    "State": "action:State",
+    "Trace": "action:Trace",
+    "Preference": "action:Preference",
+    "CoordinationPattern": "action:CoordinationPattern",
+    "ContractNetPattern": "action:ContractNetPattern",
+    "PubSubPattern": "action:PubSubPattern",
+    "BlackboardPattern": "action:BlackboardPattern",
+    "WorkflowPattern": "action:WorkflowPattern",
+
+    "performedBy": { "@id": "action:performedBy", "@type": "@id" },
+    "hasActionType": { "@id": "action:hasActionType", "@type": "@id" },
+    "fromState": { "@id": "action:fromState", "@type": "@id" },
+    "toState": { "@id": "action:toState", "@type": "@id" },
+    "producesTrace": { "@id": "action:producesTrace", "@type": "@id" },
+    "hasAffordance": { "@id": "action:hasAffordance", "@type": "@id" },
+    "hasCapability": { "@id": "action:hasCapability", "@type": "@id" },
+    "hasPreference": { "@id": "action:hasPreference", "@type": "@id" },
+    "targetsGoalState": { "@id": "action:targetsGoalState", "@type": "@id" },
+    "usesPattern": { "@id": "action:usesPattern", "@type": "@id" },
+    "refersToAction": { "@id": "action:refersToAction", "@type": "@id" },
+
+    "timestamp": { "@id": "action:timestamp", "@type": "http://www.w3.org/2001/XMLSchema#dateTime" },
+    "traceTimestamp": { "@id": "action:traceTimestamp", "@type": "http://www.w3.org/2001/XMLSchema#dateTime" },
+    "medium": "action:medium",
+    "traceKind": "action:traceKind",
+    "taskId": "action:taskId",
+    "topicId": "action:topicId",
+    "messageId": "action:messageId",
+    "priority": { "@id": "action:priority", "@type": "http://www.w3.org/2001/XMLSchema#integer" },
+    "cost": { "@id": "action:cost", "@type": "http://www.w3.org/2001/XMLSchema#decimal" },
+    "probability": { "@id": "action:probability", "@type": "http://www.w3.org/2001/XMLSchema#decimal" }
+  }
+}

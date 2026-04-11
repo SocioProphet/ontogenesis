@@ -1,0 +1,74 @@
+{
+  "@context": "../contexts/action-ontology.context.jsonld",
+  "@graph": [
+    {
+      "id": "action:observe",
+      "type": "ActionType",
+      "label": "Observe"
+    },
+    {
+      "id": "action:writeTrace",
+      "type": "ActionType",
+      "label": "Write Trace"
+    },
+    {
+      "id": "action:unknownState",
+      "type": "State",
+      "label": "Unknown State",
+      "hasAffordance": ["action:observe"]
+    },
+    {
+      "id": "action:knownState",
+      "type": "State",
+      "label": "Known State",
+      "hasAffordance": ["action:writeTrace"]
+    },
+    {
+      "id": "action:alice",
+      "type": "upper:Agent",
+      "label": "Alice",
+      "hasCapability": ["action:observe", "action:writeTrace"]
+    },
+    {
+      "id": "action:prefKnown",
+      "type": "Preference",
+      "label": "Prefer Known State",
+      "targetsGoalState": "action:knownState",
+      "priority": 1
+    },
+    {
+      "id": "action:cfpTrace",
+      "type": "Trace",
+      "label": "Contract Net CFP",
+      "usesPattern": "action:ContractNet",
+      "traceKind": "cfp",
+      "taskId": "task-001",
+      "medium": "bus:tasks",
+      "traceTimestamp": "2026-04-11T18:00:00Z"
+    },
+    {
+      "id": "action:publishTrace",
+      "type": "Trace",
+      "label": "PubSub Publish",
+      "usesPattern": "action:PubSub",
+      "traceKind": "publish",
+      "topicId": "alerts",
+      "messageId": "msg-001",
+      "medium": "topic:alerts",
+      "traceTimestamp": "2026-04-11T18:00:05Z"
+    },
+    {
+      "id": "action:observation1",
+      "type": "Action",
+      "label": "Observation Action",
+      "performedBy": "action:alice",
+      "hasActionType": "action:observe",
+      "fromState": "action:unknownState",
+      "toState": "action:knownState",
+      "timestamp": "2026-04-11T18:00:10Z",
+      "producesTrace": "action:publishTrace",
+      "cost": 1.0,
+      "probability": 1.0
+    }
+  ]
+}
