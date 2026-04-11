@@ -1,8 +1,0 @@
-{
-  "@context": "/mnt/data/ontogenesis_repo_full_v1/contexts/main.context.jsonld",
-  "id": "https://socioprophet.github.io/ontogenesis/og#MiddleActionOntology",
-  "layer": "Middle",
-  "path": "Middle/action-ontology.ttl",
-  "semver": "0.1.0",
-  "label": "Action ontology"
-}
