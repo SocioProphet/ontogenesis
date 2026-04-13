@@ -1,0 +1,54 @@
+@prefix : <https://socioprophet.github.io/ontogenesis/Platform/Parsing/hypergraph-promotion#> .
+@prefix core: <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<https://socioprophet.github.io/ontogenesis/Platform/Parsing/hypergraph-promotion>
+  a owl:Ontology ;
+  owl:imports <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core> ;
+  rdfs:label "SocioProphet Hypergraph Promotion Ontology" ;
+  rdfs:comment "Vocabulary for promotion of parse candidates into canonical hypergraph structures." .
+
+:PromotionGate a owl:Class ;
+  rdfs:subClassOf prov:Plan ;
+  rdfs:label "Promotion Gate" .
+
+:PromotionAccepted a owl:Class ;
+  rdfs:subClassOf core:PromotionDecision ;
+  rdfs:label "Promotion Accepted" .
+
+:PromotionDeferred a owl:Class ;
+  rdfs:subClassOf core:PromotionDecision ;
+  rdfs:label "Promotion Deferred" .
+
+:decisionForRelation a owl:ObjectProperty ;
+  rdfs:domain core:PromotionDecision ;
+  rdfs:range core:RelationCandidate ;
+  rdfs:label "decision for relation" .
+
+:decisionForEntity a owl:ObjectProperty ;
+  rdfs:domain core:PromotionDecision ;
+  rdfs:range core:EntityCandidate ;
+  rdfs:label "decision for entity" .
+
+:requiresGate a owl:ObjectProperty ;
+  rdfs:domain core:PromotionDecision ;
+  rdfs:range :PromotionGate ;
+  rdfs:label "requires gate" .
+
+:promotionReason a owl:DatatypeProperty ;
+  rdfs:domain core:PromotionDecision ;
+  rdfs:range xsd:string ;
+  rdfs:label "promotion reason" .
+
+:backReferencePreserved a owl:DatatypeProperty ;
+  rdfs:domain core:PromotionDecision ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "backreference preserved" .
+
+:minConfidenceThreshold a owl:DatatypeProperty ;
+  rdfs:domain :PromotionGate ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "minimum confidence threshold" .
