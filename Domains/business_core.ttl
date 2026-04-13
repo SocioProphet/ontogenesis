@@ -1,0 +1,48 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/business_core.ttl> a owl:Ontology ;
+  dct:title "Domain — Business Core" ;
+  dct:description "Canonical business entities and relationships for company, BU, offering, customer, contract, channel, revenue stream, cost pool, geography, competitor, and scenario modeling." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+biz:Company a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Company" .
+biz:BusinessUnit a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Business unit" .
+biz:Offering a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Offering" .
+biz:ProductModule a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Product module" .
+biz:Customer a owl:Class ; rdfs:subClassOf upper:Agent ; rdfs:label "Customer" .
+biz:CustomerSegment a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Customer segment" .
+biz:Channel a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Channel" .
+biz:Contract a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Contract" .
+biz:Subscription a owl:Class ; rdfs:subClassOf biz:Contract ; rdfs:label "Subscription" .
+biz:RevenueStream a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Revenue stream" .
+biz:CostPool a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Cost pool" .
+biz:CapacityUnit a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Capacity unit" .
+biz:Geography a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Geography" .
+biz:RegulatoryRegion a owl:Class ; rdfs:subClassOf biz:Geography ; rdfs:label "Regulatory region" .
+biz:Scenario a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Scenario" .
+biz:Competitor a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Competitor" .
+
+biz:hasBusinessUnit a owl:ObjectProperty ; rdfs:domain biz:Company ; rdfs:range biz:BusinessUnit ; rdfs:label "has business unit" .
+biz:offers a owl:ObjectProperty ; rdfs:domain biz:Company ; rdfs:range biz:Offering ; rdfs:label "offers" .
+biz:includesModule a owl:ObjectProperty ; rdfs:domain biz:Offering ; rdfs:range biz:ProductModule ; rdfs:label "includes module" .
+biz:servesSegment a owl:ObjectProperty ; rdfs:domain biz:Offering ; rdfs:range biz:CustomerSegment ; rdfs:label "serves segment" .
+biz:usesChannel a owl:ObjectProperty ; rdfs:domain biz:Offering ; rdfs:range biz:Channel ; rdfs:label "uses channel" .
+biz:hasContract a owl:ObjectProperty ; rdfs:domain biz:Customer ; rdfs:range biz:Contract ; rdfs:label "has contract" .
+biz:hasRevenueStream a owl:ObjectProperty ; rdfs:domain biz:Company ; rdfs:range biz:RevenueStream ; rdfs:label "has revenue stream" .
+biz:hasCostPool a owl:ObjectProperty ; rdfs:domain biz:Company ; rdfs:range biz:CostPool ; rdfs:label "has cost pool" .
+biz:locatedIn a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range biz:Geography ; rdfs:label "located in" .
+biz:competesWith a owl:ObjectProperty ; rdfs:domain biz:Company ; rdfs:range biz:Competitor ; rdfs:label "competes with" .
+biz:scenarioFor a owl:ObjectProperty ; rdfs:domain biz:Scenario ; rdfs:range biz:Company ; rdfs:label "scenario for" .
+
+biz:legalName a owl:DatatypeProperty ; rdfs:domain biz:Company ; rdfs:range xsd:string ; rdfs:label "legal name" .
+biz:currency a owl:DatatypeProperty ; rdfs:domain biz:Company ; rdfs:range xsd:string ; rdfs:label "reporting currency" .
+biz:pricingModel a owl:DatatypeProperty ; rdfs:domain biz:Offering ; rdfs:range xsd:string ; rdfs:label "pricing model" .
+biz:segmentCode a owl:DatatypeProperty ; rdfs:domain biz:CustomerSegment ; rdfs:range xsd:string ; rdfs:label "segment code" .
+biz:channelType a owl:DatatypeProperty ; rdfs:domain biz:Channel ; rdfs:range xsd:string ; rdfs:label "channel type" .
