@@ -1,0 +1,126 @@
+@prefix sp: <https://socioprophet.com/ontology/v0#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+sp:SocioProphetOntology a owl:Ontology ;
+  dct:title "SocioProphet Ontology Module" ;
+  dct:description "Minimal, public-safe ontology slice for SocioProphet surfaces, Entity Analytics, boundary contracts, and agent workflow artifacts." ;
+  owl:versionInfo "0.1.0" .
+
+### Surface layer
+sp:Surface a owl:Class ; rdfs:label "Surface" ; rdfs:comment "A public SocioProphet platform surface." .
+sp:SurfaceCategory a owl:Class ; rdfs:label "Surface category" .
+sp:Audience a owl:Class ; rdfs:label "Audience" .
+sp:Topic a owl:Class ; rdfs:label "Topic" .
+sp:Status a owl:Class ; rdfs:label "Status" .
+sp:Route a owl:Class ; rdfs:label "Route" .
+sp:Site a owl:Class ; rdfs:label "Site" .
+sp:InvestorLens a owl:Class ; rdfs:label "Investor lens" .
+sp:hasCategory a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:SurfaceCategory .
+sp:hasStatus a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Status .
+sp:hasAudience a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Audience .
+sp:hasTopic a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Topic .
+sp:hasNormalizedTopic a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Topic .
+sp:hasInvestorLens a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:InvestorLens .
+sp:landingRoute a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Route .
+sp:surveyRoute a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Route .
+sp:docsRoute a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Route .
+sp:relatedSurface a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Surface .
+sp:relatedSite a owl:ObjectProperty ; rdfs:domain sp:Surface ; rdfs:range sp:Site .
+sp:homepageVisible a owl:DatatypeProperty ; rdfs:domain sp:Surface ; rdfs:range xsd:boolean .
+sp:descriptionText a owl:DatatypeProperty ; rdfs:domain sp:Surface ; rdfs:range xsd:string .
+sp:nextActionText a owl:DatatypeProperty ; rdfs:domain sp:Surface ; rdfs:range xsd:string .
+sp:path a owl:DatatypeProperty ; rdfs:domain sp:Route ; rdfs:range xsd:string .
+sp:url a owl:DatatypeProperty ; rdfs:domain sp:Site ; rdfs:range xsd:anyURI .
+
+### Entity Analytics layer
+sp:Entity a owl:Class ; rdfs:label "Entity" .
+sp:TentativeEntity a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Tentative entity" .
+sp:AssertedEntity a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Asserted entity" .
+sp:ScopedPersona a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Scoped persona" .
+sp:Device a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Device" .
+sp:Identifier a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Identifier" .
+sp:Institution a owl:Class ; rdfs:subClassOf sp:Entity ; rdfs:label "Institution" .
+sp:Scope a owl:Class ; rdfs:label "Scope" .
+sp:IdentityPrime a owl:Class ; rdfs:label "Identity prime" .
+sp:EventIR a owl:Class ; rdfs:label "Event-IR" .
+sp:FeatureAtom a owl:Class ; rdfs:label "Feature atom" .
+sp:Evidence a owl:Class ; rdfs:label "Evidence" .
+sp:EvidenceClass a owl:Class ; rdfs:label "Evidence class" .
+sp:Link a owl:Class ; rdfs:label "Link" .
+sp:LinkState a owl:Class ; rdfs:label "Link state" .
+sp:ProofArtifact a owl:Class ; rdfs:label "Proof artifact" .
+sp:PolicyDisposition a owl:Class ; rdfs:label "Policy disposition" .
+sp:aboutEntity a owl:ObjectProperty ; rdfs:domain sp:EventIR ; rdfs:range sp:Entity .
+sp:hasScope a owl:ObjectProperty ; rdfs:domain sp:EventIR ; rdfs:range sp:Scope .
+sp:hasIdentityPrime a owl:ObjectProperty ; rdfs:domain sp:EventIR ; rdfs:range sp:IdentityPrime .
+sp:hasFeatureAtom a owl:ObjectProperty ; rdfs:domain sp:EventIR ; rdfs:range sp:FeatureAtom .
+sp:hasEvidence a owl:ObjectProperty ; rdfs:domain sp:EventIR ; rdfs:range sp:Evidence .
+sp:hasEvidenceClass a owl:ObjectProperty ; rdfs:domain sp:Evidence ; rdfs:range sp:EvidenceClass .
+sp:subjectEntity a owl:ObjectProperty ; rdfs:domain sp:Link ; rdfs:range sp:Entity .
+sp:objectEntity a owl:ObjectProperty ; rdfs:domain sp:Link ; rdfs:range sp:Entity .
+sp:hasLinkState a owl:ObjectProperty ; rdfs:domain sp:Link ; rdfs:range sp:LinkState .
+sp:witnessedBy a owl:ObjectProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range sp:Evidence .
+sp:aboutDecisionLink a owl:ObjectProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range sp:Link .
+sp:hasPolicyDisposition a owl:ObjectProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range sp:PolicyDisposition .
+sp:decisionResult a owl:DatatypeProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range xsd:string .
+sp:signatureText a owl:DatatypeProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range xsd:string .
+sp:inputHash a owl:DatatypeProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range xsd:string .
+sp:replayHook a owl:DatatypeProperty ; rdfs:domain sp:ProofArtifact ; rdfs:range xsd:string .
+sp:proposed a sp:LinkState ; rdfs:label "proposed" .
+sp:linked a sp:LinkState ; rdfs:label "linked" .
+sp:reviewRequired a sp:LinkState ; rdfs:label "review-required" .
+sp:merged a sp:LinkState ; rdfs:label "merged" .
+sp:blocked a sp:LinkState ; rdfs:label "blocked" .
+sp:revoked a sp:LinkState ; rdfs:label "revoked" .
+sp:unmerged a sp:LinkState ; rdfs:label "unmerged" .
+sp:automaticallyAllowed a sp:PolicyDisposition ; rdfs:label "automatically allowed" .
+sp:automaticallyBlocked a sp:PolicyDisposition ; rdfs:label "automatically blocked" .
+sp:reviewRequiredDisposition a sp:PolicyDisposition ; rdfs:label "review-required" .
+sp:witnessRequired a sp:PolicyDisposition ; rdfs:label "witness-required" .
+sp:localOnly a sp:PolicyDisposition ; rdfs:label "local-only or citizen-cloud-only" .
+sp:coarsenedExportOnly a sp:PolicyDisposition ; rdfs:label "coarsened-export-only" .
+
+### Boundary and agent workflow layer
+sp:Component a owl:Class ; rdfs:label "Component" .
+sp:Port a owl:Class ; rdfs:label "Port" .
+sp:Contract a owl:Class ; rdfs:label "Contract" .
+sp:BoundaryEvent a owl:Class ; rdfs:label "Boundary event" .
+sp:Capability a owl:Class ; rdfs:label "Capability" .
+sp:OperatorWorkflow a owl:Class ; rdfs:label "Operator workflow" .
+sp:WorkflowState a owl:Class ; rdfs:label "Workflow state" .
+sp:ExecutionArtifact a owl:Class ; rdfs:label "Execution artifact" .
+sp:ValidationArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Validation artifact" .
+sp:PlacementDecision a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Placement decision" .
+sp:PlacementReceipt a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Placement receipt" .
+sp:RunArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Run artifact" .
+sp:ReplayArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Replay artifact" .
+sp:PromotionArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Promotion artifact" .
+sp:ReversalArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Reversal artifact" .
+sp:SessionArtifact a owl:Class ; rdfs:subClassOf sp:ExecutionArtifact ; rdfs:label "Session artifact" .
+sp:hasPort a owl:ObjectProperty ; rdfs:domain sp:Component ; rdfs:range sp:Port .
+sp:governedByContract a owl:ObjectProperty ; rdfs:domain sp:Port ; rdfs:range sp:Contract .
+sp:materializesBoundaryEvent a owl:ObjectProperty ; rdfs:domain sp:Contract ; rdfs:range sp:BoundaryEvent .
+sp:hasCapability a owl:ObjectProperty ; rdfs:domain sp:Contract ; rdfs:range sp:Capability .
+sp:hasWorkflowState a owl:ObjectProperty ; rdfs:domain sp:OperatorWorkflow ; rdfs:range sp:WorkflowState .
+sp:emitsArtifact a owl:ObjectProperty ; rdfs:domain sp:OperatorWorkflow ; rdfs:range sp:ExecutionArtifact .
+sp:reviewsArtifact a owl:ObjectProperty ; rdfs:domain sp:OperatorWorkflow ; rdfs:range sp:ExecutionArtifact .
+sp:networkPort a sp:Port ; rdfs:label "network" .
+sp:identityPort a sp:Port ; rdfs:label "identity" .
+sp:executionPort a sp:Port ; rdfs:label "execution" .
+sp:storagePort a sp:Port ; rdfs:label "storage" .
+sp:userInterfacePort a sp:Port ; rdfs:label "user interface" .
+sp:contentPort a sp:Port ; rdfs:label "content" .
+sp:proposedState a sp:WorkflowState ; rdfs:label "proposed" .
+sp:approvedState a sp:WorkflowState ; rdfs:label "approved" .
+sp:executingState a sp:WorkflowState ; rdfs:label "executing" .
+sp:degradedState a sp:WorkflowState ; rdfs:label "degraded" .
+sp:pausedState a sp:WorkflowState ; rdfs:label "paused" .
+sp:completedState a sp:WorkflowState ; rdfs:label "completed" .
+sp:reviewedState a sp:WorkflowState ; rdfs:label "reviewed" .
+sp:reversedState a sp:WorkflowState ; rdfs:label "reversed" .
+sp:remediatedState a sp:WorkflowState ; rdfs:label "remediated" .

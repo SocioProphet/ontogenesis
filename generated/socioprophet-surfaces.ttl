@@ -1,0 +1,513 @@
+@prefix sp: <https://socioprophet.com/ontology/v0#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+sp:surface_academy a sp:Surface ;
+  rdfs:label "Academy" ;
+  sp:hasCategory sp:cat_learning ;
+  sp:hasStatus sp:status_live ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Learning, family, mentorship, and cybernetics education." ;
+  sp:nextActionText "Polish and continue documentation." ;
+  sp:landingRoute sp:route__academy_ ;
+  sp:surveyRoute sp:route__academy_apply_ ;
+  sp:docsRoute sp:route__documentation_guide_products_academy_ ;
+  sp:hasAudience sp:aud_learners ;
+  sp:hasAudience sp:aud_families ;
+  sp:hasAudience sp:aud_mentors ;
+  sp:hasAudience sp:aud_educators ;
+  sp:hasTopic sp:topic_learning ;
+  sp:hasTopic sp:topic_family ;
+  sp:hasTopic sp:topic_mentorship ;
+  sp:hasTopic sp:topic_cybernetics ;
+  sp:hasTopic sp:topic_safeguarding ;
+  sp:hasNormalizedTopic sp:topic_learning ;
+  sp:hasNormalizedTopic sp:topic_education ;
+  sp:hasNormalizedTopic sp:topic_capability ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_safeguarding ;
+  sp:hasInvestorLens sp:lens_capability_compounding ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_academy_1 ;
+  sp:relatedSite sp:site_academy_2 .
+
+sp:surface_organizations a sp:Surface ;
+  rdfs:label "Organizations" ;
+  sp:hasCategory sp:cat_deployment ;
+  sp:hasStatus sp:status_live ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Institutional deployment for schools, nonprofits, public-interest, and mission-aligned organizations." ;
+  sp:nextActionText "Upgrade to Academy-level first-class quality." ;
+  sp:landingRoute sp:route__organizations_ ;
+  sp:surveyRoute sp:route__organizations_ ;
+  sp:hasAudience sp:aud_schools ;
+  sp:hasAudience sp:aud_nonprofits ;
+  sp:hasAudience sp:aud_public_sector ;
+  sp:hasAudience sp:aud_employers ;
+  sp:hasTopic sp:topic_deployment ;
+  sp:hasTopic sp:topic_institutions ;
+  sp:hasTopic sp:topic_governance ;
+  sp:hasTopic sp:topic_public_interest ;
+  sp:hasTopic sp:topic_secure_training ;
+  sp:hasNormalizedTopic sp:topic_deployment ;
+  sp:hasNormalizedTopic sp:topic_institutions ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_capability ;
+  sp:hasInvestorLens sp:lens_deployment_compounding ;
+  sp:relatedSurface sp:surface_academy ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSurface sp:surface_medical ;
+  sp:relatedSurface sp:surface_law ;
+  sp:relatedSite sp:site_organizations_1 ;
+  sp:relatedSite sp:site_organizations_2 .
+
+sp:surface_documentation a sp:Surface ;
+  rdfs:label "Documentation" ;
+  sp:hasCategory sp:cat_docs ;
+  sp:hasStatus sp:status_live ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Architecture, products, trust model, and canonical direction." ;
+  sp:nextActionText "Keep as the source of deeper system detail." ;
+  sp:docsRoute sp:route___ ;
+  sp:hasAudience sp:aud_builders ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasAudience sp:aud_researchers ;
+  sp:hasAudience sp:aud_partners ;
+  sp:hasTopic sp:topic_architecture ;
+  sp:hasTopic sp:topic_products ;
+  sp:hasTopic sp:topic_trust ;
+  sp:hasTopic sp:topic_guides ;
+  sp:hasTopic sp:topic_reference ;
+  sp:hasNormalizedTopic sp:topic_architecture ;
+  sp:hasNormalizedTopic sp:topic_reference ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasInvestorLens sp:lens_discovery_compounding ;
+  sp:relatedSurface sp:surface_academy ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_ai ;
+  sp:relatedSurface sp:surface_developer ;
+  sp:relatedSurface sp:surface_cloud ;
+  sp:relatedSurface sp:surface_live ;
+  sp:relatedSurface sp:surface_medical ;
+  sp:relatedSurface sp:surface_law ;
+  sp:relatedSurface sp:surface_wiki ;
+  sp:relatedSurface sp:surface_blog ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_documentation_1 ;
+  sp:relatedSite sp:site_documentation_2 .
+
+sp:surface_ai a sp:Surface ;
+  rdfs:label "AI Platform" ;
+  sp:hasCategory sp:cat_technical ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Model, agent, orchestration, and trust-layer capabilities." ;
+  sp:nextActionText "Decide whether this needs a first-class landing page." ;
+  sp:docsRoute sp:route__documentation_guide_products_ai_ ;
+  sp:hasAudience sp:aud_builders ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasTopic sp:topic_agents ;
+  sp:hasTopic sp:topic_models ;
+  sp:hasTopic sp:topic_automation ;
+  sp:hasTopic sp:topic_tooling ;
+  sp:hasNormalizedTopic sp:topic_intelligence ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_automation ;
+  sp:hasNormalizedTopic sp:topic_builders ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasInvestorLens sp:lens_technical_optionality ;
+  sp:relatedSurface sp:surface_developer ;
+  sp:relatedSurface sp:surface_cloud ;
+  sp:relatedSurface sp:surface_live ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_ai_1 .
+
+sp:surface_developer a sp:Surface ;
+  rdfs:label "Developer" ;
+  sp:hasCategory sp:cat_technical ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "SDKs, APIs, integration patterns, and developer workflows." ;
+  sp:nextActionText "Promote to docs-backed landing page first." ;
+  sp:docsRoute sp:route__documentation_guide_products_dev_ ;
+  sp:hasAudience sp:aud_builders ;
+  sp:hasAudience sp:aud_integrators ;
+  sp:hasTopic sp:topic_apis ;
+  sp:hasTopic sp:topic_sdk ;
+  sp:hasTopic sp:topic_tooling ;
+  sp:hasTopic sp:topic_integration ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_builders ;
+  sp:hasNormalizedTopic sp:topic_integration ;
+  sp:hasNormalizedTopic sp:topic_capability ;
+  sp:hasNormalizedTopic sp:topic_apis ;
+  sp:hasInvestorLens sp:lens_developer_compounding ;
+  sp:relatedSurface sp:surface_ai ;
+  sp:relatedSurface sp:surface_cloud ;
+  sp:relatedSurface sp:surface_live ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_developer_1 .
+
+sp:surface_cloud a sp:Surface ;
+  rdfs:label "Cloud Suite" ;
+  sp:hasCategory sp:cat_technical ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Hosted and managed operational capabilities." ;
+  sp:nextActionText "Clarify managed-platform scope." ;
+  sp:docsRoute sp:route__documentation_guide_products_cloud_ ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasAudience sp:aud_partners ;
+  sp:hasTopic sp:topic_hosting ;
+  sp:hasTopic sp:topic_managed_services ;
+  sp:hasTopic sp:topic_deployment ;
+  sp:hasTopic sp:topic_operations ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_operations ;
+  sp:hasNormalizedTopic sp:topic_deployment ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_hosting ;
+  sp:hasInvestorLens sp:lens_managed_service_compounding ;
+  sp:relatedSurface sp:surface_ai ;
+  sp:relatedSurface sp:surface_developer ;
+  sp:relatedSurface sp:surface_live ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_cloud_1 .
+
+sp:surface_live a sp:Surface ;
+  rdfs:label "Live Builds" ;
+  sp:hasCategory sp:cat_technical ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Demonstrations, environments, and active build states." ;
+  sp:nextActionText "Decide how much live operational visibility to expose." ;
+  sp:docsRoute sp:route__documentation_guide_products_live_ ;
+  sp:hasAudience sp:aud_builders ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasAudience sp:aud_partners ;
+  sp:hasTopic sp:topic_demos ;
+  sp:hasTopic sp:topic_environments ;
+  sp:hasTopic sp:topic_rollouts ;
+  sp:hasTopic sp:topic_examples ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_operations ;
+  sp:hasNormalizedTopic sp:topic_deployment ;
+  sp:hasNormalizedTopic sp:topic_signal ;
+  sp:hasNormalizedTopic sp:topic_demonstration ;
+  sp:hasInvestorLens sp:lens_signal_and_validation ;
+  sp:relatedSurface sp:surface_ai ;
+  sp:relatedSurface sp:surface_developer ;
+  sp:relatedSurface sp:surface_cloud ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_live_1 .
+
+sp:surface_medical a sp:Surface ;
+  rdfs:label "Medical" ;
+  sp:hasCategory sp:cat_domain ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Health, education, and support pathways requiring higher assurance." ;
+  sp:nextActionText "Likely gated inquiry later, not open survey first." ;
+  sp:docsRoute sp:route__documentation_guide_products_medical_ ;
+  sp:hasAudience sp:aud_providers ;
+  sp:hasAudience sp:aud_institutions ;
+  sp:hasAudience sp:aud_families ;
+  sp:hasTopic sp:topic_health ;
+  sp:hasTopic sp:topic_care ;
+  sp:hasTopic sp:topic_higher_assurance ;
+  sp:hasTopic sp:topic_safeguarding ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_higher_assurance ;
+  sp:hasNormalizedTopic sp:topic_care ;
+  sp:hasNormalizedTopic sp:topic_safeguarding ;
+  sp:hasNormalizedTopic sp:topic_institutions ;
+  sp:hasInvestorLens sp:lens_higher_trust_optionality ;
+  sp:relatedSurface sp:surface_law ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_medical_1 .
+
+sp:surface_law a sp:Surface ;
+  rdfs:label "Law" ;
+  sp:hasCategory sp:cat_domain ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Legal, governance, and jurisprudential workflows." ;
+  sp:nextActionText "Likely gated inquiry later, not open survey first." ;
+  sp:docsRoute sp:route__documentation_guide_products_law_ ;
+  sp:hasAudience sp:aud_legal ;
+  sp:hasAudience sp:aud_policy ;
+  sp:hasAudience sp:aud_governance ;
+  sp:hasTopic sp:topic_law ;
+  sp:hasTopic sp:topic_policy ;
+  sp:hasTopic sp:topic_governance ;
+  sp:hasTopic sp:topic_higher_assurance ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_higher_assurance ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasNormalizedTopic sp:topic_policy ;
+  sp:hasNormalizedTopic sp:topic_institutions ;
+  sp:hasInvestorLens sp:lens_governance_optionality ;
+  sp:relatedSurface sp:surface_medical ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_law_1 .
+
+sp:surface_wiki a sp:Surface ;
+  rdfs:label "Wiki" ;
+  sp:hasCategory sp:cat_content ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Structured knowledge and reference surface." ;
+  sp:nextActionText "Content-first, not survey-first." ;
+  sp:docsRoute sp:route__documentation_guide_products_wiki_ ;
+  sp:hasAudience sp:aud_readers ;
+  sp:hasAudience sp:aud_researchers ;
+  sp:hasTopic sp:topic_knowledge ;
+  sp:hasTopic sp:topic_reference ;
+  sp:hasTopic sp:topic_taxonomy ;
+  sp:hasTopic sp:topic_glossary ;
+  sp:hasNormalizedTopic sp:topic_knowledge ;
+  sp:hasNormalizedTopic sp:topic_reference ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_taxonomy ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasInvestorLens sp:lens_knowledge_compounding ;
+  sp:relatedSurface sp:surface_blog ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_wiki_1 .
+
+sp:surface_blog a sp:Surface ;
+  rdfs:label "Blog" ;
+  sp:hasCategory sp:cat_content ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Long-form writing, updates, and commentary." ;
+  sp:nextActionText "Content-first surface." ;
+  sp:docsRoute sp:route__documentation_guide_products_blog_ ;
+  sp:hasAudience sp:aud_readers ;
+  sp:hasAudience sp:aud_followers ;
+  sp:hasTopic sp:topic_essays ;
+  sp:hasTopic sp:topic_updates ;
+  sp:hasTopic sp:topic_analysis ;
+  sp:hasTopic sp:topic_narrative ;
+  sp:hasNormalizedTopic sp:topic_knowledge ;
+  sp:hasNormalizedTopic sp:topic_narrative ;
+  sp:hasNormalizedTopic sp:topic_signal ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_public_positioning ;
+  sp:hasInvestorLens sp:lens_narrative_compounding ;
+  sp:relatedSurface sp:surface_wiki ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSite sp:site_blog_1 .
+
+sp:surface_digital_trust a sp:Surface ;
+  rdfs:label "Digital / Trust" ;
+  sp:hasCategory sp:cat_trust ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Trust-first positioning, digital identity, and public-facing trust surfaces." ;
+  sp:nextActionText "Clarify product definition and trust narrative." ;
+  sp:docsRoute sp:route__documentation_guide_domain_surface_ ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasAudience sp:aud_partners ;
+  sp:hasAudience sp:aud_public ;
+  sp:hasTopic sp:topic_identity ;
+  sp:hasTopic sp:topic_trust ;
+  sp:hasTopic sp:topic_governance ;
+  sp:hasTopic sp:topic_public_positioning ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasNormalizedTopic sp:topic_identity ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_public_positioning ;
+  sp:hasInvestorLens sp:lens_trust_compounding ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_academy ;
+  sp:relatedSurface sp:surface_law ;
+  sp:relatedSurface sp:surface_medical ;
+  sp:relatedSite sp:site_digital_trust_1 .
+
+sp:surface_investor a sp:Surface ;
+  rdfs:label "Investor" ;
+  sp:hasCategory sp:cat_governance ;
+  sp:hasStatus sp:status_stub ;
+  sp:homepageVisible false ;
+  sp:descriptionText "Investor and governance-facing public materials." ;
+  sp:nextActionText "Expand when investor materials are ready." ;
+  sp:landingRoute sp:route__investor_ ;
+  sp:hasAudience sp:aud_investors ;
+  sp:hasAudience sp:aud_governance ;
+  sp:hasTopic sp:topic_governance ;
+  sp:hasTopic sp:topic_capital ;
+  sp:hasTopic sp:topic_platform_direction ;
+  sp:hasNormalizedTopic sp:topic_capital ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasNormalizedTopic sp:topic_value_creation ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasInvestorLens sp:lens_economic_profit ;
+  sp:relatedSurface sp:surface_documentation ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_investor_1 ;
+  sp:relatedSite sp:site_investor_2 ;
+  sp:relatedSite sp:site_investor_3 .
+
+sp:surface_entity_analytics a sp:Surface ;
+  rdfs:label "Entity Analytics" ;
+  sp:hasCategory sp:cat_docs ;
+  sp:hasStatus sp:status_live ;
+  sp:homepageVisible true ;
+  sp:descriptionText "Identity-aware entity analytics with governed linkage, policy-constrained merging, proof artifacts, and marketer-safe outputs." ;
+  sp:nextActionText "Keep as the source of deeper system detail." ;
+  sp:landingRoute sp:route__entity_analytics_ ;
+  sp:docsRoute sp:route__documentation_guide_entity_analytics_reference_ ;
+  sp:hasAudience sp:aud_builders ;
+  sp:hasAudience sp:aud_operators ;
+  sp:hasAudience sp:aud_researchers ;
+  sp:hasAudience sp:aud_partners ;
+  sp:hasTopic sp:topic_architecture ;
+  sp:hasTopic sp:topic_products ;
+  sp:hasTopic sp:topic_trust ;
+  sp:hasTopic sp:topic_guides ;
+  sp:hasTopic sp:topic_reference ;
+  sp:hasNormalizedTopic sp:topic_architecture ;
+  sp:hasNormalizedTopic sp:topic_reference ;
+  sp:hasNormalizedTopic sp:topic_trust ;
+  sp:hasNormalizedTopic sp:topic_platform ;
+  sp:hasNormalizedTopic sp:topic_governance ;
+  sp:hasInvestorLens sp:lens_discovery_compounding ;
+  sp:relatedSurface sp:surface_academy ;
+  sp:relatedSurface sp:surface_organizations ;
+  sp:relatedSurface sp:surface_ai ;
+  sp:relatedSurface sp:surface_developer ;
+  sp:relatedSurface sp:surface_cloud ;
+  sp:relatedSurface sp:surface_live ;
+  sp:relatedSurface sp:surface_medical ;
+  sp:relatedSurface sp:surface_law ;
+  sp:relatedSurface sp:surface_wiki ;
+  sp:relatedSurface sp:surface_blog ;
+  sp:relatedSurface sp:surface_digital_trust ;
+  sp:relatedSite sp:site_entity_analytics_1 ;
+  sp:relatedSite sp:site_entity_analytics_2 .
+
+sp:route__academy_ a sp:Route ;
+  sp:path "/academy/" .
+
+sp:route__academy_apply_ a sp:Route ;
+  sp:path "/academy/apply/" .
+
+sp:route__documentation_guide_products_academy_ a sp:Route ;
+  sp:path "/documentation/guide/products/academy/" .
+
+sp:site_academy_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/academy/" .
+
+sp:site_academy_2 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/academy-safeguarding-and-minor-protection/" .
+
+sp:route__organizations_ a sp:Route ;
+  sp:path "/organizations/" .
+
+sp:site_organizations_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/surface-inventory/" .
+
+sp:site_organizations_2 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/domain-surface/" .
+
+sp:route___ a sp:Route ;
+  sp:path "/" .
+
+sp:site_documentation_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/" .
+
+sp:site_documentation_2 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/canonical-platform-direction/" .
+
+sp:route__documentation_guide_products_ai_ a sp:Route ;
+  sp:path "/documentation/guide/products/ai/" .
+
+sp:site_ai_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/ai/" .
+
+sp:route__documentation_guide_products_dev_ a sp:Route ;
+  sp:path "/documentation/guide/products/dev/" .
+
+sp:site_developer_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/dev/" .
+
+sp:route__documentation_guide_products_cloud_ a sp:Route ;
+  sp:path "/documentation/guide/products/cloud/" .
+
+sp:site_cloud_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/cloud/" .
+
+sp:route__documentation_guide_products_live_ a sp:Route ;
+  sp:path "/documentation/guide/products/live/" .
+
+sp:site_live_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/live/" .
+
+sp:route__documentation_guide_products_medical_ a sp:Route ;
+  sp:path "/documentation/guide/products/medical/" .
+
+sp:site_medical_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/medical/" .
+
+sp:route__documentation_guide_products_law_ a sp:Route ;
+  sp:path "/documentation/guide/products/law/" .
+
+sp:site_law_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/law/" .
+
+sp:route__documentation_guide_products_wiki_ a sp:Route ;
+  sp:path "/documentation/guide/products/wiki/" .
+
+sp:site_wiki_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/wiki/" .
+
+sp:route__documentation_guide_products_blog_ a sp:Route ;
+  sp:path "/documentation/guide/products/blog/" .
+
+sp:site_blog_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/products/blog/" .
+
+sp:route__documentation_guide_domain_surface_ a sp:Route ;
+  sp:path "/documentation/guide/domain-surface/" .
+
+sp:site_digital_trust_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/domain-surface/" .
+
+sp:route__investor_ a sp:Route ;
+  sp:path "/investor/" .
+
+sp:site_investor_1 a sp:Site ;
+  sp:url "/investor/" .
+
+sp:site_investor_2 a sp:Site ;
+  sp:url "/map/" .
+
+sp:site_investor_3 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/surface-inventory/" .
+
+sp:route__entity_analytics_ a sp:Route ;
+  sp:path "/entity-analytics/" .
+
+sp:route__documentation_guide_entity_analytics_reference_ a sp:Route ;
+  sp:path "/documentation/guide/entity-analytics-reference/" .
+
+sp:site_entity_analytics_1 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/" .
+
+sp:site_entity_analytics_2 a sp:Site ;
+  sp:url "https://socioprophet.com/documentation/guide/canonical-platform-direction/" .

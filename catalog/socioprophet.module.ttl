@@ -1,0 +1,10 @@
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+og:SocioProphet a og:Module ;
+  rdfs:label "SocioProphet" ;
+  og:layer "Platform" ;
+  og:path "Platform/SocioProphet.ttl" ;
+  og:baseIRI "https://socioprophet.com/ontology/v0#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" .
