@@ -1,0 +1,158 @@
+@prefix : <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://socioprophet.github.io/ontogenesis/Platform/Parsing/core>
+  a owl:Ontology ;
+  rdfs:label "SocioProphet Parsing Core Ontology" ;
+  rdfs:comment "Core vocabulary for utterance, token, span, linkage, evidence, candidate entities, candidate relations, and promotion decisions in the language-to-hypergraph pipeline." .
+
+:Utterance a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Utterance" .
+:Token a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Token" .
+:Span a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Span" .
+:Connector a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Connector" .
+:Linkage a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Linkage" .
+:Link a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Link" .
+:ParseAlternative a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Parse Alternative" .
+:EntityCandidate a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Entity Candidate" .
+:RelationCandidate a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Relation Candidate" .
+:OntologyCandidate a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Ontology Candidate" .
+:Evidence a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Evidence" .
+:PromotionDecision a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Promotion Decision" .
+:CanonicalHyperNode a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Canonical Hypergraph Node" .
+:CanonicalHyperEdge a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Canonical Hypergraph Edge" .
+
+:inUtterance a owl:ObjectProperty ;
+  rdfs:domain :Token ;
+  rdfs:range :Utterance ;
+  rdfs:label "in utterance" .
+
+:inSpan a owl:ObjectProperty ;
+  rdfs:domain :Token ;
+  rdfs:range :Span ;
+  rdfs:label "in span" .
+
+:leftToken a owl:ObjectProperty ;
+  rdfs:domain :Link ;
+  rdfs:range :Token ;
+  rdfs:label "left token" .
+
+:rightToken a owl:ObjectProperty ;
+  rdfs:domain :Link ;
+  rdfs:range :Token ;
+  rdfs:label "right token" .
+
+:fromLinkage a owl:ObjectProperty ;
+  rdfs:domain :Link ;
+  rdfs:range :Linkage ;
+  rdfs:label "from linkage" .
+
+:usesLeftConnector a owl:ObjectProperty ;
+  rdfs:domain :Link ;
+  rdfs:range :Connector ;
+  rdfs:label "uses left connector" .
+
+:usesRightConnector a owl:ObjectProperty ;
+  rdfs:domain :Link ;
+  rdfs:range :Connector ;
+  rdfs:label "uses right connector" .
+
+:belongsToAlternative a owl:ObjectProperty ;
+  rdfs:domain :Linkage ;
+  rdfs:range :ParseAlternative ;
+  rdfs:label "belongs to parse alternative" .
+
+:supportsEntity a owl:ObjectProperty ;
+  rdfs:domain :Evidence ;
+  rdfs:range :EntityCandidate ;
+  rdfs:label "supports entity" .
+
+:supportsRelation a owl:ObjectProperty ;
+  rdfs:domain :Evidence ;
+  rdfs:range :RelationCandidate ;
+  rdfs:label "supports relation" .
+
+:candidateSubject a owl:ObjectProperty ;
+  rdfs:domain :RelationCandidate ;
+  rdfs:range :EntityCandidate ;
+  rdfs:label "candidate subject" .
+
+:candidateObject a owl:ObjectProperty ;
+  rdfs:domain :RelationCandidate ;
+  rdfs:range :EntityCandidate ;
+  rdfs:label "candidate object" .
+
+:mapsToOntology a owl:ObjectProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range :OntologyCandidate ;
+  rdfs:label "maps to ontology" .
+
+:promotesToNode a owl:ObjectProperty ;
+  rdfs:domain :PromotionDecision ;
+  rdfs:range :CanonicalHyperNode ;
+  rdfs:label "promotes to node" .
+
+:promotesToEdge a owl:ObjectProperty ;
+  rdfs:domain :PromotionDecision ;
+  rdfs:range :CanonicalHyperEdge ;
+  rdfs:label "promotes to edge" .
+
+:derivedFromParseArtifact a owl:ObjectProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range prov:Entity ;
+  rdfs:subPropertyOf prov:wasDerivedFrom ;
+  rdfs:label "derived from parse artifact" .
+
+:tokenText a owl:DatatypeProperty ;
+  rdfs:domain :Token ;
+  rdfs:range xsd:string ;
+  rdfs:label "token text" .
+
+:tokenNormalized a owl:DatatypeProperty ;
+  rdfs:domain :Token ;
+  rdfs:range xsd:string ;
+  rdfs:label "token normalized" .
+
+:sourceOffsetStart a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:integer ;
+  rdfs:label "source offset start" .
+
+:sourceOffsetEnd a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:integer ;
+  rdfs:label "source offset end" .
+
+:confidence a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "confidence" .
+
+:parseCost a owl:DatatypeProperty ;
+  rdfs:domain :Linkage ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "parse cost" .
+
+:promotionStatus a owl:DatatypeProperty ;
+  rdfs:domain :PromotionDecision ;
+  rdfs:range xsd:string ;
+  rdfs:label "promotion status" .
+
+:ontologyIRI a owl:DatatypeProperty ;
+  rdfs:domain :OntologyCandidate ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "ontology IRI" .
+
+:ambiguityClass a owl:DatatypeProperty ;
+  rdfs:domain :ParseAlternative ;
+  rdfs:range xsd:string ;
+  rdfs:label "ambiguity class" .
+
+:policyState a owl:DatatypeProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "policy state" .
