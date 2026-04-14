@@ -1,0 +1,57 @@
+@prefix : <https://socioprophet.github.io/ontogenesis/Platform/Parsing/acset-parse#> .
+@prefix core: <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://socioprophet.github.io/ontogenesis/Platform/Parsing/acset-parse>
+  a owl:Ontology ;
+  owl:imports <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core> ;
+  rdfs:label "SocioProphet ACSET Parse Ontology" ;
+  rdfs:comment "Ontology for parse-state representation, indexing, and transformation of Link Grammar parse output." .
+
+:ACSETParseState a owl:Class ;
+  rdfs:subClassOf core:Entity ;
+  rdfs:label "ACSET Parse State" ;
+  rdfs:comment "A formal representation of a parsed sentence state using ACSET structures." .
+
+:ACSETObjectType a owl:Class ;
+  rdfs:label "ACSET Object Type" ;
+  rdfs:comment "Types of objects stored in ACSET parse states (e.g., Token, Linkage)." .
+
+:ACSETHom a owl:Class ;
+  rdfs:label "ACSET Hom" ;
+  rdfs:comment "Homomorphisms between ACSET objects representing relations." .
+
+:ACSETAttrType a owl:Class ;
+  rdfs:label "ACSET Attribute Type" ;
+  rdfs:comment "Attribute types for ACSET objects (e.g., string, integer)." .
+
+:ACSETAttr a owl:Class ;
+  rdfs:label "ACSET Attribute" ;
+  rdfs:comment "Attributes of ACSET objects including value and type." .
+
+:representedAsAcset a owl:ObjectProperty ;
+  rdfs:domain core:Entity ;
+  rdfs:range :ACSETParseState ;
+  rdfs:label "represented as ACSET" .
+
+:acsetIndexKey a owl:ObjectProperty ;
+  rdfs:domain :ACSETObjectType ;
+  rdfs:range xsd:string ;
+  rdfs:label "acset index key" .
+
+:acsetObjectName a owl:ObjectProperty ;
+  rdfs:domain :ACSETObjectType ;
+  rdfs:range xsd:string ;
+  rdfs:label "acset object name" .
+
+:acsetHomName a owl:ObjectProperty ;
+  rdfs:domain :ACSETHom ;
+  rdfs:range xsd:string ;
+  rdfs:label "acset homomorphism name" .
+
+:acsetAttrName a owl:ObjectProperty ;
+  rdfs:domain :ACSETAttr ;
+  rdfs:range xsd:string ;
+  rdfs:label "acset attribute name" .
