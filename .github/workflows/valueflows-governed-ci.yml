@@ -1,0 +1,41 @@
+name: valueflows-governed-ci
+
+on:
+  push:
+    paths:
+      - 'bindings/valueflows_governed/**'
+      - '.github/workflows/valueflows-governed-ci.yml'
+  pull_request:
+    paths:
+      - 'bindings/valueflows_governed/**'
+      - '.github/workflows/valueflows-governed-ci.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+      - name: Run bundle validation and replay
+        run: |
+          cd bindings/valueflows_governed
+          make validate-bundle
+          make replay-linear
+          make replay-assignment-override
+          make replay-divergence
+          make check-expected
+      - name: Run Rego runtime checks
+        run: |
+          cd bindings/valueflows_governed
+          bash ci/check_policy_runtime.sh
