@@ -1,0 +1,50 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix lower: <https://socioprophet.github.io/ontogenesis/lower#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Lower/bindings-core.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Lower — Atomic Bindings" ;
+  dct:description "Atomic bindings for on-device resources (files, processes, services, ports, devices) and boundary interfaces." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Middle/system-architecture.ttl> .
+
+### Filesystem
+lower:File a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "File" .
+lower:Directory a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Directory" .
+lower:path a owl:DatatypeProperty ; rdfs:domain upper:Entity ; rdfs:range xsd:string ; rdfs:label "path" .
+lower:mimeType a owl:DatatypeProperty ; rdfs:domain lower:File ; rdfs:range xsd:string ; rdfs:label "mime type" .
+lower:leafHash a owl:DatatypeProperty ; rdfs:domain lower:File ; rdfs:range xsd:string ; rdfs:label "leaf hash" .
+lower:schemaRef a owl:DatatypeProperty ; rdfs:domain lower:File ; rdfs:range xsd:string ; rdfs:label "schema ref" .
+
+### OS processes and services
+lower:Process a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Process" .
+lower:Service a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Service" .
+lower:pid a owl:DatatypeProperty ; rdfs:domain lower:Process ; rdfs:range xsd:integer ; rdfs:label "pid" .
+lower:unitName a owl:DatatypeProperty ; rdfs:domain lower:Service ; rdfs:range xsd:string ; rdfs:label "systemd unit name" .
+
+### Network and IO
+lower:Port a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Port" .
+lower:Device a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Device" .
+lower:Interface a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Interface" .
+
+lower:protocol a owl:DatatypeProperty ; rdfs:domain lower:Port ; rdfs:range xsd:string ; rdfs:label "protocol" .
+lower:number a owl:DatatypeProperty ; rdfs:domain lower:Port ; rdfs:range xsd:integer ; rdfs:label "port number" .
+lower:boundTo a owl:ObjectProperty ; rdfs:domain lower:Port ; rdfs:range lower:Service ; rdfs:label "bound to service" .
+
+### Containers / k8s (minimal)
+lower:Container a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Container" .
+lower:K8sResource a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Kubernetes Resource" .
+lower:kind a owl:DatatypeProperty ; rdfs:domain lower:K8sResource ; rdfs:range xsd:string ; rdfs:label "kind" .
+lower:namespace a owl:DatatypeProperty ; rdfs:domain lower:K8sResource ; rdfs:range xsd:string ; rdfs:label "namespace" .
+
+### Boundary interfaces
+lower:BoundaryInterface a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Boundary Interface" .
+lower:exposes a owl:ObjectProperty ; rdfs:domain lower:BoundaryInterface ; rdfs:range upper:Entity ; rdfs:label "exposes" .
+lower:securedBy a owl:ObjectProperty ; rdfs:domain lower:BoundaryInterface ; rdfs:range upper:Policy ; rdfs:label "secured by" .
+

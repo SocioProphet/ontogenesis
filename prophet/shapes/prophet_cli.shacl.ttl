@@ -1,0 +1,42 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+
+<prophet/shapes/prophet_cli.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass prop:BuildRecipe ;
+  sh:message "Prophet build recipes must declare at least 3 steps." ;
+  sh:property [
+    sh:path prop:hasStep ;
+    sh:minCount 3 ;
+  ] .
+
+prop:BuildStepShape a sh:NodeShape ;
+  sh:targetClass prop:BuildStep ;
+  sh:property [
+    sh:path prop:stepOrder ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:integer ;
+  ] ;
+  sh:property [
+    sh:path prop:runsCommand ;
+    sh:minCount 1 ;
+  ] .
+
+# Policy hint: destructive commands must declare requiresScope
+prop:CommandScopeShape a sh:NodeShape ;
+  sh:targetClass prop:Command ;
+  sh:message "Commands affecting SYSTEM space should declare a requiresScope." ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:select """
+      PREFIX prop: <https://socioprophet.github.io/ontogenesis/prophet#>
+      PREFIX middle: <https://socioprophet.github.io/ontogenesis/middle#>
+      SELECT ?this WHERE {
+        ?this prop:affectsSpace middle:SYSTEM .
+        FILTER NOT EXISTS { ?this prop:requiresScope ?s . }
+      }
+    """ ;
+  ] .

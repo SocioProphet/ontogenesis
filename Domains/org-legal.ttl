@@ -1,0 +1,44 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/org-legal.ttl> a owl:Ontology ;
+  dct:title "Domain — Organization and Legal" ;
+  dct:description "Legal-entity, chamber, ownership, reserved-matter, and repository-allocation primitives for constitutional enterprise structure." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Domains/cybernetic-self.ttl> ;
+  owl:imports <Domains/party-identity.ttl> .
+
+legal:LegalEntity a owl:Class ; rdfs:subClassOf party:Organization , cs:LegalEmbodiment ; rdfs:label "Legal entity" .
+legal:Jurisdiction a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Jurisdiction" .
+legal:BoardSeat a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Board seat" .
+legal:Agreement a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Agreement" .
+legal:OwnershipRelation a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Ownership relation" .
+legal:ReservedMatter a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Reserved matter" .
+legal:MissionConstraint a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Mission constraint" .
+legal:RepositoryAllocation a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Repository allocation" .
+legal:RepositoryAsset a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Repository asset" .
+
+legal:incorporatedIn a owl:ObjectProperty ; rdfs:domain legal:LegalEntity ; rdfs:range legal:Jurisdiction ; rdfs:label "incorporated in" .
+legal:hasBoardSeat a owl:ObjectProperty ; rdfs:domain legal:LegalEntity ; rdfs:range legal:BoardSeat ; rdfs:label "has board seat" .
+legal:hasAgreement a owl:ObjectProperty ; rdfs:domain legal:LegalEntity ; rdfs:range legal:Agreement ; rdfs:label "has agreement" .
+legal:hasReservedMatter a owl:ObjectProperty ; rdfs:domain legal:LegalEntity ; rdfs:range legal:ReservedMatter ; rdfs:label "has reserved matter" .
+legal:hasMissionConstraint a owl:ObjectProperty ; rdfs:domain legal:LegalEntity ; rdfs:range legal:MissionConstraint ; rdfs:label "has mission constraint" .
+legal:ownedByEntity a owl:ObjectProperty ; rdfs:domain legal:OwnershipRelation ; rdfs:range legal:LegalEntity ; rdfs:label "owned by entity" .
+legal:ownsEntity a owl:ObjectProperty ; rdfs:domain legal:OwnershipRelation ; rdfs:range legal:LegalEntity ; rdfs:label "owns entity" .
+legal:allocatesRepository a owl:ObjectProperty ; rdfs:domain legal:RepositoryAllocation ; rdfs:range legal:RepositoryAsset ; rdfs:label "allocates repository" .
+legal:allocatedToEntity a owl:ObjectProperty ; rdfs:domain legal:RepositoryAllocation ; rdfs:range legal:LegalEntity ; rdfs:label "allocated to entity" .
+legal:stewardedByParty a owl:ObjectProperty ; rdfs:domain legal:RepositoryAllocation ; rdfs:range party:Party ; rdfs:label "stewarded by party" .
+
+legal:jurisdictionCode a owl:DatatypeProperty ; rdfs:domain legal:Jurisdiction ; rdfs:range xsd:string ; rdfs:label "jurisdiction code" .
+legal:agreementType a owl:DatatypeProperty ; rdfs:domain legal:Agreement ; rdfs:range xsd:string ; rdfs:label "agreement type" .
+legal:reservedMatterName a owl:DatatypeProperty ; rdfs:domain legal:ReservedMatter ; rdfs:range xsd:string ; rdfs:label "reserved matter name" .
+legal:repositoryFullName a owl:DatatypeProperty ; rdfs:domain legal:RepositoryAsset ; rdfs:range xsd:string ; rdfs:label "repository full name" .
+legal:allocationRuleText a owl:DatatypeProperty ; rdfs:domain legal:RepositoryAllocation ; rdfs:range xsd:string ; rdfs:label "allocation rule text" .

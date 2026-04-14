@@ -1,0 +1,21 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/Genesis.ttl> a owl:Ontology ;
+  dct:title "Genesis Ontology" ;
+  dct:description "Keys, PKI, manifests, signatures, validator co-sign; provenance for all mutating ops." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/platform.ttl> .
+
+plat:KeyMaterial a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "key material" .
+plat:Manifest a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "manifest" .
+plat:Validator a owl:Class ; rdfs:subClassOf upper:Signer ; rdfs:label "validator" .
+plat:SignaturePolicy a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "signature policy" .
+
+plat:signs a owl:ObjectProperty ; rdfs:domain upper:Signer ; rdfs:range upper:InformationArtifact ; rdfs:label "signs" .
+plat:cosignedBy a owl:ObjectProperty ; rdfs:domain upper:Signature ; rdfs:range plat:Validator ; rdfs:label "cosigned by" .

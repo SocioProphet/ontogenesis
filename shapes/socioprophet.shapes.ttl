@@ -1,0 +1,33 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <https://socioprophet.com/ontology/v0#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sp:SurfaceShape a sh:NodeShape ;
+  sh:targetClass sp:Surface ;
+  sh:property [ sh:path sp:hasCategory ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path sp:hasStatus ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path sp:homepageVisible ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+  sh:property [ sh:path sp:nextActionText ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path sp:landingRoute ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path sp:docsRoute ; sh:minCount 1 ] ]
+  ) .
+
+sp:EventIRShape a sh:NodeShape ;
+  sh:targetClass sp:EventIR ;
+  sh:property [ sh:path sp:hasScope ; sh:minCount 1 ] ;
+  sh:property [ sh:path sp:hasFeatureAtom ; sh:minCount 1 ] ;
+  sh:property [ sh:path sp:hasEvidence ; sh:minCount 1 ] .
+
+sp:LinkShape a sh:NodeShape ;
+  sh:targetClass sp:Link ;
+  sh:property [ sh:path sp:subjectEntity ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path sp:objectEntity ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path sp:hasLinkState ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+sp:ProofArtifactShape a sh:NodeShape ;
+  sh:targetClass sp:ProofArtifact ;
+  sh:property [ sh:path sp:decisionResult ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path sp:inputHash ; sh:minCount 1 ] ;
+  sh:property [ sh:path sp:replayHook ; sh:minCount 1 ] ;
+  sh:property [ sh:path sp:signatureText ; sh:minCount 1 ] .

@@ -1,0 +1,9 @@
+rdflib>=7.0.0
+rdflib-jsonld>=0.6.2
+pyshacl>=0.22.6
+pyld>=2.0.4
+cose>=0.9.dev8
+cryptography>=42.0.0
+pytest>=8.0.0
+networkx>=3.3
+reportlab>=4.1.0

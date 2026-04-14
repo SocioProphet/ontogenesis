@@ -105,8 +105,11 @@ Applications such as Human Digital Twin may use Ontogenesis as an ontology and i
 ![Agentic Flow Architecture](docs/diagrams/agentic-flow-architecture.png)
 
 ![Agentic Flow Architecture — Human Interface Example](docs/diagrams/agentic-flow-architecture-body.png)
+# Ontogenesis
 
-## Quickstart
+An auditable, policy-gated, supply-chain–traceable Git repository for RDF/OWL/JSON-LD ontologies and semantic web assets used across the **SocioProphet** stack.
+
+This repo is designed to support:
 
 Install validation dependencies:
 
@@ -117,9 +120,36 @@ python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
 Validate ontology + examples:
 
 ```bash
-make validate
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
+
+python scripts/validate_rdf.py
+python scripts/shacl_gate.py
+python scripts/jsonld_roundtrip.py
+
+python scripts/build_dist.py
+python scripts/ledger_build.py
+python scripts/ledger_verify.py
 ```
 
 ## License
 
 This repository is licensed under the MIT License. See `LICENSE`.
+## Release discipline (CI)
+
+On a tag `v*`, CI will:
+
+1. Build `dist/` deterministically (`SOURCE_DATE_EPOCH` fixed).
+2. Validate RDF + SHACL gates.
+3. Build/verify `ledger/ledger.csv`.
+4. COSE-sign each `dist/*` and record signature URIs in the ledger.
+5. Emit a minimal SPDX SBOM (`sbom/spdx.json`) with checksums.
+
+## Policy
+
+- `dist/` and `audit/` are **generated only**.
+- Changes under `Upper/`, `Middle/`, `Lower/`, `Domains/`, `Platform/`, `prophet/`, `epi/` must be accompanied by `scripts/build_dist.py` + `scripts/ledger_build.py` output changes.
+- Promotion gates are enforced via SHACL bundles in `shapes/`.
+
+See `docs/` for the design plan and module map.
+

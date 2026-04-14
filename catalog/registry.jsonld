@@ -1,0 +1,74 @@
+{
+  "@context": "/mnt/data/ontogenesis_repo_full_v1/contexts/main.context.jsonld",
+  "id": "https://socioprophet.github.io/ontogenesis/catalog/registry",
+  "type": "upper:InformationArtifact",
+  "label": "Ontogenesis Module Registry (JSON-LD)",
+  "modules": [
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#UpperCore",
+      "layer": "Upper",
+      "path": "Upper/upper-core.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#MiddleSystem",
+      "layer": "Middle",
+      "path": "Middle/system-architecture.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#MiddleRegistries",
+      "layer": "Middle",
+      "path": "Middle/registries.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#MiddleActionOntology",
+      "layer": "Middle",
+      "path": "Middle/action-ontology.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#LowerBindings",
+      "layer": "Lower",
+      "path": "Lower/bindings-core.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformCore",
+      "layer": "Platform",
+      "path": "Platform/platform.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#ProphetCLI",
+      "layer": "Prophet",
+      "path": "prophet/prophet_cli.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#EPI",
+      "layer": "EPI",
+      "path": "epi/epi.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainCyberneticSelf",
+      "layer": "Domains",
+      "path": "Domains/cybernetic-self.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainPartyIdentity",
+      "layer": "Domains",
+      "path": "Domains/party-identity.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainOrgLegal",
+      "layer": "Domains",
+      "path": "Domains/org-legal.ttl",
+      "semver": "0.1.0"
+    }
+  ]
+}

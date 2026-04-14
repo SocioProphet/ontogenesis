@@ -1,0 +1,38 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cc: <https://socioprophet.github.io/ontogenesis/domains/cc#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/cc_runners.ttl> a owl:Ontology ;
+  dct:title "Domain — SocioProphet CC Runners" ;
+  dct:description "Models evaluation runners (HF embeddings, Whisper ASR, Vision ONNX) as first-class capabilities in the learning ontogenesis model." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <prophet/prophet_cli.ttl> ;
+  owl:imports <prophet/capd.ttl> .
+
+cc:Runner a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Runner" .
+cc:EmbeddingRunner a owl:Class ; rdfs:subClassOf cc:Runner ; rdfs:label "Embedding runner" .
+cc:ASRRunner a owl:Class ; rdfs:subClassOf cc:Runner ; rdfs:label "ASR runner" .
+cc:VisionRunner a owl:Class ; rdfs:subClassOf cc:Runner ; rdfs:label "Vision runner" .
+
+cc:modelRef a owl:DatatypeProperty ; rdfs:domain cc:Runner ; rdfs:range xsd:string ; rdfs:label "model ref" .
+cc:runtime a owl:DatatypeProperty ; rdfs:domain cc:Runner ; rdfs:range xsd:string ; rdfs:label "runtime" .
+cc:producesMetric a owl:DatatypeProperty ; rdfs:domain cc:Runner ; rdfs:range xsd:string ; rdfs:label "produces metric" .
+
+# Example capability descriptor (instance skeleton)
+cc:cap_embedding_sentence a prop:CapabilityDescriptor ;
+  prop:descriptorId "cc.embedding.sentence" ;
+  prop:semver "0.1.0" ;
+  prop:owner "socioprophet" ;
+  prop:declaresPlane prop:ai ;
+  prop:declaresVerb "embed" ;
+  prop:rolloutStrategy "canary" ;
+  prop:gateName "G1" ;
+  prop:successSLO "cosine>=0.98" ;
+  prop:requiresPackage "sentence-transformers" ;
+  rdfs:label "HF sentence-transformers embedding runner" .

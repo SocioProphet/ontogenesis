@@ -1,0 +1,302 @@
+version: 1
+imports:
+- id: rdf
+  title: RDF
+  iri: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  download: https://www.w3.org/1999/02/22-rdf-syntax-ns
+  license: W3C
+  sha256: TBD
+- id: rdfs
+  title: RDFS
+  iri: http://www.w3.org/2000/01/rdf-schema#
+  download: https://www.w3.org/2000/01/rdf-schema
+  license: W3C
+  sha256: TBD
+- id: owl
+  title: OWL
+  iri: http://www.w3.org/2002/07/owl#
+  download: https://www.w3.org/2002/07/owl
+  license: W3C
+  sha256: TBD
+- id: skos
+  title: SKOS
+  iri: http://www.w3.org/2004/02/skos/core#
+  download: https://www.w3.org/2009/08/skos-reference/skos.rdf
+  license: W3C
+  sha256: TBD
+- id: prov
+  title: PROV-O
+  iri: http://www.w3.org/ns/prov#
+  download: https://www.w3.org/ns/prov-o
+  license: W3C
+  sha256: TBD
+- id: dcterms
+  title: Dublin Core Terms
+  iri: http://purl.org/dc/terms/
+  download: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/dublin_core_terms.rdf
+  license: DCMI
+  sha256: TBD
+- id: dcat
+  title: DCAT
+  iri: http://www.w3.org/ns/dcat#
+  download: https://www.w3.org/ns/dcat2.rdf
+  license: W3C
+  sha256: TBD
+- id: schema
+  title: Schema.org
+  iri: https://schema.org/
+  download: https://schema.org/version/latest/schemaorg-current-http.ttl
+  license: CC-BY-SA
+  sha256: TBD
+- id: foaf
+  title: FOAF
+  iri: http://xmlns.com/foaf/0.1/
+  download: http://xmlns.com/foaf/spec/index.rdf
+  license: FOAF
+  sha256: TBD
+- id: time
+  title: OWL-Time
+  iri: http://www.w3.org/2006/time#
+  download: https://www.w3.org/2006/time
+  license: W3C
+  sha256: TBD
+- id: geosparql
+  title: GeoSPARQL
+  iri: http://www.opengis.net/ont/geosparql#
+  download: https://schemas.opengis.net/geosparql/geosparql_vocab_all.rdf
+  license: OGC
+  sha256: TBD
+- id: sosa
+  title: SOSA/SSN
+  iri: http://www.w3.org/ns/sosa/
+  download: https://www.w3.org/ns/ssn/ssn.rdf
+  license: W3C
+  sha256: TBD
+- id: qudt
+  title: QUDT
+  iri: http://qudt.org/schema/qudt/
+  download: https://qudt.org/2.1/schema/qudt.ttl
+  license: QUDT
+  sha256: TBD
+- id: spdx
+  title: SPDX (RDF/OWL)
+  iri: http://spdx.org/rdf/terms#
+  download: https://spdx.org/rdf/terms/spdx-ontology.owl.xml
+  license: SPDX
+  sha256: TBD
+- id: bfo
+  title: Basic Formal Ontology (BFO)
+  iri: http://purl.obolibrary.org/obo/bfo.owl
+  download: http://purl.obolibrary.org/obo/bfo.owl
+  license: BFO (check)
+  sha256: TBD
+- id: ro
+  title: OBO Relations Ontology (RO)
+  iri: http://purl.obolibrary.org/obo/ro.owl
+  download: http://purl.obolibrary.org/obo/ro.owl
+  license: CC-BY
+  sha256: TBD
+- id: iao
+  title: Information Artifact Ontology (IAO)
+  iri: http://purl.obolibrary.org/obo/iao.owl
+  download: http://purl.obolibrary.org/obo/iao.owl
+  license: CC-BY
+  sha256: TBD
+- id: hpo
+  title: Human Phenotype Ontology (HPO)
+  iri: http://purl.obolibrary.org/obo/hp.owl
+  download: http://purl.obolibrary.org/obo/hp.owl
+  license: HPO (check)
+  sha256: TBD
+- id: mondo
+  title: MONDO Disease Ontology
+  iri: http://purl.obolibrary.org/obo/mondo.owl
+  download: http://purl.obolibrary.org/obo/mondo.owl
+  license: CC-BY
+  sha256: TBD
+- id: fhir
+  title: HL7 FHIR RDF
+  iri: http://hl7.org/fhir/
+  download: https://hl7.org/fhir/fhir.ttl
+  license: HL7 (check)
+  sha256: TBD
+- id: sio
+  title: Semanticscience Integrated Ontology (SIO)
+  iri: http://semanticscience.org/resource/
+  download: https://github.com/MaastrichtU-IDS/semanticscience/raw/master/SIO.owl
+  license: CC-BY
+  sha256: TBD
+- id: openmath
+  title: OpenMath (content dictionaries)
+  iri: http://www.openmath.org/cd
+  download: https://www.openmath.org/cd
+  license: OpenMath (check)
+  sha256: TBD
+- id: cdao
+  title: CDAO (Computational Data Analysis Ontology)
+  iri: http://purl.org/twc/ontology/cdao.owl
+  download: https://raw.githubusercontent.com/evoinfo/cdao/master/cdao.owl
+  license: CDAO (check)
+  sha256: TBD
+- id: orkg-shapes
+  title: ORKG SHACL shapes
+  iri: https://orkg.org/shapes/
+  download: (vendor from orkg-shapes-main.zip)
+  license: (check)
+  sha256: TBD
+- id: kbpedia
+  title: KBpedia
+  iri: https://kbpedia.org/kko/
+  download: https://kbpedia.org/kko/kko.ttl
+  license: (check)
+  sha256: TBD
+- id: ext-26
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-27
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-28
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-29
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-30
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-31
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-32
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-33
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-34
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-35
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-36
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-37
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-38
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-39
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-40
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-41
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-42
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-43
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-44
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-45
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-46
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-47
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-48
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-49
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD
+- id: ext-50
+  title: External ontology (to be selected/pinned)
+  iri: TBD
+  download: TBD
+  license: TBD
+  sha256: TBD

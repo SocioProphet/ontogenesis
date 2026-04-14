@@ -1,0 +1,16 @@
+{
+  "@context": "../epi/contexts/epi.context.jsonld",
+  "id": "https://socioprophet.github.io/ontogenesis/epi#lanes/demo",
+  "type": "epi:QuantumLane",
+  "hardwareOptIn": false,
+  "qubitBudget": 64,
+  "epi:usesProvider": "https://socioprophet.github.io/ontogenesis/epi#Qiskit",
+  "epi:runsTask": [
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/epi#tasks/demo-estimate",
+      "type": "epi:QuantumTask",
+      "mitigation": "m3,zne",
+      "epi:usesBackend": "https://socioprophet.github.io/ontogenesis/epi#AerSim"
+    }
+  ]
+}

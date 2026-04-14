@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "prop": "https://socioprophet.github.io/ontogenesis/prophet#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "middle": "https://socioprophet.github.io/ontogenesis/middle#",
+    "plat": "https://socioprophet.github.io/ontogenesis/platform#",
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "inPlane": {
+      "@id": "https://socioprophet.github.io/ontogenesis/prophet#inPlane",
+      "@type": "@id"
+    },
+    "affectsSpace": {
+      "@id": "https://socioprophet.github.io/ontogenesis/prophet#affectsSpace",
+      "@type": "@id"
+    },
+    "schemaRef": "https://socioprophet.github.io/ontogenesis/prophet#schemaRef",
+    "leafRef": "https://socioprophet.github.io/ontogenesis/prophet#leafRef"
+  }
+}

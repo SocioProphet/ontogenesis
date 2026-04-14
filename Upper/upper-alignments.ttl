@@ -1,0 +1,17 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<Upper/upper-alignments.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Upper Alignments" ;
+  dct:description "Lightweight alignments to external standards (PROV, DCTERMS) by reference." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <http://www.w3.org/ns/prov-o> ;
+  owl:imports <http://purl.org/dc/terms/> .
+
+upper:Agent rdfs:subClassOf prov:Agent .
+upper:InformationArtifact rdfs:subClassOf prov:Entity .

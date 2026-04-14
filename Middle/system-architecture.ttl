@@ -1,0 +1,50 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Middle/system-architecture.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — System Architecture" ;
+  dct:description "System architecture abstractions: spaces, gates, update flow, and runtime scopes." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Spaces (SYSTEM/USER/INCEPTION/REGION/MACRO)
+middle:Space a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Space" .
+middle:SystemSpace a owl:Class ; rdfs:subClassOf middle:Space ; rdfs:label "System Space" .
+middle:UserSpace a owl:Class ; rdfs:subClassOf middle:Space ; rdfs:label "User Space" .
+middle:InceptionSpace a owl:Class ; rdfs:subClassOf middle:Space ; rdfs:label "Inception Space" .
+middle:RegionSpace a owl:Class ; rdfs:subClassOf middle:Space ; rdfs:label "Region Space" .
+middle:MacroSpace a owl:Class ; rdfs:subClassOf middle:Space ; rdfs:label "Macro Space" .
+
+### Outside→inside adjudication gates
+middle:Gate a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Gate" .
+middle:GateCondition a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Gate Condition" .
+
+middle:UpdateFlow a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Update Flow" .
+middle:hasGate a owl:ObjectProperty ; rdfs:domain middle:UpdateFlow ; rdfs:range middle:Gate ; rdfs:label "has gate" .
+middle:fromSpace a owl:ObjectProperty ; rdfs:domain middle:UpdateFlow ; rdfs:range middle:Space ; rdfs:label "from space" .
+middle:toSpace a owl:ObjectProperty ; rdfs:domain middle:UpdateFlow ; rdfs:range middle:Space ; rdfs:label "to space" .
+
+middle:requiresCondition a owl:ObjectProperty ; rdfs:domain middle:Gate ; rdfs:range middle:GateCondition ; rdfs:label "requires condition" .
+
+### Instances (canonical)
+middle:SYSTEM a middle:SystemSpace ; rdfs:label "SYSTEM" .
+middle:USER a middle:UserSpace ; rdfs:label "USER" .
+middle:INCEPTION a middle:InceptionSpace ; rdfs:label "INCEPTION" .
+middle:REGION a middle:RegionSpace ; rdfs:label "REGION" .
+middle:MACRO a middle:MacroSpace ; rdfs:label "MACRO" .
+
+middle:G0 a middle:Gate ; rdfs:label "G0 — Genesis OK" .
+middle:G1 a middle:Gate ; rdfs:label "G1 — Inception Stable" .
+
+middle:OutsideToInside a middle:UpdateFlow ;
+  rdfs:label "Outside→Inside Update Flow" ;
+  middle:fromSpace middle:INCEPTION ;
+  middle:toSpace middle:SYSTEM ;
+  middle:hasGate middle:G1 .
+

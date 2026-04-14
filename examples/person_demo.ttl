@@ -1,0 +1,26 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix hum: <https://socioprophet.github.io/ontogenesis/domains/human#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<examples/person_demo.ttl> a owl:Ontology ;
+  owl:imports <Domains/human.ttl> ;
+  rdfs:label "Example: person + phenotype observation" .
+
+hum:person-001 a hum:Person ;
+  rdfs:label "Person 001" ;
+  hum:sexAssignedAtBirth hum:Female ;
+  hum:genderIdentity hum:Woman ;
+  hum:hasPhenotype hum:phen-001 .
+
+hum:Height a hum:PhenotypeTrait ;
+  rdfs:label "Standing height" ;
+  hum:codeSystem "LOINC" ;
+  hum:code "8302-2" .
+
+hum:phen-001 a hum:PhenotypeObservation ;
+  hum:trait hum:Height ;
+  hum:value "167" ;
+  hum:unit "cm" ;
+  hum:effectiveTime "2026-03-05T00:00:00Z"^^xsd:dateTime .

@@ -1,0 +1,16 @@
+sequenceDiagram
+  participant Genesis
+  participant Inception
+  participant GIB as GIB Registry
+  participant Twin
+  participant Search
+
+  Genesis->>Genesis: verify manifest + signatures
+  Genesis->>Inception: bringup (bootstrap)
+  Inception->>GIB: seed schemas (subjects)
+  Inception->>Twin: seed snapshots
+  alt connected
+    Twin->>Search: publish + replicate
+  else disconnected
+    Twin->>Twin: queue carriers for later sync
+  end
