@@ -1,9 +1,9 @@
 # Value Flows → Governed Canonical Object Substrate
 Version: v0.4 delegated-authority slice
-Status: machine-enforced delegated-authority slice
+Status: spec-anchor (draft) — machine enforcement arrives in the follow-up tranche on this branch
 
 ## Source grounding
-The source deck argues for a shared data language, multiple optimal interfaces, shared semantics for people, groups, participation, and roles, and a conversational task flow where offers, commitments, and follow-up occur over shared data rather than a single interface. This slice extends that premise with explicit delegated authority and repo-ready CI. It does **not** claim those governance layers were present in the source deck itself. fileciteturn0file0
+The source deck argues for a shared data language, multiple optimal interfaces, shared semantics for people, groups, participation, and roles, and a conversational task flow where offers, commitments, and follow-up occur over shared data rather than a single interface. This slice extends that premise with explicit delegated authority and repo-ready CI. It does **not** claim those governance layers were present in the source deck itself. (Source deck: `docs/specs/ontogenesis_upstream_capture_20260412.md` in this repository.)
 
 ## What changed from v0.3
 - added canonical `Delegation` and `CapabilityGrant`
@@ -75,16 +75,18 @@ The authoritative replay surface includes:
 
 It intentionally excludes checkpoint objects themselves to avoid self-reference loops in the state hash.
 
-## Proven machine-checked behaviors
-The delegated linear replay proves:
+## Intended machine-checked behaviors
+These behaviors will be proven once the replay fixtures, tooling, and CI workflow land on this branch (see `docs/specs/valueflows-governed-canonical-v0.4-landing-plan.md`).
+
+The delegated linear replay will prove:
 - delegated offer by a non-coordinator when a valid delegation plus `task.offer` capability exists
 - delegated completion override when a valid `task.complete.override` capability exists
 - checkpoint hash consistency against the same authoritative projection
 
-The assignment-override replay proves:
+The assignment-override replay will prove:
 - delegated reassignment from one worker to another when `task.assignment.override` exists
 
-The negative-control divergence replay proves:
+The negative-control divergence replay will prove:
 - unauthorized assignment override is denied and recorded as a `policy_denied` divergence
 
 ## CI posture

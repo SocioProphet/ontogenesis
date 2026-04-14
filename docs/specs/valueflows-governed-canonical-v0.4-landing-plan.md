@@ -43,7 +43,7 @@ Land this work in `SocioProphet/ontogenesis` rather than a generic standards rep
 - `bindings/valueflows_governed/fixtures/replay/task-flow-divergence/...`
 
 ### Policy runtime
-- `bindings/valueflows_governed/policies/rego/task_flow_policy_v0_3.rego`
+- `bindings/valueflows_governed/policies/rego/task_flow_policy_v0_4.rego`
 - `bindings/valueflows_governed/policies/rego/testdata/...`
 - `bindings/valueflows_governed/ci/check_policy_runtime.sh`
 
@@ -57,6 +57,10 @@ Land this work in `SocioProphet/ontogenesis` rather than a generic standards rep
 
 ## Why use a dedicated subtree
 A dedicated `bindings/valueflows_governed/` subtree keeps this slice self-contained while still living inside the ontology/mapping substrate where it belongs. That avoids polluting root-level repo surfaces prematurely, while making it obvious that this is a governed binding and validation surface rather than a detached project.
+
+This subtree fits naturally into the **middle-layer bindings** described in the `ontogenesis` layer model: it connects operational and relational structure (tasks, commitments, workflows, policy decisions) between local observations and broader world models — exactly the tier described in the README for cases, workflows, policy decision events, and agent interaction models. The existing `Lower/`, `Middle/`, and `Upper/` directories are for TTL/ontology surfaces; `bindings/valueflows_governed/` is the machine-checkable JSON Schema + replay + policy runtime surface for this governed slice. This distinction from the TTL-centric surfaces warrants a separate root-level `bindings/` namespace rather than nesting under `Lower/`.
+
+Once the full tranche lands, the `README.md` **Current Framework Surfaces** section should be updated to document `bindings/valueflows_governed/` alongside the existing surfaces.
 
 ## Immediate merge criteria for the full tranche
 - schema validation passes
