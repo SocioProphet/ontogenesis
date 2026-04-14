@@ -1,0 +1,10 @@
+{
+  "action": "task.complete",
+  "actor_id": "actor:worker-2",
+  "memberships": [],
+  "delegations": [],
+  "capability_grants": [],
+  "process_run": {"status":"active","object_id":"processrun:robo-leaknet-cycle1"},
+  "task": {"group_id":"group:leaknet","process_run_id":"processrun:robo-leaknet-cycle1","object_id":"task:robo-leaknet-cycle1-3d-design","accepted_by":"actor:worker-1"},
+  "payload": {"completion_mode":"override"}
+}
