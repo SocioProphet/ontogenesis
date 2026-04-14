@@ -1,0 +1,36 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/cybernetic-self.ttl> a owl:Ontology ;
+  dct:title "Domain — Cybernetic Self" ;
+  dct:description "Federated self model for constitutional, operational, and pedagogical embodiment across SocioProphet." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+cs:CyberneticSelf a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Cybernetic Self" .
+cs:FederatedEmbodiment a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Federated embodiment" .
+cs:LegalEmbodiment a owl:Class ; rdfs:subClassOf cs:FederatedEmbodiment ; rdfs:label "Legal embodiment" .
+cs:DigitalEmbodiment a owl:Class ; rdfs:subClassOf cs:FederatedEmbodiment ; rdfs:label "Digital embodiment" .
+cs:LearningEmbodiment a owl:Class ; rdfs:subClassOf cs:FederatedEmbodiment ; rdfs:label "Learning embodiment" .
+cs:ObjectiveFunction a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Objective function" .
+cs:ConstitutionalObjective a owl:Class ; rdfs:subClassOf cs:ObjectiveFunction ; rdfs:label "Constitutional objective" .
+cs:EconomicObjective a owl:Class ; rdfs:subClassOf cs:ObjectiveFunction ; rdfs:label "Economic objective" .
+cs:CommonsObjective a owl:Class ; rdfs:subClassOf cs:ObjectiveFunction ; rdfs:label "Commons objective" .
+cs:IdentityAnchor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Identity anchor" .
+cs:Chamber a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Chamber" .
+cs:GovernanceCompact a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Governance compact" .
+
+cs:anchoredBy a owl:ObjectProperty ; rdfs:domain cs:CyberneticSelf ; rdfs:range cs:IdentityAnchor ; rdfs:label "anchored by" .
+cs:hasEmbodiment a owl:ObjectProperty ; rdfs:domain cs:CyberneticSelf ; rdfs:range cs:FederatedEmbodiment ; rdfs:label "has embodiment" .
+cs:hasObjectiveFunction a owl:ObjectProperty ; rdfs:domain cs:CyberneticSelf ; rdfs:range cs:ObjectiveFunction ; rdfs:label "has objective function" .
+cs:hasChamber a owl:ObjectProperty ; rdfs:domain cs:CyberneticSelf ; rdfs:range cs:Chamber ; rdfs:label "has chamber" .
+cs:governedByCompact a owl:ObjectProperty ; rdfs:domain cs:CyberneticSelf ; rdfs:range cs:GovernanceCompact ; rdfs:label "governed by compact" .
+cs:stewardedBy a owl:ObjectProperty ; rdfs:domain cs:FederatedEmbodiment ; rdfs:range upper:Agent ; rdfs:label "stewarded by" .
+
+cs:objectivePriority a owl:DatatypeProperty ; rdfs:domain cs:ObjectiveFunction ; rdfs:range xsd:integer ; rdfs:label "objective priority" .
+cs:governanceRuleText a owl:DatatypeProperty ; rdfs:domain cs:GovernanceCompact ; rdfs:range xsd:string ; rdfs:label "governance rule text" .

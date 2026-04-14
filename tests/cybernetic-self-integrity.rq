@@ -1,0 +1,48 @@
+PREFIX cs: <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#>
+PREFIX party: <https://socioprophet.github.io/ontogenesis/domains/party#>
+PREFIX legal: <https://socioprophet.github.io/ontogenesis/domains/legal#>
+
+SELECT ?problem WHERE {
+  {
+    FILTER NOT EXISTS {
+      cs:SocioProphetSelf a cs:CyberneticSelf ;
+        cs:anchoredBy ?a ;
+        cs:hasObjectiveFunction ?o ;
+        cs:hasEmbodiment ?e ;
+        cs:hasChamber ?c ;
+        cs:governedByCompact ?g .
+    }
+    BIND("cybernetic-self-missing-core-links" AS ?problem)
+  }
+  UNION
+  {
+    FILTER NOT EXISTS {
+      party:MichaelHeller party:hasIdentityRecord ?id ;
+        party:hasRoleAssignment ?role .
+      ?role party:roleHeldBy party:MichaelHeller ;
+        party:roleWithinSelf cs:SocioProphetSelf ;
+        party:roleName ?name .
+    }
+    BIND("party-missing-identity-or-role" AS ?problem)
+  }
+  UNION
+  {
+    FILTER NOT EXISTS {
+      legal:HellerOwnsUSOpCo legal:ownedByEntity legal:HellerHousePA ;
+        legal:ownsEntity legal:SocioProphetUSOpCo .
+      legal:HellerOwnsAUSOpCo legal:ownedByEntity legal:HellerHousePA ;
+        legal:ownsEntity legal:SocioProphetAUSOpCo .
+    }
+    BIND("ownership-relations-incomplete" AS ?problem)
+  }
+  UNION
+  {
+    FILTER NOT EXISTS {
+      legal:OntogenesisAllocation legal:allocatesRepository legal:OntogenesisRepo ;
+        legal:allocatedToEntity legal:HellerHousePA ;
+        legal:stewardedByParty party:MichaelHeller ;
+        legal:allocationRuleText ?rule .
+    }
+    BIND("repository-allocation-incomplete" AS ?problem)
+  }
+}

@@ -22,6 +22,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 TTL_GLOBS = [
     "ontogenesis.ttl",
+    "catalog/*.ttl",
+    "Upper/*.ttl",
+    "Middle/*.ttl",
+    "Lower/*.ttl",
+    "Platform/*.ttl",
+    "prophet/*.ttl",
+    "epi/*.ttl",
+    "Domains/*.ttl",
     "skos/*.ttl",
     "mappings/*.ttl",
     "examples/*.ttl",
