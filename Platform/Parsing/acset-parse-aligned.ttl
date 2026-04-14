@@ -1,0 +1,98 @@
+@prefix : <https://socioprophet.github.io/ontogenesis/Platform/Parsing/acset-parse-aligned#> .
+@prefix core: <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<https://socioprophet.github.io/ontogenesis/Platform/Parsing/acset-parse-aligned>
+  a owl:Ontology ;
+  owl:imports <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core> ;
+  rdfs:label "SocioProphet ACSET Parse Ontology (Aligned Variant)" ;
+  rdfs:comment "Aligned replacement scaffold for ACSET-backed parse-state representation, correcting the initial ontology sketch to use valid superclassing and datatype properties." .
+
+:ACSETParseState a owl:Class ;
+  rdfs:subClassOf prov:Entity ;
+  rdfs:label "ACSET Parse State" ;
+  rdfs:comment "Typed parse-state representation using attributed C-sets for parser output, ambiguity retention, indexing, and transformation." .
+
+:ACSETObjectType a owl:Class ;
+  rdfs:label "ACSET Object Type" ;
+  rdfs:comment "An object sort represented within an ACSET parse state, such as Token, Linkage, EntityCandidate, or RelationCandidate." .
+
+:ACSETHom a owl:Class ;
+  rdfs:label "ACSET Hom" ;
+  rdfs:comment "A typed incidence relation or homomorphism between ACSET object types." .
+
+:ACSETAttrType a owl:Class ;
+  rdfs:label "ACSET Attribute Type" ;
+  rdfs:comment "An attribute sort available to ACSET objects, such as string, integer, decimal, or boolean." .
+
+:ACSETAttr a owl:Class ;
+  rdfs:label "ACSET Attribute" ;
+  rdfs:comment "An attributed field associated with an ACSET object type." .
+
+:representedAsAcset a owl:ObjectProperty ;
+  rdfs:domain prov:Entity ;
+  rdfs:range :ACSETParseState ;
+  rdfs:label "represented as ACSET" .
+
+:hasAcsetObjectType a owl:ObjectProperty ;
+  rdfs:domain :ACSETParseState ;
+  rdfs:range :ACSETObjectType ;
+  rdfs:label "has ACSET object type" .
+
+:hasAcsetHom a owl:ObjectProperty ;
+  rdfs:domain :ACSETParseState ;
+  rdfs:range :ACSETHom ;
+  rdfs:label "has ACSET hom" .
+
+:hasAcsetAttr a owl:ObjectProperty ;
+  rdfs:domain :ACSETParseState ;
+  rdfs:range :ACSETAttr ;
+  rdfs:label "has ACSET attribute" .
+
+:indexesCoreClass a owl:ObjectProperty ;
+  rdfs:domain :ACSETObjectType ;
+  rdfs:range owl:Class ;
+  rdfs:label "indexes core class" .
+
+:homDomain a owl:ObjectProperty ;
+  rdfs:domain :ACSETHom ;
+  rdfs:range :ACSETObjectType ;
+  rdfs:label "hom domain" .
+
+:homRange a owl:ObjectProperty ;
+  rdfs:domain :ACSETHom ;
+  rdfs:range :ACSETObjectType ;
+  rdfs:label "hom range" .
+
+:attrForObjectType a owl:ObjectProperty ;
+  rdfs:domain :ACSETAttr ;
+  rdfs:range :ACSETObjectType ;
+  rdfs:label "attribute for object type" .
+
+:attrType a owl:ObjectProperty ;
+  rdfs:domain :ACSETAttr ;
+  rdfs:range :ACSETAttrType ;
+  rdfs:label "attribute type" .
+
+:acsetIndexKey a owl:DatatypeProperty ;
+  rdfs:domain :ACSETObjectType ;
+  rdfs:range xsd:string ;
+  rdfs:label "ACSET index key" .
+
+:acsetObjectName a owl:DatatypeProperty ;
+  rdfs:domain :ACSETObjectType ;
+  rdfs:range xsd:string ;
+  rdfs:label "ACSET object name" .
+
+:acsetHomName a owl:DatatypeProperty ;
+  rdfs:domain :ACSETHom ;
+  rdfs:range xsd:string ;
+  rdfs:label "ACSET hom name" .
+
+:acsetAttrName a owl:DatatypeProperty ;
+  rdfs:domain :ACSETAttr ;
+  rdfs:range xsd:string ;
+  rdfs:label "ACSET attribute name" .
