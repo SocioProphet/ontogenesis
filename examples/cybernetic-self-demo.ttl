@@ -1,0 +1,86 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+cs:SocioProphetSelf a cs:CyberneticSelf ;
+  rdfs:label "SocioProphet Cybernetic Self" ;
+  cs:anchoredBy cs:MichaelAnchor ;
+  cs:hasObjectiveFunction cs:EconomicSurplusObjective , cs:CommonsGrowthObjective , cs:ConstitutionalBalanceObjective ;
+  cs:hasEmbodiment legal:HellerHousePA , legal:SocioProphetUSOpCo , legal:SocioProphetAUSOpCo ;
+  cs:hasChamber cs:HellerHouseChamber , cs:CommonsHouseChamber ;
+  cs:governedByCompact cs:SocioProphetCompact .
+
+cs:MichaelAnchor a cs:IdentityAnchor ; rdfs:label "Founder anchor" .
+cs:HellerHouseChamber a cs:Chamber ; rdfs:label "Heller House chamber" .
+cs:CommonsHouseChamber a cs:Chamber ; rdfs:label "Commons House chamber" .
+cs:SocioProphetCompact a cs:GovernanceCompact ; rdfs:label "SocioProphet constitutional compact" ; cs:governanceRuleText "Reserved matters require bicameral constitutional governance." .
+cs:EconomicSurplusObjective a cs:EconomicObjective ; rdfs:label "Economic surplus" ; cs:objectivePriority 1 .
+cs:CommonsGrowthObjective a cs:CommonsObjective ; rdfs:label "Commons growth" ; cs:objectivePriority 1 .
+cs:ConstitutionalBalanceObjective a cs:ConstitutionalObjective ; rdfs:label "Constitutional balance" ; cs:objectivePriority 1 .
+
+party:MichaelHeller a party:NaturalPerson ;
+  rdfs:label "Michael Heller" ;
+  party:hasIdentityRecord party:MichaelIdentity ;
+  party:hasRoleAssignment party:FounderRole .
+
+party:MichaelIdentity a party:IdentityRecord ; rdfs:label "Michael identity record" .
+party:FounderRole a party:RoleAssignment ;
+  rdfs:label "Founder and steward" ;
+  party:roleHeldBy party:MichaelHeller ;
+  party:roleWithinSelf cs:SocioProphetSelf ;
+  party:roleName "Founder / steward" .
+
+legal:PA a legal:Jurisdiction ; rdfs:label "Pennsylvania" ; legal:jurisdictionCode "US-PA" .
+legal:US a legal:Jurisdiction ; rdfs:label "United States" ; legal:jurisdictionCode "US" .
+legal:AU a legal:Jurisdiction ; rdfs:label "Australia" ; legal:jurisdictionCode "AU" .
+
+legal:HellerHouseIdentity a party:IdentityRecord ; rdfs:label "Heller House identity record" .
+legal:HellerHouseHoldcoRole a party:RoleAssignment ;
+  rdfs:label "Heller House holding entity role" ;
+  party:roleHeldBy legal:HellerHousePA ;
+  party:roleWithinSelf cs:SocioProphetSelf ;
+  party:roleName "Holding entity" .
+
+legal:USOpCoIdentity a party:IdentityRecord ; rdfs:label "SocioProphet US OpCo identity record" .
+legal:USOpCoRole a party:RoleAssignment ;
+  rdfs:label "US operating entity role" ;
+  party:roleHeldBy legal:SocioProphetUSOpCo ;
+  party:roleWithinSelf cs:SocioProphetSelf ;
+  party:roleName "US operating entity" .
+
+legal:AUSOpCoIdentity a party:IdentityRecord ; rdfs:label "SocioProphet Australia OpCo identity record" .
+legal:AUSOpCoRole a party:RoleAssignment ;
+  rdfs:label "Australia operating entity role" ;
+  party:roleHeldBy legal:SocioProphetAUSOpCo ;
+  party:roleWithinSelf cs:SocioProphetSelf ;
+  party:roleName "Australia operating entity" .
+
+legal:HellerHousePA a legal:LegalEntity ;
+  rdfs:label "Heller House (PA)" ;
+  legal:incorporatedIn legal:PA ;
+  party:hasIdentityRecord legal:HellerHouseIdentity ;
+  party:hasRoleAssignment legal:HellerHouseHoldcoRole .
+
+legal:SocioProphetUSOpCo a legal:LegalEntity ;
+  rdfs:label "SocioProphet US OpCo" ;
+  legal:incorporatedIn legal:US ;
+  party:hasIdentityRecord legal:USOpCoIdentity ;
+  party:hasRoleAssignment legal:USOpCoRole .
+
+legal:SocioProphetAUSOpCo a legal:LegalEntity ;
+  rdfs:label "SocioProphet Australia OpCo" ;
+  legal:incorporatedIn legal:AU ;
+  party:hasIdentityRecord legal:AUSOpCoIdentity ;
+  party:hasRoleAssignment legal:AUSOpCoRole .
+
+legal:HellerOwnsUSOpCo a legal:OwnershipRelation ; legal:ownedByEntity legal:HellerHousePA ; legal:ownsEntity legal:SocioProphetUSOpCo .
+legal:HellerOwnsAUSOpCo a legal:OwnershipRelation ; legal:ownedByEntity legal:HellerHousePA ; legal:ownsEntity legal:SocioProphetAUSOpCo .
+
+legal:OntogenesisRepo a legal:RepositoryAsset ; rdfs:label "Ontogenesis repository" ; legal:repositoryFullName "SocioProphet/ontogenesis" .
+legal:OntogenesisAllocation a legal:RepositoryAllocation ;
+  legal:allocatesRepository legal:OntogenesisRepo ;
+  legal:allocatedToEntity legal:HellerHousePA ;
+  legal:stewardedByParty party:MichaelHeller ;
+  legal:allocationRuleText "Ontogenesis remains constitutionally governed and stewarded as a core semantic asset." .

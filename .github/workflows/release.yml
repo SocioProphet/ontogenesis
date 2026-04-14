@@ -41,7 +41,7 @@ jobs:
           tar -czf ontogenesis-${GITHUB_REF_NAME}.tar.gz dist ledger signatures sbom catalog imports docs
 
       - name: GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe  # v2.6.1
         with:
           files: |
             ontogenesis-${{ github.ref_name }}.tar.gz

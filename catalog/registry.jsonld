@@ -23,6 +23,12 @@
       "semver": "0.1.0"
     },
     {
+      "id": "https://socioprophet.github.io/ontogenesis/og#MiddleActionOntology",
+      "layer": "Middle",
+      "path": "Middle/action-ontology.ttl",
+      "semver": "0.1.0"
+    },
+    {
       "id": "https://socioprophet.github.io/ontogenesis/og#LowerBindings",
       "layer": "Lower",
       "path": "Lower/bindings-core.ttl",
@@ -44,6 +50,24 @@
       "id": "https://socioprophet.github.io/ontogenesis/og#EPI",
       "layer": "EPI",
       "path": "epi/epi.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainCyberneticSelf",
+      "layer": "Domains",
+      "path": "Domains/cybernetic-self.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainPartyIdentity",
+      "layer": "Domains",
+      "path": "Domains/party-identity.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainOrgLegal",
+      "layer": "Domains",
+      "path": "Domains/org-legal.ttl",
       "semver": "0.1.0"
     }
   ]

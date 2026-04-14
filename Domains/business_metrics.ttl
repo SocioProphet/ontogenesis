@@ -1,0 +1,26 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix bizm:  <https://socioprophet.github.io/ontogenesis/domains/business/metrics#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/business_metrics.ttl> a owl:Ontology ;
+  dct:title "Domain — Business Metrics" ;
+  dct:description "Canonical business and unit-economics metrics concepts such as ARR, MRR, GRR, CAC, etc." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/business_core.ttl> .
+
+bizm:MetricConcept a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Metric Concept" .
+
+bizm:AnnualRecurringRevenue a bizm:MetricConcept ; rdfs:label "Annual Recurring Revenue" ; bizm:unitFamily "currency/year" ; bizm:grainFamily "time.month_end, geography, segment" ; bizm:timeBehavior "snapshot" ; bizm:scopeFamily "company, offering, geography" .
+
+bizm:MonthlyRecurringRevenue a bizm:MetricConcept ; rdfs:label "Monthly Recurring Revenue" ; bizm:unitFamily "currency/month" ; bizm:grainFamily "time.month_end, geography, segment" ; bizm:timeBehavior "snapshot" ; bizm:scopeFamily "company, offering, geography" .
+
+bizm:NetRevenueRetention a bizm:MetricConcept ; rdfs:label "Net Revenue Retention" ; bizm:unitFamily "percent" ; bizm:grainFamily "time.month_end, geography" ; bizm:timeBehavior "snapshot" ; bizm:scopeFamily "company, offering, geography" .
+
+bizm:CustomerAcquisitionCost a bizm:MetricConcept ; rdfs:label "Customer Acquisition Cost" ; bizm:unitFamily "currency" ; bizm:grainFamily "time.month_end, geography, segment" ; bizm:timeBehavior "snapshot" ; bizm:scopeFamily "company, offering" .
+
+bizm:GrossMargin a bizm:MetricConcept ; rdfs:label "Gross Margin" ; bizm:unitFamily "percent" ; bizm:grainFamily "time.year_end, company, offering" ; bizm:timeBehavior "snapshot" ; bizm:scopeFamily "company, offering" .

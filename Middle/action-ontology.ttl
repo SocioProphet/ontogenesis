@@ -1,0 +1,170 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix action: <https://socioprophet.github.io/ontogenesis/middle/action#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Middle/action-ontology.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Action Ontology" ;
+  dct:description "Cross-stack action/state/trace ontology for governed agentic coordination, protocol patterns, and validation surfaces." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+action:Action a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Action" ;
+  rdfs:comment "A state-transition event or process performed by an agent." .
+
+action:ActionType a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Action Type" ;
+  rdfs:comment "A reusable capability or transition label that may be afforded by states and declared by agents." .
+
+action:State a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "State" ;
+  rdfs:comment "An operationally defined situation or configuration characterized by what action types it affords." .
+
+action:Trace a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Trace" ;
+  rdfs:comment "A coordination residue or evidence artifact produced by actions and observed by other actors." .
+
+action:Preference a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Preference" ;
+  rdfs:comment "A soft-goal or priority-bearing policy surface that steers an agent toward one or more target states." .
+
+action:CoordinationPattern a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Coordination Pattern" ;
+  rdfs:comment "A named coordination protocol or protocol family expressed over actions, states, and traces." .
+
+action:ContractNetPattern a owl:Class ;
+  rdfs:subClassOf action:CoordinationPattern ;
+  rdfs:label "Contract Net Pattern" .
+
+action:PubSubPattern a owl:Class ;
+  rdfs:subClassOf action:CoordinationPattern ;
+  rdfs:label "Pub/Sub Pattern" .
+
+action:BlackboardPattern a owl:Class ;
+  rdfs:subClassOf action:CoordinationPattern ;
+  rdfs:label "Blackboard Pattern" .
+
+action:WorkflowPattern a owl:Class ;
+  rdfs:subClassOf action:CoordinationPattern ;
+  rdfs:label "Workflow Pattern" .
+
+action:performedBy a owl:ObjectProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range upper:Agent ;
+  rdfs:label "performed by" .
+
+action:hasActionType a owl:ObjectProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range action:ActionType ;
+  rdfs:label "has action type" .
+
+action:fromState a owl:ObjectProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range action:State ;
+  rdfs:label "from state" .
+
+action:toState a owl:ObjectProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range action:State ;
+  rdfs:label "to state" .
+
+action:producesTrace a owl:ObjectProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range action:Trace ;
+  rdfs:label "produces trace" .
+
+action:hasAffordance a owl:ObjectProperty ;
+  rdfs:domain action:State ;
+  rdfs:range action:ActionType ;
+  rdfs:label "has affordance" .
+
+action:hasCapability a owl:ObjectProperty ;
+  rdfs:domain upper:Agent ;
+  rdfs:range action:ActionType ;
+  rdfs:label "has capability" .
+
+action:hasPreference a owl:ObjectProperty ;
+  rdfs:domain upper:Agent ;
+  rdfs:range action:Preference ;
+  rdfs:label "has preference" .
+
+action:targetsGoalState a owl:ObjectProperty ;
+  rdfs:domain action:Preference ;
+  rdfs:range action:State ;
+  rdfs:label "targets goal state" .
+
+action:usesPattern a owl:ObjectProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range action:CoordinationPattern ;
+  rdfs:label "uses pattern" .
+
+action:refersToAction a owl:ObjectProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range action:Action ;
+  rdfs:label "refers to action" .
+
+action:timestamp a owl:DatatypeProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "timestamp" .
+
+action:traceTimestamp a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "trace timestamp" .
+
+action:priority a owl:DatatypeProperty ;
+  rdfs:domain action:Preference ;
+  rdfs:range xsd:integer ;
+  rdfs:label "priority" .
+
+action:cost a owl:DatatypeProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "cost" .
+
+action:probability a owl:DatatypeProperty ;
+  rdfs:domain action:Action ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "probability" .
+
+action:medium a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:string ;
+  rdfs:label "medium" .
+
+action:traceKind a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:string ;
+  rdfs:label "trace kind" .
+
+action:taskId a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:string ;
+  rdfs:label "task id" .
+
+action:topicId a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:string ;
+  rdfs:label "topic id" .
+
+action:messageId a owl:DatatypeProperty ;
+  rdfs:domain action:Trace ;
+  rdfs:range xsd:string ;
+  rdfs:label "message id" .
+
+action:ContractNet a action:ContractNetPattern ; rdfs:label "Contract Net" .
+action:PubSub a action:PubSubPattern ; rdfs:label "Publish Subscribe" .
+action:Blackboard a action:BlackboardPattern ; rdfs:label "Blackboard" .
+action:Workflow a action:WorkflowPattern ; rdfs:label "Workflow" .

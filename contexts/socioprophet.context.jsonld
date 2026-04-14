@@ -1,0 +1,33 @@
+{
+  "@context": {
+    "sp": "https://socioprophet.com/ontology/v0#",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "Surface": "sp:Surface",
+    "Entity": "sp:Entity",
+    "EventIR": "sp:EventIR",
+    "Link": "sp:Link",
+    "ProofArtifact": "sp:ProofArtifact",
+    "Component": "sp:Component",
+    "Contract": "sp:Contract",
+    "BoundaryEvent": "sp:BoundaryEvent",
+    "hasCategory": { "@id": "sp:hasCategory", "@type": "@id" },
+    "hasStatus": { "@id": "sp:hasStatus", "@type": "@id" },
+    "hasAudience": { "@id": "sp:hasAudience", "@type": "@id" },
+    "hasTopic": { "@id": "sp:hasTopic", "@type": "@id" },
+    "landingRoute": { "@id": "sp:landingRoute", "@type": "@id" },
+    "aboutEntity": { "@id": "sp:aboutEntity", "@type": "@id" },
+    "hasScope": { "@id": "sp:hasScope", "@type": "@id" },
+    "subjectEntity": { "@id": "sp:subjectEntity", "@type": "@id" },
+    "objectEntity": { "@id": "sp:objectEntity", "@type": "@id" },
+    "hasLinkState": { "@id": "sp:hasLinkState", "@type": "@id" },
+    "witnessedBy": { "@id": "sp:witnessedBy", "@type": "@id" },
+    "governedByContract": { "@id": "sp:governedByContract", "@type": "@id" },
+    "materializesBoundaryEvent": { "@id": "sp:materializesBoundaryEvent", "@type": "@id" },
+    "homepageVisible": "sp:homepageVisible",
+    "descriptionText": "sp:descriptionText",
+    "nextActionText": "sp:nextActionText",
+    "decisionResult": "sp:decisionResult",
+    "inputHash": "sp:inputHash",
+    "replayHook": "sp:replayHook"
+  }
+}

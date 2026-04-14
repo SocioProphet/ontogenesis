@@ -65,10 +65,13 @@ This repo defines a layered ontology stack plus gates/tools.
 - `Domains/cyber.ttl` — security event/control/finding stubs
 - `Domains/metadata.ttl` — catalogs/datasets/services
 - `Domains/web.ttl` — socioprophet.* domain endpoints
+- `Domains/cybernetic-self.ttl` — cybernetic self, embodiments, chambers, objective functions
+- `Domains/party-identity.ttl` — party, identity, accounts, entitlements, role assignments
+- `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 
 ## Gates and audits
 - SHACL bundle: `shapes/core.shacl.ttl`
+- Additional tranche SHACL: `shapes/cybernetic-self.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
-
