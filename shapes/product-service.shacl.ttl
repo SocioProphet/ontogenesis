@@ -1,0 +1,35 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+
+<shapes/product-service.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass ps:Plan ;
+  sh:message "Product-service SHACL bundle loaded." .
+
+ps:OfferingShape a sh:NodeShape ;
+  sh:targetClass biz:Offering ;
+  sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
+
+ps:PlanShape a sh:NodeShape ;
+  sh:targetClass ps:Plan ;
+  sh:property [ sh:path ps:planCode ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path ps:soldAsSKU ; sh:minCount 1 ; sh:class ps:SKU ] ;
+  sh:property [ sh:path ps:includesCapability ; sh:minCount 1 ; sh:class ps:Capability ] ;
+  sh:property [ sh:path ps:grantsEntitlement ; sh:minCount 1 ; sh:class party:Entitlement ] ;
+  sh:property [ sh:path ps:defaultSLA ; sh:minCount 1 ; sh:class ps:ServiceLevel ] ;
+  sh:property [ sh:path ps:pricedInBook ; sh:minCount 1 ; sh:class ps:PriceBook ] .
+
+ps:CapabilityShape a sh:NodeShape ;
+  sh:targetClass ps:Capability ;
+  sh:property [ sh:path ps:includesFeature ; sh:minCount 1 ; sh:class ps:Feature ] .
+
+ps:ServiceInstanceShape a sh:NodeShape ;
+  sh:targetClass ps:ServiceInstance ;
+  sh:property [ sh:path ps:instantiatesPlan ; sh:minCount 1 ; sh:class ps:Plan ] ;
+  sh:property [ sh:path ps:provisionedFor ; sh:minCount 1 ; sh:class party:Party ] ;
+  sh:property [ sh:path ps:governedByProvider ; sh:minCount 1 ; sh:class legal:LegalEntity ] ;
+  sh:property [ sh:path ps:billedUnderContract ; sh:minCount 1 ; sh:class biz:Contract ] .
