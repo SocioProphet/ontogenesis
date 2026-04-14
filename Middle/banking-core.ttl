@@ -1,0 +1,77 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix banking: <https://socioprophet.github.io/ontogenesis/domains/banking#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Middle/banking-core.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Banking Core" ;
+  dct:description "Seed banking ontology module for legal entities, portfolios, counterparties, capital, liquidity, and regulated reporting surfaces." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+banking:BankingFirm a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Banking Firm" .
+
+banking:LegalEntity a owl:Class ;
+  rdfs:subClassOf upper:Organization ;
+  rdfs:label "Legal Entity" .
+
+banking:Portfolio a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Portfolio" .
+
+banking:Counterparty a owl:Class ;
+  rdfs:subClassOf upper:Agent ;
+  rdfs:label "Counterparty" .
+
+banking:CapitalState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Capital State" .
+
+banking:LiquidityState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Liquidity State" .
+
+banking:FilingPack a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Filing Pack" .
+
+banking:hasLegalEntity a owl:ObjectProperty ;
+  rdfs:domain banking:BankingFirm ;
+  rdfs:range banking:LegalEntity ;
+  rdfs:label "has legal entity" .
+
+banking:hasPortfolio a owl:ObjectProperty ;
+  rdfs:domain banking:LegalEntity ;
+  rdfs:range banking:Portfolio ;
+  rdfs:label "has portfolio" .
+
+banking:hasCounterparty a owl:ObjectProperty ;
+  rdfs:domain banking:Portfolio ;
+  rdfs:range banking:Counterparty ;
+  rdfs:label "has counterparty" .
+
+banking:hasCapitalState a owl:ObjectProperty ;
+  rdfs:domain banking:LegalEntity ;
+  rdfs:range banking:CapitalState ;
+  rdfs:label "has capital state" .
+
+banking:hasLiquidityState a owl:ObjectProperty ;
+  rdfs:domain banking:LegalEntity ;
+  rdfs:range banking:LiquidityState ;
+  rdfs:label "has liquidity state" .
+
+banking:hasFilingPack a owl:ObjectProperty ;
+  rdfs:domain banking:LegalEntity ;
+  rdfs:range banking:FilingPack ;
+  rdfs:label "has filing pack" .
+
+banking:asOfDate a owl:DatatypeProperty ;
+  rdfs:domain banking:CapitalState ;
+  rdfs:range xsd:date ;
+  rdfs:label "as of date" .
