@@ -1,0 +1,23 @@
+{
+  "@context": {
+    "biz": "https://socioprophet.github.io/ontogenesis/domains/business#",
+    "bizm": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://socioprophet.github.io/ontogenesis/domains/business#Company",
+      "@type": "biz:Company",
+      "biz:legalName": "ACME Cyber Inc.",
+      "biz:currency": "USD"
+    },
+    {
+      "@id": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#AnnualRecurringRevenue",
+      "@type": "bizm:MetricConcept",
+      "bizm:unitFamily": "currency/year",
+      "bizm:grainFamily": "time.month_end, geography, segment",
+      "bizm:timeBehavior": "snapshot",
+      "bizm:scopeFamily": "company, offering, geography"
+    }
+  ]
+}
