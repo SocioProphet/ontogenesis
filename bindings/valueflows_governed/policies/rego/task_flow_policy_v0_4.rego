@@ -152,7 +152,6 @@ allow if {
 }
 
 deny_reasons contains "actor lacks active membership" if {
-  some group_id
   group_id := object.get(input.task, "group_id", object.get(input.process_run, "group_id", null))
   group_id != null
   not active_membership(input.actor_id, group_id)
