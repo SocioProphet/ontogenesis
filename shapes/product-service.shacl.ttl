@@ -10,6 +10,14 @@
   sh:targetClass ps:Plan ;
   sh:message "Product-service SHACL bundle loaded." .
 
+ps:ProductOfferingShape a sh:NodeShape ;
+  sh:targetClass ps:ProductOffering ;
+  sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
+
+ps:ServiceOfferingShape a sh:NodeShape ;
+  sh:targetClass ps:ServiceOffering ;
+  sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
+
 ps:OfferingShape a sh:NodeShape ;
   sh:targetClass biz:Offering ;
   sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
