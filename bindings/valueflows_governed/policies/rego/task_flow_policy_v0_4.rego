@@ -36,7 +36,16 @@ active_delegation(actor_id, group_id, process_run_id, task_id) if {
   d.grantee_actor_id == actor_id
   d.group_id == group_id
   d.process_run_id == process_run_id
-  (d.task_id == null or d.task_id == task_id)
+  d.task_id == null
+}
+
+active_delegation(actor_id, group_id, process_run_id, task_id) if {
+  some d in input.delegations
+  d.status == "active"
+  d.grantee_actor_id == actor_id
+  d.group_id == group_id
+  d.process_run_id == process_run_id
+  d.task_id == task_id
 }
 
 active_capability(actor_id, capability, group_id, process_run_id, task_id) if {
@@ -46,7 +55,18 @@ active_capability(actor_id, capability, group_id, process_run_id, task_id) if {
   g.capability == capability
   g.group_id == group_id
   g.process_run_id == process_run_id
-  (g.task_id == null or g.task_id == task_id)
+  g.task_id == null
+  active_delegation(actor_id, group_id, process_run_id, task_id)
+}
+
+active_capability(actor_id, capability, group_id, process_run_id, task_id) if {
+  some g in input.capability_grants
+  g.status == "active"
+  g.grantee_actor_id == actor_id
+  g.capability == capability
+  g.group_id == group_id
+  g.process_run_id == process_run_id
+  g.task_id == task_id
   active_delegation(actor_id, group_id, process_run_id, task_id)
 }
 
