@@ -51,6 +51,36 @@
       "layer": "EPI",
       "path": "epi/epi.ttl",
       "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainBusinessCore",
+      "layer": "Domains",
+      "path": "Domains/business_core.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainCyberneticSelf",
+      "layer": "Domains",
+      "path": "Domains/cybernetic-self.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainPartyIdentity",
+      "layer": "Domains",
+      "path": "Domains/party-identity.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainOrgLegal",
+      "layer": "Domains",
+      "path": "Domains/org-legal.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#DomainProductService",
+      "layer": "Domains",
+      "path": "Domains/product-service.ttl",
+      "semver": "0.1.0"
     }
   ]
 }

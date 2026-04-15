@@ -1,0 +1,68 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+biz:SocioProphetCompany a biz:Company ;
+  rdfs:label "SocioProphet" ;
+  biz:legalName "SocioProphet" ;
+  biz:currency "USD" ;
+  biz:offers ps:SocioProphetPlatform ;
+  biz:hasRevenueStream ps:EnterpriseSubscriptionRevenue .
+
+ps:InstitutionalBuyers a biz:CustomerSegment ; rdfs:label "Institutional buyers" ; biz:segmentCode "INST" .
+ps:DirectEnterpriseChannel a biz:Channel ; rdfs:label "Direct enterprise channel" ; biz:channelType "direct" .
+ps:EnterpriseSubscriptionRevenue a biz:RevenueStream ; rdfs:label "Enterprise subscription revenue" .
+
+ps:SocioProphetPlatform a ps:ServiceOffering ;
+  rdfs:label "SocioProphet Platform" ;
+  biz:servesSegment ps:InstitutionalBuyers ;
+  biz:usesChannel ps:DirectEnterpriseChannel ;
+  ps:hasPlan ps:SocioProphetOrgPlan .
+
+ps:SocioProphetOrgPlan a ps:Plan ;
+  rdfs:label "SocioProphet Org Plan" ;
+  ps:planCode "SP-ORG-001" ;
+  ps:soldAsSKU ps:SocioProphetOrgSKU ;
+  ps:includesCapability ps:OntologyGovernanceCapability , ps:EvidenceGraphCapability ;
+  ps:grantsEntitlement ps:WorkspaceEntitlement , ps:OntologyApiEntitlement ;
+  ps:defaultSLA ps:BusinessCriticalSLA ;
+  ps:pricedInBook ps:StandardPriceBook ;
+  ps:meteredBy ps:SeatMeter ;
+  ps:governedByQuota ps:StandardQuotaPolicy ;
+  ps:lifecycleStatus "active" ;
+  ps:billingPeriod "annual" .
+
+ps:SocioProphetOrgSKU a ps:SKU ; rdfs:label "SocioProphet Org SKU" ; ps:skuCode "SKU-SP-ORG" .
+ps:OntologyGovernanceCapability a ps:Capability ; rdfs:label "Ontology governance" ; ps:includesFeature ps:ShaclValidationFeature .
+ps:EvidenceGraphCapability a ps:Capability ; rdfs:label "Evidence graph" ; ps:includesFeature ps:ReplayableEvidenceFeature .
+ps:ShaclValidationFeature a ps:Feature ; rdfs:label "SHACL validation" .
+ps:ReplayableEvidenceFeature a ps:Feature ; rdfs:label "Replayable evidence" .
+ps:BusinessCriticalSLA a ps:ServiceLevel ; rdfs:label "Business critical" ; ps:slaName "business-critical" .
+ps:StandardPriceBook a ps:PriceBook ; rdfs:label "Standard price book" .
+ps:SeatMeter a ps:Meter ; rdfs:label "Seat meter" ; ps:meterUnit "seat" .
+ps:StandardQuotaPolicy a ps:QuotaPolicy ; rdfs:label "Standard quota policy" ; ps:quotaRuleText "Seats and API quotas are plan-governed by entitlement." .
+ps:WorkspaceEntitlement a party:Entitlement ; rdfs:label "Workspace entitlement" .
+ps:OntologyApiEntitlement a party:Entitlement ; rdfs:label "Ontology API entitlement" .
+
+party:AcmeInstitution a party:Organization ;
+  rdfs:label "Acme Institution" ;
+  party:hasIdentityRecord party:AcmeInstitutionIdentity ;
+  party:hasRoleAssignment party:AcmeCustomerRole .
+party:AcmeInstitutionIdentity a party:IdentityRecord ; rdfs:label "Acme Institution identity record" .
+party:AcmeCustomerRole a party:RoleAssignment ;
+  rdfs:label "Acme customer role" ;
+  party:roleHeldBy party:AcmeInstitution ;
+  party:roleWithinSelf cs:SocioProphetSelf ;
+  party:roleName "Customer" .
+
+ps:AcmeAnnualContract a biz:Contract ; rdfs:label "Acme annual platform contract" .
+ps:AcmeWorkspaceInstance a ps:ServiceInstance ;
+  rdfs:label "Acme workspace instance" ;
+  ps:instantiatesPlan ps:SocioProphetOrgPlan ;
+  ps:provisionedFor party:AcmeInstitution ;
+  ps:governedByProvider legal:SocioProphetUSOpCo ;
+  ps:billedUnderContract ps:AcmeAnnualContract .

@@ -1,0 +1,44 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+
+<shapes/cybernetic-self.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass cs:CyberneticSelf ;
+  sh:message "Cybernetic self SHACL bundle loaded." .
+
+cs:CyberneticSelfShape a sh:NodeShape ;
+  sh:targetClass cs:CyberneticSelf ;
+  sh:property [ sh:path cs:anchoredBy ; sh:minCount 1 ; sh:class cs:IdentityAnchor ] ;
+  sh:property [ sh:path cs:hasObjectiveFunction ; sh:minCount 1 ; sh:class cs:ObjectiveFunction ] ;
+  sh:property [ sh:path cs:hasEmbodiment ; sh:minCount 1 ; sh:class cs:FederatedEmbodiment ] ;
+  sh:property [ sh:path cs:hasChamber ; sh:minCount 1 ; sh:class cs:Chamber ] ;
+  sh:property [ sh:path cs:governedByCompact ; sh:minCount 1 ; sh:class cs:GovernanceCompact ] .
+
+party:PartyShape a sh:NodeShape ;
+  sh:targetClass party:Party ;
+  sh:property [ sh:path party:hasIdentityRecord ; sh:minCount 1 ; sh:class party:IdentityRecord ] ;
+  sh:property [ sh:path party:hasRoleAssignment ; sh:minCount 1 ; sh:class party:RoleAssignment ] .
+
+party:RoleAssignmentShape a sh:NodeShape ;
+  sh:targetClass party:RoleAssignment ;
+  sh:property [ sh:path party:roleHeldBy ; sh:minCount 1 ; sh:class party:Party ] ;
+  sh:property [ sh:path party:roleWithinSelf ; sh:minCount 1 ; sh:class cs:CyberneticSelf ] ;
+  sh:property [ sh:path party:roleName ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+legal:LegalEntityShape a sh:NodeShape ;
+  sh:targetClass legal:LegalEntity ;
+  sh:property [ sh:path legal:incorporatedIn ; sh:minCount 1 ; sh:class legal:Jurisdiction ] .
+
+legal:OwnershipRelationShape a sh:NodeShape ;
+  sh:targetClass legal:OwnershipRelation ;
+  sh:property [ sh:path legal:ownedByEntity ; sh:minCount 1 ; sh:class legal:LegalEntity ] ;
+  sh:property [ sh:path legal:ownsEntity ; sh:minCount 1 ; sh:class legal:LegalEntity ] .
+
+legal:RepositoryAllocationShape a sh:NodeShape ;
+  sh:targetClass legal:RepositoryAllocation ;
+  sh:property [ sh:path legal:allocatesRepository ; sh:minCount 1 ; sh:class legal:RepositoryAsset ] ;
+  sh:property [ sh:path legal:allocatedToEntity ; sh:minCount 1 ; sh:class legal:LegalEntity ] ;
+  sh:property [ sh:path legal:allocationRuleText ; sh:minCount 1 ; sh:datatype xsd:string ] .

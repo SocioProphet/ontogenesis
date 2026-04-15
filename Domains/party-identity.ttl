@@ -1,0 +1,43 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/party-identity.ttl> a owl:Ontology ;
+  dct:title "Domain — Party and Identity" ;
+  dct:description "Master data primitives for persons, organizations, service principals, accounts, roles, and entitlements." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Domains/cybernetic-self.ttl> .
+
+party:Party a owl:Class ; rdfs:subClassOf upper:Agent ; rdfs:label "Party" .
+party:NaturalPerson a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Natural person" .
+party:Organization a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Organization" .
+party:ServicePrincipal a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Service principal" .
+party:DevicePrincipal a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Device principal" .
+party:IdentityRecord a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Identity record" .
+party:RoleAssignment a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Role assignment" .
+party:Relationship a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Relationship" .
+party:Account a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Account" .
+party:Entitlement a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Entitlement" .
+party:ContactPoint a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Contact point" .
+
+party:hasIdentityRecord a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:IdentityRecord ; rdfs:label "has identity record" .
+party:hasRoleAssignment a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:RoleAssignment ; rdfs:label "has role assignment" .
+party:hasRelationship a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:Relationship ; rdfs:label "has relationship" .
+party:hasAccount a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:Account ; rdfs:label "has account" .
+party:hasEntitlement a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:Entitlement ; rdfs:label "has entitlement" .
+party:hasContactPoint a owl:ObjectProperty ; rdfs:domain party:Party ; rdfs:range party:ContactPoint ; rdfs:label "has contact point" .
+party:roleHeldBy a owl:ObjectProperty ; rdfs:domain party:RoleAssignment ; rdfs:range party:Party ; rdfs:label "role held by" .
+party:roleWithinSelf a owl:ObjectProperty ; rdfs:domain party:RoleAssignment ; rdfs:range cs:CyberneticSelf ; rdfs:label "role within self" .
+party:relatesParty a owl:ObjectProperty ; rdfs:domain party:Relationship ; rdfs:range party:Party ; rdfs:label "relates party" .
+party:grantsEntitlement a owl:ObjectProperty ; rdfs:domain party:Account ; rdfs:range party:Entitlement ; rdfs:label "grants entitlement" .
+
+party:roleName a owl:DatatypeProperty ; rdfs:domain party:RoleAssignment ; rdfs:range xsd:string ; rdfs:label "role name" .
+party:accountStatus a owl:DatatypeProperty ; rdfs:domain party:Account ; rdfs:range xsd:string ; rdfs:label "account status" .
+party:contactValue a owl:DatatypeProperty ; rdfs:domain party:ContactPoint ; rdfs:range xsd:string ; rdfs:label "contact value" .
+party:relationshipType a owl:DatatypeProperty ; rdfs:domain party:Relationship ; rdfs:range xsd:string ; rdfs:label "relationship type" .

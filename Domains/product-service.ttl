@@ -1,0 +1,55 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/product-service.ttl> a owl:Ontology ;
+  dct:title "Domain — Product and Service" ;
+  dct:description "Refinement layer for offer catalog, plans, SKUs, capabilities, features, entitlements, service levels, and provisioned instances." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Domains/business_core.ttl> ;
+  owl:imports <Domains/party-identity.ttl> ;
+  owl:imports <Domains/org-legal.ttl> .
+
+ps:ProductOffering a owl:Class ; rdfs:subClassOf biz:Offering ; rdfs:label "Product offering" .
+ps:ServiceOffering a owl:Class ; rdfs:subClassOf biz:Offering ; rdfs:label "Service offering" .
+ps:Plan a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Plan" .
+ps:SKU a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "SKU" .
+ps:Bundle a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Bundle" .
+ps:Capability a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Capability" .
+ps:Feature a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Feature" .
+ps:ServiceLevel a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Service level" .
+ps:PriceBook a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Price book" .
+ps:Meter a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Meter" .
+ps:QuotaPolicy a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Quota policy" .
+ps:ServiceInstance a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Service instance" .
+
+ps:hasPlan a owl:ObjectProperty ; rdfs:domain biz:Offering ; rdfs:range ps:Plan ; rdfs:label "has plan" .
+ps:soldAsSKU a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:SKU ; rdfs:label "sold as SKU" .
+ps:bundlesOffering a owl:ObjectProperty ; rdfs:domain ps:Bundle ; rdfs:range biz:Offering ; rdfs:label "bundles offering" .
+ps:includesCapability a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:Capability ; rdfs:label "includes capability" .
+ps:includesFeature a owl:ObjectProperty ; rdfs:domain ps:Capability ; rdfs:range ps:Feature ; rdfs:label "includes feature" .
+ps:grantsEntitlement a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range party:Entitlement ; rdfs:label "grants entitlement" .
+ps:defaultSLA a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:ServiceLevel ; rdfs:label "default SLA" .
+ps:pricedInBook a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:PriceBook ; rdfs:label "priced in book" .
+ps:meteredBy a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:Meter ; rdfs:label "metered by" .
+ps:governedByQuota a owl:ObjectProperty ; rdfs:domain ps:Plan ; rdfs:range ps:QuotaPolicy ; rdfs:label "governed by quota" .
+ps:instantiatesPlan a owl:ObjectProperty ; rdfs:domain ps:ServiceInstance ; rdfs:range ps:Plan ; rdfs:label "instantiates plan" .
+ps:provisionedFor a owl:ObjectProperty ; rdfs:domain ps:ServiceInstance ; rdfs:range party:Party ; rdfs:label "provisioned for" .
+ps:governedByProvider a owl:ObjectProperty ; rdfs:domain ps:ServiceInstance ; rdfs:range legal:LegalEntity ; rdfs:label "governed by provider" .
+ps:billedUnderContract a owl:ObjectProperty ; rdfs:domain ps:ServiceInstance ; rdfs:range biz:Contract ; rdfs:label "billed under contract" .
+
+ps:planCode a owl:DatatypeProperty ; rdfs:domain ps:Plan ; rdfs:range xsd:string ; rdfs:label "plan code" .
+ps:skuCode a owl:DatatypeProperty ; rdfs:domain ps:SKU ; rdfs:range xsd:string ; rdfs:label "SKU code" .
+ps:lifecycleStatus a owl:DatatypeProperty ; rdfs:domain ps:Plan ; rdfs:range xsd:string ; rdfs:label "lifecycle status" .
+ps:billingPeriod a owl:DatatypeProperty ; rdfs:domain ps:Plan ; rdfs:range xsd:string ; rdfs:label "billing period" .
+ps:meterUnit a owl:DatatypeProperty ; rdfs:domain ps:Meter ; rdfs:range xsd:string ; rdfs:label "meter unit" .
+ps:quotaRuleText a owl:DatatypeProperty ; rdfs:domain ps:QuotaPolicy ; rdfs:range xsd:string ; rdfs:label "quota rule text" .
+ps:slaName a owl:DatatypeProperty ; rdfs:domain ps:ServiceLevel ; rdfs:range xsd:string ; rdfs:label "SLA name" .

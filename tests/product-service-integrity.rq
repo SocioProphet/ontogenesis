@@ -1,0 +1,37 @@
+PREFIX ps: <https://socioprophet.github.io/ontogenesis/domains/product-service#>
+PREFIX party: <https://socioprophet.github.io/ontogenesis/domains/party#>
+PREFIX legal: <https://socioprophet.github.io/ontogenesis/domains/legal#>
+
+SELECT ?problem WHERE {
+  {
+    FILTER NOT EXISTS {
+      ps:SocioProphetPlatform a ps:ServiceOffering ;
+        ps:hasPlan ps:SocioProphetOrgPlan .
+    }
+    BIND("offering-missing-plan" AS ?problem)
+  }
+  UNION
+  {
+    FILTER NOT EXISTS {
+      ps:SocioProphetOrgPlan a ps:Plan ;
+        ps:planCode ?code ;
+        ps:soldAsSKU ps:SocioProphetOrgSKU ;
+        ps:includesCapability ?cap ;
+        ps:grantsEntitlement ?ent ;
+        ps:defaultSLA ps:BusinessCriticalSLA ;
+        ps:pricedInBook ps:StandardPriceBook .
+    }
+    BIND("plan-missing-commercial-structure" AS ?problem)
+  }
+  UNION
+  {
+    FILTER NOT EXISTS {
+      ps:AcmeWorkspaceInstance a ps:ServiceInstance ;
+        ps:instantiatesPlan ps:SocioProphetOrgPlan ;
+        ps:provisionedFor party:AcmeInstitution ;
+        ps:governedByProvider legal:SocioProphetUSOpCo ;
+        ps:billedUnderContract ps:AcmeAnnualContract .
+    }
+    BIND("service-instance-missing-bindings" AS ?problem)
+  }
+}
