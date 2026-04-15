@@ -18,6 +18,10 @@ ps:ServiceOfferingShape a sh:NodeShape ;
   sh:targetClass ps:ServiceOffering ;
   sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
 
+ps:OfferingShape a sh:NodeShape ;
+  sh:targetClass biz:Offering ;
+  sh:property [ sh:path ps:hasPlan ; sh:minCount 1 ; sh:class ps:Plan ] .
+
 ps:PlanShape a sh:NodeShape ;
   sh:targetClass ps:Plan ;
   sh:property [ sh:path ps:planCode ; sh:minCount 1 ; sh:datatype xsd:string ] ;

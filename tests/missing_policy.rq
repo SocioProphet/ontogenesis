@@ -1,0 +1,7 @@
+PREFIX hdt: <https://socioprophet.dev/ont/ontogenesis#>
+
+# Invariant: anything marked DELIVERED must record the policy decision that authorized delivery.
+SELECT ?res WHERE {
+  ?res hdt:hasOmegaState hdt:DELIVERED .
+  FILTER NOT EXISTS { ?res hdt:usesPolicy ?p . }
+}

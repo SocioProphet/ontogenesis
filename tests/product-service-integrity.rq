@@ -1,4 +1,3 @@
-PREFIX biz: <https://socioprophet.github.io/ontogenesis/domains/business#>
 PREFIX ps: <https://socioprophet.github.io/ontogenesis/domains/product-service#>
 PREFIX party: <https://socioprophet.github.io/ontogenesis/domains/party#>
 PREFIX legal: <https://socioprophet.github.io/ontogenesis/domains/legal#>

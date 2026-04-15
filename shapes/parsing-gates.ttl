@@ -1,0 +1,72 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#> .
+@prefix hp: <https://socioprophet.github.io/ontogenesis/Platform/Parsing/hypergraph-promotion#> .
+@prefix : <https://socioprophet.github.io/ontogenesis/shapes/parsing-gates#> .
+
+:LinkShape a sh:NodeShape ;
+  sh:targetClass core:Link ;
+  sh:property [
+    sh:path core:fromLinkage ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class core:Linkage ;
+    sh:message "Every parsing link must belong to exactly one linkage." ;
+  ] ;
+  sh:property [
+    sh:path core:leftToken ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class core:Token ;
+  ] ;
+  sh:property [
+    sh:path core:rightToken ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class core:Token ;
+  ] .
+
+:EntityCandidateShape a sh:NodeShape ;
+  sh:targetClass core:EntityCandidate ;
+  sh:property [
+    sh:path [ sh:inversePath core:supportsEntity ] ;
+    sh:minCount 1 ;
+    sh:class core:Evidence ;
+    sh:message "Every entity candidate must be backed by at least one evidence object." ;
+  ] .
+
+:RelationCandidateShape a sh:NodeShape ;
+  sh:targetClass core:RelationCandidate ;
+  sh:property [
+    sh:path core:candidateSubject ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class core:EntityCandidate ;
+  ] ;
+  sh:property [
+    sh:path core:candidateObject ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class core:EntityCandidate ;
+  ] ;
+  sh:property [
+    sh:path [ sh:inversePath core:supportsRelation ] ;
+    sh:minCount 1 ;
+    sh:class core:Evidence ;
+  ] .
+
+:PromotionDecisionShape a sh:NodeShape ;
+  sh:targetClass core:PromotionDecision ;
+  sh:property [
+    sh:path core:promotionStatus ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path hp:backReferencePreserved ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:boolean ;
+    sh:message "Every promotion decision must explicitly record whether parse backreferences were preserved." ;
+  ] .
