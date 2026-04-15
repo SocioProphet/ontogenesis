@@ -98,8 +98,16 @@ allow if {
   input.task.process_run_id == input.process_run.object_id
   input.process_run.status == "active"
   active_membership(input.actor_id, input.task.group_id)
-  (process_creator_or_coordinator(input.actor_id, input.task.group_id) or
-   active_capability(input.actor_id, "task.offer", input.task.group_id, input.process_run.object_id, input.task.object_id))
+  process_creator_or_coordinator(input.actor_id, input.task.group_id)
+}
+
+allow if {
+  action == "task.offer"
+  input.task.status == "offered"
+  input.task.process_run_id == input.process_run.object_id
+  input.process_run.status == "active"
+  active_membership(input.actor_id, input.task.group_id)
+  active_capability(input.actor_id, "task.offer", input.task.group_id, input.process_run.object_id, input.task.object_id)
 }
 
 allow if {
