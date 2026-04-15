@@ -7,6 +7,8 @@ on:
 jobs:
   ontology-validate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,4 +19,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
       - name: Validate
-        run: make validate
+        run: python scripts/validate_rdf.py
