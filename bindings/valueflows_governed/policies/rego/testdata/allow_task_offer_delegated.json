@@ -1,9 +1,33 @@
 {
   "action": "task.offer",
   "actor_id": "actor:worker-2",
-  "memberships": [],
-  "delegations": [],
-  "capability_grants": [],
+  "memberships": [
+    {
+      "actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "status": "active",
+      "role_ids": ["role:contributor"]
+    }
+  ],
+  "delegations": [
+    {
+      "status": "active",
+      "grantee_actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "task_id": null
+    }
+  ],
+  "capability_grants": [
+    {
+      "status": "active",
+      "grantee_actor_id": "actor:worker-2",
+      "capability": "task.offer",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "task_id": null
+    }
+  ],
   "process_run": {"status":"active","object_id":"processrun:robo-leaknet-cycle1","created_by":"actor:tibi"},
   "task": {"status":"offered","group_id":"group:leaknet","process_run_id":"processrun:robo-leaknet-cycle1","object_id":"task:robo-leaknet-cycle1-3d-design"},
   "payload": {"task_id":"task:robo-leaknet-cycle1-3d-design"}

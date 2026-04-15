@@ -2,8 +2,25 @@
   "action": "task.complete",
   "actor_id": "actor:worker-2",
   "memberships": [],
-  "delegations": [],
-  "capability_grants": [],
+  "delegations": [
+    {
+      "status": "active",
+      "grantee_actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "task_id": null
+    }
+  ],
+  "capability_grants": [
+    {
+      "status": "active",
+      "grantee_actor_id": "actor:worker-2",
+      "capability": "task.complete.override",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "task_id": null
+    }
+  ],
   "process_run": {"status":"active","object_id":"processrun:robo-leaknet-cycle1"},
   "task": {"group_id":"group:leaknet","process_run_id":"processrun:robo-leaknet-cycle1","object_id":"task:robo-leaknet-cycle1-3d-design","accepted_by":"actor:worker-1"},
   "payload": {"completion_mode":"override"}

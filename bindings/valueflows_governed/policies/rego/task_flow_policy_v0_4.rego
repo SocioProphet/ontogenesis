@@ -1,4 +1,4 @@
-package socioprophet.valueflows.taskflow.v3
+package socioprophet.valueflows.taskflow.v4
 
 default allow := false
 
