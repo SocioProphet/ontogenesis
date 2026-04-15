@@ -1,0 +1,10 @@
+{
+  "action": "task.offer",
+  "actor_id": "actor:worker-2",
+  "memberships": [],
+  "delegations": [],
+  "capability_grants": [],
+  "process_run": {"status":"active","object_id":"processrun:robo-leaknet-cycle1","created_by":"actor:tibi"},
+  "task": {"status":"offered","group_id":"group:leaknet","process_run_id":"processrun:robo-leaknet-cycle1","object_id":"task:robo-leaknet-cycle1-3d-design"},
+  "payload": {"task_id":"task:robo-leaknet-cycle1-3d-design"}
+}

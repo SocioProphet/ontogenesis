@@ -1,0 +1,238 @@
+{
+  "action": "task.assignment_override",
+  "actor_id": "actor:worker-2",
+  "memberships": [
+    {
+      "schema_ref": "schemas/json/canonical/v1/membership.v1.schema.json",
+      "schema_version": "1.0.0",
+      "object_type": "Membership",
+      "object_id": "membership:tibi:leaknet",
+      "business_key": "tibi-leaknet",
+      "created_at": "2026-04-13T23:50:00Z",
+      "updated_at": "2026-04-13T23:50:00Z",
+      "status": "active",
+      "labels": [
+        "contribution"
+      ],
+      "external_refs": [],
+      "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+      },
+      "provenance_ref": null,
+      "actor_id": "actor:tibi",
+      "group_id": "group:leaknet",
+      "role_ids": [
+        "role:coordinator"
+      ],
+      "valid_from": "2026-04-13T23:50:00Z",
+      "valid_to": null,
+      "joined_via": "assignment"
+    },
+    {
+      "schema_ref": "schemas/json/canonical/v1/membership.v1.schema.json",
+      "schema_version": "1.0.0",
+      "object_type": "Membership",
+      "object_id": "membership:worker-1:leaknet",
+      "business_key": "worker-1-leaknet",
+      "created_at": "2026-04-13T23:50:00Z",
+      "updated_at": "2026-04-13T23:50:00Z",
+      "status": "active",
+      "labels": [
+        "contribution"
+      ],
+      "external_refs": [],
+      "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+      },
+      "provenance_ref": null,
+      "actor_id": "actor:worker-1",
+      "group_id": "group:leaknet",
+      "role_ids": [
+        "role:contributor"
+      ],
+      "valid_from": "2026-04-13T23:50:00Z",
+      "valid_to": null,
+      "joined_via": "assignment"
+    },
+    {
+      "schema_ref": "schemas/json/canonical/v1/membership.v1.schema.json",
+      "schema_version": "1.0.0",
+      "object_type": "Membership",
+      "object_id": "membership:worker-2:leaknet",
+      "business_key": "worker-2-leaknet",
+      "created_at": "2026-04-13T23:50:00Z",
+      "updated_at": "2026-04-13T23:50:00Z",
+      "status": "active",
+      "labels": [
+        "contribution"
+      ],
+      "external_refs": [],
+      "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+      },
+      "provenance_ref": null,
+      "actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "role_ids": [
+        "role:contributor"
+      ],
+      "valid_from": "2026-04-13T23:50:00Z",
+      "valid_to": null,
+      "joined_via": "assignment"
+    }
+  ],
+  "delegations": [
+    {
+      "schema_ref": "schemas/json/canonical/v1/delegation.v1.schema.json",
+      "schema_version": "1.0.0",
+      "object_type": "Delegation",
+      "object_id": "delegation:tibi-worker2-task-admin",
+      "business_key": "tibi-worker2-task-admin",
+      "created_at": "2026-04-13T23:52:00Z",
+      "updated_at": "2026-04-13T23:52:00Z",
+      "status": "active",
+      "labels": [
+        "delegation"
+      ],
+      "external_refs": [],
+      "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+      },
+      "provenance_ref": null,
+      "grantor_actor_id": "actor:tibi",
+      "grantee_actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "delegation_kind": "operational",
+      "capability_scope": "process_run",
+      "task_id": null,
+      "valid_from": "2026-04-13T23:52:00Z",
+      "valid_until": "2026-04-15T00:00:00Z",
+      "purpose": "Allow delegated task administration for the cycle.",
+      "revocation_reason": null
+    }
+  ],
+  "capability_grants": [
+    {
+      "schema_ref": "schemas/json/canonical/v1/capability-grant.v1.schema.json",
+      "schema_version": "1.0.0",
+      "object_type": "CapabilityGrant",
+      "object_id": "capgrant:worker2:assignment-override",
+      "business_key": "worker2-assignment-override",
+      "created_at": "2026-04-13T23:54:30Z",
+      "updated_at": "2026-04-13T23:54:30Z",
+      "status": "active",
+      "labels": [
+        "capability"
+      ],
+      "external_refs": [],
+      "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+      },
+      "provenance_ref": null,
+      "delegation_id": "delegation:tibi-worker2-task-admin",
+      "grantor_actor_id": "actor:tibi",
+      "grantee_actor_id": "actor:worker-2",
+      "group_id": "group:leaknet",
+      "process_run_id": "processrun:robo-leaknet-cycle1",
+      "task_id": "task:robo-leaknet-cycle1-3d-design",
+      "capability": "task.assignment.override",
+      "valid_from": "2026-04-13T23:54:30Z",
+      "valid_until": "2026-04-15T00:00:00Z",
+      "usage_limit": null,
+      "usage_count": 0,
+      "constraints": []
+    }
+  ],
+  "process_run": {
+    "schema_ref": "schemas/json/canonical/v1/process-run.v1.schema.json",
+    "schema_version": "1.0.0",
+    "object_type": "ProcessRun",
+    "object_id": "processrun:robo-leaknet-cycle1",
+    "business_key": "robo-leaknet-cycle1",
+    "created_at": "2026-04-13T23:50:00Z",
+    "updated_at": "2026-04-13T23:50:00Z",
+    "status": "active",
+    "labels": [
+      "process"
+    ],
+    "external_refs": [],
+    "canonicalization": {
+        "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+        "content_hash": "sha256:SELF"
+    },
+    "provenance_ref": null,
+    "title": "Robo Leaknet Cycle 1",
+    "description": "Cycle 1",
+    "group_id": "group:leaknet",
+    "created_by": "actor:tibi",
+    "process_kind": "cycle",
+    "temporal": {
+      "started_at": "2026-04-13T23:50:00Z",
+      "planned_end_at": "2026-04-15T00:00:00Z",
+      "completed_at": null
+    },
+    "task_ids": [
+      "task:robo-leaknet-cycle1-3d-design"
+    ]
+  },
+  "task": {
+    "schema_ref": "schemas/json/canonical/v1/task.v1.schema.json",
+    "schema_version": "1.0.0",
+    "object_type": "Task",
+    "object_id": "task:robo-leaknet-cycle1-3d-design",
+    "business_key": "robo-leaknet-cycle1-3d-design",
+    "created_at": "2026-04-13T23:55:00Z",
+    "updated_at": "2026-04-13T23:55:00Z",
+    "status": "accepted",
+    "labels": [
+      "task"
+    ],
+    "external_refs": [],
+    "canonicalization": {
+      "method": "RFC8785-JCS-like(sort-keys,no-whitespace,content_hash=SELF)",
+      "content_hash": "sha256:SELF"
+    },
+    "provenance_ref": null,
+    "title": "3D design",
+    "description": "3D design work",
+    "group_id": "group:leaknet",
+    "process_run_id": "processrun:robo-leaknet-cycle1",
+    "created_by": "actor:tibi",
+    "offered_by": "actor:worker-2",
+    "accepted_by": "actor:worker-1",
+    "work_spec": {
+      "skill_tags": [
+        "3D design"
+      ],
+      "estimated_duration_minutes": 60,
+      "deliverables": [
+        "3D design artifact"
+      ]
+    },
+    "temporal": {
+      "offered_at": "2026-04-13T23:55:00Z",
+      "due_at": "2026-04-14T23:59:00Z",
+      "started_at": null,
+      "completed_at": null
+    },
+    "dependencies": [],
+    "priority": "normal",
+    "interface_bindings": [
+      {
+        "interface_kind": "chat",
+        "interface_ref": "chat:task-offer-thread"
+      }
+    ]
+  },
+  "payload": {
+    "task_id": "task:robo-leaknet-cycle1-3d-design",
+    "prior_assignee": "actor:worker-1",
+    "new_assignee": "actor:worker-2"
+  }
+}
