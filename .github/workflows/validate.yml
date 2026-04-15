@@ -12,9 +12,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Setup venv
+        run: make venv
       - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+        run: make deps
       - name: Validate
         run: make validate
