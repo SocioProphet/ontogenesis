@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "Ontogenesis"
+message: "If you use this project, please cite it using this metadata."
+type: software
+repository-code: "https://github.com/SocioProphet/ontogenesis"
+license: "MIT"
+version: "0.1.0"
+abstract: "Ontogenesis is a policy-gated ontology engineering repository for RDF/OWL/JSON-LD assets with validation, ledger, and SBOM workflows."
+keywords:
+  - ontology
+  - RDF
+  - OWL
+  - SHACL
+  - JSON-LD
+  - semantic web
+  - knowledge graph
+authors:
+  - name: "SocioProphet"

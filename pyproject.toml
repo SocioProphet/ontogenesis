@@ -2,7 +2,26 @@
 name = "ontogenesis-tools"
 version = "0.1.0"
 description = "Build/audit tools for Ontogenesis ontologies"
+readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
+keywords = ["ontology", "rdf", "owl", "shacl", "json-ld", "semantic-web"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/SocioProphet/ontogenesis"
+Repository = "https://github.com/SocioProphet/ontogenesis"
+Issues = "https://github.com/SocioProphet/ontogenesis/issues"
+Documentation = "https://github.com/SocioProphet/ontogenesis/tree/main/docs"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
