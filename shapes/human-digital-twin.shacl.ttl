@@ -1,0 +1,11 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix twin: <https://socioprophet.org/ont/twin#> .
+
+<https://socioprophet.org/ont/twin#HumanDigitalTwinShape> a sh:NodeShape ;
+  sh:targetClass twin:HumanDigitalTwin ;
+  sh:property [ sh:path twin:anchorsSubject ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path twin:hasConsentEnvelope ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path twin:hasProjectionBound ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path twin:hasMemorySubsystem ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path twin:hasCognitionSubsystem ; sh:minCount 1 ; ] ;
+  sh:message "Human digital twins must be anchored to a subject and bounded by consent, projection, memory, and cognition subsystems." .
