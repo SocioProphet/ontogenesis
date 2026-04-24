@@ -1,0 +1,20 @@
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ms:MichaelDiscoveryModule a owl:Ontology ;
+  rdfs:label "Michael discovery module" ;
+  rdfs:comment "Candidate-law and counterexample vocabulary for symbolic regression and promotion gating." .
+
+ms:EquationCandidate rdfs:subClassOf ms:Hypothesis .
+ms:Counterexample rdfs:subClassOf ms:EvidencePacket .
+ms:ConstraintWitness rdfs:subClassOf ms:EvidencePacket .
+
+ms:canonicalExpression a owl:DatatypeProperty .
+ms:latexExpression a owl:DatatypeProperty .
+ms:hasSymbol a owl:ObjectProperty .
+ms:hasConstant a owl:ObjectProperty .
+ms:fitSummary a owl:DatatypeProperty .
+ms:stabilitySummary a owl:DatatypeProperty .
+ms:discoveryEngineFamily a owl:DatatypeProperty .
+ms:discoveryEngineVersion a owl:DatatypeProperty .
