@@ -4,8 +4,8 @@
 Runs a focused validation pass over the parsing module family and the parsing SHACL bundle.
 This is intentionally narrower than `tools/validate.py`, which validates the broader repo.
 
-Default behavior on this branch prefers the aligned ACSET variant when present so the parsing
-cleanup work can be validated independently of the canonical replacement step.
+Default behavior validates the canonical parsing ontology family, including the canonical
+`Platform/Parsing/acset-parse.ttl` scaffold.
 
 Dependencies: rdflib + pyshacl
 """
@@ -78,7 +78,6 @@ def run_shacl(g: Graph) -> None:
 def run_basic_invariants(g: Graph) -> None:
     q = """
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     SELECT ?cls WHERE {
       ?cls a owl:Class .
       FILTER(STRSTARTS(STR(?cls), "https://socioprophet.github.io/ontogenesis/Platform/Parsing/"))
@@ -93,13 +92,13 @@ def run_basic_invariants(g: Graph) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument(
-        "--canonical-acset",
+        "--aligned-acset",
         action="store_true",
-        help="validate the canonical acset-parse.ttl instead of the aligned variant",
+        help="validate the historical aligned replacement file when present",
     )
     args = ap.parse_args()
 
-    g = load_graph(use_aligned_acset=not args.canonical_acset)
+    g = load_graph(use_aligned_acset=args.aligned_acset)
     run_basic_invariants(g)
     run_shacl(g)
     return 0
