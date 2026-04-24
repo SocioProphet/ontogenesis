@@ -1,0 +1,18 @@
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ms:MichaelBeliefModule a owl:Ontology ;
+  rdfs:label "Michael belief module" ;
+  rdfs:comment "Belief-state and soft-rule vocabulary for probabilistic-relational reasoning." .
+
+ms:BeliefState rdfs:subClassOf ms:Hypothesis .
+ms:WeightedRuleSet rdfs:subClassOf ms:EvidencePacket .
+
+ms:posteriorAtom a owl:ObjectProperty .
+ms:weightedRule a owl:ObjectProperty .
+ms:beliefEngineFamily a owl:DatatypeProperty .
+ms:beliefEngineVersion a owl:DatatypeProperty .
+ms:calibrationSummary a owl:DatatypeProperty .
+ms:contradictionBudgetStatus a owl:DatatypeProperty .
+ms:ontologyAlignmentStatus a owl:DatatypeProperty .
