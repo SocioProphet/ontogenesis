@@ -1,0 +1,26 @@
+@prefix twin: <https://socioprophet.org/ont/twin#> .
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://socioprophet.org/ont/twin> a owl:Ontology ;
+  rdfs:label "Human digital twin module" ;
+  rdfs:comment "Bounded, consent-governed human digital twin vocabulary for Michael-aligned reasoning." .
+
+twin:HumanSubject a owl:Class .
+twin:HumanDigitalTwin a owl:Class .
+twin:ConsentEnvelope a owl:Class .
+twin:BoundedProjection a owl:Class .
+twin:MemorySubsystem a owl:Class .
+twin:CognitionSubsystem a owl:Class .
+twin:WearableObservation a owl:Class .
+twin:ClinicalObservation a owl:Class .
+twin:EmbodiedObservation a owl:Class .
+
+twin:anchorsSubject a owl:ObjectProperty .
+twin:hasConsentEnvelope a owl:ObjectProperty .
+twin:hasProjectionBound a owl:ObjectProperty .
+twin:hasMemorySubsystem a owl:ObjectProperty .
+twin:hasCognitionSubsystem a owl:ObjectProperty .
+twin:feedsBeliefState a owl:ObjectProperty .
+twin:feedsObservation a owl:ObjectProperty .
