@@ -1,0 +1,11 @@
+{
+  "@context": {
+    "ms": "https://socioprophet.org/ont/michael#"
+  },
+  "@id": "urn:example:michael:belief-state:0001",
+  "@type": "ms:BeliefState",
+  "ms:truthStatus": { "@id": "ms:believedTruth" },
+  "ms:derivedFromObservation": { "@id": "urn:example:michael:observation:0001" },
+  "ms:usesMethodologySnapshot": { "@id": "urn:example:michael:methodology:0001" },
+  "ms:confidenceScore": 0.82
+}
