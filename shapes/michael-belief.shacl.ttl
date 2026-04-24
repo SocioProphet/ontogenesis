@@ -1,0 +1,9 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+
+ms:BeliefStateShape a sh:NodeShape ;
+  sh:targetClass ms:BeliefState ;
+  sh:property [ sh:path ms:truthStatus ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path ms:usesMethodologySnapshot ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path ms:derivedFromObservation ; sh:minCount 1 ; ] ;
+  sh:message "Belief states must declare truth status, methodology snapshot, and observation provenance." .
