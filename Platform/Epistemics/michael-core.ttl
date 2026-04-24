@@ -1,0 +1,45 @@
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+ms:MichaelEpistemicModule a owl:Ontology ;
+  rdfs:label "Michael epistemic core" ;
+  rdfs:comment "Core epistemic vocabulary for the Michael governed machine-science agent." .
+
+ms:Observation a owl:Class .
+ms:GroundedAssertion a owl:Class .
+ms:BeliefState a owl:Class .
+ms:WeightedRuleSet a owl:Class .
+ms:Hypothesis a owl:Class .
+ms:EquationCandidate a owl:Class .
+ms:Counterexample a owl:Class .
+ms:ConstraintWitness a owl:Class .
+ms:PromotionDecision a owl:Class .
+ms:MethodologySnapshot a owl:Class .
+ms:EvidencePacket a owl:Class .
+
+ms:assertedTruth a owl:NamedIndividual .
+ms:believedTruth a owl:NamedIndividual .
+ms:candidateLaw a owl:NamedIndividual .
+ms:promotedHeuristic a owl:NamedIndividual .
+ms:rejectedHypothesis a owl:NamedIndividual .
+
+ms:truthStatus a owl:ObjectProperty .
+ms:derivedFromObservation a owl:ObjectProperty .
+ms:updatesBeliefState a owl:ObjectProperty .
+ms:supportsHypothesis a owl:ObjectProperty .
+ms:proposesEquation a owl:ObjectProperty .
+ms:hasCounterexample a owl:ObjectProperty .
+ms:hasConstraintWitness a owl:ObjectProperty .
+ms:promotionStatus a owl:ObjectProperty .
+ms:usesMethodologySnapshot a owl:ObjectProperty .
+ms:inducesSoftRule a owl:ObjectProperty .
+ms:promotedToConstraint a owl:ObjectProperty .
+ms:promotedToOntologyLaw a owl:ObjectProperty .
+
+ms:confidenceScore a owl:DatatypeProperty ;
+  rdfs:range xsd:decimal .
+ms:createdAt a owl:DatatypeProperty ;
+  rdfs:range xsd:dateTime .
