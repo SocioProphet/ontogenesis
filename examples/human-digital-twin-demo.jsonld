@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "twin": "https://socioprophet.org/ont/twin#"
+  },
+  "@id": "urn:example:twin:human:0001",
+  "@type": "twin:HumanDigitalTwin",
+  "twin:anchorsSubject": { "@id": "urn:example:subject:human:0001" },
+  "twin:hasConsentEnvelope": { "@id": "urn:example:consent:0001" },
+  "twin:hasProjectionBound": { "@id": "urn:example:projection-bound:0001" },
+  "twin:hasMemorySubsystem": { "@id": "urn:example:memory:0001" },
+  "twin:hasCognitionSubsystem": { "@id": "urn:example:cognition:0001" }
+}
