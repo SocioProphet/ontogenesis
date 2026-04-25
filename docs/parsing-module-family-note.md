@@ -21,9 +21,7 @@ The intended division of labor remains:
 - `Platform/Parsing/link-grammar.ttl`
   - Link Grammar-specific connector, disjunct, linkage, lexicon, and parse-failure terms
 - `Platform/Parsing/acset-parse.ttl`
-  - current canonical ACSET parse-state scaffold
-- `Platform/Parsing/acset-parse-aligned.ttl`
-  - corrected semantic replacement target for the current canonical ACSET scaffold
+  - canonical ACSET parse-state scaffold
 - `Platform/Parsing/hypergraph-promotion.ttl`
   - promotion decisions, gates, and backreference-preservation terms
 
@@ -50,16 +48,11 @@ The intended division of labor remains:
 - parser-family SHACL bundle exists
 - dedicated parser-family validator exists
 - dedicated parser-family CI workflow exists
+- the canonical ACSET scaffold has been normalized onto `Platform/Parsing/acset-parse.ttl`
 
-### What remains unresolved
+### Historical note
 
-The canonical file `Platform/Parsing/acset-parse.ttl` still reflects the earlier rough scaffold. The aligned variant file `Platform/Parsing/acset-parse-aligned.ttl` is the corrected semantic target.
-
-The remaining cleanup sequence is therefore:
-
-1. replace canonical `acset-parse.ttl` with the aligned content
-2. remove `acset-parse-aligned.ttl`
-3. keep the dedicated parser-family validator and CI lane in place
+The earlier temporary aligned replacement file was used as an intermediate correction target while the available connector path did not yet support a safe canonical file overwrite from chat. That temporary split state has been resolved in the cleanup branch for this change set.
 
 ## Validation commands
 
