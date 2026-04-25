@@ -1,0 +1,12 @@
+{
+  "@context": {
+    "ms": "https://socioprophet.org/ont/michael#"
+  },
+  "@id": "urn:example:michael:candidate-law:0001",
+  "@type": "ms:EquationCandidate",
+  "ms:truthStatus": { "@id": "ms:candidateLaw" },
+  "ms:proposesEquation": { "@id": "urn:example:michael:equation:0001" },
+  "ms:usesMethodologySnapshot": { "@id": "urn:example:michael:methodology:0001" },
+  "ms:hasCounterexample": { "@id": "urn:example:michael:counterexample:0001" },
+  "ms:hasConstraintWitness": { "@id": "urn:example:michael:constraint-witness:0001" }
+}
