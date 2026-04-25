@@ -1,0 +1,10 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix ms:   <https://socioprophet.org/ont/michael#> .
+
+ms:EquationCandidateShape a sh:NodeShape ;
+  sh:targetClass ms:EquationCandidate ;
+  sh:property [ sh:path ms:proposesEquation ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path ms:usesMethodologySnapshot ; sh:minCount 1 ; ] ;
+  sh:property [ sh:path ms:hasCounterexample ; sh:minCount 0 ; ] ;
+  sh:property [ sh:path ms:hasConstraintWitness ; sh:minCount 0 ; ] ;
+  sh:message "Equation candidates must declare the proposed equation and methodology snapshot, with optional counterexamples and constraint witnesses." .
