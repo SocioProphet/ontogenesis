@@ -5,15 +5,35 @@ import sys
 from jsonschema import Draft202012Validator
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+BUNDLE_PATH = ROOT / 'compact-bundle.v1.json'
 SCHEMA_ROOT = ROOT / 'schemas'
 DATA_ROOT = ROOT / 'data'
 FIXTURE_ROOT = ROOT / 'fixtures'
 
-CANONICAL = json.loads((SCHEMA_ROOT / 'canonical-schemas.v1.json').read_text())
-ENV_SCHEMA = json.loads((SCHEMA_ROOT / 'event-envelope.v1.schema.json').read_text())
-EVENT_PAYLOADS = json.loads((SCHEMA_ROOT / 'event-payload-schemas.v1.json').read_text())
-ENV_VALIDATOR = Draft202012Validator(ENV_SCHEMA)
 
+def load_runtime():
+    if BUNDLE_PATH.exists():
+        bundle = json.loads(BUNDLE_PATH.read_text())
+        return (
+            bundle['schemas']['canonical'],
+            bundle['schemas']['event_envelope'],
+            bundle['schemas']['event_payloads'],
+            bundle['data']['reference_objects'],
+            {
+                'linear.events.ndjson': bundle['fixtures']['linear.events.ndjson'],
+                'assignment_override.events.ndjson': bundle['fixtures']['assignment_override.events.ndjson'],
+                'divergence.events.ndjson': bundle['fixtures']['divergence.events.ndjson'],
+            },
+        )
+    canonical = json.loads((SCHEMA_ROOT / 'canonical-schemas.v1.json').read_text())
+    env_schema = json.loads((SCHEMA_ROOT / 'event-envelope.v1.schema.json').read_text())
+    event_payloads = json.loads((SCHEMA_ROOT / 'event-payload-schemas.v1.json').read_text())
+    refs = json.loads((DATA_ROOT / 'reference_objects.json').read_text())
+    fixtures = {name: (FIXTURE_ROOT / name).read_text() for name in ['linear.events.ndjson','assignment_override.events.ndjson','divergence.events.ndjson']}
+    return canonical, env_schema, event_payloads, refs, fixtures
+
+CANONICAL, ENV_SCHEMA, EVENT_PAYLOADS, REFS, FIXTURES = load_runtime()
+ENV_VALIDATOR = Draft202012Validator(ENV_SCHEMA)
 EVENT_MAP = {
     'processrun.created.v1': 'processrun.created.v1.payload.schema.json',
     'delegation.issued.v1': 'delegation.issued.v1.payload.schema.json',
@@ -68,12 +88,12 @@ def validate_event(event, source):
 def main():
     results=[]
     failures=0
-    for item in json.loads((DATA_ROOT/'reference_objects.json').read_text()):
+    for item in REFS:
         source, errs = validate_object(item)
         results.append({'file': source, 'ok': not errs, 'errors': errs})
         failures += bool(errs)
     for name in ['linear.events.ndjson','assignment_override.events.ndjson','divergence.events.ndjson']:
-        for idx, line in enumerate((FIXTURE_ROOT/name).read_text().splitlines(), start=1):
+        for idx, line in enumerate(FIXTURES[name].splitlines(), start=1):
             line=line.strip()
             if not line:
                 continue

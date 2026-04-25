@@ -30,14 +30,14 @@ jobs:
           curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
           chmod +x opa
           sudo mv opa /usr/local/bin/opa
-      - name: Check if compact schema/fixture tranche exists
+      - name: Check if runnable tranche exists
         id: tranche_check
         run: |
-          if [ -f bindings/valueflows_governed/schemas/canonical-schemas.v1.json ]; then
+          if [ -f bindings/valueflows_governed/compact-bundle.v1.json ] || [ -f bindings/valueflows_governed/schemas/canonical-schemas.v1.json ]; then
             echo "tranche_ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "tranche_ready=false" >> "$GITHUB_OUTPUT"
-            echo "Compact schema/fixture tranche not yet committed — skipping bundle validation and replay."
+            echo "Compact runtime tranche not yet committed — skipping bundle validation and replay."
           fi
       - name: Run bundle validation and replay
         if: steps.tranche_check.outputs.tranche_ready == 'true'
