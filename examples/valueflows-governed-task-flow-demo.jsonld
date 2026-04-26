@@ -1,0 +1,68 @@
+{
+  "@context": "../bindings/valueflows_governed/valueflows-governed.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:processrun:robo-leaknet-cycle1",
+      "@type": "ProcessRun",
+      "groupId": "urn:group:leaknet",
+      "createdBy": "urn:actor:tibi",
+      "title": "Robo Leaknet Cycle 1",
+      "processKind": "cycle",
+      "status": "active",
+      "startedAt": "2026-04-13T23:50:00Z",
+      "plannedEndAt": "2026-04-15T00:00:00Z"
+    },
+    {
+      "@id": "urn:delegation:tibi-worker2-task-admin",
+      "@type": "Delegation",
+      "grantorActorId": "urn:actor:tibi",
+      "granteeActorId": "urn:actor:worker-2",
+      "groupId": "urn:group:leaknet",
+      "processRunId": "urn:processrun:robo-leaknet-cycle1",
+      "delegationKind": "operational",
+      "capabilityScope": "process_run",
+      "status": "active",
+      "validFrom": "2026-04-13T23:52:00Z",
+      "validUntil": "2026-04-15T00:00:00Z"
+    },
+    {
+      "@id": "urn:capabilitygrant:worker-2:task-offer",
+      "@type": "CapabilityGrant",
+      "delegationId": "urn:delegation:tibi-worker2-task-admin",
+      "granteeActorId": "urn:actor:worker-2",
+      "groupId": "urn:group:leaknet",
+      "processRunId": "urn:processrun:robo-leaknet-cycle1",
+      "capability": "task.offer",
+      "status": "active",
+      "validFrom": "2026-04-13T23:53:00Z",
+      "validUntil": "2026-04-15T00:00:00Z"
+    },
+    {
+      "@id": "urn:task:robo-leaknet-cycle1-3d-design",
+      "@type": "Task",
+      "groupId": "urn:group:leaknet",
+      "processRunId": "urn:processrun:robo-leaknet-cycle1",
+      "offeredBy": "urn:actor:worker-2",
+      "acceptedBy": "urn:actor:worker-1",
+      "status": "completed",
+      "dueAt": "2026-04-14T23:59:00Z",
+      "completedAt": "2026-04-14T00:20:00Z"
+    },
+    {
+      "@id": "urn:commitment:worker-1-task-3d-design",
+      "@type": "Commitment",
+      "taskId": "urn:task:robo-leaknet-cycle1-3d-design",
+      "debtorActorId": "urn:actor:worker-1",
+      "status": "fulfilled",
+      "progressPercent": 100,
+      "outcomeRef": "urn:artifact:3d-design-v1"
+    },
+    {
+      "@id": "urn:checkpoint:e9",
+      "@type": "CairnCheckpoint",
+      "processRunId": "urn:processrun:robo-leaknet-cycle1",
+      "stateProjectionName": "authoritative_projection_v2",
+      "materializedStateHash": "sha256:eb4070d0de8621ec1393f3a0bb93fa62287e718a33d8dfcfde5039b5705776d3"
+    }
+  ]
+}

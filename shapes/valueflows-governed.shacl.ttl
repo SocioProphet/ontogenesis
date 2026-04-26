@@ -1,0 +1,49 @@
+@prefix vfg: <https://socioprophet.dev/ont/valueflows-governed#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vfg:ProcessRunShape a sh:NodeShape ;
+  sh:targetClass vfg:ProcessRun ;
+  sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:createdBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:startedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+
+vfg:DelegationShape a sh:NodeShape ;
+  sh:targetClass vfg:Delegation ;
+  sh:property [ sh:path vfg:grantorActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:granteeActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:validFrom ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+
+vfg:CapabilityGrantShape a sh:NodeShape ;
+  sh:targetClass vfg:CapabilityGrant ;
+  sh:property [ sh:path vfg:delegationId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:granteeActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:capability ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+vfg:TaskShape a sh:NodeShape ;
+  sh:targetClass vfg:Task ;
+  sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:offeredBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:dueAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+
+vfg:CommitmentShape a sh:NodeShape ;
+  sh:targetClass vfg:Commitment ;
+  sh:property [ sh:path vfg:taskId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:debtorActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:progressPercent ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+vfg:CairnCheckpointShape a sh:NodeShape ;
+  sh:targetClass vfg:CairnCheckpoint ;
+  sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:stateProjectionName ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:materializedStateHash ; sh:minCount 1 ; sh:datatype xsd:string ] .
