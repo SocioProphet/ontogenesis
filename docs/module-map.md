@@ -71,6 +71,12 @@ This repo defines a layered ontology stack plus gates/tools.
 - `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 - `Domains/product-service.ttl` — product/service offerings, plans, SKUs, capabilities, entitlements, and service instances
 
+## Bindings / governed profiles
+- `bindings/valueflows_governed/`
+  - compact governed binding lane for process-scoped task flow, delegated authority, deterministic replay, and policy runtime checks
+  - current execution surface is intentionally compact and CI-oriented (`compact-bundle.v1.json`, runtime tools, Rego policy, GitHub Actions workflow)
+  - semantic lift into SHACL / JSON-LD / ontology-native examples is still pending and should remain the next step before wider lifecycle expansion
+
 ## Gates and audits
 - SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`
 - Scripts:

@@ -24,6 +24,7 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`hypergraph-parser-acset-linkgrammar-spec.md`](hypergraph-parser-acset-linkgrammar-spec.md)
 - [`hypergraph-parser-implementation-checklist.md`](hypergraph-parser-implementation-checklist.md)
 - [`parsing-upstream-alignment-2026-04-14.md`](parsing-upstream-alignment-2026-04-14.md)
+- [`valueflows-governed-binding-note.md`](valueflows-governed-binding-note.md) — ontology-native integration note for the compact governed binding lane
 
 ## Domain/module notes
 
