@@ -1,0 +1,252 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix oq:    <https://socioprophet.github.io/ontogenesis/platform/oq#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/lattice-ontology-query.ttl> a owl:Ontology ;
+  dct:title "Lattice Ontology-Query Adapter" ;
+  dct:description "OWL vocabulary for the ontology-query adapter between Ontogenesis and the Lattice FederatedQueryPlane. Defines request/response shapes for class-query, shape-query, constraint-query, schema-alignment-query, and reasoning-result-query, plus dry-run and evidence fields." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+# ---------------------------------------------------------------------------
+# Core adapter concept
+# ---------------------------------------------------------------------------
+
+oq:OntologyQuery a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Ontology Query" ;
+  rdfs:comment "A query routed through the Lattice FederatedQueryPlane ontology-query plane. Distinct from SPARQL: reasoning, SHACL shapes, schema alignment, and constraint checks are explicit governance operations, not triple-pattern queries." .
+
+# ---------------------------------------------------------------------------
+# Five query-type classes
+# ---------------------------------------------------------------------------
+
+oq:ClassQuery a owl:Class ;
+  rdfs:subClassOf oq:OntologyQuery ;
+  rdfs:label "Class Query" ;
+  rdfs:comment "Queries class membership, hierarchy, or equivalent-class relations within a governed ontology scope." .
+
+oq:ShapeQuery a owl:Class ;
+  rdfs:subClassOf oq:OntologyQuery ;
+  rdfs:label "Shape Query" ;
+  rdfs:comment "Queries SHACL shape applicability: which shapes target a given node or class, and whether shapes are satisfied." .
+
+oq:ConstraintQuery a owl:Class ;
+  rdfs:subClassOf oq:OntologyQuery ;
+  rdfs:label "Constraint Query" ;
+  rdfs:comment "Queries for active constraint violations or constraint-check results within a catalog scope." .
+
+oq:SchemaAlignmentQuery a owl:Class ;
+  rdfs:subClassOf oq:OntologyQuery ;
+  rdfs:label "Schema Alignment Query" ;
+  rdfs:comment "Queries cross-schema or cross-ontology alignment mappings, including equivalent properties and class bridge assertions." .
+
+oq:ReasoningResultQuery a owl:Class ;
+  rdfs:subClassOf oq:OntologyQuery ;
+  rdfs:label "Reasoning Result Query" ;
+  rdfs:comment "Queries the outcome of an OWL reasoner or SHACL inference run: inferred triples, class subsumptions, or property entailments." .
+
+# ---------------------------------------------------------------------------
+# Request envelope properties
+# ---------------------------------------------------------------------------
+
+oq:queryId a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range xsd:string ;
+  rdfs:label "query ID" ;
+  rdfs:comment "Unique, stable identifier for this query request (e.g. UUID)." .
+
+oq:queryVersion a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range xsd:string ;
+  rdfs:label "query version" ;
+  rdfs:comment "SemVer of the adapter contract used to formulate this query." .
+
+oq:catalogScope a owl:ObjectProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "catalog scope" ;
+  rdfs:comment "Restricts the query to a specific catalog, module, or ontology graph." .
+
+oq:requestingAgent a owl:ObjectProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range upper:Agent ;
+  rdfs:label "requesting agent" ;
+  rdfs:comment "The agent (system or user) that submitted the query request." .
+
+oq:governedByPolicy a owl:ObjectProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range upper:Policy ;
+  rdfs:label "governed by policy" ;
+  rdfs:comment "The governance policy that authorises or constrains this query." .
+
+oq:isDryRun a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQuery ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "is dry run" ;
+  rdfs:comment "When true, the adapter validates policy + catalog scope but does NOT execute the reasoner or SHACL engine. Returns a dry-run status instead of a result payload." .
+
+oq:targetClass a owl:ObjectProperty ;
+  rdfs:domain oq:ClassQuery ;
+  rdfs:range rdfs:Class ;
+  rdfs:label "target class" ;
+  rdfs:comment "The OWL class that is the subject of a ClassQuery." .
+
+oq:targetShape a owl:ObjectProperty ;
+  rdfs:domain oq:ShapeQuery ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "target shape" ;
+  rdfs:comment "The SHACL NodeShape or PropertyShape that is the subject of a ShapeQuery." .
+
+oq:targetNode a owl:ObjectProperty ;
+  rdfs:domain oq:ShapeQuery ;
+  rdfs:range upper:Entity ;
+  rdfs:label "target node" ;
+  rdfs:comment "The RDF node whose shape conformance is being queried." .
+
+oq:sourceSchema a owl:ObjectProperty ;
+  rdfs:domain oq:SchemaAlignmentQuery ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "source schema" ;
+  rdfs:comment "The source schema or ontology module in a cross-schema alignment query." .
+
+oq:targetSchema a owl:ObjectProperty ;
+  rdfs:domain oq:SchemaAlignmentQuery ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "target schema" ;
+  rdfs:comment "The target schema or ontology module in a cross-schema alignment query." .
+
+oq:reasonerProfile a owl:DatatypeProperty ;
+  rdfs:domain oq:ReasoningResultQuery ;
+  rdfs:range xsd:string ;
+  rdfs:label "reasoner profile" ;
+  rdfs:comment "Identifies the OWL profile or inference regime (e.g. 'OWL2-RL', 'RDFS', 'SHACL-AF')." .
+
+# ---------------------------------------------------------------------------
+# Response envelope
+# ---------------------------------------------------------------------------
+
+oq:OntologyQueryResponse a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Ontology Query Response" ;
+  rdfs:comment "The response produced by the ontology-query adapter after processing an OntologyQuery." .
+
+oq:responseId a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range xsd:string ;
+  rdfs:label "response ID" ;
+  rdfs:comment "Unique identifier for this response envelope." .
+
+oq:respondingTo a owl:ObjectProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range oq:OntologyQuery ;
+  rdfs:label "responding to" ;
+  rdfs:comment "Links a response back to the originating OntologyQuery." .
+
+oq:resultStatus a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range xsd:string ;
+  rdfs:label "result status" ;
+  rdfs:comment "Execution outcome. One of: ok, error, dry-run-pass, dry-run-fail." .
+
+oq:resultPayload a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range xsd:string ;
+  rdfs:label "result payload" ;
+  rdfs:comment "Serialised result data (e.g. JSON-LD fragment, Turtle snippet, or SHACL report IRI). Empty on dry-run." .
+
+oq:errorMessage a owl:DatatypeProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range xsd:string ;
+  rdfs:label "error message" ;
+  rdfs:comment "Human-readable error description when resultStatus is 'error' or 'dry-run-fail'." .
+
+# ---------------------------------------------------------------------------
+# Dry-run sub-classes (distinguished response types)
+# ---------------------------------------------------------------------------
+
+oq:DryRunPassResponse a owl:Class ;
+  rdfs:subClassOf oq:OntologyQueryResponse ;
+  rdfs:label "Dry-Run Pass Response" ;
+  rdfs:comment "Response returned when isDryRun=true and policy + catalog scope validation succeeded." .
+
+oq:DryRunFailResponse a owl:Class ;
+  rdfs:subClassOf oq:OntologyQueryResponse ;
+  rdfs:label "Dry-Run Fail Response" ;
+  rdfs:comment "Response returned when isDryRun=true and policy or catalog scope validation failed." .
+
+# ---------------------------------------------------------------------------
+# Evidence fields (Sherlock / Sociosphere)
+# ---------------------------------------------------------------------------
+
+oq:QueryEvidence a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Query Evidence" ;
+  rdfs:comment "An evidence record capturing a governance step, policy check, or catalog-scope decision made during query processing." .
+
+oq:hasEvidence a owl:ObjectProperty ;
+  rdfs:domain oq:OntologyQueryResponse ;
+  rdfs:range oq:QueryEvidence ;
+  rdfs:label "has evidence" ;
+  rdfs:comment "Links a response to one or more evidence records for audit and replay by Sherlock/Sociosphere." .
+
+oq:evidenceKind a owl:DatatypeProperty ;
+  rdfs:domain oq:QueryEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence kind" ;
+  rdfs:comment "Category of the evidence record. One of: policy-check, catalog-check, reasoning-trace, dry-run-check." .
+
+oq:evidenceTimestamp a owl:DatatypeProperty ;
+  rdfs:domain oq:QueryEvidence ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "evidence timestamp" ;
+  rdfs:comment "ISO-8601 UTC timestamp when the evidence record was created." .
+
+oq:evidenceSource a owl:DatatypeProperty ;
+  rdfs:domain oq:QueryEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence source" ;
+  rdfs:comment "Identifier (IRI or label) of the component that produced this evidence (e.g. 'lattice-policy-engine', 'shacl-gate')." .
+
+oq:evidenceText a owl:DatatypeProperty ;
+  rdfs:domain oq:QueryEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence text" ;
+  rdfs:comment "Human-readable description of the decision or finding captured by this evidence record." .
+
+oq:policyDecision a owl:DatatypeProperty ;
+  rdfs:domain oq:QueryEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "policy decision" ;
+  rdfs:comment "The authorisation decision made by the policy engine. One of: allow, deny, conditional." .
+
+# ---------------------------------------------------------------------------
+# Lattice FederatedQueryPlane binding
+# ---------------------------------------------------------------------------
+
+oq:LatticeQueryPlaneBinding a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Lattice Query Plane Binding" ;
+  rdfs:comment "Declares how an OntologyQuery maps to the Lattice FederatedQueryPlane 'ontology-query' language." .
+
+oq:bindsQuery a owl:ObjectProperty ;
+  rdfs:domain oq:LatticeQueryPlaneBinding ;
+  rdfs:range oq:OntologyQuery ;
+  rdfs:label "binds query" .
+
+oq:latticeQueryLanguage a owl:DatatypeProperty ;
+  rdfs:domain oq:LatticeQueryPlaneBinding ;
+  rdfs:range xsd:string ;
+  rdfs:label "lattice query language" ;
+  rdfs:comment "Must be 'ontology-query'. Distinguishes this plane from 'sparql' in FederatedQueryPlane routing." .
+
+oq:distinguishedFrom a owl:DatatypeProperty ;
+  rdfs:domain oq:LatticeQueryPlaneBinding ;
+  rdfs:range xsd:string ;
+  rdfs:label "distinguished from" ;
+  rdfs:comment "Explicit statement that this binding is NOT a SPARQL plane; value should be 'sparql'." .

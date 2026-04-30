@@ -1,0 +1,9 @@
+PREFIX oq: <https://socioprophet.github.io/ontogenesis/platform/oq#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Invariant: every OntologyQueryResponse must be linked to an originating OntologyQuery.
+# Any response missing respondingTo is a contract violation.
+SELECT ?resp WHERE {
+  ?resp a oq:OntologyQueryResponse .
+  FILTER NOT EXISTS { ?resp oq:respondingTo ?q . }
+}

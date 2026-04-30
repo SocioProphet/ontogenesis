@@ -53,3 +53,5 @@ og:MiddleLearningOntogenesis a og:Module ; og:layer "Middle" ; og:path "Middle/l
 og:DomainCCRunners a og:Module ; og:layer "Domains" ; og:path "Domains/cc_runners.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/cc#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "CC runners" .
 og:UpperAlignments a og:Module ; og:layer "Upper" ; og:path "Upper/upper-alignments.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/upper#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Upper alignments" .
 og:Genesys a og:Module ; og:layer "Platform" ; og:path "Platform/Genesys.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Genesys (alias)" .
+
+og:LatticeOntologyQuery a og:Module ; og:layer "Platform" ; og:path "Platform/lattice-ontology-query.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/oq#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Lattice ontology-query adapter" .
