@@ -1,0 +1,229 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix oq:    <https://socioprophet.github.io/ontogenesis/platform/oq#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# Ontology header
+# ---------------------------------------------------------------------------
+
+<examples/ontology-query-demo.ttl> a owl:Ontology ;
+  owl:imports <Platform/lattice-ontology-query.ttl> ;
+  rdfs:label "Example: Lattice ontology-query adapter fixtures" .
+
+# ---------------------------------------------------------------------------
+# Shared catalog scope and policy
+# ---------------------------------------------------------------------------
+
+<catalog/registry.ttl> a upper:InformationArtifact ;
+  rdfs:label "Ontogenesis module registry (used as catalog scope)" .
+
+oq:DemoQueryPolicy a upper:Policy ;
+  rdfs:label "Demo query governance policy" .
+
+oq:LatticeAdapterAgent a upper:Agent ;
+  rdfs:label "Lattice FederatedQueryPlane adapter agent" .
+
+# ---------------------------------------------------------------------------
+# 1. ClassQuery — ask for subclasses of upper:Agent
+# ---------------------------------------------------------------------------
+
+oq:DemoClassQuery a oq:ClassQuery ;
+  rdfs:label "Demo class query: subclasses of upper:Agent" ;
+  oq:queryId "cq-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun false ;
+  oq:targetClass upper:Agent .
+
+oq:DemoClassQueryResponse a oq:OntologyQueryResponse ;
+  rdfs:label "Response: subclasses of upper:Agent" ;
+  oq:responseId "cqr-001" ;
+  oq:respondingTo oq:DemoClassQuery ;
+  oq:resultStatus "ok" ;
+  oq:resultPayload "{\"subclasses\":[\"upper:Signer\",\"upper:Agent\"]}" ;
+  oq:hasEvidence oq:DemoClassQueryEvidence .
+
+oq:DemoClassQueryEvidence a oq:QueryEvidence ;
+  rdfs:label "Policy check evidence for cq-001" ;
+  oq:evidenceKind "policy-check" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:00Z"^^xsd:dateTime ;
+  oq:evidenceSource "lattice-policy-engine" ;
+  oq:evidenceText "Policy oq:DemoQueryPolicy allows class-query on catalog/registry.ttl scope." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 2. ShapeQuery — ask which shapes target upper:Agent nodes
+# ---------------------------------------------------------------------------
+
+oq:DemoShapeQuery a oq:ShapeQuery ;
+  rdfs:label "Demo shape query: shapes targeting upper:Agent" ;
+  oq:queryId "sq-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun false ;
+  oq:targetNode upper:Agent .
+
+oq:DemoShapeQueryResponse a oq:OntologyQueryResponse ;
+  rdfs:label "Response: shapes targeting upper:Agent" ;
+  oq:responseId "sqr-001" ;
+  oq:respondingTo oq:DemoShapeQuery ;
+  oq:resultStatus "ok" ;
+  oq:resultPayload "{\"shapes\":[\"action:ActionShape.performedBy\"]}" ;
+  oq:hasEvidence oq:DemoShapeQueryEvidence .
+
+oq:DemoShapeQueryEvidence a oq:QueryEvidence ;
+  rdfs:label "Catalog check evidence for sq-001" ;
+  oq:evidenceKind "catalog-check" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:01Z"^^xsd:dateTime ;
+  oq:evidenceSource "shacl-gate" ;
+  oq:evidenceText "Catalog scope catalog/registry.ttl resolved; shape query authorised." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 3. ConstraintQuery — check for constraint violations across catalog
+# ---------------------------------------------------------------------------
+
+oq:DemoConstraintQuery a oq:ConstraintQuery ;
+  rdfs:label "Demo constraint query: active violations in catalog scope" ;
+  oq:queryId "conq-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun false .
+
+oq:DemoConstraintQueryResponse a oq:OntologyQueryResponse ;
+  rdfs:label "Response: constraint violations" ;
+  oq:responseId "conqr-001" ;
+  oq:respondingTo oq:DemoConstraintQuery ;
+  oq:resultStatus "ok" ;
+  oq:resultPayload "{\"violations\":[]}" ;
+  oq:hasEvidence oq:DemoConstraintQueryEvidence .
+
+oq:DemoConstraintQueryEvidence a oq:QueryEvidence ;
+  rdfs:label "Reasoning trace evidence for conq-001" ;
+  oq:evidenceKind "reasoning-trace" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:02Z"^^xsd:dateTime ;
+  oq:evidenceSource "shacl-gate" ;
+  oq:evidenceText "SHACL constraint check ran on merged graph; 0 violations found." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 4. SchemaAlignmentQuery — align Upper core to a target schema
+# ---------------------------------------------------------------------------
+
+oq:DemoAlignmentQuery a oq:SchemaAlignmentQuery ;
+  rdfs:label "Demo schema-alignment query: Upper core → Middle system-architecture" ;
+  oq:queryId "aq-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun false ;
+  oq:sourceSchema <Upper/upper-core.ttl> ;
+  oq:targetSchema <Middle/system-architecture.ttl> .
+
+oq:DemoAlignmentQueryResponse a oq:OntologyQueryResponse ;
+  rdfs:label "Response: Upper→Middle alignment" ;
+  oq:responseId "aqr-001" ;
+  oq:respondingTo oq:DemoAlignmentQuery ;
+  oq:resultStatus "ok" ;
+  oq:resultPayload "{\"alignments\":[{\"source\":\"upper:System\",\"target\":\"middle:Space\",\"relation\":\"rdfs:subClassOf\"}]}" ;
+  oq:hasEvidence oq:DemoAlignmentQueryEvidence .
+
+oq:DemoAlignmentQueryEvidence a oq:QueryEvidence ;
+  rdfs:label "Catalog check evidence for aq-001" ;
+  oq:evidenceKind "catalog-check" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:03Z"^^xsd:dateTime ;
+  oq:evidenceSource "lattice-policy-engine" ;
+  oq:evidenceText "Source and target schemas are both within catalog scope; alignment query authorised." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 5. ReasoningResultQuery — retrieve RDFS entailments for upper:Agent
+# ---------------------------------------------------------------------------
+
+oq:DemoReasoningQuery a oq:ReasoningResultQuery ;
+  rdfs:label "Demo reasoning-result query: RDFS entailments for upper:Agent" ;
+  oq:queryId "rq-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun false ;
+  oq:reasonerProfile "RDFS" .
+
+oq:DemoReasoningQueryResponse a oq:OntologyQueryResponse ;
+  rdfs:label "Response: RDFS reasoning over upper:Agent" ;
+  oq:responseId "rqr-001" ;
+  oq:respondingTo oq:DemoReasoningQuery ;
+  oq:resultStatus "ok" ;
+  oq:resultPayload "{\"inferred\":[{\"s\":\"upper:Signer\",\"p\":\"rdfs:subClassOf\",\"o\":\"upper:Entity\"}]}" ;
+  oq:hasEvidence oq:DemoReasoningQueryEvidence .
+
+oq:DemoReasoningQueryEvidence a oq:QueryEvidence ;
+  rdfs:label "Reasoning trace evidence for rq-001" ;
+  oq:evidenceKind "reasoning-trace" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:04Z"^^xsd:dateTime ;
+  oq:evidenceSource "ontogenesis-rdfs-reasoner" ;
+  oq:evidenceText "RDFS materialization completed; 1 inferred triple returned for upper:Agent hierarchy." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 6. Dry-run example — dry-run pass
+# ---------------------------------------------------------------------------
+
+oq:DemoDryRunQuery a oq:ClassQuery ;
+  rdfs:label "Demo dry-run query: validate policy before class query execution" ;
+  oq:queryId "cq-dry-001" ;
+  oq:queryVersion "0.1.0" ;
+  oq:catalogScope <catalog/registry.ttl> ;
+  oq:requestingAgent oq:LatticeAdapterAgent ;
+  oq:governedByPolicy oq:DemoQueryPolicy ;
+  oq:isDryRun true ;
+  oq:targetClass upper:Agent .
+
+oq:DemoDryRunPassResponse a oq:DryRunPassResponse ;
+  rdfs:label "Dry-run pass: policy and catalog scope validated" ;
+  oq:responseId "cqr-dry-001" ;
+  oq:respondingTo oq:DemoDryRunQuery ;
+  oq:resultStatus "dry-run-pass" ;
+  oq:hasEvidence oq:DemoDryRunPolicyEvidence , oq:DemoDryRunCatalogEvidence .
+
+oq:DemoDryRunPolicyEvidence a oq:QueryEvidence ;
+  rdfs:label "Policy check evidence for dry-run cq-dry-001" ;
+  oq:evidenceKind "dry-run-check" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:05Z"^^xsd:dateTime ;
+  oq:evidenceSource "lattice-policy-engine" ;
+  oq:evidenceText "Policy oq:DemoQueryPolicy permits class-query; dry-run authorisation check passed." ;
+  oq:policyDecision "allow" .
+
+oq:DemoDryRunCatalogEvidence a oq:QueryEvidence ;
+  rdfs:label "Catalog scope evidence for dry-run cq-dry-001" ;
+  oq:evidenceKind "dry-run-check" ;
+  oq:evidenceTimestamp "2026-04-30T22:00:05Z"^^xsd:dateTime ;
+  oq:evidenceSource "lattice-catalog-resolver" ;
+  oq:evidenceText "Catalog scope catalog/registry.ttl resolved and accessible; dry-run scope check passed." ;
+  oq:policyDecision "allow" .
+
+# ---------------------------------------------------------------------------
+# 7. Lattice FederatedQueryPlane binding declaration
+# ---------------------------------------------------------------------------
+
+oq:DemoLatticeBinding a oq:LatticeQueryPlaneBinding ;
+  rdfs:label "Lattice FederatedQueryPlane binding for ontology-query adapter" ;
+  oq:latticeQueryLanguage "ontology-query" ;
+  oq:distinguishedFrom "sparql" ;
+  oq:bindsQuery oq:DemoClassQuery ,
+                oq:DemoShapeQuery ,
+                oq:DemoConstraintQuery ,
+                oq:DemoAlignmentQuery ,
+                oq:DemoReasoningQuery ,
+                oq:DemoDryRunQuery .

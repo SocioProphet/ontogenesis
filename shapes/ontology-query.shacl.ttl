@@ -1,0 +1,224 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix oq:  <https://socioprophet.github.io/ontogenesis/platform/oq#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# ---------------------------------------------------------------------------
+# OntologyQuery — base request shape (all subtypes must satisfy this)
+# ---------------------------------------------------------------------------
+
+oq:OntologyQueryShape a sh:NodeShape ;
+  sh:targetClass oq:OntologyQuery ;
+  sh:message "Every OntologyQuery must carry a queryId, queryVersion, catalogScope, requestingAgent, governedByPolicy, and isDryRun." ;
+  sh:property [
+    sh:path oq:queryId ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:queryVersion ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path oq:catalogScope ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:requestingAgent ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:governedByPolicy ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:isDryRun ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:boolean ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# ClassQuery shape
+# ---------------------------------------------------------------------------
+
+oq:ClassQueryShape a sh:NodeShape ;
+  sh:targetClass oq:ClassQuery ;
+  sh:message "A ClassQuery must specify targetClass." ;
+  sh:property [
+    sh:path oq:targetClass ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# ShapeQuery shape
+# ---------------------------------------------------------------------------
+
+oq:ShapeQueryShape a sh:NodeShape ;
+  sh:targetClass oq:ShapeQuery ;
+  sh:message "A ShapeQuery must specify at least one of targetShape or targetNode." ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A ShapeQuery must have at least targetShape or targetNode." ;
+    sh:select """
+      PREFIX oq: <https://socioprophet.github.io/ontogenesis/platform/oq#>
+      SELECT ?this WHERE {
+        ?this a oq:ShapeQuery .
+        FILTER NOT EXISTS { ?this oq:targetShape ?s . }
+        FILTER NOT EXISTS { ?this oq:targetNode  ?n . }
+      }
+    """ ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# ConstraintQuery shape
+# ---------------------------------------------------------------------------
+
+oq:ConstraintQueryShape a sh:NodeShape ;
+  sh:targetClass oq:ConstraintQuery ;
+  sh:message "A ConstraintQuery must specify catalogScope (inherited) and must not override isDryRun to absent." .
+
+# ---------------------------------------------------------------------------
+# SchemaAlignmentQuery shape
+# ---------------------------------------------------------------------------
+
+oq:SchemaAlignmentQueryShape a sh:NodeShape ;
+  sh:targetClass oq:SchemaAlignmentQuery ;
+  sh:message "A SchemaAlignmentQuery must provide both sourceSchema and targetSchema." ;
+  sh:property [
+    sh:path oq:sourceSchema ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:targetSchema ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# ReasoningResultQuery shape
+# ---------------------------------------------------------------------------
+
+oq:ReasoningResultQueryShape a sh:NodeShape ;
+  sh:targetClass oq:ReasoningResultQuery ;
+  sh:message "A ReasoningResultQuery must declare a reasonerProfile." ;
+  sh:property [
+    sh:path oq:reasonerProfile ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# OntologyQueryResponse — base response shape
+# ---------------------------------------------------------------------------
+
+oq:OntologyQueryResponseShape a sh:NodeShape ;
+  sh:targetClass oq:OntologyQueryResponse ;
+  sh:message "Every OntologyQueryResponse must carry responseId, respondingTo, and resultStatus." ;
+  sh:property [
+    sh:path oq:responseId ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path oq:respondingTo ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:resultStatus ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ( "ok" "error" "dry-run-pass" "dry-run-fail" ) ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# Dry-run response shapes
+# ---------------------------------------------------------------------------
+
+oq:DryRunPassResponseShape a sh:NodeShape ;
+  sh:targetClass oq:DryRunPassResponse ;
+  sh:message "A DryRunPassResponse must have resultStatus='dry-run-pass' and at least one evidence record." ;
+  sh:property [
+    sh:path oq:resultStatus ;
+    sh:hasValue "dry-run-pass" ;
+  ] ;
+  sh:property [
+    sh:path oq:hasEvidence ;
+    sh:minCount 1 ;
+  ] .
+
+oq:DryRunFailResponseShape a sh:NodeShape ;
+  sh:targetClass oq:DryRunFailResponse ;
+  sh:message "A DryRunFailResponse must have resultStatus='dry-run-fail', at least one evidence record, and an errorMessage." ;
+  sh:property [
+    sh:path oq:resultStatus ;
+    sh:hasValue "dry-run-fail" ;
+  ] ;
+  sh:property [
+    sh:path oq:hasEvidence ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path oq:errorMessage ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# QueryEvidence shape
+# ---------------------------------------------------------------------------
+
+oq:QueryEvidenceShape a sh:NodeShape ;
+  sh:targetClass oq:QueryEvidence ;
+  sh:message "Every QueryEvidence must carry evidenceKind, evidenceTimestamp, evidenceSource, and evidenceText." ;
+  sh:property [
+    sh:path oq:evidenceKind ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ( "policy-check" "catalog-check" "reasoning-trace" "dry-run-check" ) ;
+  ] ;
+  sh:property [
+    sh:path oq:evidenceTimestamp ;
+    sh:minCount 1 ;
+    sh:datatype xsd:dateTime ;
+  ] ;
+  sh:property [
+    sh:path oq:evidenceSource ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path oq:evidenceText ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# LatticeQueryPlaneBinding shape
+# ---------------------------------------------------------------------------
+
+oq:LatticeQueryPlaneBindingShape a sh:NodeShape ;
+  sh:targetClass oq:LatticeQueryPlaneBinding ;
+  sh:message "A LatticeQueryPlaneBinding must declare latticeQueryLanguage='ontology-query', distinguishedFrom, and bindsQuery." ;
+  sh:property [
+    sh:path oq:latticeQueryLanguage ;
+    sh:minCount 1 ;
+    sh:hasValue "ontology-query" ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path oq:distinguishedFrom ;
+    sh:minCount 1 ;
+    sh:hasValue "sparql" ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path oq:bindsQuery ;
+    sh:minCount 1 ;
+  ] .
