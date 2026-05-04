@@ -13,6 +13,7 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 ## Specifications
 
 - [`specs/namespaces.md`](specs/namespaces.md) — canonical namespace prefixes and base IRI guidance
+- [`specs/shir-v0.1.md`](specs/shir-v0.1.md) — Semantic Hyperknowledge Intermediate Representation draft spec
 - [`specs/audit_policy.md`](specs/audit_policy.md) — audit and policy constraints
 - [`specs/prophet_cli_spec.md`](specs/prophet_cli_spec.md) — Prophet CLI ontology spec
 - [`specs/valueflows-governed-canonical-v0.4.md`](specs/valueflows-governed-canonical-v0.4.md) — ValueFlows governed profile spec
