@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "banking": "https://socioprophet.github.io/ontogenesis/domains/banking#",
+    "id": "@id",
+    "type": "@type",
+    "BankingFirm": "banking:BankingFirm",
+    "LegalEntity": "banking:LegalEntity",
+    "Portfolio": "banking:Portfolio",
+    "Counterparty": "banking:Counterparty",
+    "CapitalState": "banking:CapitalState",
+    "LiquidityState": "banking:LiquidityState",
+    "FilingPack": "banking:FilingPack",
+    "Asset": "banking:Asset",
+    "Liability": "banking:Liability",
+    "Cashflow": "banking:Cashflow",
+    "FundingSource": "banking:FundingSource",
+    "LineItem": "banking:LineItem",
+    "CorrectionChain": "banking:CorrectionChain",
+    "Signoff": "banking:Signoff",
+    "hasLegalEntity": { "@id": "banking:hasLegalEntity", "@type": "@id" },
+    "hasPortfolio": { "@id": "banking:hasPortfolio", "@type": "@id" },
+    "hasCounterparty": { "@id": "banking:hasCounterparty", "@type": "@id" },
+    "hasCapitalState": { "@id": "banking:hasCapitalState", "@type": "@id" },
+    "hasLiquidityState": { "@id": "banking:hasLiquidityState", "@type": "@id" },
+    "hasFilingPack": { "@id": "banking:hasFilingPack", "@type": "@id" },
+    "publicationStatus": "banking:publicationStatus",
+    "correctionStatus": "banking:correctionStatus"
+  }
+}

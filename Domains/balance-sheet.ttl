@@ -1,0 +1,27 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix banking: <https://socioprophet.github.io/ontogenesis/domains/banking#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/balance-sheet.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Balance Sheet" ;
+  dct:description "Seed balance-sheet ontology module for assets, liabilities, cashflows, and funding sources." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Middle/banking-core.ttl> .
+
+banking:Asset a owl:Class ; rdfs:label "Asset" .
+banking:Liability a owl:Class ; rdfs:label "Liability" .
+banking:Cashflow a owl:Class ; rdfs:label "Cashflow" .
+banking:FundingSource a owl:Class ; rdfs:label "Funding Source" .
+
+banking:hasAsset a owl:ObjectProperty ; rdfs:domain banking:LegalEntity ; rdfs:range banking:Asset ; rdfs:label "has asset" .
+banking:hasLiability a owl:ObjectProperty ; rdfs:domain banking:LegalEntity ; rdfs:range banking:Liability ; rdfs:label "has liability" .
+banking:hasCashflow a owl:ObjectProperty ; rdfs:domain banking:LegalEntity ; rdfs:range banking:Cashflow ; rdfs:label "has cashflow" .
+banking:hasFundingSource a owl:ObjectProperty ; rdfs:domain banking:LegalEntity ; rdfs:range banking:FundingSource ; rdfs:label "has funding source" .
+
+banking:balanceValue a owl:DatatypeProperty ; rdfs:range xsd:decimal ; rdfs:label "balance value" .
+banking:currency a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "currency" .
+banking:maturityDate a owl:DatatypeProperty ; rdfs:range xsd:date ; rdfs:label "maturity date" .

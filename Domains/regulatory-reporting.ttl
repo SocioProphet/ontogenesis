@@ -1,0 +1,23 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix banking: <https://socioprophet.github.io/ontogenesis/domains/banking#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/regulatory-reporting.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Regulatory Reporting" ;
+  dct:description "Seed regulatory-reporting ontology module for filing packs, line items, and correction chains." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Middle/banking-core.ttl> .
+
+banking:LineItem a owl:Class ; rdfs:label "Line Item" .
+banking:CorrectionChain a owl:Class ; rdfs:label "Correction Chain" .
+banking:Signoff a owl:Class ; rdfs:label "Signoff" .
+
+banking:hasLineItem a owl:ObjectProperty ; rdfs:domain banking:FilingPack ; rdfs:range banking:LineItem ; rdfs:label "has line item" .
+banking:hasCorrectionChain a owl:ObjectProperty ; rdfs:domain banking:FilingPack ; rdfs:range banking:CorrectionChain ; rdfs:label "has correction chain" .
+banking:hasSignoff a owl:ObjectProperty ; rdfs:domain banking:FilingPack ; rdfs:range banking:Signoff ; rdfs:label "has signoff" .
+
+banking:publicationStatus a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "publication status" .
+banking:correctionStatus a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "correction status" .
