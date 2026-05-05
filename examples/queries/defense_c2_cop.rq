@@ -1,0 +1,45 @@
+PREFIX c2: <https://socioprophet.github.io/ontogenesis/domains/defense-c2#>
+PREFIX cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#>
+PREFIX sc: <https://socioprophet.github.io/ontogenesis/domains/supply-chain#>
+PREFIX upper: <https://socioprophet.github.io/ontogenesis/upper#>
+
+# Find common-operational-picture entities with mission, unit, readiness,
+# logistics, cyber state, threat assessment, and supply-chain dependency overlays.
+SELECT ?cop ?mission ?unit ?readiness ?readinessLevel ?logistics ?logisticsStatus ?asset ?cyberState ?cyberStateLabel ?area ?threat ?threatLevel ?supplySystem
+WHERE {
+  ?cop a c2:CommonOperationalPicture ;
+    c2:copIncludesEntity ?mission .
+
+  ?mission a c2:Mission ;
+    c2:missionIdentifier ?missionId .
+
+  OPTIONAL {
+    ?unit a c2:Unit ;
+      c2:assignedToMission ?mission .
+    OPTIONAL {
+      ?unit c2:hasReadinessAssessment ?readiness .
+      ?readiness c2:readinessLevel ?readinessLevel .
+    }
+    OPTIONAL {
+      ?unit c2:hasLogisticsState ?logistics .
+      ?logistics c2:logisticsStatus ?logisticsStatus .
+    }
+  }
+
+  OPTIONAL {
+    ?mission c2:usesAsset ?asset .
+    OPTIONAL {
+      ?asset c2:hasCyberState ?cyberState .
+      ?cyberState c2:cyberStateLabel ?cyberStateLabel .
+    }
+  }
+
+  OPTIONAL {
+    ?mission c2:locatedInArea ?area .
+    ?area c2:hasThreatAssessment ?threat .
+    ?threat c2:threatLevel ?threatLevel .
+  }
+
+  OPTIONAL { ?mission c2:dependsOnSupplyChainElement ?supplySystem . }
+}
+ORDER BY ?mission ?unit
