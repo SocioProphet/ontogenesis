@@ -10,17 +10,17 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
-ex:SemanticEnterprisePipeline a kgl:IngestionPipeline ;
+ex:SemanticEnterprisePipeline a kgl:IngestionPipeline, kgl:Pipeline ;
   kgl:sourceSystem "enterprise-data-lake" ;
   kgl:schedule "daily" ;
   kgl:hasPhase ex:CreationPhase, ex:HostingPhase, ex:CurationPhase, ex:DeploymentPhase ;
   kgl:usesMappingRule ex:CustomerCompanyMappingRule ;
   kgl:producesGraphOutput ex:CuratedCustomerGraphOutput .
 
-ex:CreationPhase a kgl:KnowledgeCreation .
-ex:HostingPhase a kgl:KnowledgeHosting .
-ex:CurationPhase a kgl:KnowledgeCuration .
-ex:DeploymentPhase a kgl:KnowledgeDeployment .
+ex:CreationPhase a kgl:KnowledgeCreation, kgl:LifecyclePhase .
+ex:HostingPhase a kgl:KnowledgeHosting, kgl:LifecyclePhase .
+ex:CurationPhase a kgl:KnowledgeCuration, kgl:LifecyclePhase .
+ex:DeploymentPhase a kgl:KnowledgeDeployment, kgl:LifecyclePhase .
 
 ex:CustomerCompanyMappingRule a kgl:MappingRule ;
   upper:describes biz:Company ;
@@ -37,7 +37,7 @@ ex:SemanticEnterpriseValidationRun a kgl:ValidationRun ;
 ex:EnterpriseSparqlEndpoint a kgl:SPARQLEndpoint ;
   kgl:queryInterfaceUrl "https://example.invalid/sparql"^^xsd:anyURI .
 
-ex:CuratedCustomerNamedGraph a ngov:CuratedGraph ;
+ex:CuratedCustomerNamedGraph a ngov:CuratedGraph, ngov:NamedGraph ;
   ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/example/curated-customer"^^xsd:anyURI ;
   ngov:sourceSystem "enterprise-data-lake" ;
   ngov:hasAccessPolicy ex:InternalGraphAccessPolicy ;
