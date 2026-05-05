@@ -24,6 +24,16 @@ This runs:
 - ledger build + verification
 - SPDX SBOM generation
 
+## Complies with Standards
+
+This repository provides ontology governance for SocioProphet standards and contract surfaces:
+
+- `SocioProphet/socioprophet-standards-knowledge` — Knowledge Context v1 contracts, Avro Path-A protocols, JSON-LD overlays, fixtures, and lifecycle events.
+- `SocioProphet/socioprophet-standards-storage/docs/standards/070-graph-rdf-hypergraph.md` — graph/RDF/property/hypergraph storage guidance consumed by ontology-governed modules.
+- `SocioProphet/socioprophet-standards-storage/docs/standards/080-knowledge-context.md` — platform pointer that delegates detailed Knowledge Context standards to the standards-knowledge package.
+- `Platform/knowledge-context.ttl` — Ontogenesis semantic governance module for Knowledge Context v1 artifacts.
+- `shapes/knowledge-context.shacl.ttl` — SHACL promotion gate for Knowledge Context semantic artifacts.
+
 ## What’s in this repository
 
 - `Upper/`, `Middle/`, `Lower/` — layered ontology modules
