@@ -1,0 +1,31 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<catalog/semantic_enterprise_v0_1_registry.ttl> a owl:Ontology ;
+  dct:title "Semantic Enterprise v0.1 Rollup Registry" ;
+  dct:description "Stable v0.1 rollup registry importing the semantic-enterprise infrastructure, sector modules, sector scenarios, query/import surfaces, and import-contract validation supplements." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl>,
+    <catalog/semantic_enterprise_registry.ttl>,
+    <catalog/semantic_sector_registry.ttl>,
+    <catalog/semantic_sector_scenarios_registry.ttl>,
+    <catalog/semantic_query_import_registry.ttl> .
+
+og:SemanticEnterpriseV01Rollup a og:Module ;
+  og:layer "Catalog" ;
+  og:path "catalog/semantic_enterprise_v0_1_registry.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/catalog/semantic-enterprise-v0-1#" ;
+  og:semver "0.1.0" ;
+  og:status "stable" ;
+  rdfs:label "Semantic Enterprise v0.1 rollup registry" .
+
+og:SemanticEnterpriseV01ReleaseNote a og:Module ;
+  og:layer "Docs" ;
+  og:path "docs/semantic-enterprise/v0.1-release-note.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/docs/semantic-enterprise/v0-1-release#" ;
+  og:semver "0.1.0" ;
+  og:status "stable" ;
+  rdfs:label "Semantic Enterprise v0.1 release note" .
