@@ -2,7 +2,7 @@
 """Run SHACL gates over the merged data graph.
 
 Default behavior:
-- merges all *.ttl under Upper/Middle/Lower/Domains/Platform/prophet/epi/catalog
+- merges all *.ttl under Upper/Middle/Lower/Domains/Alignments/Platform/prophet/epi/catalog/examples
 - merges all shapes under shapes/ plus module-local shapes
 - runs pyshacl validate
 """
@@ -15,7 +15,7 @@ from pyshacl import validate
 
 ROOT = Path(__file__).resolve().parents[1]
 
-DATA_DIRS = ["Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi", "catalog", "examples"]
+DATA_DIRS = ["Upper", "Middle", "Lower", "Domains", "Alignments", "Platform", "prophet", "epi", "catalog", "examples"]
 SHAPES_DIRS = ["shapes", "prophet/shapes", "epi/shapes"]
 
 def load_all_ttl(dirs: list[str]) -> Graph:
