@@ -1,0 +1,106 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/scenarios/supply-chain-resilience#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:SupplyGovernanceSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:SupplyAnchor ;
+  cs:hasObjectiveFunction ex:SupplyObjective ;
+  cs:hasEmbodiment ex:SupplyEmbodiment ;
+  cs:hasChamber ex:SupplyChamber ;
+  cs:governedByCompact ex:SupplyCompact .
+
+ex:SupplyAnchor a cs:IdentityAnchor .
+ex:SupplyObjective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:SupplyEmbodiment a cs:FederatedEmbodiment .
+ex:SupplyChamber a cs:Chamber .
+ex:SupplyCompact a cs:GovernanceCompact ; cs:governanceRuleText "supply-chain resilience compact" .
+
+ex:SupplierA a sc:Supplier ;
+  upper:hasIdentifier "supplier-a" ;
+  party:hasIdentityRecord ex:SupplierAIdentity ;
+  party:hasRoleAssignment ex:SupplierARole ;
+  sc:hasFacility ex:SupplierAFacility .
+
+ex:SupplierAIdentity a party:IdentityRecord .
+ex:SupplierARole a party:RoleAssignment ;
+  party:roleHeldBy ex:SupplierA ;
+  party:roleWithinSelf ex:SupplyGovernanceSelf ;
+  party:roleName "primary-supplier" .
+
+ex:AlternateSupplierA a sc:Supplier ;
+  upper:hasIdentifier "alternate-supplier-a" ;
+  party:hasIdentityRecord ex:AltSupplierIdentity ;
+  party:hasRoleAssignment ex:AltSupplierRole ;
+  sc:hasFacility ex:AlternateFacility .
+
+ex:AltSupplierIdentity a party:IdentityRecord .
+ex:AltSupplierRole a party:RoleAssignment ;
+  party:roleHeldBy ex:AlternateSupplierA ;
+  party:roleWithinSelf ex:SupplyGovernanceSelf ;
+  party:roleName "qualified-alternate-supplier" .
+
+ex:ManufacturerA a sc:Manufacturer ;
+  upper:hasIdentifier "manufacturer-a" ;
+  party:hasIdentityRecord ex:ManufacturerAIdentity ;
+  party:hasRoleAssignment ex:ManufacturerARole ;
+  sc:hasFacility ex:ManufacturerFacility .
+
+ex:ManufacturerAIdentity a party:IdentityRecord .
+ex:ManufacturerARole a party:RoleAssignment ;
+  party:roleHeldBy ex:ManufacturerA ;
+  party:roleWithinSelf ex:SupplyGovernanceSelf ;
+  party:roleName "manufacturer" .
+
+ex:SupplierAFacility a sc:Facility ;
+  upper:hasIdentifier "supplier-a-facility" ;
+  sc:capacityUnits 400.0 .
+
+ex:AlternateFacility a sc:Facility ;
+  upper:hasIdentifier "alternate-facility" ;
+  sc:capacityUnits 260.0 .
+
+ex:ManufacturerFacility a sc:Facility ;
+  upper:hasIdentifier "manufacturer-facility" ;
+  sc:capacityUnits 900.0 .
+
+ex:CriticalComponentA a sc:Component ;
+  upper:hasIdentifier "critical-component-a" ;
+  ps:includesFeature ex:CriticalComponentFeatureA ;
+  sc:leadTimeDays 21.0 ;
+  sc:hasAlternateSource ex:AlternateSourceA .
+
+ex:CriticalComponentFeatureA a ps:Feature .
+
+ex:SupplierA sc:suppliesComponent ex:CriticalComponentA .
+
+ex:AlternateSourceA a sc:AlternateSource ;
+  sc:alternateSupplier ex:AlternateSupplierA .
+
+ex:SupplySystemA a sc:SupplyChainSystem ;
+  sc:hasAgent ex:SupplierA, ex:AlternateSupplierA, ex:ManufacturerA .
+
+ex:BillOfLadingA a sc:BillOfLading ;
+  upper:hasIdentifier "bol-resilience-demo-001" .
+
+ex:ShipmentA a sc:Shipment ;
+  sc:shipsFrom ex:SupplierAFacility ;
+  sc:shipsTo ex:ManufacturerFacility ;
+  sc:shipmentDocument ex:BillOfLadingA ;
+  sc:shipmentStatus "delayed" .
+
+ex:DisruptionA a sc:DisruptionEvent ;
+  sc:disruptionTimestamp "2026-05-05T06:30:00Z"^^xsd:dateTime ;
+  upper:describes ex:SupplierAFacility .
+
+ex:SupplyRiskA a sc:SupplyRisk ;
+  sc:riskAffects ex:CriticalComponentA ;
+  sc:riskLevel "high" ;
+  sc:mitigatedBy ex:ActivateAlternateSource .
+
+ex:ActivateAlternateSource a sc:MitigationAction ;
+  upper:dependsOn ex:AlternateSourceA .
