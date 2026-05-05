@@ -1,0 +1,71 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fin:   <https://socioprophet.github.io/ontogenesis/domains/finance#> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+
+<shapes/sector_modules.shacl.ttl> a owl:Ontology ;
+  dct:title "SHACL — Semantic Enterprise Sector Modules" ;
+  dct:description "Promotion gates for finance, threat-intel, investigation, supply-chain, and defense/C2 sector modules." ;
+  owl:versionInfo "0.1.0" .
+
+fin:FinancialTransactionShape a sh:NodeShape ;
+  sh:targetClass fin:FinancialTransaction ;
+  sh:property [ sh:path fin:hasSender ; sh:minCount 1 ; sh:message "A financial transaction must declare a sender." ] ;
+  sh:property [ sh:path fin:hasRecipient ; sh:minCount 1 ; sh:message "A financial transaction must declare a recipient." ] ;
+  sh:property [ sh:path fin:amount ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ; sh:message "A financial transaction must declare one decimal amount." ] ;
+  sh:property [ sh:path fin:currency ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:Literal ; sh:message "A financial transaction must declare a currency." ] ;
+  sh:property [ sh:path fin:transactedAt ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:dateTime ; sh:message "A financial transaction must declare a transaction timestamp." ] .
+
+fin:RiskScoreShape a sh:NodeShape ;
+  sh:targetClass fin:RiskScore ;
+  sh:property [ sh:path fin:riskValue ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0.0 ; sh:maxInclusive 1.0 ; sh:message "A risk score must declare a normalized decimal risk value." ] ;
+  sh:property [ sh:path fin:riskModel ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "A risk score must declare the model or policy that produced it." ] .
+
+cti:IndicatorShape a sh:NodeShape ;
+  sh:targetClass cti:Indicator ;
+  sh:property [ sh:path cti:hasObservable ; sh:minCount 1 ; sh:class cti:Observable ; sh:message "A CTI indicator must include at least one observable." ] ;
+  sh:property [ sh:path cti:reportedBy ; sh:minCount 1 ; sh:class cti:CTISource ; sh:message "A CTI indicator must declare at least one source." ] ;
+  sh:property [ sh:path cti:confidence ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0.0 ; sh:maxInclusive 1.0 ; sh:message "A CTI indicator must declare confidence between 0.0 and 1.0." ] .
+
+cti:ObservableShape a sh:NodeShape ;
+  sh:targetClass cti:Observable ;
+  sh:property [ sh:path cti:observableType ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "An observable must declare an observable type." ] ;
+  sh:property [ sh:path cti:observableValue ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "An observable must declare an observable value." ] .
+
+inv:EvidenceItemShape a sh:NodeShape ;
+  sh:targetClass inv:EvidenceItem ;
+  sh:property [ sh:path inv:evidenceIdentifier ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "An evidence item must declare an evidence identifier." ] ;
+  sh:property [ sh:path inv:hasCustodyEvent ; sh:minCount 1 ; sh:class inv:ChainOfCustodyEvent ; sh:message "An evidence item must include at least one custody event." ] .
+
+inv:ChainOfCustodyEventShape a sh:NodeShape ;
+  sh:targetClass inv:ChainOfCustodyEvent ;
+  sh:property [ sh:path inv:custodyHeldBy ; sh:minCount 1 ; sh:message "A custody event must declare the party holding custody." ] ;
+  sh:property [ sh:path inv:custodyTimestamp ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:dateTime ; sh:message "A custody event must declare a timestamp." ] .
+
+sc:ShipmentShape a sh:NodeShape ;
+  sh:targetClass sc:Shipment ;
+  sh:property [ sh:path sc:shipsFrom ; sh:minCount 1 ; sh:class sc:Facility ; sh:message "A shipment must declare its origin facility." ] ;
+  sh:property [ sh:path sc:shipsTo ; sh:minCount 1 ; sh:class sc:Facility ; sh:message "A shipment must declare its destination facility." ] ;
+  sh:property [ sh:path sc:shipmentDocument ; sh:minCount 1 ; sh:message "A shipment must declare at least one source or transport document." ] ;
+  sh:property [ sh:path sc:shipmentStatus ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "A shipment must declare a status." ] .
+
+sc:SupplyRiskShape a sh:NodeShape ;
+  sh:targetClass sc:SupplyRisk ;
+  sh:property [ sh:path sc:riskAffects ; sh:minCount 1 ; sh:message "A supply risk must declare what it affects." ] ;
+  sh:property [ sh:path sc:riskLevel ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "A supply risk must declare a risk level." ] .
+
+c2:MissionShape a sh:NodeShape ;
+  sh:targetClass c2:Mission ;
+  sh:property [ sh:path c2:missionIdentifier ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "A mission must declare a mission identifier." ] ;
+  sh:property [ sh:path c2:hasCourseOfAction ; sh:minCount 1 ; sh:class c2:CourseOfAction ; sh:message "A mission must declare at least one course of action." ] ;
+  sh:property [ sh:path c2:governedByROE ; sh:minCount 1 ; sh:class c2:RuleOfEngagement ; sh:message "A mission must declare applicable rules of engagement or operating constraints." ] .
+
+c2:ReadinessAssessmentShape a sh:NodeShape ;
+  sh:targetClass c2:ReadinessAssessment ;
+  sh:property [ sh:path c2:readinessLevel ; sh:minCount 1 ; sh:nodeKind sh:Literal ; sh:message "A readiness assessment must declare a readiness level." ] .
