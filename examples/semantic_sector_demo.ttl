@@ -1,0 +1,114 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/semantic-sector#> .
+@prefix fin:   <https://socioprophet.github.io/ontogenesis/domains/finance#> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:AcmeBank a legal:LegalEntity, party:Organization ;
+  upper:hasIdentifier "acme-bank" .
+
+ex:CounterpartyA a fin:Counterparty, party:Organization ;
+  upper:hasIdentifier "counterparty-a" .
+
+ex:AccountA a fin:FinancialAccount ;
+  upper:hasIdentifier "acct-a" .
+
+ex:TransactionA a fin:FinancialTransaction ;
+  fin:hasSender ex:AcmeBank ;
+  fin:hasRecipient ex:CounterpartyA ;
+  fin:usesAccount ex:AccountA ;
+  fin:amount 125000.00 ;
+  fin:currency "USD" ;
+  fin:transactedAt "2026-05-05T10:00:00Z"^^xsd:dateTime .
+
+ex:RiskScoreA a fin:RiskScore ;
+  fin:riskValue 0.72 ;
+  fin:riskModel "semantic-enterprise-demo-risk-v0" .
+
+ex:AMLAlertA a fin:AMLAlert ;
+  fin:alertSubject ex:TransactionA ;
+  fin:alertStatus "review" .
+
+ex:ThreatFeedA a cti:CTISource ;
+  cti:sourceReliability "curated-demo" .
+
+ex:ObservableA a cti:Observable ;
+  cti:observableType "domain" ;
+  cti:observableValue "example.invalid" .
+
+ex:IndicatorA a cti:Indicator ;
+  cti:hasObservable ex:ObservableA ;
+  cti:reportedBy ex:ThreatFeedA ;
+  cti:confidence 0.81 ;
+  cti:firstSeen "2026-05-05T09:00:00Z"^^xsd:dateTime .
+
+ex:CaseA a inv:Case ;
+  inv:caseIdentifier "CASE-DEMO-001" .
+
+ex:CustodianA a party:NaturalPerson ;
+  upper:hasIdentifier "custodian-a" .
+
+ex:CustodyEventA a inv:ChainOfCustodyEvent ;
+  inv:custodyHeldBy ex:CustodianA ;
+  inv:custodyTimestamp "2026-05-05T11:00:00Z"^^xsd:dateTime .
+
+ex:DigitalEvidenceA a inv:DigitalEvidence, inv:EvidenceItem ;
+  inv:evidenceIdentifier "EVID-DEMO-001" ;
+  inv:hasCustodyEvent ex:CustodyEventA ;
+  inv:linkedToSecurityEvent ex:SecurityEventA .
+
+ex:SecurityEventA a cyber:SecurityEvent .
+
+ex:SupplierA a sc:Supplier ;
+  upper:hasIdentifier "supplier-a" .
+
+ex:FacilityOrigin a sc:Facility ;
+  upper:hasIdentifier "facility-origin" ;
+  sc:capacityUnits 1000.0 .
+
+ex:FacilityDestination a sc:Facility ;
+  upper:hasIdentifier "facility-destination" ;
+  sc:capacityUnits 800.0 .
+
+ex:BillOfLadingA a sc:BillOfLading ;
+  upper:hasIdentifier "bol-demo-001" .
+
+ex:ShipmentA a sc:Shipment ;
+  sc:shipsFrom ex:FacilityOrigin ;
+  sc:shipsTo ex:FacilityDestination ;
+  sc:shipmentDocument ex:BillOfLadingA ;
+  sc:shipmentStatus "in-transit" .
+
+ex:ComponentA a sc:Component ;
+  upper:hasIdentifier "component-a" .
+
+ex:SupplyRiskA a sc:SupplyRisk ;
+  sc:riskAffects ex:ComponentA ;
+  sc:riskLevel "medium" .
+
+ex:MissionA a c2:Mission ;
+  c2:missionIdentifier "MISSION-DEMO-001" ;
+  c2:hasCourseOfAction ex:CourseOfActionA ;
+  c2:governedByROE ex:ROEA ;
+  c2:dependsOnSupplyChainElement ex:SupplySystemA .
+
+ex:CourseOfActionA a c2:CourseOfAction .
+
+ex:ROEA a c2:RuleOfEngagement ;
+  c2:roeText "demo operating constraint" .
+
+ex:SupplySystemA a sc:SupplyChainSystem .
+
+ex:UnitA a c2:Unit ;
+  c2:assignedToMission ex:MissionA ;
+  c2:hasReadinessAssessment ex:ReadinessA .
+
+ex:ReadinessA a c2:ReadinessAssessment ;
+  c2:readinessLevel "green" .
