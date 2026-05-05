@@ -1,0 +1,61 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix iw: <https://socioprophet.github.io/ontogenesis/domains/institutional-work#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix action: <https://socioprophet.github.io/ontogenesis/middle/action#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Domains/institutional-work.ttl> a owl:Ontology ;
+  dct:title "Domain — Institutional Work" ;
+  dct:description "Canonical objective, workroom, actor, role, policy, action, evidence, outcome, score, and learning loop for governed human-agent institutional work." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Middle/action-ontology.ttl> .
+
+iw:Objective a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Objective" .
+iw:Workroom a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Workroom" .
+iw:WorkOrder a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Work order" .
+iw:Actor a owl:Class ; rdfs:subClassOf upper:Agent ; rdfs:label "Actor" .
+iw:HumanActor a owl:Class ; rdfs:subClassOf iw:Actor ; rdfs:label "Human actor" .
+iw:AgentActor a owl:Class ; rdfs:subClassOf iw:Actor ; rdfs:label "Agent actor" .
+iw:Role a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Role" .
+iw:RoleBinding a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Role binding" .
+iw:Authority a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Authority" .
+iw:CapabilityGrant a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Capability grant" .
+iw:Asset a owl:Class ; rdfs:subClassOf upper:Entity ; rdfs:label "Asset" .
+iw:PolicyDecision a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Policy decision" .
+iw:Review a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Review" .
+iw:Outcome a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Outcome" .
+iw:Score a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Score" .
+iw:LearningEvent a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Learning event" .
+
+iw:hasWorkOrder a owl:ObjectProperty ; rdfs:domain iw:Objective ; rdfs:range iw:WorkOrder ; rdfs:label "has work order" .
+iw:belongsToWorkroom a owl:ObjectProperty ; rdfs:domain iw:WorkOrder ; rdfs:range iw:Workroom ; rdfs:label "belongs to workroom" .
+iw:worksOnObjective a owl:ObjectProperty ; rdfs:domain iw:WorkOrder ; rdfs:range iw:Objective ; rdfs:label "works on objective" .
+iw:bindsActor a owl:ObjectProperty ; rdfs:domain iw:RoleBinding ; rdfs:range iw:Actor ; rdfs:label "binds actor" .
+iw:bindsRole a owl:ObjectProperty ; rdfs:domain iw:RoleBinding ; rdfs:range iw:Role ; rdfs:label "binds role" .
+iw:bindingScope a owl:ObjectProperty ; rdfs:domain iw:RoleBinding ; rdfs:range upper:Entity ; rdfs:label "binding scope" .
+iw:grantsAuthority a owl:ObjectProperty ; rdfs:domain iw:Role ; rdfs:range iw:Authority ; rdfs:label "grants authority" .
+iw:hasCapabilityGrant a owl:ObjectProperty ; rdfs:domain iw:RoleBinding ; rdfs:range iw:CapabilityGrant ; rdfs:label "has capability grant" .
+iw:targetsAsset a owl:ObjectProperty ; rdfs:domain action:Action ; rdfs:range iw:Asset ; rdfs:label "targets asset" .
+iw:hasPolicyDecision a owl:ObjectProperty ; rdfs:domain action:Action ; rdfs:range iw:PolicyDecision ; rdfs:label "has policy decision" .
+iw:decisionForActor a owl:ObjectProperty ; rdfs:domain iw:PolicyDecision ; rdfs:range iw:Actor ; rdfs:label "decision for actor" .
+iw:decisionForAsset a owl:ObjectProperty ; rdfs:domain iw:PolicyDecision ; rdfs:range iw:Asset ; rdfs:label "decision for asset" .
+iw:emitsEvidence a owl:ObjectProperty ; rdfs:domain action:Action ; rdfs:range upper:Evidence ; rdfs:label "emits evidence" .
+iw:supportsReview a owl:ObjectProperty ; rdfs:domain upper:Evidence ; rdfs:range iw:Review ; rdfs:label "supports review" .
+iw:reviewedBy a owl:ObjectProperty ; rdfs:domain iw:Review ; rdfs:range iw:Actor ; rdfs:label "reviewed by" .
+iw:reviewsSubject a owl:ObjectProperty ; rdfs:domain iw:Review ; rdfs:range upper:Entity ; rdfs:label "reviews subject" .
+iw:producesOutcome a owl:ObjectProperty ; rdfs:domain iw:Review ; rdfs:range iw:Outcome ; rdfs:label "produces outcome" .
+iw:outcomeForWorkOrder a owl:ObjectProperty ; rdfs:domain iw:Outcome ; rdfs:range iw:WorkOrder ; rdfs:label "outcome for work order" .
+iw:hasScore a owl:ObjectProperty ; rdfs:domain iw:Outcome ; rdfs:range iw:Score ; rdfs:label "has score" .
+iw:learningTriggeredBy a owl:ObjectProperty ; rdfs:domain iw:LearningEvent ; rdfs:range upper:Entity ; rdfs:label "learning triggered by" .
+iw:learningAppliesTo a owl:ObjectProperty ; rdfs:domain iw:LearningEvent ; rdfs:range upper:Entity ; rdfs:label "learning applies to" .
+
+iw:title a owl:DatatypeProperty ; rdfs:domain upper:Entity ; rdfs:range xsd:string ; rdfs:label "title" .
+iw:decisionState a owl:DatatypeProperty ; rdfs:domain iw:PolicyDecision ; rdfs:range xsd:string ; rdfs:label "decision state" .
+iw:status a owl:DatatypeProperty ; rdfs:domain upper:Entity ; rdfs:range xsd:string ; rdfs:label "institutional work status" .
+iw:scoreValue a owl:DatatypeProperty ; rdfs:domain iw:Score ; rdfs:range xsd:decimal ; rdfs:label "score value" .
+iw:scoreDimension a owl:DatatypeProperty ; rdfs:domain iw:Score ; rdfs:range xsd:string ; rdfs:label "score dimension" .
+iw:sourceRef a owl:DatatypeProperty ; rdfs:domain upper:Entity ; rdfs:range xsd:anyURI ; rdfs:label "source reference" .
