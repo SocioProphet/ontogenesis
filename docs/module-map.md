@@ -36,6 +36,23 @@ This repo defines a layered ontology stack plus gates/tools.
   - snapshots, handshake, replication
 - `Platform/Mesh.ttl`
   - wireguard tunnels and peers
+- `Platform/lattice-ontology-query.ttl`
+  - governed ontology-query adapter contract for Lattice FederatedQueryPlane; distinct from SPARQL routing
+- `Platform/Parsing/`
+  - `core.ttl` — utterances, tokens, spans, links, candidates, evidence, and promotion decisions
+  - `link-grammar.ttl` — Link Grammar connectors, disjuncts, linkages, lexicon entries, and parse-failure terms
+  - `acset-parse.ttl` — canonical ACSET parse-state scaffold
+  - `hypergraph-promotion.ttl` — promotion decisions, gates, and parse-backreference preservation
+  - SHACL: `shapes/parsing-gates.ttl`
+  - Validator: `tools/validate_parsing.py`; CI: `.github/workflows/validate-parsing.yml`
+- `Platform/Epistemics/`
+  - `michael-core.ttl` — Michael epistemic core primitives
+  - `michael-belief.ttl` — belief-state surface
+  - `michael-discovery.ttl` — candidate-law / discovery surface
+  - SHACL: `shapes/michael-belief.shacl.ttl`
+- `Platform/Twins/`
+  - `human-digital-twin.ttl` — bounded human digital twin starter surface
+  - SHACL: `shapes/human-digital-twin.shacl.ttl`
 
 ## Prophet
 - `prophet/prophet_cli.ttl`
@@ -74,11 +91,21 @@ This repo defines a layered ontology stack plus gates/tools.
 ## Bindings / governed profiles
 - `bindings/valueflows_governed/`
   - compact governed binding lane for process-scoped task flow, delegated authority, deterministic replay, and policy runtime checks
-  - current execution surface is intentionally compact and CI-oriented (`compact-bundle.v1.json`, runtime tools, Rego policy, GitHub Actions workflow)
-  - semantic lift into SHACL / JSON-LD / ontology-native examples is still pending and should remain the next step before wider lifecycle expansion
+  - execution surface remains compact and CI-oriented (`compact-bundle.v1.json`, runtime tools, Rego policy, GitHub Actions workflow)
+  - ontology-native semantic lift is present via `bindings/valueflows_governed/valueflows-governed.context.jsonld`, `shapes/valueflows-governed.shacl.ttl`, and `examples/valueflows-governed-task-flow-demo.jsonld`
+  - terminal and revocation semantics are represented for completed/canceled processes and tasks, plus revoked/expired delegations and capability grants
+  - SHIR projection surface is present via `bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json`, `docs/valueflows-to-shir-projection.md`, and `examples/valueflows-shir-receipt.example.json`
+
+## Specifications and profiles
+- `docs/specs/shir-v0.1.md`
+  - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
+- `docs/specs/ontology-query-adapter.md`
+  - governed ontology-query adapter contract for OWL/SHACL/schema-alignment/reasoning queries in the Lattice FederatedQueryPlane
+- `docs/specs/valueflows-governed-canonical-v0.4.md`
+  - governed ValueFlows profile spec
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
