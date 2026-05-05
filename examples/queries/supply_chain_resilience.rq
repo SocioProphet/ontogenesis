@@ -1,0 +1,29 @@
+PREFIX sc: <https://socioprophet.github.io/ontogenesis/domains/supply-chain#>
+PREFIX ps: <https://socioprophet.github.io/ontogenesis/domains/product-service#>
+PREFIX upper: <https://socioprophet.github.io/ontogenesis/upper#>
+
+# Find high-risk components, affected supply-chain elements,
+# mitigations, alternate sources, and shipment state.
+SELECT ?risk ?riskLevel ?affected ?component ?alternateSource ?alternateSupplier ?mitigation ?shipment ?shipmentStatus
+WHERE {
+  ?risk a sc:SupplyRisk ;
+    sc:riskLevel ?riskLevel ;
+    sc:riskAffects ?affected .
+
+  OPTIONAL {
+    BIND(?affected AS ?component)
+    ?component a sc:Component .
+    OPTIONAL {
+      ?component sc:hasAlternateSource ?alternateSource .
+      ?alternateSource sc:alternateSupplier ?alternateSupplier .
+    }
+  }
+
+  OPTIONAL { ?risk sc:mitigatedBy ?mitigation . }
+
+  OPTIONAL {
+    ?shipment a sc:Shipment ;
+      sc:shipmentStatus ?shipmentStatus .
+  }
+}
+ORDER BY ?riskLevel ?component
