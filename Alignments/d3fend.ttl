@@ -1,0 +1,38 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix d3f:   <https://d3fend.mitre.org/ontologies/d3fend.owl#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/d3fend.ttl> a owl:Ontology ;
+  dct:title "Alignment — D3FEND" ;
+  dct:description "Governed alignment scaffold from Ontogenesis cyber controls to D3FEND-style defensive technique semantics." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Domains/cyber.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:d3fendExternalOntology a smap:ExternalOntology ;
+  smap:standardName "MITRE D3FEND" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://d3fend.mitre.org/" ;
+  rdfs:label "D3FEND" .
+
+align:ControlToD3FENDDefensiveTechnique a smap:MappingAssertion ;
+  smap:mapsFrom cyber:Control ;
+  smap:mapsTo d3f:DefensiveTechnique ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:d3fendExternalOntology ;
+  smap:confidence 0.80 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis cyber controls are policy/control artifacts; D3FEND defensive techniques provide a defensive action taxonomy for later control-to-technique enrichment." .
+
+align:FindingToD3FENDAssessment a smap:MappingAssertion ;
+  smap:mapsFrom cyber:Finding ;
+  smap:mapsTo d3f:Assessment ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:d3fendExternalOntology ;
+  smap:confidence 0.60 ;
+  smap:status "draft" ;
+  smap:rationale "A finding can support a defensive assessment; exact treatment depends on whether the finding records evidence, measurement, or analytic judgment." .

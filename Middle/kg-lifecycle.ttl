@@ -1,0 +1,43 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix kgl:   <https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<Middle/kg-lifecycle.ttl> a owl:Ontology ;
+  dct:title "Middle — Knowledge Graph Lifecycle" ;
+  dct:description "Cross-domain vocabulary for knowledge creation, hosting, curation, deployment, validation, reasoning, and lifecycle feedback loops." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+kgl:LifecyclePhase a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Knowledge graph lifecycle phase" .
+kgl:KnowledgeCreation a owl:Class ; rdfs:subClassOf kgl:LifecyclePhase ; rdfs:label "Knowledge creation" .
+kgl:KnowledgeHosting a owl:Class ; rdfs:subClassOf kgl:LifecyclePhase ; rdfs:label "Knowledge hosting" .
+kgl:KnowledgeCuration a owl:Class ; rdfs:subClassOf kgl:LifecyclePhase ; rdfs:label "Knowledge curation" .
+kgl:KnowledgeDeployment a owl:Class ; rdfs:subClassOf kgl:LifecyclePhase ; rdfs:label "Knowledge deployment" .
+
+kgl:Pipeline a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Knowledge graph pipeline" .
+kgl:IngestionPipeline a owl:Class ; rdfs:subClassOf kgl:Pipeline ; rdfs:label "Ingestion pipeline" .
+kgl:ExtractionActivity a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Extraction activity" .
+kgl:MappingRule a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Mapping rule" .
+kgl:ValidationRun a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Validation run" .
+kgl:ReasoningRun a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Reasoning run" .
+kgl:EntityResolutionRun a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Entity resolution run" .
+kgl:CurationFeedbackLoop a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Curation feedback loop" .
+kgl:GraphOutput a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Graph output" .
+kgl:SPARQLEndpoint a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "SPARQL endpoint" .
+
+kgl:hasPhase a owl:ObjectProperty ; rdfs:domain kgl:Pipeline ; rdfs:range kgl:LifecyclePhase ; rdfs:label "has lifecycle phase" .
+kgl:usesMappingRule a owl:ObjectProperty ; rdfs:domain kgl:Pipeline ; rdfs:range kgl:MappingRule ; rdfs:label "uses mapping rule" .
+kgl:producesGraphOutput a owl:ObjectProperty ; rdfs:domain kgl:Pipeline ; rdfs:range kgl:GraphOutput ; rdfs:label "produces graph output" .
+kgl:validatedBy a owl:ObjectProperty ; rdfs:domain kgl:GraphOutput ; rdfs:range kgl:ValidationRun ; rdfs:label "validated by" .
+kgl:reasonedBy a owl:ObjectProperty ; rdfs:domain kgl:GraphOutput ; rdfs:range kgl:ReasoningRun ; rdfs:label "reasoned by" .
+kgl:curationFeedsBackTo a owl:ObjectProperty ; rdfs:domain kgl:CurationFeedbackLoop ; rdfs:range kgl:MappingRule ; rdfs:label "curation feeds back to" .
+kgl:exposedThrough a owl:ObjectProperty ; rdfs:domain kgl:GraphOutput ; rdfs:range kgl:SPARQLEndpoint ; rdfs:label "exposed through" .
+kgl:sourceSystem a owl:DatatypeProperty ; rdfs:domain kgl:Pipeline ; rdfs:range xsd:string ; rdfs:label "source system" .
+kgl:schedule a owl:DatatypeProperty ; rdfs:domain kgl:Pipeline ; rdfs:range xsd:string ; rdfs:label "schedule" .
+kgl:qualityStatus a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "quality status" .
+kgl:queryInterfaceUrl a owl:DatatypeProperty ; rdfs:domain kgl:SPARQLEndpoint ; rdfs:range xsd:anyURI ; rdfs:label "query interface URL" .

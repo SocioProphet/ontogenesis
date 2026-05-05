@@ -1,0 +1,50 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix fibo-be: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fnd-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fbc-fct: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/fibo.ttl> a owl:Ontology ;
+  dct:title "Alignment — FIBO" ;
+  dct:description "Governed alignment scaffold from Ontogenesis business/legal concepts to FIBO financial-sector semantics. This keeps Ontogenesis canonical while allowing finance-domain interoperability." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Domains/business_core.ttl>, <Domains/org-legal.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:fiboExternalOntology a smap:ExternalOntology ;
+  smap:standardName "Financial Industry Business Ontology" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://spec.edmcouncil.org/fibo/" ;
+  rdfs:label "FIBO" .
+
+align:CompanyToFiboLegalPerson a smap:MappingAssertion ;
+  smap:mapsFrom biz:Company ;
+  smap:mapsTo fibo-be:LegalPerson ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:fiboExternalOntology ;
+  smap:confidence 0.72 ;
+  smap:status "draft" ;
+  smap:rationale "Company often maps to a FIBO legal person, but Ontogenesis Company may include operational systems that are not legal persons." .
+
+align:ContractToFiboAgreement a smap:MappingAssertion ;
+  smap:mapsFrom biz:Contract ;
+  smap:mapsTo fibo-fnd-agr:Agreement ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:fiboExternalOntology ;
+  smap:confidence 0.82 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis Contract is agreement-like but currently modeled pragmatically as an information artifact." .
+
+align:CustomerToFiboFinancialServicesCustomer a smap:MappingAssertion ;
+  smap:mapsFrom biz:Customer ;
+  smap:mapsTo fibo-fbc-fct:FinancialServicesCustomer ;
+  smap:usesMappingPredicate smap:SkosBroadMatch ;
+  smap:targetOntology align:fiboExternalOntology ;
+  smap:confidence 0.60 ;
+  smap:status "draft" ;
+  smap:rationale "Generic customer is broader than financial-services customer; use only in finance-specific contexts." .

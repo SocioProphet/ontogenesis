@@ -1,0 +1,31 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<catalog/semantic_enterprise_registry.ttl> a owl:Ontology ;
+  dct:title "Semantic Enterprise Module Registry Supplement" ;
+  dct:description "Supplemental registry entries for the semantic-enterprise lifecycle, mapping, named graph governance, external-standard alignment, SHACL gate, documentation, and example tranche." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:SemanticEnterpriseArchitecture a og:Module ; og:layer "Docs" ; og:path "docs/specs/semantic_enterprise_architecture.md" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/docs/specs/semantic-enterprise#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic enterprise architecture specification" .
+og:SemanticEnterpriseDocs a og:Module ; og:layer "Docs" ; og:path "docs/semantic-enterprise/README.md" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/docs/semantic-enterprise#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic enterprise tranche index" .
+
+og:MiddleKGLifecycle a og:Module ; og:layer "Middle" ; og:path "Middle/kg-lifecycle.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Knowledge graph lifecycle" .
+og:MiddleSemanticMapping a og:Module ; og:layer "Middle" ; og:path "Middle/semantic-mapping.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic mapping" .
+og:MiddleNamedGraphGovernance a og:Module ; og:layer "Middle" ; og:path "Middle/named-graph-governance.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Named graph governance" .
+
+og:AlignmentGist a og:Module ; og:layer "Alignments" ; og:path "Alignments/gist.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "gist alignment" .
+og:AlignmentFIBO a og:Module ; og:layer "Alignments" ; og:path "Alignments/fibo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "FIBO alignment" .
+og:AlignmentUCOCASE a og:Module ; og:layer "Alignments" ; og:path "Alignments/uco-case.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "UCO CASE alignment" .
+og:AlignmentD3FEND a og:Module ; og:layer "Alignments" ; og:path "Alignments/d3fend.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "D3FEND alignment" .
+og:AlignmentIOFSCO a og:Module ; og:layer "Alignments" ; og:path "Alignments/iof-sco.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "IOF SCO alignment" .
+og:AlignmentDoDAFCCO a og:Module ; og:layer "Alignments" ; og:path "Alignments/dodaf-cco.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "DoDAF CCO alignment" .
+
+og:ShapeKGLifecycle a og:Module ; og:layer "Shapes" ; og:path "shapes/kg_lifecycle.shacl.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/shapes/kg-lifecycle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "KG lifecycle SHACL gates" .
+og:ShapeSemanticMapping a og:Module ; og:layer "Shapes" ; og:path "shapes/semantic_mapping.shacl.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/shapes/semantic-mapping#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic mapping SHACL gates" .
+og:ShapeNamedGraphGovernance a og:Module ; og:layer "Shapes" ; og:path "shapes/named_graph_governance.shacl.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/shapes/named-graph-governance#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Named graph governance SHACL gates" .
+
+og:ExampleSemanticEnterprisePipeline a og:Module ; og:layer "Examples" ; og:path "examples/semantic_enterprise_pipeline.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/semantic-enterprise#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic enterprise pipeline example" .
