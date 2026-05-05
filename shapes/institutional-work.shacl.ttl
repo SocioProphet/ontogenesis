@@ -1,0 +1,118 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix iw: <https://socioprophet.github.io/ontogenesis/domains/institutional-work#> .
+@prefix action: <https://socioprophet.github.io/ontogenesis/middle/action#> .
+
+<shapes/institutional-work.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass iw:WorkOrder ;
+  sh:message "Institutional Work SHACL bundle loaded." .
+
+iw:WorkOrderShape a sh:NodeShape ;
+  sh:targetClass iw:WorkOrder ;
+  sh:property [
+    sh:path iw:worksOnObjective ;
+    sh:minCount 1 ;
+    sh:class iw:Objective ;
+  ] ;
+  sh:property [
+    sh:path iw:belongsToWorkroom ;
+    sh:minCount 1 ;
+    sh:class iw:Workroom ;
+  ] ;
+  sh:property [
+    sh:path iw:status ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+iw:RoleBindingShape a sh:NodeShape ;
+  sh:targetClass iw:RoleBinding ;
+  sh:property [
+    sh:path iw:bindsActor ;
+    sh:minCount 1 ;
+    sh:class iw:Actor ;
+  ] ;
+  sh:property [
+    sh:path iw:bindsRole ;
+    sh:minCount 1 ;
+    sh:class iw:Role ;
+  ] ;
+  sh:property [
+    sh:path iw:bindingScope ;
+    sh:minCount 1 ;
+  ] .
+
+iw:PolicyDecisionShape a sh:NodeShape ;
+  sh:targetClass iw:PolicyDecision ;
+  sh:property [
+    sh:path iw:decisionState ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("allow" "deny" "escalate" "allow_with_constraints" "revoke" "blocked_expected") ;
+  ] ;
+  sh:property [
+    sh:path iw:decisionForActor ;
+    sh:minCount 1 ;
+    sh:class iw:Actor ;
+  ] .
+
+iw:GovernedActionShape a sh:NodeShape ;
+  sh:targetClass action:Action ;
+  sh:property [
+    sh:path iw:targetsAsset ;
+    sh:minCount 1 ;
+    sh:class iw:Asset ;
+  ] ;
+  sh:property [
+    sh:path iw:hasPolicyDecision ;
+    sh:minCount 1 ;
+    sh:class iw:PolicyDecision ;
+  ] ;
+  sh:property [
+    sh:path iw:emitsEvidence ;
+    sh:minCount 1 ;
+  ] .
+
+iw:ReviewShape a sh:NodeShape ;
+  sh:targetClass iw:Review ;
+  sh:property [
+    sh:path iw:reviewedBy ;
+    sh:minCount 1 ;
+    sh:class iw:Actor ;
+  ] ;
+  sh:property [
+    sh:path iw:reviewsSubject ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path iw:producesOutcome ;
+    sh:minCount 1 ;
+    sh:class iw:Outcome ;
+  ] .
+
+iw:OutcomeShape a sh:NodeShape ;
+  sh:targetClass iw:Outcome ;
+  sh:property [
+    sh:path iw:outcomeForWorkOrder ;
+    sh:minCount 1 ;
+    sh:class iw:WorkOrder ;
+  ] ;
+  sh:property [
+    sh:path iw:hasScore ;
+    sh:minCount 1 ;
+    sh:class iw:Score ;
+  ] .
+
+iw:ScoreShape a sh:NodeShape ;
+  sh:targetClass iw:Score ;
+  sh:property [
+    sh:path iw:scoreDimension ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path iw:scoreValue ;
+    sh:minCount 1 ;
+    sh:datatype xsd:decimal ;
+  ] .
