@@ -1,0 +1,61 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+
+<shapes/semantic_mapping.shacl.ttl> a owl:Ontology ;
+  dct:title "SHACL — Semantic Mapping" ;
+  dct:description "Promotion gates for governed ontology alignment and mapping assertions." ;
+  owl:versionInfo "0.1.0" .
+
+smap:MappingAssertionShape a sh:NodeShape ;
+  sh:targetClass smap:MappingAssertion ;
+  sh:property [
+    sh:path smap:mapsFrom ;
+    sh:minCount 1 ;
+    sh:message "A mapping assertion must declare the Ontogenesis/source concept it maps from." ;
+  ] ;
+  sh:property [
+    sh:path smap:mapsTo ;
+    sh:minCount 1 ;
+    sh:message "A mapping assertion must declare the external/target concept it maps to." ;
+  ] ;
+  sh:property [
+    sh:path smap:usesMappingPredicate ;
+    sh:minCount 1 ;
+    sh:class smap:MappingPredicate ;
+    sh:message "A mapping assertion must declare the mapping predicate classifying the semantic relationship." ;
+  ] ;
+  sh:property [
+    sh:path smap:confidence ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+    sh:message "A mapping assertion must declare a confidence value between 0.0 and 1.0." ;
+  ] ;
+  sh:property [
+    sh:path smap:status ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A mapping assertion must declare a lifecycle status such as draft, reviewed, approved, deprecated, or rejected." ;
+  ] .
+
+smap:ExternalOntologyShape a sh:NodeShape ;
+  sh:targetClass smap:ExternalOntology ;
+  sh:property [
+    sh:path smap:standardName ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path smap:standardUrl ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:anyURI ;
+  ] .
