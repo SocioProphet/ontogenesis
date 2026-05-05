@@ -1,0 +1,99 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/scenarios/defense-c2-cop#> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:C2GovernanceSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:C2Anchor ;
+  cs:hasObjectiveFunction ex:C2Objective ;
+  cs:hasEmbodiment ex:C2Embodiment ;
+  cs:hasChamber ex:C2Chamber ;
+  cs:governedByCompact ex:C2Compact .
+
+ex:C2Anchor a cs:IdentityAnchor .
+ex:C2Objective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:C2Embodiment a cs:FederatedEmbodiment .
+ex:C2Chamber a cs:Chamber .
+ex:C2Compact a cs:GovernanceCompact ; cs:governanceRuleText "defensive C2 common-operational-picture compact" .
+
+ex:UnitA a c2:Unit ;
+  upper:hasIdentifier "unit-a" ;
+  party:hasIdentityRecord ex:UnitAIdentity ;
+  party:hasRoleAssignment ex:UnitARole ;
+  c2:assignedToMission ex:MissionA ;
+  c2:hasCapability ex:ReconCapability ;
+  c2:hasReadinessAssessment ex:ReadinessA ;
+  c2:hasLogisticsState ex:LogisticsA .
+
+ex:UnitAIdentity a party:IdentityRecord .
+ex:UnitARole a party:RoleAssignment ;
+  party:roleHeldBy ex:UnitA ;
+  party:roleWithinSelf ex:C2GovernanceSelf ;
+  party:roleName "mission-unit" .
+
+ex:MissionA a c2:Mission ;
+  c2:missionIdentifier "MISSION-COP-001" ;
+  c2:usesAsset ex:SensorA ;
+  c2:locatedInArea ex:AreaAlpha ;
+  c2:hasCourseOfAction ex:COAA ;
+  c2:governedByROE ex:OperatingConstraintA ;
+  c2:dependsOnSupplyChainElement ex:C2SupplySystem .
+
+ex:ReconCapability a c2:Capability ;
+  upper:hasIdentifier "recon-capability" .
+
+ex:SensorA a c2:Sensor ;
+  upper:hasIdentifier "sensor-a" ;
+  c2:hasCyberState ex:CyberStateA ;
+  c2:locatedInArea ex:AreaAlpha .
+
+ex:AreaAlpha a c2:OperationalArea ;
+  c2:hasThreatAssessment ex:ThreatAssessmentA .
+
+ex:COAA a c2:CourseOfAction ;
+  upper:hasIdentifier "coa-a" .
+
+ex:OperatingConstraintA a c2:RuleOfEngagement ;
+  c2:roeText "demo defensive operating constraint" .
+
+ex:ThreatAssessmentA a c2:ThreatAssessment ;
+  c2:threatLevel "medium" ;
+  upper:describes ex:AreaAlpha .
+
+ex:CyberStateA a c2:CyberState, cyber:Finding ;
+  c2:cyberStateLabel "degraded-but-operational" ;
+  cyber:severity "medium" .
+
+ex:ReadinessA a c2:ReadinessAssessment ;
+  c2:readinessLevel "amber" .
+
+ex:LogisticsA a c2:LogisticsState ;
+  c2:logisticsStatus "constrained" .
+
+ex:C2SupplySystem a sc:SupplyChainSystem ;
+  sc:hasAgent ex:C2Supplier .
+
+ex:C2Supplier a sc:Supplier ;
+  upper:hasIdentifier "c2-supplier" ;
+  party:hasIdentityRecord ex:C2SupplierIdentity ;
+  party:hasRoleAssignment ex:C2SupplierRole .
+
+ex:C2SupplierIdentity a party:IdentityRecord .
+ex:C2SupplierRole a party:RoleAssignment ;
+  party:roleHeldBy ex:C2Supplier ;
+  party:roleWithinSelf ex:C2GovernanceSelf ;
+  party:roleName "mission-supplier" .
+
+ex:C2ComponentFeature a ps:Feature .
+ex:C2Component a sc:Component ;
+  upper:hasIdentifier "c2-component" ;
+  ps:includesFeature ex:C2ComponentFeature .
+
+ex:COPSnapshotA a c2:CommonOperationalPicture ;
+  c2:copIncludesEntity ex:MissionA, ex:UnitA, ex:SensorA, ex:AreaAlpha, ex:ThreatAssessmentA, ex:CyberStateA, ex:ReadinessA, ex:LogisticsA .
