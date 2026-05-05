@@ -1,0 +1,18 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<catalog/semantic_sector_scenarios_registry.ttl> a owl:Ontology ;
+  dct:title "Semantic Sector Scenario Registry Supplement" ;
+  dct:description "Supplemental registry entries for deeper finance, CTI, investigation, supply-chain, and defense/C2 scenario fixtures." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl>, <catalog/semantic_sector_registry.ttl> .
+
+og:ScenarioFinanceAMLKYC a og:Module ; og:layer "Examples" ; og:path "examples/scenarios/finance_aml_kyc_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/scenarios/finance-aml-kyc#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Finance AML KYC scenario" .
+og:ScenarioThreatIntelLifecycle a og:Module ; og:layer "Examples" ; og:path "examples/scenarios/threat_intel_lifecycle_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/scenarios/threat-intel-lifecycle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Threat intelligence lifecycle scenario" .
+og:ScenarioInvestigationCustody a og:Module ; og:layer "Examples" ; og:path "examples/scenarios/investigation_custody_timeline_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/scenarios/investigation-custody#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Investigation custody timeline scenario" .
+og:ScenarioSupplyChainResilience a og:Module ; og:layer "Examples" ; og:path "examples/scenarios/supply_chain_resilience_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/scenarios/supply-chain-resilience#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Supply-chain resilience scenario" .
+og:ScenarioDefenseC2COP a og:Module ; og:layer "Examples" ; og:path "examples/scenarios/defense_c2_cop_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/scenarios/defense-c2-cop#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Defense C2 common operational picture scenario" .
+og:SemanticSectorScenariosNote a og:Module ; og:layer "Docs" ; og:path "docs/semantic-enterprise/sector-scenarios-v0.1.md" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/docs/semantic-enterprise/sector-scenarios#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic sector scenarios tranche note" .
