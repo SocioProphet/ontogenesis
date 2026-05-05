@@ -26,6 +26,8 @@ This repo defines a layered ontology stack plus gates/tools.
 ## Platform
 - `Platform/platform.ttl`
   - Component taxonomy: SourceOS, Genesis, Inception, Twin, Mesh
+- `Platform/knowledge-context.ttl`
+  - Knowledge Context v1 semantic governance: passages, mentions, claims, provenance, embedding references, vector index references, and entity resolution records
 - `Platform/SourceOS.ttl`
   - ostree deployments, Nix flake generations, rollback semantics
 - `Platform/Genesis.ttl`
@@ -78,7 +80,7 @@ This repo defines a layered ontology stack plus gates/tools.
   - semantic lift into SHACL / JSON-LD / ontology-native examples is still pending and should remain the next step before wider lifecycle expansion
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
