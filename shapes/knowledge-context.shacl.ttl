@@ -1,0 +1,86 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix kc: <https://socioprophet.github.io/ontogenesis/platform/knowledge-context#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<shapes/knowledge-context.shacl.ttl> a owl:Ontology ;
+  dct:title "Knowledge Context SHACL Shapes" ;
+  dct:description "Promotion-gate shapes for the Platform Knowledge Context ontology module." ;
+  owl:versionInfo "0.1.0" .
+
+kc:KnowledgeContextShape a sh:NodeShape ;
+  sh:targetClass kc:KnowledgeContext ;
+  sh:property [
+    sh:path kc:schemaLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path kc:contextLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+kc:PassageShape a sh:NodeShape ;
+  sh:targetClass kc:Passage ;
+  sh:property [
+    sh:path kc:artifactId ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path kc:text ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+kc:MentionShape a sh:NodeShape ;
+  sh:targetClass kc:Mention ;
+  sh:property [
+    sh:path kc:surfaceForm ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path kc:inPassage ;
+    sh:minCount 1 ;
+    sh:class kc:Passage ;
+  ] ;
+  sh:property [
+    sh:path kc:mentionsEntity ;
+    sh:minCount 1 ;
+    sh:class kc:Entity ;
+  ] .
+
+kc:EmbeddingRefShape a sh:NodeShape ;
+  sh:targetClass kc:EmbeddingRef ;
+  sh:property [
+    sh:path kc:targetsNode ;
+    sh:minCount 1 ;
+    sh:class kc:KnowledgeArtifact ;
+  ] ;
+  sh:property [
+    sh:path kc:usesVectorIndex ;
+    sh:minCount 1 ;
+    sh:class kc:VectorIndexRef ;
+  ] ;
+  sh:property [
+    sh:path kc:embeddingModel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+kc:VectorIndexRefShape a sh:NodeShape ;
+  sh:targetClass kc:VectorIndexRef ;
+  sh:property [
+    sh:path kc:vectorBackend ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path kc:metric ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .

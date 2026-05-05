@@ -26,6 +26,7 @@ og:MiddleActionOntology a og:Module ; og:layer "Middle" ; og:path "Middle/action
 og:LowerBindings a og:Module ; og:layer "Lower" ; og:path "Lower/bindings-core.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/lower#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Lower bindings" .
 
 og:PlatformCore a og:Module ; og:layer "Platform" ; og:path "Platform/platform.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Platform core" .
+og:PlatformKnowledgeContext a og:Module ; og:layer "Platform" ; og:path "Platform/knowledge-context.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Knowledge Context" .
 og:SourceOS a og:Module ; og:layer "Platform" ; og:path "Platform/SourceOS.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "SourceOS" .
 og:Genesis a og:Module ; og:layer "Platform" ; og:path "Platform/Genesis.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Genesis" .
 og:Inception a og:Module ; og:layer "Platform" ; og:path "Platform/Inception.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/platform#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Inception" .

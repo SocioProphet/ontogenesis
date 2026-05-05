@@ -41,6 +41,12 @@
       "semver": "0.1.0"
     },
     {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformKnowledgeContext",
+      "layer": "Platform",
+      "path": "Platform/knowledge-context.ttl",
+      "semver": "0.1.0"
+    },
+    {
       "id": "https://socioprophet.github.io/ontogenesis/og#ProphetCLI",
       "layer": "Prophet",
       "path": "prophet/prophet_cli.ttl",
