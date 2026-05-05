@@ -1,0 +1,21 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<catalog/semantic_sector_registry.ttl> a owl:Ontology ;
+  dct:title "Semantic Sector Module Registry Supplement" ;
+  dct:description "Supplemental registry entries for finance, threat-intel, investigation, supply-chain, defense/C2, sector SHACL, context, and example fixture modules." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:DomainFinance a og:Module ; og:layer "Domains" ; og:path "Domains/finance.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/finance#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Finance domain" .
+og:DomainThreatIntel a og:Module ; og:layer "Domains" ; og:path "Domains/threat-intel.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/threat-intel#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Threat intelligence domain" .
+og:DomainInvestigation a og:Module ; og:layer "Domains" ; og:path "Domains/investigation.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/investigation#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Investigation domain" .
+og:DomainSupplyChain a og:Module ; og:layer "Domains" ; og:path "Domains/supply-chain.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/supply-chain#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Supply chain domain" .
+og:DomainDefenseC2 a og:Module ; og:layer "Domains" ; og:path "Domains/defense-c2.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/defense-c2#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Defense C2 domain" .
+
+og:ShapeSectorModules a og:Module ; og:layer "Shapes" ; og:path "shapes/sector_modules.shacl.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/shapes/sector-modules#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Sector module SHACL gates" .
+og:ContextSemanticSectors a og:Module ; og:layer "Contexts" ; og:path "contexts/semantic-sectors.context.jsonld" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/contexts/semantic-sectors#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic sectors JSON-LD context" .
+og:ExampleSemanticSectorDemo a og:Module ; og:layer "Examples" ; og:path "examples/semantic_sector_demo.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/semantic-sector#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic sector demo fixture" .
