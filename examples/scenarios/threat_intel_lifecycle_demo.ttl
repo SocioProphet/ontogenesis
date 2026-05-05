@@ -1,0 +1,72 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/scenarios/threat-intel-lifecycle#> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:CuratedFeedA a cti:CTISource ;
+  upper:hasIdentifier "curated-feed-a" ;
+  cti:sourceReliability "A" .
+
+ex:DomainObservableA a cti:Observable ;
+  cti:observableType "domain" ;
+  cti:observableValue "login-update.example.invalid" .
+
+ex:HashObservableA a cti:Observable ;
+  cti:observableType "sha256" ;
+  cti:observableValue "0000000000000000000000000000000000000000000000000000000000000000" .
+
+ex:IndicatorDomainA a cti:Indicator ;
+  cti:hasObservable ex:DomainObservableA ;
+  cti:reportedBy ex:CuratedFeedA ;
+  cti:confidence 0.78 ;
+  cti:firstSeen "2026-05-05T08:00:00Z"^^xsd:dateTime ;
+  cti:lastSeen "2026-05-05T12:00:00Z"^^xsd:dateTime .
+
+ex:IndicatorHashA a cti:Indicator ;
+  cti:hasObservable ex:HashObservableA ;
+  cti:reportedBy ex:CuratedFeedA ;
+  cti:confidence 0.84 ;
+  cti:firstSeen "2026-05-05T08:15:00Z"^^xsd:dateTime ;
+  cti:lastSeen "2026-05-05T12:10:00Z"^^xsd:dateTime .
+
+ex:ThreatActorA a cti:ThreatActor ;
+  upper:hasIdentifier "demo-actor-a" ;
+  cti:usesMalware ex:MalwareA ;
+  cti:usesTechnique ex:SpearphishingAttachment .
+
+ex:CampaignA a cti:Campaign ;
+  upper:hasIdentifier "campaign-demo-a" ;
+  cti:targetsEntity ex:TargetSectorA ;
+  cti:usesTechnique ex:SpearphishingAttachment .
+
+ex:TargetSectorA a upper:InformationArtifact ;
+  upper:hasIdentifier "financial-services-demo-target" .
+
+ex:MalwareA a cti:Malware ;
+  upper:hasIdentifier "malware-demo-a" .
+
+ex:SpearphishingAttachment a cti:TTP ;
+  upper:hasIdentifier "ttp-demo-spearphishing-attachment" ;
+  cti:exploitsVulnerability ex:MacroExecutionRisk ;
+  cti:mitigatedBy ex:AttachmentSandboxing .
+
+ex:MacroExecutionRisk a cti:Vulnerability ;
+  cyber:severity "high" .
+
+ex:AttachmentSandboxing a cti:DefensiveTechnique ;
+  upper:hasIdentifier "defensive-technique-attachment-sandboxing" .
+
+ex:MailGatewayCountermeasure a cti:Countermeasure ;
+  cti:countermeasureFor ex:SpearphishingAttachment ;
+  upper:dependsOn ex:AttachmentSandboxing .
+
+ex:AttributionAssessmentA a cti:AttributionAssessment ;
+  cti:assessesCampaign ex:CampaignA ;
+  cti:attributedTo ex:ThreatActorA ;
+  cti:confidence 0.66 ;
+  cti:reportedBy ex:CuratedFeedA .
+
+ex:IndicatorDomainA cti:indicatorOf ex:CampaignA .
+ex:IndicatorHashA cti:indicatorOf ex:MalwareA .
