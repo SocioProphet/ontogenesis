@@ -1,0 +1,48 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix gist:  <https://w3id.org/semanticarts/ns/ontology/gist/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/gist.ttl> a owl:Ontology ;
+  dct:title "Alignment — gist" ;
+  dct:description "Governed alignment scaffold from Ontogenesis upper/business primitives to gist-style enterprise upper ontology concepts. This maps to gist without vendoring the full external ontology tree." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/business_core.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:gistExternalOntology a smap:ExternalOntology ;
+  smap:standardName "gist" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://www.semanticarts.com/gist/" ;
+  rdfs:label "gist enterprise upper ontology" .
+
+align:UpperAgentToGistAgent a smap:MappingAssertion ;
+  smap:mapsFrom upper:Agent ;
+  smap:mapsTo gist:Agent ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:gistExternalOntology ;
+  smap:confidence 0.80 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis Agent and gist Agent both represent acting entities, but exact equivalence is deferred pending full external ontology review." .
+
+align:BusinessCompanyToGistOrganization a smap:MappingAssertion ;
+  smap:mapsFrom biz:Company ;
+  smap:mapsTo gist:Organization ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:gistExternalOntology ;
+  smap:confidence 0.85 ;
+  smap:status "draft" ;
+  smap:rationale "Company is an organization-like business system; close match is safer than exact equivalence until legal/entity distinctions are reviewed." .
+
+align:BusinessContractToGistAgreement a smap:MappingAssertion ;
+  smap:mapsFrom biz:Contract ;
+  smap:mapsTo gist:Agreement ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:gistExternalOntology ;
+  smap:confidence 0.85 ;
+  smap:status "draft" ;
+  smap:rationale "A contract is a governed agreement-like information artifact in Ontogenesis business semantics." .
