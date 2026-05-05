@@ -1,0 +1,176 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/semantic-sector#> .
+@prefix fin:   <https://socioprophet.github.io/ontogenesis/domains/finance#> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:DemoCyberneticSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:DemoIdentityAnchor ;
+  cs:hasObjectiveFunction ex:DemoObjective ;
+  cs:hasEmbodiment ex:DemoEmbodiment ;
+  cs:hasChamber ex:DemoChamber ;
+  cs:governedByCompact ex:DemoCompact .
+
+ex:DemoIdentityAnchor a cs:IdentityAnchor .
+ex:DemoObjective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:DemoEmbodiment a cs:FederatedEmbodiment .
+ex:DemoChamber a cs:Chamber .
+ex:DemoCompact a cs:GovernanceCompact ; cs:governanceRuleText "demo semantic-sector governance compact" .
+
+ex:DemoJurisdiction a legal:Jurisdiction ;
+  legal:jurisdictionCode "DEMO" .
+
+ex:AcmeBank a legal:LegalEntity, party:Organization ;
+  upper:hasIdentifier "acme-bank" ;
+  legal:incorporatedIn ex:DemoJurisdiction ;
+  party:hasIdentityRecord ex:AcmeBankIdentity ;
+  party:hasRoleAssignment ex:AcmeBankRole .
+
+ex:AcmeBankIdentity a party:IdentityRecord .
+ex:AcmeBankRole a party:RoleAssignment ;
+  party:roleHeldBy ex:AcmeBank ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "regulated-financial-institution" .
+
+ex:CounterpartyA a fin:Counterparty, party:Organization ;
+  upper:hasIdentifier "counterparty-a" ;
+  party:hasIdentityRecord ex:CounterpartyAIdentity ;
+  party:hasRoleAssignment ex:CounterpartyARole .
+
+ex:CounterpartyAIdentity a party:IdentityRecord .
+ex:CounterpartyARole a party:RoleAssignment ;
+  party:roleHeldBy ex:CounterpartyA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "transaction-counterparty" .
+
+ex:AccountA a fin:FinancialAccount ;
+  upper:hasIdentifier "acct-a" .
+
+ex:TransactionA a fin:FinancialTransaction ;
+  fin:hasSender ex:AcmeBank ;
+  fin:hasRecipient ex:CounterpartyA ;
+  fin:usesAccount ex:AccountA ;
+  fin:amount 125000.00 ;
+  fin:currency "USD" ;
+  fin:transactedAt "2026-05-05T10:00:00Z"^^xsd:dateTime .
+
+ex:RiskScoreA a fin:RiskScore ;
+  fin:riskValue 0.72 ;
+  fin:riskModel "semantic-enterprise-demo-risk-v0" .
+
+ex:AMLAlertA a fin:AMLAlert ;
+  fin:alertSubject ex:TransactionA ;
+  fin:alertStatus "review" .
+
+ex:ThreatFeedA a cti:CTISource ;
+  cti:sourceReliability "curated-demo" .
+
+ex:ObservableA a cti:Observable ;
+  cti:observableType "domain" ;
+  cti:observableValue "example.invalid" .
+
+ex:IndicatorA a cti:Indicator ;
+  cti:hasObservable ex:ObservableA ;
+  cti:reportedBy ex:ThreatFeedA ;
+  cti:confidence 0.81 ;
+  cti:firstSeen "2026-05-05T09:00:00Z"^^xsd:dateTime .
+
+ex:CaseA a inv:Case ;
+  inv:caseIdentifier "CASE-DEMO-001" .
+
+ex:CustodianA a party:NaturalPerson ;
+  upper:hasIdentifier "custodian-a" ;
+  party:hasIdentityRecord ex:CustodianAIdentity ;
+  party:hasRoleAssignment ex:CustodianARole .
+
+ex:CustodianAIdentity a party:IdentityRecord .
+ex:CustodianARole a party:RoleAssignment ;
+  party:roleHeldBy ex:CustodianA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "evidence-custodian" .
+
+ex:CustodyEventA a inv:ChainOfCustodyEvent ;
+  inv:custodyHeldBy ex:CustodianA ;
+  inv:custodyTimestamp "2026-05-05T11:00:00Z"^^xsd:dateTime .
+
+ex:DigitalEvidenceA a inv:DigitalEvidence, inv:EvidenceItem ;
+  inv:evidenceIdentifier "EVID-DEMO-001" ;
+  inv:hasCustodyEvent ex:CustodyEventA ;
+  inv:linkedToSecurityEvent ex:SecurityEventA .
+
+ex:SecurityEventA a cyber:SecurityEvent .
+
+ex:SupplierA a sc:Supplier ;
+  upper:hasIdentifier "supplier-a" ;
+  party:hasIdentityRecord ex:SupplierAIdentity ;
+  party:hasRoleAssignment ex:SupplierARole .
+
+ex:SupplierAIdentity a party:IdentityRecord .
+ex:SupplierARole a party:RoleAssignment ;
+  party:roleHeldBy ex:SupplierA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "tier-one-supplier" .
+
+ex:FacilityOrigin a sc:Facility ;
+  upper:hasIdentifier "facility-origin" ;
+  sc:capacityUnits 1000.0 .
+
+ex:FacilityDestination a sc:Facility ;
+  upper:hasIdentifier "facility-destination" ;
+  sc:capacityUnits 800.0 .
+
+ex:BillOfLadingA a sc:BillOfLading ;
+  upper:hasIdentifier "bol-demo-001" .
+
+ex:ShipmentA a sc:Shipment ;
+  sc:shipsFrom ex:FacilityOrigin ;
+  sc:shipsTo ex:FacilityDestination ;
+  sc:shipmentDocument ex:BillOfLadingA ;
+  sc:shipmentStatus "in-transit" .
+
+ex:ComponentFeatureA a ps:Feature .
+
+ex:ComponentA a sc:Component ;
+  upper:hasIdentifier "component-a" ;
+  ps:includesFeature ex:ComponentFeatureA .
+
+ex:SupplyRiskA a sc:SupplyRisk ;
+  sc:riskAffects ex:ComponentA ;
+  sc:riskLevel "medium" .
+
+ex:MissionA a c2:Mission ;
+  c2:missionIdentifier "MISSION-DEMO-001" ;
+  c2:hasCourseOfAction ex:CourseOfActionA ;
+  c2:governedByROE ex:ROEA ;
+  c2:dependsOnSupplyChainElement ex:SupplySystemA .
+
+ex:CourseOfActionA a c2:CourseOfAction .
+
+ex:ROEA a c2:RuleOfEngagement ;
+  c2:roeText "demo operating constraint" .
+
+ex:SupplySystemA a sc:SupplyChainSystem .
+
+ex:UnitA a c2:Unit ;
+  party:hasIdentityRecord ex:UnitAIdentity ;
+  party:hasRoleAssignment ex:UnitARole ;
+  c2:assignedToMission ex:MissionA ;
+  c2:hasReadinessAssessment ex:ReadinessA .
+
+ex:UnitAIdentity a party:IdentityRecord .
+ex:UnitARole a party:RoleAssignment ;
+  party:roleHeldBy ex:UnitA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "mission-unit" .
+
+ex:ReadinessA a c2:ReadinessAssessment ;
+  c2:readinessLevel "green" .

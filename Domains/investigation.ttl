@@ -1,0 +1,49 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/investigation.ttl> a owl:Ontology ;
+  dct:title "Domain — Investigation" ;
+  dct:description "Cyber-physical investigation semantics for cases, evidence, traces, investigative actions, custody events, persons of interest, locations, hypotheses, and source provenance." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/cyber.ttl>, <Domains/party-identity.ttl> .
+
+inv:Investigation a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Investigation" .
+inv:Case a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Case" .
+inv:EvidenceItem a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Evidence item" .
+inv:DigitalEvidence a owl:Class ; rdfs:subClassOf inv:EvidenceItem ; rdfs:label "Digital evidence" .
+inv:PhysicalEvidence a owl:Class ; rdfs:subClassOf inv:EvidenceItem ; rdfs:label "Physical evidence" .
+inv:Trace a owl:Class ; rdfs:subClassOf inv:EvidenceItem ; rdfs:label "Trace" .
+inv:InvestigativeAction a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Investigative action" .
+inv:ChainOfCustodyEvent a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Chain of custody event" .
+inv:PersonOfInterest a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Person of interest" .
+inv:Witness a owl:Class ; rdfs:subClassOf party:Party ; rdfs:label "Witness" .
+inv:LocationArtifact a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Location artifact" .
+inv:Hypothesis a owl:Class ; rdfs:subClassOf upper:Assertion ; rdfs:label "Hypothesis" .
+inv:SourceReport a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Source report" .
+
+inv:hasCase a owl:ObjectProperty ; rdfs:domain inv:Investigation ; rdfs:range inv:Case ; rdfs:label "has case" .
+inv:hasEvidence a owl:ObjectProperty ; rdfs:domain inv:Case ; rdfs:range inv:EvidenceItem ; rdfs:label "has evidence" .
+inv:collectedByAction a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:InvestigativeAction ; rdfs:label "collected by action" .
+inv:hasCustodyEvent a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:ChainOfCustodyEvent ; rdfs:label "has custody event" .
+inv:custodyHeldBy a owl:ObjectProperty ; rdfs:domain inv:ChainOfCustodyEvent ; rdfs:range party:Party ; rdfs:label "custody held by" .
+inv:associatedParty a owl:ObjectProperty ; rdfs:domain inv:Case ; rdfs:range party:Party ; rdfs:label "associated party" .
+inv:associatedLocation a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:LocationArtifact ; rdfs:label "associated location" .
+inv:derivedFromTrace a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:Trace ; rdfs:label "derived from trace" .
+inv:linkedToSecurityEvent a owl:ObjectProperty ; rdfs:domain inv:DigitalEvidence ; rdfs:range cyber:SecurityEvent ; rdfs:label "linked to security event" .
+inv:supportsHypothesis a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:Hypothesis ; rdfs:label "supports hypothesis" .
+inv:contradictsHypothesis a owl:ObjectProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range inv:Hypothesis ; rdfs:label "contradicts hypothesis" .
+inv:reportedIn a owl:ObjectProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range inv:SourceReport ; rdfs:label "reported in" .
+
+inv:caseIdentifier a owl:DatatypeProperty ; rdfs:domain inv:Case ; rdfs:range xsd:string ; rdfs:label "case identifier" .
+inv:evidenceIdentifier a owl:DatatypeProperty ; rdfs:domain inv:EvidenceItem ; rdfs:range xsd:string ; rdfs:label "evidence identifier" .
+inv:actionTimestamp a owl:DatatypeProperty ; rdfs:domain inv:InvestigativeAction ; rdfs:range xsd:dateTime ; rdfs:label "action timestamp" .
+inv:custodyTimestamp a owl:DatatypeProperty ; rdfs:domain inv:ChainOfCustodyEvent ; rdfs:range xsd:dateTime ; rdfs:label "custody timestamp" .
+inv:locationLabel a owl:DatatypeProperty ; rdfs:domain inv:LocationArtifact ; rdfs:range xsd:string ; rdfs:label "location label" .
+inv:hypothesisStatus a owl:DatatypeProperty ; rdfs:domain inv:Hypothesis ; rdfs:range xsd:string ; rdfs:label "hypothesis status" .

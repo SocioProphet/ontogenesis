@@ -1,0 +1,46 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/threat-intel.ttl> a owl:Ontology ;
+  dct:title "Domain — Threat Intelligence" ;
+  dct:description "Cyber threat intelligence semantics for indicators, observables, campaigns, threat actors, malware, vulnerabilities, techniques, defensive techniques, countermeasures, confidence, and source provenance." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/cyber.ttl> .
+
+cti:CTISource a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "CTI source" .
+cti:Observable a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Observable" .
+cti:Indicator a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Indicator" .
+cti:ThreatActor a owl:Class ; rdfs:subClassOf upper:Agent ; rdfs:label "Threat actor" .
+cti:Campaign a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Campaign" .
+cti:Malware a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Malware" .
+cti:Vulnerability a owl:Class ; rdfs:subClassOf cyber:Finding ; rdfs:label "Vulnerability" .
+cti:AttackPattern a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Attack pattern" .
+cti:TTP a owl:Class ; rdfs:subClassOf cti:AttackPattern ; rdfs:label "Tactic technique or procedure" .
+cti:DefensiveTechnique a owl:Class ; rdfs:subClassOf cyber:Control ; rdfs:label "Defensive technique" .
+cti:Countermeasure a owl:Class ; rdfs:subClassOf cyber:Control ; rdfs:label "Countermeasure" .
+cti:AttributionAssessment a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Attribution assessment" .
+
+cti:reportedBy a owl:ObjectProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range cti:CTISource ; rdfs:label "reported by" .
+cti:indicatorOf a owl:ObjectProperty ; rdfs:domain cti:Indicator ; rdfs:range upper:Entity ; rdfs:label "indicator of" .
+cti:hasObservable a owl:ObjectProperty ; rdfs:domain cti:Indicator ; rdfs:range cti:Observable ; rdfs:label "has observable" .
+cti:usesMalware a owl:ObjectProperty ; rdfs:domain cti:ThreatActor ; rdfs:range cti:Malware ; rdfs:label "uses malware" .
+cti:usesTechnique a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range cti:TTP ; rdfs:label "uses technique" .
+cti:exploitsVulnerability a owl:ObjectProperty ; rdfs:domain cti:AttackPattern ; rdfs:range cti:Vulnerability ; rdfs:label "exploits vulnerability" .
+cti:targetsEntity a owl:ObjectProperty ; rdfs:domain cti:Campaign ; rdfs:range upper:Entity ; rdfs:label "targets entity" .
+cti:attributedTo a owl:ObjectProperty ; rdfs:domain cti:AttributionAssessment ; rdfs:range cti:ThreatActor ; rdfs:label "attributed to" .
+cti:assessesCampaign a owl:ObjectProperty ; rdfs:domain cti:AttributionAssessment ; rdfs:range cti:Campaign ; rdfs:label "assesses campaign" .
+cti:mitigatedBy a owl:ObjectProperty ; rdfs:domain cti:AttackPattern ; rdfs:range cti:DefensiveTechnique ; rdfs:label "mitigated by" .
+cti:countermeasureFor a owl:ObjectProperty ; rdfs:domain cti:Countermeasure ; rdfs:range upper:Entity ; rdfs:label "countermeasure for" .
+
+cti:observableType a owl:DatatypeProperty ; rdfs:domain cti:Observable ; rdfs:range xsd:string ; rdfs:label "observable type" .
+cti:observableValue a owl:DatatypeProperty ; rdfs:domain cti:Observable ; rdfs:range xsd:string ; rdfs:label "observable value" .
+cti:confidence a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:decimal ; rdfs:label "confidence" .
+cti:firstSeen a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:dateTime ; rdfs:label "first seen" .
+cti:lastSeen a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:dateTime ; rdfs:label "last seen" .
+cti:sourceReliability a owl:DatatypeProperty ; rdfs:domain cti:CTISource ; rdfs:range xsd:string ; rdfs:label "source reliability" .

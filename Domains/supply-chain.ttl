@@ -1,0 +1,51 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix prod:  <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/supply-chain.ttl> a owl:Ontology ;
+  dct:title "Domain — Supply Chain" ;
+  dct:description "Supply-chain semantics for agents, facilities, components, shipments, orders, documents, dependencies, disruption risk, mitigations, alternate sources, capacity, and lead time." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/business_core.ttl>, <Domains/product-service.ttl>, <Domains/party-identity.ttl> .
+
+sc:SupplyChainSystem a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Supply chain system" .
+sc:SupplyChainAgent a owl:Class ; rdfs:subClassOf party:Organization ; rdfs:label "Supply chain agent" .
+sc:Supplier a owl:Class ; rdfs:subClassOf sc:SupplyChainAgent ; rdfs:label "Supplier" .
+sc:Manufacturer a owl:Class ; rdfs:subClassOf sc:SupplyChainAgent ; rdfs:label "Manufacturer" .
+sc:Distributor a owl:Class ; rdfs:subClassOf sc:SupplyChainAgent ; rdfs:label "Distributor" .
+sc:Retailer a owl:Class ; rdfs:subClassOf sc:SupplyChainAgent ; rdfs:label "Retailer" .
+sc:Facility a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Facility" .
+sc:Component a owl:Class ; rdfs:subClassOf prod:Capability ; rdfs:label "Component" .
+sc:Shipment a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Shipment" .
+sc:PurchaseOrder a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Purchase order" .
+sc:BillOfLading a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Bill of lading" .
+sc:SupplyRisk a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Supply risk" .
+sc:DisruptionEvent a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Disruption event" .
+sc:MitigationAction a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Mitigation action" .
+sc:AlternateSource a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Alternate source" .
+
+sc:hasAgent a owl:ObjectProperty ; rdfs:domain sc:SupplyChainSystem ; rdfs:range sc:SupplyChainAgent ; rdfs:label "has agent" .
+sc:hasFacility a owl:ObjectProperty ; rdfs:domain sc:SupplyChainAgent ; rdfs:range sc:Facility ; rdfs:label "has facility" .
+sc:suppliesComponent a owl:ObjectProperty ; rdfs:domain sc:Supplier ; rdfs:range sc:Component ; rdfs:label "supplies component" .
+sc:dependsOnComponent a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range sc:Component ; rdfs:label "depends on component" .
+sc:shipsFrom a owl:ObjectProperty ; rdfs:domain sc:Shipment ; rdfs:range sc:Facility ; rdfs:label "ships from" .
+sc:shipsTo a owl:ObjectProperty ; rdfs:domain sc:Shipment ; rdfs:range sc:Facility ; rdfs:label "ships to" .
+sc:shipmentDocument a owl:ObjectProperty ; rdfs:domain sc:Shipment ; rdfs:range upper:InformationArtifact ; rdfs:label "shipment document" .
+sc:hasSupplyRisk a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range sc:SupplyRisk ; rdfs:label "has supply risk" .
+sc:riskAffects a owl:ObjectProperty ; rdfs:domain sc:SupplyRisk ; rdfs:range upper:Entity ; rdfs:label "risk affects" .
+sc:mitigatedBy a owl:ObjectProperty ; rdfs:domain sc:SupplyRisk ; rdfs:range sc:MitigationAction ; rdfs:label "mitigated by" .
+sc:hasAlternateSource a owl:ObjectProperty ; rdfs:domain sc:Component ; rdfs:range sc:AlternateSource ; rdfs:label "has alternate source" .
+sc:alternateSupplier a owl:ObjectProperty ; rdfs:domain sc:AlternateSource ; rdfs:range sc:Supplier ; rdfs:label "alternate supplier" .
+
+sc:leadTimeDays a owl:DatatypeProperty ; rdfs:domain upper:Entity ; rdfs:range xsd:decimal ; rdfs:label "lead time days" .
+sc:capacityUnits a owl:DatatypeProperty ; rdfs:domain sc:Facility ; rdfs:range xsd:decimal ; rdfs:label "capacity units" .
+sc:shipmentStatus a owl:DatatypeProperty ; rdfs:domain sc:Shipment ; rdfs:range xsd:string ; rdfs:label "shipment status" .
+sc:riskLevel a owl:DatatypeProperty ; rdfs:domain sc:SupplyRisk ; rdfs:range xsd:string ; rdfs:label "risk level" .
+sc:disruptionTimestamp a owl:DatatypeProperty ; rdfs:domain sc:DisruptionEvent ; rdfs:range xsd:dateTime ; rdfs:label "disruption timestamp" .
