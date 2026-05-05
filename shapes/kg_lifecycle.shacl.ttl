@@ -1,0 +1,51 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix kgl:   <https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#> .
+
+<shapes/kg_lifecycle.shacl.ttl> a owl:Ontology ;
+  dct:title "SHACL — Knowledge Graph Lifecycle" ;
+  dct:description "Promotion gates for knowledge graph lifecycle pipelines, outputs, validation, reasoning, and deployment surfaces." ;
+  owl:versionInfo "0.1.0" .
+
+kgl:PipelineShape a sh:NodeShape ;
+  sh:targetClass kgl:Pipeline ;
+  sh:property [
+    sh:path kgl:hasPhase ;
+    sh:minCount 1 ;
+    sh:class kgl:LifecyclePhase ;
+    sh:message "A knowledge graph pipeline must declare at least one lifecycle phase." ;
+  ] ;
+  sh:property [
+    sh:path kgl:sourceSystem ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A knowledge graph pipeline must declare at least one source system or source family." ;
+  ] ;
+  sh:property [
+    sh:path kgl:producesGraphOutput ;
+    sh:minCount 1 ;
+    sh:class kgl:GraphOutput ;
+    sh:message "A knowledge graph pipeline must declare at least one governed graph output." ;
+  ] .
+
+kgl:GraphOutputShape a sh:NodeShape ;
+  sh:targetClass kgl:GraphOutput ;
+  sh:property [
+    sh:path kgl:qualityStatus ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A graph output must declare its quality status." ;
+  ] .
+
+kgl:SPARQLEndpointShape a sh:NodeShape ;
+  sh:targetClass kgl:SPARQLEndpoint ;
+  sh:property [
+    sh:path kgl:queryInterfaceUrl ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:anyURI ;
+    sh:message "A SPARQL endpoint must declare a query interface URL." ;
+  ] .
