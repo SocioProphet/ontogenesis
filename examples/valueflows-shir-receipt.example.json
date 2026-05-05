@@ -1,0 +1,46 @@
+{
+  "apiVersion": "shir.socioprophet.dev/v0.1",
+  "kind": "SHIRReceipt",
+  "metadata": {
+    "name": "valueflows-governed-task-flow-receipt",
+    "sourceLane": "bindings/valueflows_governed",
+    "projectionManifest": "bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json"
+  },
+  "receipt": {
+    "id": "shir-receipt:valueflows:robo-leaknet-cycle1:e9",
+    "type": "shir:Receipt",
+    "sourceProjectionName": "authoritative_projection_v2",
+    "sourceCheckpoint": "urn:checkpoint:e9",
+    "sourceMaterializedStateHash": "sha256:eb4070d0de8621ec1393f3a0bb93fa62287e718a33d8dfcfde5039b5705776d3",
+    "ontologyProfile": "valueflows-governed-v0.4-terminal-revocation",
+    "targetProfile": "SHIR v0.1",
+    "projectionStatus": "partial-preserving",
+    "policyScopeRefs": [
+      "urn:delegation:tibi-worker2-task-admin",
+      "urn:capabilitygrant:worker-2:task-offer"
+    ],
+    "temporalScopeRefs": [
+      "urn:processrun:robo-leaknet-cycle1",
+      "urn:task:robo-leaknet-cycle1-3d-design"
+    ],
+    "projectionLossReport": {
+      "id": "shir-projection-loss:valueflows:robo-leaknet-cycle1:e9",
+      "type": "shir:ProjectionLossReport",
+      "preserved": [
+        "process context",
+        "task node identity",
+        "delegation authority scope",
+        "capability grant scope",
+        "commitment role binding",
+        "checkpoint hash"
+      ],
+      "droppedOrDeferred": [
+        "full replay event order",
+        "full Rego decision trace",
+        "Memory Mesh persistence receipt",
+        "complete actor identity graph"
+      ],
+      "requiresFollowup": true
+    }
+  }
+}

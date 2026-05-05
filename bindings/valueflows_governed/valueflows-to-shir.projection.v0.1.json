@@ -1,0 +1,112 @@
+{
+  "apiVersion": "ontogenesis.socioprophet.dev/v0.1",
+  "kind": "ValueFlowsToSHIRProjectionManifest",
+  "metadata": {
+    "name": "valueflows-governed-to-shir-v0.1",
+    "sourceLane": "bindings/valueflows_governed",
+    "targetSpec": "docs/specs/shir-v0.1.md",
+    "status": "draft"
+  },
+  "sourceProfile": {
+    "name": "valueflows-governed",
+    "projectionName": "authoritative_projection_v2",
+    "objects": [
+      "ProcessRun",
+      "Task",
+      "Delegation",
+      "CapabilityGrant",
+      "Commitment",
+      "CairnCheckpoint"
+    ],
+    "runtimeProofs": [
+      "terminal_lockout"
+    ]
+  },
+  "targetProfile": {
+    "name": "SHIR",
+    "version": "v0.1",
+    "objects": [
+      "Node",
+      "Context",
+      "Connector",
+      "RoleBinding",
+      "Link",
+      "Assertion",
+      "Evidence",
+      "TemporalScope",
+      "PolicyScope",
+      "Projection",
+      "ProjectionLossReport",
+      "Receipt"
+    ]
+  },
+  "mappings": [
+    {
+      "source": "ProcessRun",
+      "targets": ["shir:Context", "shir:Node"],
+      "rule": "Project process run as recursive execution context and addressable semantic node."
+    },
+    {
+      "source": "Task",
+      "targets": ["shir:Node"],
+      "rule": "Project task as operational work node scoped by ProcessRun context."
+    },
+    {
+      "source": "Delegation",
+      "targets": ["shir:Assertion", "shir:PolicyScope", "shir:TemporalScope"],
+      "rule": "Project delegation as authority assertion with grantor, grantee, process scope, temporal validity, and revocation state."
+    },
+    {
+      "source": "CapabilityGrant",
+      "targets": ["shir:Assertion", "shir:PolicyScope", "shir:TemporalScope"],
+      "rule": "Project capability grant as constrained authority assertion derived from a delegation."
+    },
+    {
+      "source": "Commitment",
+      "targets": ["shir:Link", "shir:RoleBinding"],
+      "rule": "Project commitment as connector-backed n-ary relation between debtor actor, task, process context, and status."
+    },
+    {
+      "source": "CairnCheckpoint",
+      "targets": ["shir:Receipt"],
+      "rule": "Project checkpoint as reproducibility and governance receipt over the materialized state hash."
+    },
+    {
+      "source": "RuntimeDivergence",
+      "targets": ["shir:ProjectionLossReport", "shir:CurationDecision"],
+      "rule": "Project divergence as explicit loss/curation artifact rather than silent runtime failure."
+    }
+  ],
+  "connectors": [
+    {
+      "id": "vfg:delegatesAuthority",
+      "roles": ["grantor", "grantee", "process_run", "scope"]
+    },
+    {
+      "id": "vfg:grantsCapability",
+      "roles": ["grantor", "grantee", "capability", "delegation", "process_run", "task"]
+    },
+    {
+      "id": "vfg:commitsToTask",
+      "roles": ["debtor", "task", "process_run", "status"]
+    }
+  ],
+  "lossProfile": {
+    "preserved": [
+      "object identity",
+      "process/task scoping",
+      "delegated authority shape",
+      "terminal-state timestamps",
+      "checkpoint hash",
+      "policy-relevant capability and delegation scope"
+    ],
+    "notFullyPreserved": [
+      "full runtime event ordering",
+      "all Rego decision internals",
+      "all compact-bundle validation reports",
+      "full actor graph beyond referenced actor IDs",
+      "direct Memory Mesh persistence receipts"
+    ],
+    "requiresProjectionLossReport": true
+  }
+}
