@@ -1,0 +1,107 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix iw: <https://socioprophet.github.io/ontogenesis/domains/institutional-work#> .
+@prefix action: <https://socioprophet.github.io/ontogenesis/middle/action#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<examples/institutional-work-orggov-demo.ttl> a upper:InformationArtifact ;
+  iw:title "OrgGov v0 institutional work demo graph" ;
+  iw:sourceRef <https://github.com/SocioProphet/prophet-platform/issues/406> .
+
+iw:objective-orggov-v0 a iw:Objective ;
+  iw:title "Make SocioProphet Organization Governance Control Plane visible and executable" ;
+  iw:hasWorkOrder iw:workorder-prophet-platform-406 ;
+  iw:status "active" .
+
+iw:workroom-orggov-v0 a iw:Workroom ;
+  iw:title "OrgGov v0 control room" ;
+  iw:status "active" .
+
+iw:workorder-prophet-platform-406 a iw:WorkOrder ;
+  iw:title "Organization Governance Control Plane v0" ;
+  iw:worksOnObjective iw:objective-orggov-v0 ;
+  iw:belongsToWorkroom iw:workroom-orggov-v0 ;
+  iw:sourceRef <https://github.com/SocioProphet/prophet-platform/issues/406> ;
+  iw:status "planned" .
+
+iw:actor-mdheller a iw:HumanActor ;
+  iw:title "Michael Heller" ;
+  iw:sourceRef <https://github.com/mdheller> .
+
+iw:actor-orggov-planning-agent a iw:AgentActor ;
+  iw:title "OrgGov Planning Agent" ;
+  iw:sourceRef <https://github.com/SocioProphet/agent-registry/issues/18> .
+
+iw:role-planning-contract-agent a iw:Role ;
+  iw:title "Planning and contract agent" ;
+  iw:grantsAuthority iw:authority-create-public-contract-fixtures .
+
+iw:authority-create-public-contract-fixtures a iw:Authority ;
+  iw:title "Create public contract fixtures" .
+
+iw:grant-public-contract-fixtures a iw:CapabilityGrant ;
+  iw:title "Public non-secret contract fixture grant" ;
+  iw:status "active" .
+
+iw:rolebinding-orggov-planning-agent a iw:RoleBinding ;
+  iw:bindsActor iw:actor-orggov-planning-agent ;
+  iw:bindsRole iw:role-planning-contract-agent ;
+  iw:bindingScope iw:workroom-orggov-v0 ;
+  iw:hasCapabilityGrant iw:grant-public-contract-fixtures .
+
+iw:asset-orggov-contracts a iw:Asset ;
+  iw:title "OrgGov platform contracts" ;
+  iw:sourceRef <https://github.com/SocioProphet/prophet-platform/tree/main/contracts/orggov> .
+
+iw:policydecision-allow-contract-spine a iw:PolicyDecision ;
+  iw:title "Allow public contract spine with constraints" ;
+  iw:decisionState "allow_with_constraints" ;
+  iw:decisionForActor iw:actor-orggov-planning-agent ;
+  iw:decisionForAsset iw:asset-orggov-contracts .
+
+iw:state-planned a action:State ;
+  action:hasAffordance iw:actiontype-create-contract-spine .
+
+iw:state-contract-spine-created a action:State ;
+  action:hasAffordance iw:actiontype-review-contract-spine .
+
+iw:actiontype-create-contract-spine a action:ActionType ;
+  iw:title "Create contract spine" .
+
+iw:actiontype-review-contract-spine a action:ActionType ;
+  iw:title "Review contract spine" .
+
+iw:action-create-contract-spine a action:Action ;
+  action:performedBy iw:actor-orggov-planning-agent ;
+  action:hasActionType iw:actiontype-create-contract-spine ;
+  action:fromState iw:state-planned ;
+  action:toState iw:state-contract-spine-created ;
+  action:timestamp "2026-05-05T14:40:00Z"^^xsd:dateTime ;
+  iw:targetsAsset iw:asset-orggov-contracts ;
+  iw:hasPolicyDecision iw:policydecision-allow-contract-spine ;
+  iw:emitsEvidence iw:evidence-parent-issue .
+
+iw:evidence-parent-issue a upper:Evidence ;
+  iw:title "Parent tranche issue and contract-spine PR evidence" ;
+  iw:sourceRef <https://github.com/SocioProphet/prophet-platform/issues/406> ;
+  iw:supportsReview iw:review-initial-direction .
+
+iw:review-initial-direction a iw:Review ;
+  iw:title "Initial direction accepted" ;
+  iw:reviewedBy iw:actor-mdheller ;
+  iw:reviewsSubject iw:action-create-contract-spine ;
+  iw:producesOutcome iw:outcome-orggov-captured .
+
+iw:outcome-orggov-captured a iw:Outcome ;
+  iw:title "OrgGov v0 captured" ;
+  iw:outcomeForWorkOrder iw:workorder-prophet-platform-406 ;
+  iw:hasScore iw:score-product-compression .
+
+iw:score-product-compression a iw:Score ;
+  iw:scoreDimension "productCompression" ;
+  iw:scoreValue "0.68"^^xsd:decimal .
+
+iw:learning-product-compression a iw:LearningEvent ;
+  iw:title "Expose the product loop, not scattered substrate repos" ;
+  iw:learningTriggeredBy iw:outcome-orggov-captured ;
+  iw:learningAppliesTo iw:objective-orggov-v0 .
