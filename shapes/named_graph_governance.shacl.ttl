@@ -1,0 +1,62 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix ngov:  <https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#> .
+
+<shapes/named_graph_governance.shacl.ttl> a owl:Ontology ;
+  dct:title "SHACL — Named Graph Governance" ;
+  dct:description "Promotion gates for named graph context, source, trust, access, ownership, lifecycle, and retention metadata." ;
+  owl:versionInfo "0.1.0" .
+
+ngov:NamedGraphShape a sh:NodeShape ;
+  sh:targetClass ngov:NamedGraph ;
+  sh:property [
+    sh:path ngov:graphURI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:anyURI ;
+    sh:message "A named graph must declare its graph URI." ;
+  ] ;
+  sh:property [
+    sh:path ngov:sourceSystem ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A named graph must declare its source system or source family." ;
+  ] ;
+  sh:property [
+    sh:path ngov:hasAccessPolicy ;
+    sh:minCount 1 ;
+    sh:class ngov:GraphAccessPolicy ;
+    sh:message "A named graph must declare a graph access policy." ;
+  ] ;
+  sh:property [
+    sh:path ngov:hasTrustProfile ;
+    sh:minCount 1 ;
+    sh:class ngov:GraphTrustProfile ;
+    sh:message "A named graph must declare a graph trust profile." ;
+  ] .
+
+ngov:GraphAccessPolicyShape a sh:NodeShape ;
+  sh:targetClass ngov:GraphAccessPolicy ;
+  sh:property [
+    sh:path ngov:accessClass ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path ngov:retentionPolicy ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+ngov:GraphTrustProfileShape a sh:NodeShape ;
+  sh:targetClass ngov:GraphTrustProfile ;
+  sh:property [
+    sh:path ngov:trustLevel ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
