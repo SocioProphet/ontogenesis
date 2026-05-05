@@ -1,0 +1,34 @@
+name: semantic-import-contract
+
+on:
+  pull_request:
+    paths:
+      - 'catalog/semantic_*registry.ttl'
+      - 'docs/semantic-enterprise/**'
+      - 'examples/scenarios/**'
+      - 'examples/queries/**'
+      - 'examples/named-graphs/**'
+      - 'scripts/validate_semantic_import_contract.py'
+      - '.github/workflows/semantic-import-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'catalog/semantic_*registry.ttl'
+      - 'docs/semantic-enterprise/**'
+      - 'examples/scenarios/**'
+      - 'examples/queries/**'
+      - 'examples/named-graphs/**'
+      - 'scripts/validate_semantic_import_contract.py'
+      - '.github/workflows/semantic-import-contract.yml'
+
+jobs:
+  validate-semantic-import-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate semantic import contract
+        run: python scripts/validate_semantic_import_contract.py
