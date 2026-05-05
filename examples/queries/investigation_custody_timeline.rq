@@ -1,0 +1,29 @@
+PREFIX inv: <https://socioprophet.github.io/ontogenesis/domains/investigation#>
+PREFIX party: <https://socioprophet.github.io/ontogenesis/domains/party#>
+PREFIX cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#>
+PREFIX upper: <https://socioprophet.github.io/ontogenesis/upper#>
+
+# Find evidence items, custody events, custodians, collection actions,
+# source reports, and linked cyber-physical context for a case.
+SELECT ?case ?caseId ?evidence ?evidenceId ?custodyEvent ?custodian ?custodyTimestamp ?action ?actionTimestamp ?location ?hypothesis ?report
+WHERE {
+  ?case a inv:Case ;
+    inv:caseIdentifier ?caseId ;
+    inv:hasEvidence ?evidence .
+
+  ?evidence a inv:EvidenceItem ;
+    inv:evidenceIdentifier ?evidenceId ;
+    inv:hasCustodyEvent ?custodyEvent .
+
+  ?custodyEvent inv:custodyHeldBy ?custodian ;
+    inv:custodyTimestamp ?custodyTimestamp .
+
+  OPTIONAL {
+    ?evidence inv:collectedByAction ?action .
+    ?action inv:actionTimestamp ?actionTimestamp .
+  }
+  OPTIONAL { ?evidence inv:associatedLocation ?location . }
+  OPTIONAL { ?evidence inv:supportsHypothesis ?hypothesis . }
+  OPTIONAL { ?evidence inv:reportedIn ?report . }
+}
+ORDER BY ?caseId ?custodyTimestamp

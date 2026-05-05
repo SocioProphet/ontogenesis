@@ -1,0 +1,95 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/named-graphs/semantic-sector#> .
+@prefix ngov:  <https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#> .
+@prefix kgl:   <https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:SemanticEnterpriseGraphOwner a prov:Agent .
+
+ex:FinanceAccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "restricted-internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:FinanceTrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated-demo" .
+
+ex:FinanceAMLKYCGraph a ngov:CuratedGraph, ngov:NamedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/scenarios/finance-aml-kyc"^^xsd:anyURI ;
+  ngov:sourceSystem "examples/scenarios/finance_aml_kyc_demo.ttl" ;
+  ngov:hasAccessPolicy ex:FinanceAccessPolicy ;
+  ngov:hasTrustProfile ex:FinanceTrustProfile ;
+  ngov:graphOwner ex:SemanticEnterpriseGraphOwner ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "finance AML KYC scenario graph" .
+
+ex:ThreatIntelAccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "restricted-internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:ThreatIntelTrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated-demo" .
+
+ex:ThreatIntelLifecycleGraph a ngov:CuratedGraph, ngov:NamedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/scenarios/threat-intel-lifecycle"^^xsd:anyURI ;
+  ngov:sourceSystem "examples/scenarios/threat_intel_lifecycle_demo.ttl" ;
+  ngov:hasAccessPolicy ex:ThreatIntelAccessPolicy ;
+  ngov:hasTrustProfile ex:ThreatIntelTrustProfile ;
+  ngov:graphOwner ex:SemanticEnterpriseGraphOwner ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "threat intelligence lifecycle scenario graph" .
+
+ex:InvestigationAccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "restricted-internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:InvestigationTrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated-demo" .
+
+ex:InvestigationCustodyGraph a ngov:CuratedGraph, ngov:NamedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/scenarios/investigation-custody"^^xsd:anyURI ;
+  ngov:sourceSystem "examples/scenarios/investigation_custody_timeline_demo.ttl" ;
+  ngov:hasAccessPolicy ex:InvestigationAccessPolicy ;
+  ngov:hasTrustProfile ex:InvestigationTrustProfile ;
+  ngov:graphOwner ex:SemanticEnterpriseGraphOwner ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "investigation custody scenario graph" .
+
+ex:SupplyChainAccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:SupplyChainTrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated-demo" .
+
+ex:SupplyChainResilienceGraph a ngov:CuratedGraph, ngov:NamedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/scenarios/supply-chain-resilience"^^xsd:anyURI ;
+  ngov:sourceSystem "examples/scenarios/supply_chain_resilience_demo.ttl" ;
+  ngov:hasAccessPolicy ex:SupplyChainAccessPolicy ;
+  ngov:hasTrustProfile ex:SupplyChainTrustProfile ;
+  ngov:graphOwner ex:SemanticEnterpriseGraphOwner ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "supply-chain resilience scenario graph" .
+
+ex:DefenseC2AccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "restricted-internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:DefenseC2TrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated-demo" .
+
+ex:DefenseC2COPGraph a ngov:CuratedGraph, ngov:NamedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/scenarios/defense-c2-cop"^^xsd:anyURI ;
+  ngov:sourceSystem "examples/scenarios/defense_c2_cop_demo.ttl" ;
+  ngov:hasAccessPolicy ex:DefenseC2AccessPolicy ;
+  ngov:hasTrustProfile ex:DefenseC2TrustProfile ;
+  ngov:graphOwner ex:SemanticEnterpriseGraphOwner ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "defense C2 COP scenario graph" .
+
+ex:CurationPhase a kgl:KnowledgeCuration, kgl:LifecyclePhase .
