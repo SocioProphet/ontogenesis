@@ -1,0 +1,64 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix plat:  <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix dodaf: <https://socioprophet.github.io/external/dodaf#> .
+@prefix cco:   <https://socioprophet.github.io/external/cco#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/dodaf-cco.ttl> a owl:Ontology ;
+  dct:title "Alignment — DoDAF / CCO" ;
+  dct:description "Governed alignment scaffold from Ontogenesis system/process/capability concepts to DoDAF and CCO style defense architecture concepts." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Platform/platform.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:dodafExternalOntology a smap:ExternalOntology ;
+  smap:standardName "Department of Defense Architecture Framework" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://dodcio.defense.gov/Library/DoD-Architecture-Framework/" ;
+  rdfs:label "DoDAF" .
+
+align:ccoExternalOntology a smap:ExternalOntology ;
+  smap:standardName "Common Core Ontologies" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://www.commoncoreontologies.org/" ;
+  rdfs:label "CCO" .
+
+align:SystemToDodafSystem a smap:MappingAssertion ;
+  smap:mapsFrom upper:System ;
+  smap:mapsTo dodaf:System ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:dodafExternalOntology ;
+  smap:confidence 0.72 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis System is intentionally general; DoDAF System is a defense architecture specialization." .
+
+align:ProcessToDodafActivity a smap:MappingAssertion ;
+  smap:mapsFrom upper:Process ;
+  smap:mapsTo dodaf:Activity ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:dodafExternalOntology ;
+  smap:confidence 0.70 ;
+  smap:status "draft" ;
+  smap:rationale "Process and DoDAF Activity overlap operationally; exact equivalence should be confirmed per mission model." .
+
+align:AgentToCcoAgent a smap:MappingAssertion ;
+  smap:mapsFrom upper:Agent ;
+  smap:mapsTo cco:Agent ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:ccoExternalOntology ;
+  smap:confidence 0.75 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis Agent should align to agentive CCO concepts while preserving local stack semantics." .
+
+align:PlatformComponentToCapabilityBearer a smap:MappingAssertion ;
+  smap:mapsFrom plat:Component ;
+  smap:mapsTo dodaf:Performer ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:dodafExternalOntology ;
+  smap:confidence 0.64 ;
+  smap:status "draft" ;
+  smap:rationale "Platform components can perform capabilities, but DoDAF Performer semantics should remain an external alignment, not a replacement." .
