@@ -1,0 +1,44 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+<Middle/semantic-mapping.ttl> a owl:Ontology ;
+  dct:title "Middle — Semantic Mapping" ;
+  dct:description "Cross-domain vocabulary for governed ontology alignment, external standards, mapping assertions, confidence, approval status, and provenance." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+smap:ExternalOntology a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "External ontology" .
+smap:AlignmentModule a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Alignment module" .
+smap:MappingAssertion a owl:Class ; rdfs:subClassOf upper:Assertion ; rdfs:label "Mapping assertion" .
+smap:MappingReview a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Mapping review" .
+smap:MappingPredicate a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Mapping predicate" .
+
+smap:ExactClassEquivalence a smap:MappingPredicate ; rdfs:label "Exact class equivalence" ; smap:predicateIRI "http://www.w3.org/2002/07/owl#equivalentClass" .
+smap:SubclassAlignment a smap:MappingPredicate ; rdfs:label "Subclass alignment" ; smap:predicateIRI "http://www.w3.org/2000/01/rdf-schema#subClassOf" .
+smap:SkosExactMatch a smap:MappingPredicate ; rdfs:label "SKOS exact match" ; smap:predicateIRI "http://www.w3.org/2004/02/skos/core#exactMatch" .
+smap:SkosCloseMatch a smap:MappingPredicate ; rdfs:label "SKOS close match" ; smap:predicateIRI "http://www.w3.org/2004/02/skos/core#closeMatch" .
+smap:SkosBroadMatch a smap:MappingPredicate ; rdfs:label "SKOS broad match" ; smap:predicateIRI "http://www.w3.org/2004/02/skos/core#broadMatch" .
+smap:SkosNarrowMatch a smap:MappingPredicate ; rdfs:label "SKOS narrow match" ; smap:predicateIRI "http://www.w3.org/2004/02/skos/core#narrowMatch" .
+
+smap:mapsFrom a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range upper:Entity ; rdfs:label "maps from" .
+smap:mapsTo a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range upper:Entity ; rdfs:label "maps to" .
+smap:usesMappingPredicate a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range smap:MappingPredicate ; rdfs:label "uses mapping predicate" .
+smap:sourceOntology a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range smap:ExternalOntology ; rdfs:label "source ontology" .
+smap:targetOntology a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range smap:ExternalOntology ; rdfs:label "target ontology" .
+smap:reviewedBy a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range prov:Agent ; rdfs:label "reviewed by" .
+smap:reviewActivity a owl:ObjectProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range smap:MappingReview ; rdfs:label "review activity" .
+
+smap:confidence a owl:DatatypeProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range xsd:decimal ; rdfs:label "confidence" .
+smap:status a owl:DatatypeProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range xsd:string ; rdfs:label "mapping status" .
+smap:predicateIRI a owl:DatatypeProperty ; rdfs:domain smap:MappingPredicate ; rdfs:range xsd:anyURI ; rdfs:label "predicate IRI" .
+smap:standardName a owl:DatatypeProperty ; rdfs:domain smap:ExternalOntology ; rdfs:range xsd:string ; rdfs:label "standard name" .
+smap:standardVersion a owl:DatatypeProperty ; rdfs:domain smap:ExternalOntology ; rdfs:range xsd:string ; rdfs:label "standard version" .
+smap:standardUrl a owl:DatatypeProperty ; rdfs:domain smap:ExternalOntology ; rdfs:range xsd:anyURI ; rdfs:label "standard URL" .
+smap:rationale a owl:DatatypeProperty ; rdfs:domain smap:MappingAssertion ; rdfs:range xsd:string ; rdfs:label "rationale" .
