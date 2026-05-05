@@ -48,6 +48,10 @@ jobs:
           make replay-assignment-override
           make replay-divergence
           make check-expected
+      - name: Run terminal/revocation lockout proof
+        run: |
+          cd bindings/valueflows_governed
+          make validate-terminal-lockout
       - name: Run Rego runtime checks
         run: |
           cd bindings/valueflows_governed

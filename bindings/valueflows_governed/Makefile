@@ -15,5 +15,8 @@ replay-divergence:
 check-expected:
 	$(PYTHON) tools/check_expected_reports.py
 
-ci-local: validate-bundle replay-linear replay-assignment-override replay-divergence check-expected
+validate-terminal-lockout:
+	$(PYTHON) tools/validate_terminal_lockout_fixture.py
+
+ci-local: validate-bundle replay-linear replay-assignment-override replay-divergence check-expected validate-terminal-lockout
 	bash ci/run_local_ci.sh
