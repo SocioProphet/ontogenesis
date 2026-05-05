@@ -1,0 +1,96 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rfail: <https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<shapes/reasoning_failure.shacl.ttl> a sh:NodeShape ;
+  dct:title "Reasoning Failure SHACL Gate v0.1" ;
+  dct:description "Validation gates for first-class reasoning failure case records." .
+
+rfail:ReasoningFailureCaseShape a sh:NodeShape ;
+  sh:targetClass rfail:ReasoningFailureCase ;
+  sh:property [
+    sh:path rfail:hasFailureMode ;
+    sh:minCount 1 ;
+    sh:class rfail:ReasoningFailureMode ;
+    sh:message "Reasoning failure cases must cite at least one canonical failure mode."
+  ] ;
+  sh:property [
+    sh:path rfail:hasTask ;
+    sh:minCount 1 ;
+    sh:class rfail:ReasoningTask ;
+    sh:message "Reasoning failure cases must cite the task being evaluated."
+  ] ;
+  sh:property [
+    sh:path rfail:hasInvariant ;
+    sh:minCount 1 ;
+    sh:class rfail:Invariant ;
+    sh:message "Reasoning failure cases must declare the invariant that should survive perturbation."
+  ] ;
+  sh:property [
+    sh:path rfail:hasVerifier ;
+    sh:minCount 1 ;
+    sh:class rfail:Verifier ;
+    sh:message "Reasoning failure cases must cite a verifier or verifier family."
+  ] ;
+  sh:property [
+    sh:path rfail:hasEvidenceReceipt ;
+    sh:minCount 1 ;
+    sh:class rfail:EvidenceReceipt ;
+    sh:message "Reasoning failure cases must cite an evidence receipt rather than relying on rationale text."
+  ] ;
+  sh:property [
+    sh:path rfail:hasResidualRisk ;
+    sh:minCount 1 ;
+    sh:class rfail:ResidualRisk ;
+    sh:message "Reasoning failure cases must carry residual risk."
+  ] ;
+  sh:property [
+    sh:path rfail:severity ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("low" "medium" "high" "critical") ;
+    sh:message "Reasoning failure severity must be low, medium, high, or critical."
+  ] ;
+  sh:property [
+    sh:path rfail:riskAction ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Reasoning failure cases must declare a proposed runtime action."
+  ] .
+
+rfail:RelationSemanticsShape a sh:NodeShape ;
+  sh:targetClass rfail:RelationSemantics ;
+  sh:property [
+    sh:path rfail:relationDirection ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("directed" "undirected" "bidirectional" "n-ary") ;
+    sh:message "Relation semantics must declare relation direction."
+  ] ;
+  sh:property [
+    sh:path rfail:symmetryProfile ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("symmetric" "asymmetric" "antisymmetric" "unknown") ;
+    sh:message "Relation semantics must declare symmetry profile."
+  ] ;
+  sh:property [
+    sh:path rfail:transitivityProfile ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("transitive" "intransitive" "nontransitive" "unknown") ;
+    sh:message "Relation semantics must declare transitivity profile."
+  ] .
+
+rfail:VerifierShape a sh:NodeShape ;
+  sh:targetClass rfail:Verifier ;
+  sh:property [
+    sh:path rfail:status ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ("deterministic" "symbolic" "schema" "policy" "tool-backed" "human-review" "llm-judge-advisory") ;
+    sh:message "Verifier status must identify whether the verifier is deterministic, symbolic, schema, policy, tool-backed, human-review, or LLM-judge advisory."
+  ] .
