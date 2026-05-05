@@ -1,0 +1,20 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<catalog/semantic_query_import_registry.ttl> a owl:Ontology ;
+  dct:title "Semantic Query and Import Registry Supplement" ;
+  dct:description "Supplemental registry entries for semantic-enterprise SPARQL examples, named-graph governance fixtures, and downstream import-bridge contract notes." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl>, <catalog/semantic_sector_scenarios_registry.ttl> .
+
+og:QueryFinanceAMLKYC a og:Module ; og:layer "Queries" ; og:path "examples/queries/finance_aml_kyc.rq" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/queries/finance-aml-kyc#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Finance AML KYC SPARQL query" .
+og:QueryThreatIntelLifecycle a og:Module ; og:layer "Queries" ; og:path "examples/queries/threat_intel_lifecycle.rq" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/queries/threat-intel-lifecycle#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Threat intelligence lifecycle SPARQL query" .
+og:QueryInvestigationCustodyTimeline a og:Module ; og:layer "Queries" ; og:path "examples/queries/investigation_custody_timeline.rq" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/queries/investigation-custody-timeline#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Investigation custody timeline SPARQL query" .
+og:QuerySupplyChainResilience a og:Module ; og:layer "Queries" ; og:path "examples/queries/supply_chain_resilience.rq" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/queries/supply-chain-resilience#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Supply-chain resilience SPARQL query" .
+og:QueryDefenseC2COP a og:Module ; og:layer "Queries" ; og:path "examples/queries/defense_c2_cop.rq" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/queries/defense-c2-cop#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Defense C2 COP SPARQL query" .
+
+og:NamedGraphSemanticSectorScenarios a og:Module ; og:layer "Examples" ; og:path "examples/named-graphs/semantic_sector_named_graphs.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/named-graphs/semantic-sector#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Semantic sector named graph governance fixture" .
+og:DownstreamImportBridge a og:Module ; og:layer "Docs" ; og:path "docs/semantic-enterprise/downstream-import-bridge-v0.1.md" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/docs/semantic-enterprise/downstream-import-bridge#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Downstream import bridge contract" .
