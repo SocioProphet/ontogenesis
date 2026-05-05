@@ -1,0 +1,36 @@
+PREFIX fin: <https://socioprophet.github.io/ontogenesis/domains/finance#>
+PREFIX party: <https://socioprophet.github.io/ontogenesis/domains/party#>
+PREFIX legal: <https://socioprophet.github.io/ontogenesis/domains/legal#>
+PREFIX upper: <https://socioprophet.github.io/ontogenesis/upper#>
+
+# Find AML alerts with linked transactions, counterparties, sanctions-screening status,
+# risk score, and beneficial ownership context.
+SELECT ?alert ?status ?tx ?sender ?recipient ?amount ?currency ?risk ?riskValue ?screening ?screeningStatus ?owner
+WHERE {
+  ?alert a fin:AMLAlert ;
+    fin:alertSubject ?tx ;
+    fin:alertStatus ?status .
+
+  ?tx a fin:FinancialTransaction ;
+    fin:hasSender ?sender ;
+    fin:hasRecipient ?recipient ;
+    fin:amount ?amount ;
+    fin:currency ?currency .
+
+  OPTIONAL {
+    ?recipient fin:hasRiskScore ?risk .
+    ?risk fin:riskValue ?riskValue .
+  }
+
+  OPTIONAL {
+    ?recipient fin:hasSanctionsScreeningResult ?screening .
+    ?screening fin:screeningStatus ?screeningStatus .
+  }
+
+  OPTIONAL {
+    ?ownership a fin:BeneficialOwnershipRelation ;
+      fin:ownedLegalEntity ?recipient ;
+      fin:beneficialOwner ?owner .
+  }
+}
+ORDER BY DESC(?riskValue)
