@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "party": "https://socioprophet.github.io/ontogenesis/domains/party#",
+    "legal": "https://socioprophet.github.io/ontogenesis/domains/legal#",
+    "biz": "https://socioprophet.github.io/ontogenesis/domains/business#",
+    "cyber": "https://socioprophet.github.io/ontogenesis/domains/cyber#",
+    "fin": "https://socioprophet.github.io/ontogenesis/domains/finance#",
+    "cti": "https://socioprophet.github.io/ontogenesis/domains/threat-intel#",
+    "inv": "https://socioprophet.github.io/ontogenesis/domains/investigation#",
+    "sc": "https://socioprophet.github.io/ontogenesis/domains/supply-chain#",
+    "c2": "https://socioprophet.github.io/ontogenesis/domains/defense-c2#"
+  }
+}
