@@ -1,0 +1,100 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/scenarios/investigation-custody#> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:InvestigationSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:InvestigationAnchor ;
+  cs:hasObjectiveFunction ex:InvestigationObjective ;
+  cs:hasEmbodiment ex:InvestigationEmbodiment ;
+  cs:hasChamber ex:InvestigationChamber ;
+  cs:governedByCompact ex:InvestigationCompact .
+
+ex:InvestigationAnchor a cs:IdentityAnchor .
+ex:InvestigationObjective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:InvestigationEmbodiment a cs:FederatedEmbodiment .
+ex:InvestigationChamber a cs:Chamber .
+ex:InvestigationCompact a cs:GovernanceCompact ; cs:governanceRuleText "investigation chain-of-custody compact" .
+
+ex:AnalystA a party:NaturalPerson ;
+  upper:hasIdentifier "analyst-a" ;
+  party:hasIdentityRecord ex:AnalystAIdentity ;
+  party:hasRoleAssignment ex:AnalystARole .
+
+ex:AnalystAIdentity a party:IdentityRecord .
+ex:AnalystARole a party:RoleAssignment ;
+  party:roleHeldBy ex:AnalystA ;
+  party:roleWithinSelf ex:InvestigationSelf ;
+  party:roleName "case-analyst" .
+
+ex:CustodianA a party:NaturalPerson ;
+  upper:hasIdentifier "custodian-a" ;
+  party:hasIdentityRecord ex:CustodianAIdentity ;
+  party:hasRoleAssignment ex:CustodianARole .
+
+ex:CustodianAIdentity a party:IdentityRecord .
+ex:CustodianARole a party:RoleAssignment ;
+  party:roleHeldBy ex:CustodianA ;
+  party:roleWithinSelf ex:InvestigationSelf ;
+  party:roleName "custodian" .
+
+ex:InvestigationA a inv:Investigation ;
+  inv:hasCase ex:CaseA .
+
+ex:CaseA a inv:Case ;
+  inv:caseIdentifier "CASE-CUSTODY-001" ;
+  inv:hasEvidence ex:PhoneImageA, ex:ShellCasingA ;
+  inv:associatedParty ex:AnalystA .
+
+ex:AcquisitionActionA a inv:InvestigativeAction ;
+  inv:actionTimestamp "2026-05-05T07:30:00Z"^^xsd:dateTime .
+
+ex:TransferActionA a inv:InvestigativeAction ;
+  inv:actionTimestamp "2026-05-05T09:00:00Z"^^xsd:dateTime .
+
+ex:CustodyEventPhoneA a inv:ChainOfCustodyEvent ;
+  inv:custodyHeldBy ex:CustodianA ;
+  inv:custodyTimestamp "2026-05-05T07:45:00Z"^^xsd:dateTime .
+
+ex:CustodyEventShellA a inv:ChainOfCustodyEvent ;
+  inv:custodyHeldBy ex:CustodianA ;
+  inv:custodyTimestamp "2026-05-05T08:10:00Z"^^xsd:dateTime .
+
+ex:CrimeSceneA a inv:LocationArtifact ;
+  inv:locationLabel "demo crime scene" .
+
+ex:SecurityEventA a cyber:SecurityEvent ;
+  cyber:mapsToStandard "UCO/CASE-demo" .
+
+ex:PhoneTraceA a inv:Trace ;
+  inv:evidenceIdentifier "TRACE-PHONE-001" ;
+  inv:hasCustodyEvent ex:CustodyEventPhoneA .
+
+ex:PhoneImageA a inv:DigitalEvidence, inv:EvidenceItem ;
+  inv:evidenceIdentifier "DIGITAL-PHONE-IMAGE-001" ;
+  inv:collectedByAction ex:AcquisitionActionA ;
+  inv:hasCustodyEvent ex:CustodyEventPhoneA ;
+  inv:associatedLocation ex:CrimeSceneA ;
+  inv:derivedFromTrace ex:PhoneTraceA ;
+  inv:linkedToSecurityEvent ex:SecurityEventA ;
+  inv:supportsHypothesis ex:HypothesisA .
+
+ex:ShellCasingA a inv:PhysicalEvidence, inv:EvidenceItem ;
+  inv:evidenceIdentifier "PHYSICAL-SHELL-001" ;
+  inv:collectedByAction ex:TransferActionA ;
+  inv:hasCustodyEvent ex:CustodyEventShellA ;
+  inv:associatedLocation ex:CrimeSceneA ;
+  inv:supportsHypothesis ex:HypothesisA .
+
+ex:HypothesisA a inv:Hypothesis ;
+  inv:hypothesisStatus "under-review" .
+
+ex:SourceReportA a inv:SourceReport ;
+  upper:hasIdentifier "source-report-demo-001" .
+
+ex:PhoneImageA inv:reportedIn ex:SourceReportA .
+ex:ShellCasingA inv:reportedIn ex:SourceReportA .
