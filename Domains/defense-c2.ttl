@@ -1,0 +1,50 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/defense-c2.ttl> a owl:Ontology ;
+  dct:title "Domain — Defense C2" ;
+  dct:description "Defensive command-and-control semantics for missions, capabilities, units, assets, sensors, operational areas, courses of action, rules of engagement, logistics state, cyber state, readiness, and threat assessment." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/cyber.ttl>, <Domains/party-identity.ttl>, <Domains/supply-chain.ttl> .
+
+c2:Mission a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Mission" .
+c2:Capability a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Capability" .
+c2:Unit a owl:Class ; rdfs:subClassOf party:Organization ; rdfs:label "Unit" .
+c2:Asset a owl:Class ; rdfs:subClassOf upper:System ; rdfs:label "Asset" .
+c2:Sensor a owl:Class ; rdfs:subClassOf c2:Asset ; rdfs:label "Sensor" .
+c2:OperationalArea a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Operational area" .
+c2:CourseOfAction a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Course of action" .
+c2:RuleOfEngagement a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Rule of engagement" .
+c2:ThreatAssessment a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Threat assessment" .
+c2:CyberState a owl:Class ; rdfs:subClassOf cyber:Finding ; rdfs:label "Cyber state" .
+c2:LogisticsState a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Logistics state" .
+c2:ReadinessAssessment a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Readiness assessment" .
+c2:CommonOperationalPicture a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Common operational picture" .
+
+c2:hasCapability a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range c2:Capability ; rdfs:label "has capability" .
+c2:assignedToMission a owl:ObjectProperty ; rdfs:domain c2:Unit ; rdfs:range c2:Mission ; rdfs:label "assigned to mission" .
+c2:usesAsset a owl:ObjectProperty ; rdfs:domain c2:Mission ; rdfs:range c2:Asset ; rdfs:label "uses asset" .
+c2:locatedInArea a owl:ObjectProperty ; rdfs:domain upper:Entity ; rdfs:range c2:OperationalArea ; rdfs:label "located in area" .
+c2:hasCourseOfAction a owl:ObjectProperty ; rdfs:domain c2:Mission ; rdfs:range c2:CourseOfAction ; rdfs:label "has course of action" .
+c2:governedByROE a owl:ObjectProperty ; rdfs:domain c2:Mission ; rdfs:range c2:RuleOfEngagement ; rdfs:label "governed by ROE" .
+c2:hasThreatAssessment a owl:ObjectProperty ; rdfs:domain c2:OperationalArea ; rdfs:range c2:ThreatAssessment ; rdfs:label "has threat assessment" .
+c2:hasCyberState a owl:ObjectProperty ; rdfs:domain upper:System ; rdfs:range c2:CyberState ; rdfs:label "has cyber state" .
+c2:hasLogisticsState a owl:ObjectProperty ; rdfs:domain c2:Unit ; rdfs:range c2:LogisticsState ; rdfs:label "has logistics state" .
+c2:hasReadinessAssessment a owl:ObjectProperty ; rdfs:domain c2:Unit ; rdfs:range c2:ReadinessAssessment ; rdfs:label "has readiness assessment" .
+c2:dependsOnSupplyChainElement a owl:ObjectProperty ; rdfs:domain c2:Mission ; rdfs:range sc:SupplyChainSystem ; rdfs:label "depends on supply chain element" .
+c2:copIncludesEntity a owl:ObjectProperty ; rdfs:domain c2:CommonOperationalPicture ; rdfs:range upper:Entity ; rdfs:label "COP includes entity" .
+
+c2:missionIdentifier a owl:DatatypeProperty ; rdfs:domain c2:Mission ; rdfs:range xsd:string ; rdfs:label "mission identifier" .
+c2:readinessLevel a owl:DatatypeProperty ; rdfs:domain c2:ReadinessAssessment ; rdfs:range xsd:string ; rdfs:label "readiness level" .
+c2:cyberStateLabel a owl:DatatypeProperty ; rdfs:domain c2:CyberState ; rdfs:range xsd:string ; rdfs:label "cyber state label" .
+c2:logisticsStatus a owl:DatatypeProperty ; rdfs:domain c2:LogisticsState ; rdfs:range xsd:string ; rdfs:label "logistics status" .
+c2:threatLevel a owl:DatatypeProperty ; rdfs:domain c2:ThreatAssessment ; rdfs:range xsd:string ; rdfs:label "threat level" .
+c2:roeText a owl:DatatypeProperty ; rdfs:domain c2:RuleOfEngagement ; rdfs:range xsd:string ; rdfs:label "ROE text" .
