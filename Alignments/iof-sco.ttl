@@ -1,0 +1,49 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix prod:  <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix iof-sc: <https://spec.industrialontologies.org/iof/ontology/supplychain/SupplyChain/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/iof-sco.ttl> a owl:Ontology ;
+  dct:title "Alignment — IOF Supply Chain Ontology" ;
+  dct:description "Governed alignment scaffold from Ontogenesis business/product concepts to IOF Supply Chain Ontology style supply-chain structure." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/business_core.ttl>, <Domains/product-service.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:iofScoExternalOntology a smap:ExternalOntology ;
+  smap:standardName "Industrial Ontology Foundry Supply Chain Ontology" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://spec.industrialontologies.org/iof/ontology/supplychain/SupplyChain/" ;
+  rdfs:label "IOF Supply Chain Ontology" .
+
+align:CompanyToSupplyChainAgent a smap:MappingAssertion ;
+  smap:mapsFrom biz:Company ;
+  smap:mapsTo iof-sc:SupplyChainAgent ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:iofScoExternalOntology ;
+  smap:confidence 0.70 ;
+  smap:status "draft" ;
+  smap:rationale "A company can act as a supply-chain agent in context, but Ontogenesis Company is broader than that role." .
+
+align:OfferingToProduct a smap:MappingAssertion ;
+  smap:mapsFrom biz:Offering ;
+  smap:mapsTo iof-sc:Product ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:iofScoExternalOntology ;
+  smap:confidence 0.62 ;
+  smap:status "draft" ;
+  smap:rationale "Offering may be product, service, or bundle; exact product alignment is context-dependent." .
+
+align:DependsOnToSupplyDependency a smap:MappingAssertion ;
+  smap:mapsFrom upper:dependsOn ;
+  smap:mapsTo iof-sc:suppliedBy ;
+  smap:usesMappingPredicate smap:SkosBroadMatch ;
+  smap:targetOntology align:iofScoExternalOntology ;
+  smap:confidence 0.50 ;
+  smap:status "draft" ;
+  smap:rationale "General dependency can encode supply dependency when the participating entities are supply-chain resources or agents." .
