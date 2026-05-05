@@ -13,6 +13,7 @@ The ValueFlows governed lane is a compact governed binding and runtime proof sur
 - policy runtime checks
 - compact-bundle execution for CI and local validation
 - ontology-native terminal-state semantics for completed, canceled, revoked, and expired states
+- terminal/revocation lockout proof for delegated authority closure and process completion closure
 
 It is intentionally narrower than a full ontology module family.
 
@@ -32,6 +33,8 @@ Current repo surfaces for this lane include:
 - `bindings/valueflows_governed/valueflows-governed.context.jsonld`
 - `bindings/valueflows_governed/tools/*.py`
 - `bindings/valueflows_governed/policies/rego/*.rego`
+- `bindings/valueflows_governed/fixtures/terminal_lockout.events.ndjson`
+- `bindings/valueflows_governed/fixtures/terminal_lockout.expected.json`
 - `shapes/valueflows-governed.shacl.ttl`
 - `examples/valueflows-governed-task-flow-demo.jsonld`
 - `.github/workflows/valueflows-governed-ci.yml`
@@ -46,7 +49,7 @@ This lane currently proves a compact runtime slice for:
 - denial of unauthorized assignment override
 - deterministic replay against expected outputs
 
-It also now defines ontology-native semantics for:
+It also defines ontology-native semantics for:
 
 - completed process runs requiring `completedAt`
 - canceled process runs requiring `canceledAt` and `canceledBy`
@@ -54,11 +57,17 @@ It also now defines ontology-native semantics for:
 - revoked capability grants requiring `revokedAt` and `revokedBy`
 - completed and canceled tasks carrying terminal-state timestamps and authorities
 
+The terminal lockout fixture now proves:
+
+- revoked capability grants block delegated task offers
+- revoked delegations close delegated authority
+- completed process runs block later task offers, even from the coordinator
+
 ## What it does not yet prove
 
 Missing or partial surfaces still include:
 
-- runtime replay fixtures for revocation and terminal-state lockout behavior
+- full compact-bundle replay absorption for terminal/revocation events
 - SHIR projection and receipt mapping
 - module catalog / registry alignment beyond documentation references
 - Memory Mesh persistence/reconstruction for ValueFlows event logs and checkpoints
@@ -66,10 +75,10 @@ Missing or partial surfaces still include:
 
 ## Correct next lift
 
-The right next lift is runtime and projection evidence, not wider ontology sprawl:
+The right next lift is projection evidence, not wider ontology sprawl:
 
-1. update the compact runtime bundle and replay fixtures to prove terminal-state lockouts
-2. add a ValueFlows-to-SHIR projection manifest and receipt example
+1. add a ValueFlows-to-SHIR projection manifest and receipt example
+2. absorb terminal/revocation events into the main compact bundle materializer when the connector/file-write path can safely carry the larger runtime artifact
 3. then wire ValueFlows event/checkpoint artifacts into Memory Mesh or AgentPlane consumers
 
 ## Design rule

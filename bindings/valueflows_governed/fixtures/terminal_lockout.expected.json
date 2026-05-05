@@ -1,0 +1,20 @@
+{
+  "expected_events_applied": ["t1", "t2", "t3", "t4", "t6", "t7"],
+  "expected_divergences": [
+    {
+      "event_id": "t5",
+      "reason": "policy_denied",
+      "details": "actor lacks coordinator/process authority or task.offer capability grant"
+    },
+    {
+      "event_id": "t8",
+      "reason": "wrong_process",
+      "details": "task must reference an active process run"
+    }
+  ],
+  "expected_terminal_state": {
+    "process_run_status": "completed",
+    "delegation_status": "revoked",
+    "capability_grant_status": "revoked"
+  }
+}
