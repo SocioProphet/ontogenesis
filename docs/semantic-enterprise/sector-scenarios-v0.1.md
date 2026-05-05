@@ -12,6 +12,8 @@ This tranche adds scenario fixtures for the merged sector modules.
 
 Each fixture is written as RDF/Turtle and is intended to run through the existing Ontogenesis parse, SHACL, JSON-LD, dist, ledger, and SBOM validation flow.
 
+The scenario fixtures are deliberately synthetic and non-operational. They exercise evidence, provenance, role, risk, logistics, readiness, and governance surfaces without encoding procedural instructions.
+
 ## Follow-up
 
 Next work should add SPARQL query examples, named-graph governance examples, and downstream import-bridge notes for platform consumers.
