@@ -1,0 +1,111 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/scenarios/finance-aml-kyc#> .
+@prefix fin:   <https://socioprophet.github.io/ontogenesis/domains/finance#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:FinanceGovernanceSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:FinanceAnchor ;
+  cs:hasObjectiveFunction ex:FinanceObjective ;
+  cs:hasEmbodiment ex:FinanceEmbodiment ;
+  cs:hasChamber ex:FinanceRiskChamber ;
+  cs:governedByCompact ex:FinanceCompact .
+
+ex:FinanceAnchor a cs:IdentityAnchor .
+ex:FinanceObjective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:FinanceEmbodiment a cs:FederatedEmbodiment .
+ex:FinanceRiskChamber a cs:Chamber .
+ex:FinanceCompact a cs:GovernanceCompact ; cs:governanceRuleText "finance scenario evidence, risk, and provenance compact" .
+
+ex:US-DEMO a legal:Jurisdiction ; legal:jurisdictionCode "US-DEMO" .
+
+ex:BankA a legal:LegalEntity, party:Organization ;
+  upper:hasIdentifier "bank-a" ;
+  legal:incorporatedIn ex:US-DEMO ;
+  party:hasIdentityRecord ex:BankAIdentity ;
+  party:hasRoleAssignment ex:BankARole ;
+  fin:hasRiskScore ex:BankRiskScore .
+
+ex:BankAIdentity a party:IdentityRecord .
+ex:BankARole a party:RoleAssignment ;
+  party:roleHeldBy ex:BankA ;
+  party:roleWithinSelf ex:FinanceGovernanceSelf ;
+  party:roleName "regulated-bank" .
+
+ex:ShellCoA a legal:LegalEntity, fin:Counterparty, party:Organization ;
+  upper:hasIdentifier "shell-co-a" ;
+  legal:incorporatedIn ex:US-DEMO ;
+  party:hasIdentityRecord ex:ShellCoAIdentity ;
+  party:hasRoleAssignment ex:ShellCoARole ;
+  fin:hasSanctionsScreeningResult ex:ShellCoSanctions ;
+  fin:hasRiskScore ex:ShellCoRiskScore .
+
+ex:ShellCoAIdentity a party:IdentityRecord .
+ex:ShellCoARole a party:RoleAssignment ;
+  party:roleHeldBy ex:ShellCoA ;
+  party:roleWithinSelf ex:FinanceGovernanceSelf ;
+  party:roleName "screened-counterparty" .
+
+ex:OwnerA a fin:Counterparty, party:NaturalPerson ;
+  upper:hasIdentifier "owner-a" ;
+  party:hasIdentityRecord ex:OwnerAIdentity ;
+  party:hasRoleAssignment ex:OwnerARole .
+
+ex:OwnerAIdentity a party:IdentityRecord .
+ex:OwnerARole a party:RoleAssignment ;
+  party:roleHeldBy ex:OwnerA ;
+  party:roleWithinSelf ex:FinanceGovernanceSelf ;
+  party:roleName "beneficial-owner" .
+
+ex:BeneficialOwnershipA a fin:BeneficialOwnershipRelation ;
+  fin:beneficialOwner ex:OwnerA ;
+  fin:ownedLegalEntity ex:ShellCoA ;
+  legal:ownedByEntity ex:OwnerHoldingEntity ;
+  legal:ownsEntity ex:ShellCoA .
+
+ex:OwnerHoldingEntity a legal:LegalEntity, party:Organization ;
+  upper:hasIdentifier "owner-holding-entity" ;
+  legal:incorporatedIn ex:US-DEMO ;
+  party:hasIdentityRecord ex:OwnerHoldingIdentity ;
+  party:hasRoleAssignment ex:OwnerHoldingRole .
+
+ex:OwnerHoldingIdentity a party:IdentityRecord .
+ex:OwnerHoldingRole a party:RoleAssignment ;
+  party:roleHeldBy ex:OwnerHoldingEntity ;
+  party:roleWithinSelf ex:FinanceGovernanceSelf ;
+  party:roleName "ownership-intermediary" .
+
+ex:BankAccountA a fin:FinancialAccount ; upper:hasIdentifier "bank-account-a" .
+ex:ShellAccountA a fin:FinancialAccount ; upper:hasIdentifier "shell-account-a" .
+
+ex:WireTransferA a fin:FinancialTransaction ;
+  fin:hasSender ex:BankA ;
+  fin:hasRecipient ex:ShellCoA ;
+  fin:usesAccount ex:BankAccountA, ex:ShellAccountA ;
+  fin:amount 485000.00 ;
+  fin:currency "USD" ;
+  fin:transactedAt "2026-05-05T13:00:00Z"^^xsd:dateTime ;
+  fin:hasCounterparty ex:ShellCoA .
+
+ex:ShellCoSanctions a fin:SanctionsScreeningResult ;
+  fin:screeningStatus "potential-match-review" .
+
+ex:ShellCoRiskScore a fin:RiskScore ;
+  fin:riskValue 0.86 ;
+  fin:riskModel "aml-network-pattern-demo-v0" .
+
+ex:BankRiskScore a fin:RiskScore ;
+  fin:riskValue 0.21 ;
+  fin:riskModel "institution-baseline-demo-v0" .
+
+ex:RoundTripPatternA a fin:TransactionNetworkPattern ;
+  fin:patternInvolvesTransaction ex:WireTransferA ;
+  upper:describes ex:ShellCoA .
+
+ex:AMLAlertA a fin:AMLAlert ;
+  fin:alertSubject ex:WireTransferA ;
+  fin:alertStatus "triage" ;
+  upper:describes ex:RoundTripPatternA .
