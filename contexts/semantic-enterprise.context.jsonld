@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "kgl": "https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#",
+    "smap": "https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#",
+    "ngov": "https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#",
+    "align": "https://socioprophet.github.io/ontogenesis/alignments#",
+    "biz": "https://socioprophet.github.io/ontogenesis/domains/business#",
+    "cyber": "https://socioprophet.github.io/ontogenesis/domains/cyber#",
+    "legal": "https://socioprophet.github.io/ontogenesis/domains/legal#",
+    "prod": "https://socioprophet.github.io/ontogenesis/domains/product-service#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "gist": "https://w3id.org/semanticarts/ns/ontology/gist/",
+    "fibo-be": "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/",
+    "fibo-fnd-agr": "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/",
+    "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+    "case-investigation": "https://ontology.caseontology.org/case/investigation/",
+    "d3f": "https://d3fend.mitre.org/ontologies/d3fend.owl#",
+    "iof-sc": "https://spec.industrialontologies.org/iof/ontology/supplychain/SupplyChain/"
+  }
+}
