@@ -41,9 +41,105 @@
       "semver": "0.1.0"
     },
     {
+      "id": "https://socioprophet.github.io/ontogenesis/og#SourceOS",
+      "layer": "Platform",
+      "path": "Platform/SourceOS.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Genesis",
+      "layer": "Platform",
+      "path": "Platform/Genesis.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Inception",
+      "layer": "Platform",
+      "path": "Platform/Inception.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Twin",
+      "layer": "Platform",
+      "path": "Platform/Twin.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Mesh",
+      "layer": "Platform",
+      "path": "Platform/Mesh.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#LatticeOntologyQuery",
+      "layer": "Platform",
+      "path": "Platform/lattice-ontology-query.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingCore",
+      "layer": "Platform",
+      "path": "Platform/Parsing/core.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingLinkGrammar",
+      "layer": "Platform",
+      "path": "Platform/Parsing/link-grammar.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingAcsetParse",
+      "layer": "Platform",
+      "path": "Platform/Parsing/acset-parse.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingHypergraphPromotion",
+      "layer": "Platform",
+      "path": "Platform/Parsing/hypergraph-promotion.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelCore",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-core.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelBelief",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-belief.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelDiscovery",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-discovery.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformTwinsHumanDigitalTwin",
+      "layer": "Platform",
+      "path": "Platform/Twins/human-digital-twin.ttl",
+      "semver": "0.1.0"
+    },
+    {
       "id": "https://socioprophet.github.io/ontogenesis/og#ProphetCLI",
       "layer": "Prophet",
       "path": "prophet/prophet_cli.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CapD",
+      "layer": "Prophet",
+      "path": "prophet/capd.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Noether",
+      "layer": "EPI",
+      "path": "epi/noether.ttl",
       "semver": "0.1.0"
     },
     {
@@ -80,6 +176,18 @@
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainProductService",
       "layer": "Domains",
       "path": "Domains/product-service.ttl",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#ValueFlowsGoverned",
+      "layer": "Bindings",
+      "path": "bindings/valueflows_governed/valueflows-governed.context.jsonld",
+      "semver": "0.1.0"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#SHIRv01",
+      "layer": "Specifications",
+      "path": "docs/specs/shir-v0.1.md",
       "semver": "0.1.0"
     }
   ]
