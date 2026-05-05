@@ -1,0 +1,41 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/reasoning_failure_registry.ttl> a owl:Ontology ;
+  dct:title "Reasoning Failure Registry Supplement v0.1" ;
+  dct:description "Focused registry supplement for the first Ontogenesis reasoning-failure ontology tranche." .
+
+og:ReasoningFailureOntology a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/ReasoningFailure/reasoning-failure.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reasoning Failure Ontology" .
+
+og:ReasoningFailureShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/reasoning_failure.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reasoning Failure SHACL Gate" .
+
+og:ReasoningFailureContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/reasoning-failure.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reasoning Failure JSON-LD Context" .
+
+og:ReasoningFailureDemo a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/reasoning_failure_demo.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reasoning Failure Demo Fixture" .
