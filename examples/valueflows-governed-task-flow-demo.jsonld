@@ -8,9 +8,10 @@
       "createdBy": "urn:actor:tibi",
       "title": "Robo Leaknet Cycle 1",
       "processKind": "cycle",
-      "status": "active",
+      "status": "completed",
       "startedAt": "2026-04-13T23:50:00Z",
-      "plannedEndAt": "2026-04-15T00:00:00Z"
+      "plannedEndAt": "2026-04-15T00:00:00Z",
+      "completedAt": "2026-04-14T01:00:00Z"
     },
     {
       "@id": "urn:delegation:tibi-worker2-task-admin",
@@ -21,9 +22,12 @@
       "processRunId": "urn:processrun:robo-leaknet-cycle1",
       "delegationKind": "operational",
       "capabilityScope": "process_run",
-      "status": "active",
+      "status": "revoked",
       "validFrom": "2026-04-13T23:52:00Z",
-      "validUntil": "2026-04-15T00:00:00Z"
+      "validUntil": "2026-04-15T00:00:00Z",
+      "revokedAt": "2026-04-14T01:05:00Z",
+      "revokedBy": "urn:actor:tibi",
+      "revocationReason": "Cycle completed and delegated authority closed."
     },
     {
       "@id": "urn:capabilitygrant:worker-2:task-offer",
@@ -33,9 +37,12 @@
       "groupId": "urn:group:leaknet",
       "processRunId": "urn:processrun:robo-leaknet-cycle1",
       "capability": "task.offer",
-      "status": "active",
+      "status": "revoked",
       "validFrom": "2026-04-13T23:53:00Z",
-      "validUntil": "2026-04-15T00:00:00Z"
+      "validUntil": "2026-04-15T00:00:00Z",
+      "revokedAt": "2026-04-14T01:05:00Z",
+      "revokedBy": "urn:actor:tibi",
+      "revocationReason": "Offer authority closed after process completion."
     },
     {
       "@id": "urn:task:robo-leaknet-cycle1-3d-design",
@@ -63,6 +70,32 @@
       "processRunId": "urn:processrun:robo-leaknet-cycle1",
       "stateProjectionName": "authoritative_projection_v2",
       "materializedStateHash": "sha256:eb4070d0de8621ec1393f3a0bb93fa62287e718a33d8dfcfde5039b5705776d3"
+    },
+    {
+      "@id": "urn:processrun:robo-leaknet-cycle2",
+      "@type": "ProcessRun",
+      "groupId": "urn:group:leaknet",
+      "createdBy": "urn:actor:tibi",
+      "title": "Robo Leaknet Cycle 2",
+      "processKind": "cycle",
+      "status": "canceled",
+      "startedAt": "2026-04-15T10:00:00Z",
+      "plannedEndAt": "2026-04-16T00:00:00Z",
+      "canceledAt": "2026-04-15T11:00:00Z",
+      "canceledBy": "urn:actor:tibi",
+      "cancellationReason": "Insufficient capacity for safe execution."
+    },
+    {
+      "@id": "urn:task:robo-leaknet-cycle2-3d-design",
+      "@type": "Task",
+      "groupId": "urn:group:leaknet",
+      "processRunId": "urn:processrun:robo-leaknet-cycle2",
+      "offeredBy": "urn:actor:tibi",
+      "status": "canceled",
+      "dueAt": "2026-04-15T18:00:00Z",
+      "canceledAt": "2026-04-15T11:00:00Z",
+      "canceledBy": "urn:actor:tibi",
+      "cancellationReason": "Task canceled with the process run."
     }
   ]
 }

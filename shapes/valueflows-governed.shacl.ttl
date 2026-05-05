@@ -6,8 +6,30 @@ vfg:ProcessRunShape a sh:NodeShape ;
   sh:targetClass vfg:ProcessRun ;
   sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:createdBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
-  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path vfg:startedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "active" "completed" "canceled" ) ] ;
+  sh:property [ sh:path vfg:startedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:completedAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:canceledAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:canceledBy ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:cancellationReason ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:sparql [
+    sh:message "Completed process runs must provide completedAt." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "completed" .
+        FILTER NOT EXISTS { $this vfg:completedAt ?completedAt . }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Canceled process runs must provide canceledAt and canceledBy." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "canceled" .
+        FILTER ( NOT EXISTS { $this vfg:canceledAt ?t . } || NOT EXISTS { $this vfg:canceledBy ?a . } )
+      }
+    """
+  ] .
 
 vfg:DelegationShape a sh:NodeShape ;
   sh:targetClass vfg:Delegation ;
@@ -15,8 +37,20 @@ vfg:DelegationShape a sh:NodeShape ;
   sh:property [ sh:path vfg:granteeActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
-  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path vfg:validFrom ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "active" "revoked" "expired" ) ] ;
+  sh:property [ sh:path vfg:validFrom ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:revokedAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:revokedBy ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:revocationReason ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:sparql [
+    sh:message "Revoked delegations must provide revokedAt and revokedBy." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "revoked" .
+        FILTER ( NOT EXISTS { $this vfg:revokedAt ?t . } || NOT EXISTS { $this vfg:revokedBy ?a . } )
+      }
+    """
+  ] .
 
 vfg:CapabilityGrantShape a sh:NodeShape ;
   sh:targetClass vfg:CapabilityGrant ;
@@ -25,21 +59,55 @@ vfg:CapabilityGrantShape a sh:NodeShape ;
   sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:capability ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] .
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "active" "revoked" "expired" ) ] ;
+  sh:property [ sh:path vfg:revokedAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:revokedBy ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:revocationReason ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:sparql [
+    sh:message "Revoked capability grants must provide revokedAt and revokedBy." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "revoked" .
+        FILTER ( NOT EXISTS { $this vfg:revokedAt ?t . } || NOT EXISTS { $this vfg:revokedBy ?a . } )
+      }
+    """
+  ] .
 
 vfg:TaskShape a sh:NodeShape ;
   sh:targetClass vfg:Task ;
   sh:property [ sh:path vfg:groupId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:processRunId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:offeredBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
-  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path vfg:dueAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "offered" "accepted" "in_progress" "completed" "canceled" ) ] ;
+  sh:property [ sh:path vfg:dueAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:completedAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:canceledAt ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path vfg:canceledBy ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path vfg:cancellationReason ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:sparql [
+    sh:message "Completed tasks must provide completedAt." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "completed" .
+        FILTER NOT EXISTS { $this vfg:completedAt ?completedAt . }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Canceled tasks must provide canceledAt and canceledBy." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this vfg:status "canceled" .
+        FILTER ( NOT EXISTS { $this vfg:canceledAt ?t . } || NOT EXISTS { $this vfg:canceledBy ?a . } )
+      }
+    """
+  ] .
 
 vfg:CommitmentShape a sh:NodeShape ;
   sh:targetClass vfg:Commitment ;
   sh:property [ sh:path vfg:taskId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
   sh:property [ sh:path vfg:debtorActorId ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
-  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path vfg:status ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "accepted" "in_progress" "fulfilled" "released" "reassigned" "canceled" ) ] ;
   sh:property [ sh:path vfg:progressPercent ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
 
 vfg:CairnCheckpointShape a sh:NodeShape ;

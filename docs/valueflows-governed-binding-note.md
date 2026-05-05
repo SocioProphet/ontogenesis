@@ -12,6 +12,7 @@ The ValueFlows governed lane is a compact governed binding and runtime proof sur
 - deterministic replay and checkpoint hashing
 - policy runtime checks
 - compact-bundle execution for CI and local validation
+- ontology-native terminal-state semantics for completed, canceled, revoked, and expired states
 
 It is intentionally narrower than a full ontology module family.
 
@@ -28,8 +29,11 @@ Current repo surfaces for this lane include:
 - `bindings/valueflows_governed/README.md`
 - `bindings/valueflows_governed/Makefile`
 - `bindings/valueflows_governed/compact-bundle.v1.json`
+- `bindings/valueflows_governed/valueflows-governed.context.jsonld`
 - `bindings/valueflows_governed/tools/*.py`
 - `bindings/valueflows_governed/policies/rego/*.rego`
+- `shapes/valueflows-governed.shacl.ttl`
+- `examples/valueflows-governed-task-flow-demo.jsonld`
 - `.github/workflows/valueflows-governed-ci.yml`
 
 ## What it currently proves
@@ -42,25 +46,31 @@ This lane currently proves a compact runtime slice for:
 - denial of unauthorized assignment override
 - deterministic replay against expected outputs
 
-## What it does not yet prove
+It also now defines ontology-native semantics for:
 
-This lane is not yet fully ontology-native.
+- completed process runs requiring `completedAt`
+- canceled process runs requiring `canceledAt` and `canceledBy`
+- revoked delegations requiring `revokedAt` and `revokedBy`
+- revoked capability grants requiring `revokedAt` and `revokedBy`
+- completed and canceled tasks carrying terminal-state timestamps and authorities
+
+## What it does not yet prove
 
 Missing or partial surfaces still include:
 
-- SHACL shapes dedicated to the ValueFlows governed lane
-- JSON-LD context / context-fragment integration
-- ontology-native example alignment beyond the compact runtime bundle
+- runtime replay fixtures for revocation and terminal-state lockout behavior
+- SHIR projection and receipt mapping
 - module catalog / registry alignment beyond documentation references
-- revocation and terminal lifecycle semantics for delegations, capability grants, and process runs
+- Memory Mesh persistence/reconstruction for ValueFlows event logs and checkpoints
+- AgentPlane / Policy Fabric consumption of ValueFlows process/task authority as a governed execution subject
 
 ## Correct next lift
 
-The right next lift is semantic, not wider runtime sprawl:
+The right next lift is runtime and projection evidence, not wider ontology sprawl:
 
-1. bind the governed lane to native ontology surfaces such as SHACL and JSON-LD context fragments
-2. preserve the compact bundle as the deterministic CI/runtime proof surface
-3. add revocation and terminal lifecycle semantics only after the ontology-native surfaces exist
+1. update the compact runtime bundle and replay fixtures to prove terminal-state lockouts
+2. add a ValueFlows-to-SHIR projection manifest and receipt example
+3. then wire ValueFlows event/checkpoint artifacts into Memory Mesh or AgentPlane consumers
 
 ## Design rule
 
