@@ -1,0 +1,22 @@
+PREFIX cti: <https://socioprophet.github.io/ontogenesis/domains/threat-intel#>
+PREFIX cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#>
+PREFIX upper: <https://socioprophet.github.io/ontogenesis/upper#>
+
+# Find CTI indicators, their observables, linked campaigns or malware,
+# associated TTPs, vulnerabilities, and defensive techniques.
+SELECT ?indicator ?observableType ?observableValue ?confidence ?thing ?technique ?vulnerability ?defensiveTechnique ?source
+WHERE {
+  ?indicator a cti:Indicator ;
+    cti:hasObservable ?observable ;
+    cti:confidence ?confidence ;
+    cti:reportedBy ?source .
+
+  ?observable cti:observableType ?observableType ;
+    cti:observableValue ?observableValue .
+
+  OPTIONAL { ?indicator cti:indicatorOf ?thing . }
+  OPTIONAL { ?thing cti:usesTechnique ?technique . }
+  OPTIONAL { ?technique cti:exploitsVulnerability ?vulnerability . }
+  OPTIONAL { ?technique cti:mitigatedBy ?defensiveTechnique . }
+}
+ORDER BY DESC(?confidence)
