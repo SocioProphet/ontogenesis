@@ -1,0 +1,115 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix fin:   <https://socioprophet.github.io/ontogenesis/domains/finance#> .
+@prefix cti:   <https://socioprophet.github.io/ontogenesis/domains/threat-intel#> .
+@prefix inv:   <https://socioprophet.github.io/ontogenesis/domains/investigation#> .
+@prefix sc:    <https://socioprophet.github.io/ontogenesis/domains/supply-chain#> .
+@prefix c2:    <https://socioprophet.github.io/ontogenesis/domains/defense-c2#> .
+@prefix fibo-fbc-fct: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fnd-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .
+@prefix case-investigation: <https://ontology.caseontology.org/case/investigation/> .
+@prefix d3f:   <https://d3fend.mitre.org/ontologies/d3fend.owl#> .
+@prefix iof-sc: <https://spec.industrialontologies.org/iof/ontology/supplychain/SupplyChain/> .
+@prefix dodaf: <https://socioprophet.github.io/external/dodaf#> .
+@prefix cco:   <https://socioprophet.github.io/external/cco#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/sector-domains.ttl> a owl:Ontology ;
+  dct:title "Alignment — Semantic Enterprise Sector Domains" ;
+  dct:description "Governed mapping assertions connecting finance, threat-intel, investigation, supply-chain, and defense/C2 sector modules to external standard alignment surfaces." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Middle/semantic-mapping.ttl>, <Domains/finance.ttl>, <Domains/threat-intel.ttl>, <Domains/investigation.ttl>, <Domains/supply-chain.ttl>, <Domains/defense-c2.ttl>, <Alignments/fibo.ttl>, <Alignments/uco-case.ttl>, <Alignments/d3fend.ttl>, <Alignments/iof-sco.ttl>, <Alignments/dodaf-cco.ttl> .
+
+align:FinancialAccountToFIBOAccount a smap:MappingAssertion ;
+  smap:mapsFrom fin:FinancialAccount ;
+  smap:mapsTo fibo-fbc-fct:Account ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:fiboExternalOntology ;
+  smap:confidence 0.70 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis financial accounts are intended to align with FIBO-style account semantics while preserving local governance and party binding." .
+
+align:FinancialTransactionToFIBOAgreementContext a smap:MappingAssertion ;
+  smap:mapsFrom fin:FinancialTransaction ;
+  smap:mapsTo fibo-fnd-agr:Agreement ;
+  smap:usesMappingPredicate smap:SkosBroadMatch ;
+  smap:targetOntology align:fiboExternalOntology ;
+  smap:confidence 0.55 ;
+  smap:status "draft" ;
+  smap:rationale "Financial transactions may instantiate or settle agreement obligations; exact FIBO transaction modeling is deferred to a finance-specific alignment review." .
+
+align:ThreatIntelIndicatorToUCOObject a smap:MappingAssertion ;
+  smap:mapsFrom cti:Indicator ;
+  smap:mapsTo uco-core:UcoObject ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:ucoExternalOntology ;
+  smap:confidence 0.65 ;
+  smap:status "draft" ;
+  smap:rationale "CTI indicators are governed cyber information objects; precise UCO/STIX mapping remains a follow-on interoperability task." .
+
+align:DefensiveTechniqueToD3FENDTechnique a smap:MappingAssertion ;
+  smap:mapsFrom cti:DefensiveTechnique ;
+  smap:mapsTo d3f:DefensiveTechnique ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:d3fendExternalOntology ;
+  smap:confidence 0.85 ;
+  smap:status "draft" ;
+  smap:rationale "Threat-intel defensive techniques are intended to bridge directly to D3FEND-style defensive technique semantics." .
+
+align:InvestigationEvidenceToCASETrace a smap:MappingAssertion ;
+  smap:mapsFrom inv:EvidenceItem ;
+  smap:mapsTo case-investigation:Trace ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:caseExternalOntology ;
+  smap:confidence 0.70 ;
+  smap:status "draft" ;
+  smap:rationale "Evidence items can become CASE-style traces when admitted into a case context with custody provenance." .
+
+align:InvestigativeActionToCASEAction a smap:MappingAssertion ;
+  smap:mapsFrom inv:InvestigativeAction ;
+  smap:mapsTo case-investigation:InvestigativeAction ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:caseExternalOntology ;
+  smap:confidence 0.85 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis investigative actions are modeled to align with CASE investigative action semantics." .
+
+align:ShipmentToIOFShipment a smap:MappingAssertion ;
+  smap:mapsFrom sc:Shipment ;
+  smap:mapsTo iof-sc:Shipment ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:iofScoExternalOntology ;
+  smap:confidence 0.82 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis shipment semantics intentionally bridge to IOF SCO shipment concepts." .
+
+align:SupplyChainAgentToIOFAgent a smap:MappingAssertion ;
+  smap:mapsFrom sc:SupplyChainAgent ;
+  smap:mapsTo iof-sc:SupplyChainAgent ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:iofScoExternalOntology ;
+  smap:confidence 0.82 ;
+  smap:status "draft" ;
+  smap:rationale "Suppliers, manufacturers, distributors, and retailers specialize the supply-chain-agent role." .
+
+align:MissionToDoDAFActivity a smap:MappingAssertion ;
+  smap:mapsFrom c2:Mission ;
+  smap:mapsTo dodaf:Activity ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:dodafExternalOntology ;
+  smap:confidence 0.70 ;
+  smap:status "draft" ;
+  smap:rationale "Missions are operational processes and can align to DoDAF activity views while retaining Ontogenesis governance semantics." .
+
+align:UnitToCCOOrganization a smap:MappingAssertion ;
+  smap:mapsFrom c2:Unit ;
+  smap:mapsTo cco:Organization ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:ccoExternalOntology ;
+  smap:confidence 0.72 ;
+  smap:status "draft" ;
+  smap:rationale "Units are organization-like command elements in the defense/C2 module." .
