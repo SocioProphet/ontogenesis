@@ -1,0 +1,63 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/semantic-enterprise#> .
+@prefix kgl:   <https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#> .
+@prefix ngov:  <https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:SemanticEnterprisePipeline a kgl:IngestionPipeline ;
+  kgl:sourceSystem "enterprise-data-lake" ;
+  kgl:schedule "daily" ;
+  kgl:hasPhase ex:CreationPhase, ex:HostingPhase, ex:CurationPhase, ex:DeploymentPhase ;
+  kgl:usesMappingRule ex:CustomerCompanyMappingRule ;
+  kgl:producesGraphOutput ex:CuratedCustomerGraphOutput .
+
+ex:CreationPhase a kgl:KnowledgeCreation .
+ex:HostingPhase a kgl:KnowledgeHosting .
+ex:CurationPhase a kgl:KnowledgeCuration .
+ex:DeploymentPhase a kgl:KnowledgeDeployment .
+
+ex:CustomerCompanyMappingRule a kgl:MappingRule ;
+  upper:describes biz:Company ;
+  kgl:qualityStatus "draft" .
+
+ex:CuratedCustomerGraphOutput a kgl:GraphOutput ;
+  kgl:qualityStatus "validated" ;
+  kgl:validatedBy ex:SemanticEnterpriseValidationRun ;
+  kgl:exposedThrough ex:EnterpriseSparqlEndpoint .
+
+ex:SemanticEnterpriseValidationRun a kgl:ValidationRun ;
+  prov:startedAtTime "2026-05-05T00:00:00Z"^^xsd:dateTime .
+
+ex:EnterpriseSparqlEndpoint a kgl:SPARQLEndpoint ;
+  kgl:queryInterfaceUrl "https://example.invalid/sparql"^^xsd:anyURI .
+
+ex:CuratedCustomerNamedGraph a ngov:CuratedGraph ;
+  ngov:graphURI "https://socioprophet.github.io/ontogenesis/graphs/example/curated-customer"^^xsd:anyURI ;
+  ngov:sourceSystem "enterprise-data-lake" ;
+  ngov:hasAccessPolicy ex:InternalGraphAccessPolicy ;
+  ngov:hasTrustProfile ex:CuratedTrustProfile ;
+  ngov:graphLifecyclePhase ex:CurationPhase ;
+  ngov:generatedByPipeline ex:SemanticEnterprisePipeline ;
+  ngov:effectiveDate "2026-05-05"^^xsd:date ;
+  ngov:perspectiveLabel "curated customer/company perspective" .
+
+ex:InternalGraphAccessPolicy a ngov:GraphAccessPolicy ;
+  ngov:accessClass "internal" ;
+  ngov:retentionPolicy "retain-current-plus-audit-history" .
+
+ex:CuratedTrustProfile a ngov:GraphTrustProfile ;
+  ngov:trustLevel "curated" .
+
+ex:CompanyToGistExampleMapping a smap:MappingAssertion ;
+  smap:mapsFrom biz:Company ;
+  smap:mapsTo align:gistExternalOntology ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:gistExternalOntology ;
+  smap:confidence 0.85 ;
+  smap:status "draft" ;
+  smap:rationale "Example pipeline mapping showing company-to-enterprise-upper-ontology bridge governance." .
