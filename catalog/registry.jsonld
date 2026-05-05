@@ -1,5 +1,5 @@
 {
-  "@context": "/mnt/data/ontogenesis_repo_full_v1/contexts/main.context.jsonld",
+  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
   "id": "https://socioprophet.github.io/ontogenesis/catalog/registry",
   "type": "upper:InformationArtifact",
   "label": "Ontogenesis Module Registry (JSON-LD)",
@@ -8,79 +8,257 @@
       "id": "https://socioprophet.github.io/ontogenesis/og#UpperCore",
       "layer": "Upper",
       "path": "Upper/upper-core.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/upper#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#MiddleSystem",
       "layer": "Middle",
       "path": "Middle/system-architecture.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/middle#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#MiddleRegistries",
       "layer": "Middle",
       "path": "Middle/registries.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/middle#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#MiddleActionOntology",
       "layer": "Middle",
       "path": "Middle/action-ontology.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/middle/action#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#LowerBindings",
       "layer": "Lower",
       "path": "Lower/bindings-core.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/lower#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#PlatformCore",
       "layer": "Platform",
       "path": "Platform/platform.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#SourceOS",
+      "layer": "Platform",
+      "path": "Platform/SourceOS.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Genesis",
+      "layer": "Platform",
+      "path": "Platform/Genesis.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Inception",
+      "layer": "Platform",
+      "path": "Platform/Inception.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Twin",
+      "layer": "Platform",
+      "path": "Platform/Twin.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Mesh",
+      "layer": "Platform",
+      "path": "Platform/Mesh.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#LatticeOntologyQuery",
+      "layer": "Platform",
+      "path": "Platform/lattice-ontology-query.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/platform/oq#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingCore",
+      "layer": "Platform",
+      "path": "Platform/Parsing/core.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Parsing/core#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingLinkGrammar",
+      "layer": "Platform",
+      "path": "Platform/Parsing/link-grammar.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Parsing/link-grammar#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingAcsetParse",
+      "layer": "Platform",
+      "path": "Platform/Parsing/acset-parse.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Parsing/acset-parse#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformParsingHypergraphPromotion",
+      "layer": "Platform",
+      "path": "Platform/Parsing/hypergraph-promotion.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Parsing/hypergraph-promotion#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelCore",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-core.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Epistemics/michael-core#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelBelief",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-belief.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Epistemics/michael-belief#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformEpistemicsMichaelDiscovery",
+      "layer": "Platform",
+      "path": "Platform/Epistemics/michael-discovery.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Epistemics/michael-discovery#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#PlatformTwinsHumanDigitalTwin",
+      "layer": "Platform",
+      "path": "Platform/Twins/human-digital-twin.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/Platform/Twins/human-digital-twin#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#ProphetCLI",
       "layer": "Prophet",
       "path": "prophet/prophet_cli.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/prophet#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CapD",
+      "layer": "Prophet",
+      "path": "prophet/capd.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/prophet#capd#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#Noether",
+      "layer": "EPI",
+      "path": "epi/noether.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/noether#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#EPI",
       "layer": "EPI",
       "path": "epi/epi.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/epi#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainBusinessCore",
       "layer": "Domains",
       "path": "Domains/business_core.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/domains/business#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainCyberneticSelf",
       "layer": "Domains",
       "path": "Domains/cybernetic-self.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainPartyIdentity",
       "layer": "Domains",
       "path": "Domains/party-identity.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/domains/party#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainOrgLegal",
       "layer": "Domains",
       "path": "Domains/org-legal.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/domains/legal#",
+      "semver": "0.1.0",
+      "status": "draft"
     },
     {
       "id": "https://socioprophet.github.io/ontogenesis/og#DomainProductService",
       "layer": "Domains",
       "path": "Domains/product-service.ttl",
-      "semver": "0.1.0"
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/domains/product-service#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#ValueFlowsGoverned",
+      "layer": "Bindings",
+      "path": "bindings/valueflows_governed/valueflows-governed.context.jsonld",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/bindings/valueflows-governed#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#ValueFlowsToSHIRProjection",
+      "layer": "Bindings",
+      "path": "bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/bindings/valueflows-governed#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#SHIRv01",
+      "layer": "Specifications",
+      "path": "docs/specs/shir-v0.1.md",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/shir#",
+      "semver": "0.1.0",
+      "status": "draft"
     }
   ]
 }
