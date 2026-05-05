@@ -8,14 +8,49 @@
 @prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
 @prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
 @prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix cs:    <https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#> .
+@prefix ps:    <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
 @prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
+ex:DemoCyberneticSelf a cs:CyberneticSelf ;
+  cs:anchoredBy ex:DemoIdentityAnchor ;
+  cs:hasObjectiveFunction ex:DemoObjective ;
+  cs:hasEmbodiment ex:DemoEmbodiment ;
+  cs:hasChamber ex:DemoChamber ;
+  cs:governedByCompact ex:DemoCompact .
+
+ex:DemoIdentityAnchor a cs:IdentityAnchor .
+ex:DemoObjective a cs:ObjectiveFunction ; cs:objectivePriority 1 .
+ex:DemoEmbodiment a cs:FederatedEmbodiment .
+ex:DemoChamber a cs:Chamber .
+ex:DemoCompact a cs:GovernanceCompact ; cs:governanceRuleText "demo semantic-sector governance compact" .
+
+ex:DemoJurisdiction a legal:Jurisdiction ;
+  legal:jurisdictionCode "DEMO" .
+
 ex:AcmeBank a legal:LegalEntity, party:Organization ;
-  upper:hasIdentifier "acme-bank" .
+  upper:hasIdentifier "acme-bank" ;
+  legal:incorporatedIn ex:DemoJurisdiction ;
+  party:hasIdentityRecord ex:AcmeBankIdentity ;
+  party:hasRoleAssignment ex:AcmeBankRole .
+
+ex:AcmeBankIdentity a party:IdentityRecord .
+ex:AcmeBankRole a party:RoleAssignment ;
+  party:roleHeldBy ex:AcmeBank ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "regulated-financial-institution" .
 
 ex:CounterpartyA a fin:Counterparty, party:Organization ;
-  upper:hasIdentifier "counterparty-a" .
+  upper:hasIdentifier "counterparty-a" ;
+  party:hasIdentityRecord ex:CounterpartyAIdentity ;
+  party:hasRoleAssignment ex:CounterpartyARole .
+
+ex:CounterpartyAIdentity a party:IdentityRecord .
+ex:CounterpartyARole a party:RoleAssignment ;
+  party:roleHeldBy ex:CounterpartyA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "transaction-counterparty" .
 
 ex:AccountA a fin:FinancialAccount ;
   upper:hasIdentifier "acct-a" .
@@ -53,7 +88,15 @@ ex:CaseA a inv:Case ;
   inv:caseIdentifier "CASE-DEMO-001" .
 
 ex:CustodianA a party:NaturalPerson ;
-  upper:hasIdentifier "custodian-a" .
+  upper:hasIdentifier "custodian-a" ;
+  party:hasIdentityRecord ex:CustodianAIdentity ;
+  party:hasRoleAssignment ex:CustodianARole .
+
+ex:CustodianAIdentity a party:IdentityRecord .
+ex:CustodianARole a party:RoleAssignment ;
+  party:roleHeldBy ex:CustodianA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "evidence-custodian" .
 
 ex:CustodyEventA a inv:ChainOfCustodyEvent ;
   inv:custodyHeldBy ex:CustodianA ;
@@ -67,7 +110,15 @@ ex:DigitalEvidenceA a inv:DigitalEvidence, inv:EvidenceItem ;
 ex:SecurityEventA a cyber:SecurityEvent .
 
 ex:SupplierA a sc:Supplier ;
-  upper:hasIdentifier "supplier-a" .
+  upper:hasIdentifier "supplier-a" ;
+  party:hasIdentityRecord ex:SupplierAIdentity ;
+  party:hasRoleAssignment ex:SupplierARole .
+
+ex:SupplierAIdentity a party:IdentityRecord .
+ex:SupplierARole a party:RoleAssignment ;
+  party:roleHeldBy ex:SupplierA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "tier-one-supplier" .
 
 ex:FacilityOrigin a sc:Facility ;
   upper:hasIdentifier "facility-origin" ;
@@ -86,8 +137,11 @@ ex:ShipmentA a sc:Shipment ;
   sc:shipmentDocument ex:BillOfLadingA ;
   sc:shipmentStatus "in-transit" .
 
+ex:ComponentFeatureA a ps:Feature .
+
 ex:ComponentA a sc:Component ;
-  upper:hasIdentifier "component-a" .
+  upper:hasIdentifier "component-a" ;
+  ps:includesFeature ex:ComponentFeatureA .
 
 ex:SupplyRiskA a sc:SupplyRisk ;
   sc:riskAffects ex:ComponentA ;
@@ -107,8 +161,16 @@ ex:ROEA a c2:RuleOfEngagement ;
 ex:SupplySystemA a sc:SupplyChainSystem .
 
 ex:UnitA a c2:Unit ;
+  party:hasIdentityRecord ex:UnitAIdentity ;
+  party:hasRoleAssignment ex:UnitARole ;
   c2:assignedToMission ex:MissionA ;
   c2:hasReadinessAssessment ex:ReadinessA .
+
+ex:UnitAIdentity a party:IdentityRecord .
+ex:UnitARole a party:RoleAssignment ;
+  party:roleHeldBy ex:UnitA ;
+  party:roleWithinSelf ex:DemoCyberneticSelf ;
+  party:roleName "mission-unit" .
 
 ex:ReadinessA a c2:ReadinessAssessment ;
   c2:readinessLevel "green" .
