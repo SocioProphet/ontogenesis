@@ -115,6 +115,10 @@ These are governed alignment scaffolds. They are not full vendored external onto
 ## Specifications and profiles
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
+- `docs/specs/candidate-link-intelligence-plane.md`
+  - governed candidate-link, link-prediction, scoring, evidence, curation, and promotion contract
+- `docs/specs/candidate-link-to-shir.md`
+  - mapping from binary links, hyperedges, alignments, evidence bundles, prediction traces, counterexamples, and receipts into SHIR
 - `docs/specs/ontology-query-adapter.md`
   - governed ontology-query adapter contract for OWL/SHACL/schema-alignment/reasoning queries in the Lattice FederatedQueryPlane
 - `docs/specs/semantic_enterprise_architecture.md`
