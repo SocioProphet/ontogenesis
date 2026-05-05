@@ -2,8 +2,9 @@
 """Validate semantic-enterprise import contract coverage.
 
 This script is intentionally lightweight and stdlib-only. It checks that the
-semantic-enterprise scenario, query, named-graph, registry, and downstream
-import-bridge surfaces remain connected by path and by expected coverage.
+semantic-enterprise scenario, query, named-graph, registry, rollup, release note,
+and downstream import-bridge surfaces remain connected by path and expected
+coverage.
 """
 from __future__ import annotations
 
@@ -48,6 +49,13 @@ REQUIRED_IMPORT_BRIDGE_CONSUMERS = [
     "DeliveryExcellence",
 ]
 
+SEMANTIC_REGISTRY_SUPPLEMENTS = [
+    "catalog/semantic_enterprise_registry.ttl",
+    "catalog/semantic_sector_registry.ttl",
+    "catalog/semantic_sector_scenarios_registry.ttl",
+    "catalog/semantic_query_import_registry.ttl",
+]
+
 
 def require_file(errors: list[str], path: str) -> None:
     if not (ROOT / path).is_file():
@@ -71,9 +79,20 @@ def main() -> int:
     query_registry = "catalog/semantic_query_import_registry.ttl"
     named_graphs = "examples/named-graphs/semantic_sector_named_graphs.ttl"
     import_bridge = "docs/semantic-enterprise/downstream-import-bridge-v0.1.md"
+    rollup_registry = "catalog/semantic_enterprise_v0_1_registry.ttl"
+    release_note = "docs/semantic-enterprise/v0.1-release-note.md"
 
-    for path in [scenario_registry, query_registry, named_graphs, import_bridge]:
+    for path in [scenario_registry, query_registry, named_graphs, import_bridge, rollup_registry, release_note]:
         require_file(errors, path)
+
+    for registry_path in SEMANTIC_REGISTRY_SUPPLEMENTS:
+        require_file(errors, registry_path)
+        require_contains(errors, rollup_registry, registry_path, f"rollup registry imports {registry_path}")
+        require_contains(errors, release_note, registry_path, f"release note references {registry_path}")
+
+    require_contains(errors, rollup_registry, release_note, "rollup registry references release note")
+    require_contains(errors, release_note, rollup_registry, "release note references rollup registry")
+    require_contains(errors, release_note, "Semantic Enterprise v0.1 is stable", "release note declares stable v0.1 status")
 
     for sector, spec in SCENARIOS.items():
         scenario_path = spec["scenario"]
@@ -87,9 +106,11 @@ def main() -> int:
         require_contains(errors, query_registry, query_path, f"{sector} query registry coverage")
         require_contains(errors, named_graphs, scenario_path, f"{sector} named graph sourceSystem coverage")
         require_contains(errors, named_graphs, graph_uri_fragment, f"{sector} named graph URI coverage")
+        require_contains(errors, release_note, sector.split("-")[0], f"{sector} release note topic coverage")
 
     for consumer in REQUIRED_IMPORT_BRIDGE_CONSUMERS:
         require_contains(errors, import_bridge, consumer, f"downstream consumer {consumer} coverage")
+        require_contains(errors, release_note, consumer, f"release note downstream consumer {consumer} coverage")
 
     if errors:
         print("Semantic import contract validation failed:")
@@ -98,7 +119,7 @@ def main() -> int:
         return 1
 
     print("Semantic import contract validation passed.")
-    print(f"Validated {len(SCENARIOS)} scenarios, queries, named graph records, and import bridge coverage.")
+    print(f"Validated {len(SCENARIOS)} scenarios, queries, named graph records, rollup registry, release note, and import bridge coverage.")
     return 0
 
 
