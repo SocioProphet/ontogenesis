@@ -41,7 +41,7 @@ smap:MappingAssertionShape a sh:NodeShape ;
     sh:path smap:status ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:string ;
+    sh:nodeKind sh:Literal ;
     sh:message "A mapping assertion must declare a lifecycle status such as draft, reviewed, approved, deprecated, or rejected." ;
   ] .
 
@@ -51,11 +51,13 @@ smap:ExternalOntologyShape a sh:NodeShape ;
     sh:path smap:standardName ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:string ;
+    sh:nodeKind sh:Literal ;
+    sh:message "An external ontology must declare a standard name." ;
   ] ;
   sh:property [
     sh:path smap:standardUrl ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:anyURI ;
+    sh:nodeKind sh:Literal ;
+    sh:message "An external ontology must declare a standard URL." ;
   ] .
