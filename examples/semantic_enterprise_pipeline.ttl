@@ -3,6 +3,7 @@
 @prefix kgl:   <https://socioprophet.github.io/ontogenesis/middle/kg-lifecycle#> .
 @prefix ngov:  <https://socioprophet.github.io/ontogenesis/middle/named-graph-governance#> .
 @prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix gist:  <https://w3id.org/semanticarts/ns/ontology/gist/> .
 @prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
 @prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
 @prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
@@ -55,7 +56,7 @@ ex:CuratedTrustProfile a ngov:GraphTrustProfile ;
 
 ex:CompanyToGistExampleMapping a smap:MappingAssertion ;
   smap:mapsFrom biz:Company ;
-  smap:mapsTo align:gistExternalOntology ;
+  smap:mapsTo gist:Organization ;
   smap:usesMappingPredicate smap:SkosCloseMatch ;
   smap:targetOntology align:gistExternalOntology ;
   smap:confidence 0.85 ;
