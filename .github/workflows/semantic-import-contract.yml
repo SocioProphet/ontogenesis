@@ -5,6 +5,7 @@ on:
     paths:
       - 'catalog/semantic_*registry.ttl'
       - 'docs/semantic-enterprise/**'
+      - 'docs/releases/**'
       - 'examples/scenarios/**'
       - 'examples/queries/**'
       - 'examples/named-graphs/**'
@@ -17,6 +18,7 @@ on:
     paths:
       - 'catalog/semantic_*registry.ttl'
       - 'docs/semantic-enterprise/**'
+      - 'docs/releases/**'
       - 'examples/scenarios/**'
       - 'examples/queries/**'
       - 'examples/named-graphs/**'
