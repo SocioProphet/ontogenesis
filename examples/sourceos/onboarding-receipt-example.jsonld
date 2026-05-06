@@ -1,0 +1,95 @@
+{
+  "@context": {
+    "srcos": "https://schemas.srcos.ai/v2/",
+    "id": "@id",
+    "type": "@type",
+    "workspaceKind": "srcos:workspaceKind",
+    "mountMode": "srcos:mountMode",
+    "riskLevel": "srcos:riskLevel",
+    "receiptRequired": "srcos:receiptRequired",
+    "requiresExplicitApproval": "srcos:requiresExplicitApproval",
+    "connectorKind": "srcos:connectorKind",
+    "action": "srcos:action",
+    "accessLevel": "srcos:accessLevel",
+    "skillRef": "srcos:skillRef",
+    "permissionRef": "srcos:permissionRef",
+    "workspaceScopeRef": {
+      "@id": "srcos:workspaceScopeRef",
+      "@type": "@id"
+    },
+    "trustModeRef": {
+      "@id": "srcos:trustModeRef",
+      "@type": "@id"
+    },
+    "enabledCapabilityPack": {
+      "@id": "srcos:enabledCapabilityPack",
+      "@type": "@id"
+    },
+    "enabledConnectorActionScope": {
+      "@id": "srcos:enabledConnectorActionScope",
+      "@type": "@id"
+    },
+    "enabledAutomationTemplate": {
+      "@id": "srcos:enabledAutomationTemplate",
+      "@type": "@id"
+    },
+    "trialTask": "srcos:trialTask",
+    "revocationInstruction": "srcos:revocationInstruction"
+  },
+  "@graph": [
+    {
+      "id": "urn:srcos:workspace-scope:socioprophet-sourceos-spec-readonly",
+      "type": "srcos:WorkspaceScope",
+      "workspaceKind": "gitRepository",
+      "mountMode": "readOnly"
+    },
+    {
+      "id": "urn:srcos:trust-mode:read-only-analyst",
+      "type": "srcos:TrustMode",
+      "riskLevel": "low"
+    },
+    {
+      "id": "urn:srcos:capability-pack:repo-release-prep",
+      "type": "srcos:CapabilityPack",
+      "skillRef": [
+        "urn:srcos:skill:git-activity-summary",
+        "urn:srcos:skill:release-notes-draft"
+      ],
+      "permissionRef": [
+        "github.repo.read",
+        "github.pr.read",
+        "artifact.write"
+      ],
+      "receiptRequired": true
+    },
+    {
+      "id": "urn:srcos:connector-action-scope:github-read-only",
+      "type": "srcos:ConnectorActionScope",
+      "connectorKind": "github",
+      "action": [
+        "github.repo.read",
+        "github.pr.read",
+        "github.issue.read"
+      ],
+      "accessLevel": "readOnly",
+      "riskLevel": "low",
+      "requiresExplicitApproval": false
+    },
+    {
+      "id": "urn:srcos:automation-template:yesterday-git-activity",
+      "type": "srcos:AutomationTemplate",
+      "receiptRequired": true
+    },
+    {
+      "id": "urn:srcos:receipt:onboarding:first-run-read-only",
+      "type": "srcos:OnboardingReceipt",
+      "workspaceScopeRef": "urn:srcos:workspace-scope:socioprophet-sourceos-spec-readonly",
+      "trustModeRef": "urn:srcos:trust-mode:read-only-analyst",
+      "enabledCapabilityPack": "urn:srcos:capability-pack:repo-release-prep",
+      "enabledConnectorActionScope": "urn:srcos:connector-action-scope:github-read-only",
+      "enabledAutomationTemplate": "urn:srcos:automation-template:yesterday-git-activity",
+      "trialTask": "Read repository metadata and draft local evidence artifacts without repository mutation.",
+      "revocationInstruction": "Disable connector scope, dependent automations, and derived local indexes."
+    }
+  ]
+}
