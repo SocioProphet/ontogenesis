@@ -1,0 +1,101 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix mitre: <https://socioprophet.github.io/ontogenesis/alignments/mitre-attack#> .
+@prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/mitre-attack.ttl> a owl:Ontology ;
+  dct:title "Alignment — MITRE ATT&CK / ATLAS" ;
+  dct:description "Governed alignment scaffold for MITRE ATT&CK and ATLAS concepts. This module does not vendor the full ATT&CK STIX corpus. It defines stable local hooks for import/mapping pipelines and lets Ontogenesis maintain a SourceOS-compatible equivalent ontology where needed." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> , <Domains/cyber.ttl> , <Domains/agentic-purple-team.ttl> .
+
+mitre:MITREAttack a apt:AttackFramework ;
+  apt:frameworkName "MITRE ATT&CK" ;
+  apt:importPolicy "map-not-vendor-by-default" ;
+  apt:sourceUrl <https://attack.mitre.org/> ;
+  rdfs:label "MITRE ATT&CK" .
+
+mitre:MITREATLAS a apt:AttackFramework ;
+  apt:frameworkName "MITRE ATLAS" ;
+  apt:importPolicy "map-not-vendor-by-default" ;
+  apt:sourceUrl <https://atlas.mitre.org/> ;
+  rdfs:label "MITRE ATLAS" .
+
+mitre:EnterpriseMatrix a apt:AttackMatrix ;
+  apt:sourceUrl <https://attack.mitre.org/matrices/enterprise/> ;
+  rdfs:label "ATT&CK Enterprise Matrix" .
+
+mitre:AtlasMatrix a apt:AttackMatrix ;
+  apt:sourceUrl <https://atlas.mitre.org/matrices/> ;
+  rdfs:label "ATLAS Matrix" .
+
+### Minimal seed tactics for mapping. Full corpus import belongs in a governed generated module.
+
+mitre:InitialAccess a apt:Tactic ; apt:tacticId "TA0001" ; rdfs:label "Initial Access" .
+mitre:Execution a apt:Tactic ; apt:tacticId "TA0002" ; rdfs:label "Execution" .
+mitre:Persistence a apt:Tactic ; apt:tacticId "TA0003" ; rdfs:label "Persistence" .
+mitre:PrivilegeEscalation a apt:Tactic ; apt:tacticId "TA0004" ; rdfs:label "Privilege Escalation" .
+mitre:DefenseEvasion a apt:Tactic ; apt:tacticId "TA0005" ; rdfs:label "Defense Evasion" .
+mitre:CredentialAccess a apt:Tactic ; apt:tacticId "TA0006" ; rdfs:label "Credential Access" .
+mitre:Discovery a apt:Tactic ; apt:tacticId "TA0007" ; rdfs:label "Discovery" .
+mitre:LateralMovement a apt:Tactic ; apt:tacticId "TA0008" ; rdfs:label "Lateral Movement" .
+mitre:Collection a apt:Tactic ; apt:tacticId "TA0009" ; rdfs:label "Collection" .
+mitre:Exfiltration a apt:Tactic ; apt:tacticId "TA0010" ; rdfs:label "Exfiltration" .
+mitre:CommandAndControl a apt:Tactic ; apt:tacticId "TA0011" ; rdfs:label "Command and Control" .
+mitre:Impact a apt:Tactic ; apt:tacticId "TA0040" ; rdfs:label "Impact" .
+
+### Local seed techniques we actively reference in SCOPE-D examples.
+
+mitre:CommandAndScriptingInterpreter a apt:Technique ;
+  apt:techniqueId "T1059" ;
+  rdfs:label "Command and Scripting Interpreter" ;
+  rdfs:comment "Seed technique for safe synthetic examples. SCOPE-D does not execute command payloads by default." .
+
+mitre:ToolPoisoningEquivalent a apt:Technique ;
+  apt:techniqueId "SOCIO-TOOL-POISONING" ;
+  rdfs:label "Tool poisoning equivalent" ;
+  rdfs:comment "SourceOS/SCOPE-D local technique for hidden or ambiguous tool instructions, overbroad MCP tool descriptions, and unsafe tool schemas. May map to ATT&CK, ATLAS, OWASP LLM Top 10, or MCP-specific taxonomies as they evolve." .
+
+mitre:PromptInjectionEquivalent a apt:Technique ;
+  apt:techniqueId "SOCIO-PROMPT-INJECTION" ;
+  rdfs:label "Prompt injection equivalent" .
+
+mitre:MemoryBoundaryBypassEquivalent a apt:Technique ;
+  apt:techniqueId "SOCIO-MEMORY-BOUNDARY-BYPASS" ;
+  rdfs:label "Memory boundary bypass equivalent" .
+
+mitre:CapabilityOverreachEquivalent a apt:Technique ;
+  apt:techniqueId "SOCIO-CAPABILITY-OVERREACH" ;
+  rdfs:label "Capability overreach equivalent" .
+
+### Alignment properties
+
+mitre:stixId a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "STIX ID" .
+
+mitre:attackUrl a owl:DatatypeProperty ;
+  rdfs:domain apt:Technique ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "ATT&CK URL" .
+
+mitre:atlasUrl a owl:DatatypeProperty ;
+  rdfs:domain apt:Technique ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "ATLAS URL" .
+
+mitre:sourceFramework a owl:ObjectProperty ;
+  rdfs:domain apt:Technique ;
+  rdfs:range apt:AttackFramework ;
+  rdfs:label "source framework" .
+
+mitre:localEquivalentOf a owl:ObjectProperty ;
+  rdfs:domain apt:Technique ;
+  rdfs:range apt:Technique ;
+  rdfs:label "local equivalent of" .
