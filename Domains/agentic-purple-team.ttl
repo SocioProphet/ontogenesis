@@ -1,0 +1,235 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix cyber: <https://socioprophet.github.io/ontogenesis/domains/cyber#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/agentic-purple-team.ttl> a owl:Ontology ;
+  dct:title "Domain — Agentic Purple Team" ;
+  dct:description "Agentic purple-team action ontology for governed security loops: enumeration, emulation, atomic validation, threat intel, countermeasure generation, hunt, verification, safety gates, and run receipts. Designed to align with MITRE ATT&CK, ATLAS, D3FEND, STIX, Sigma, and SourceOS/SCOPE-D contracts by mapping, not uncontrolled vendoring." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> , <Domains/cyber.ttl> .
+
+### Core loop
+
+apt:PurpleTeamLoop a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Purple team loop" ;
+  rdfs:comment "A governed security feedback loop that turns hypotheses, evidence, controls, and validation results into measurable defensive improvement." .
+
+apt:AgenticPurpleTeamLoop a owl:Class ;
+  rdfs:subClassOf apt:PurpleTeamLoop ;
+  rdfs:label "Agentic purple team loop" ;
+  rdfs:comment "A purple-team loop partially executed or coordinated by agents under explicit safety boundaries, gates, and evidence contracts." .
+
+apt:PurpleTeamAction a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Purple team action" .
+
+apt:AgenticPurpleTeamAction a owl:Class ;
+  rdfs:subClassOf apt:PurpleTeamAction ;
+  rdfs:label "Agentic purple team action" .
+
+apt:EnumerationAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Enumeration action" .
+apt:ThreatIntelIngestionAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Threat intelligence ingestion action" .
+apt:EmulationPlanningAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Emulation planning action" .
+apt:AtomicValidationAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Atomic validation action" .
+apt:DetectionEngineeringAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Detection engineering action" .
+apt:CountermeasureGenerationAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Countermeasure generation action" .
+apt:HuntAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Hunt action" .
+apt:EvidenceVerificationAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Evidence verification action" .
+apt:RunReceiptAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Run receipt action" .
+apt:SafetyGateAction a owl:Class ; rdfs:subClassOf apt:AgenticPurpleTeamAction ; rdfs:label "Safety gate action" .
+
+### Action products
+
+apt:ControlLoopRun a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Control loop run" .
+
+apt:EvidenceEnvelope a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Evidence envelope" .
+
+apt:SafetyBoundary a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Safety boundary" .
+
+apt:ControlGate a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Control gate" .
+
+apt:AtomicTestCase a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Atomic test case" .
+
+apt:EmulationPlan a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Emulation plan" .
+
+apt:RunReceipt a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Run receipt" .
+
+apt:RunSummary a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Run summary" .
+
+apt:CountermeasureRule a owl:Class ;
+  rdfs:subClassOf cyber:Control ;
+  rdfs:label "Countermeasure rule" .
+
+apt:ThreatIntelFeed a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Threat intelligence feed" .
+
+apt:IndicatorRecord a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Indicator record" .
+
+apt:AttackPathGraph a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Attack path graph" .
+
+apt:GraphRobustnessAssessment a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Graph robustness assessment" .
+
+apt:AIInfraAssessment a owl:Class ;
+  rdfs:subClassOf cyber:Finding ;
+  rdfs:label "AI infrastructure assessment" .
+
+apt:MCPToolRisk a owl:Class ;
+  rdfs:subClassOf cyber:Finding ;
+  rdfs:label "MCP tool risk" .
+
+apt:AgentSkillRisk a owl:Class ;
+  rdfs:subClassOf cyber:Finding ;
+  rdfs:label "Agent skill risk" .
+
+### MITRE-compatible local model
+
+apt:AttackFramework a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Attack framework" ;
+  rdfs:comment "A threat model or technique taxonomy such as MITRE ATT&CK, MITRE ATLAS, D3FEND, or a SourceOS equivalent." .
+
+apt:AttackMatrix a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Attack matrix" .
+apt:Tactic a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Tactic" .
+apt:Technique a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Technique" .
+apt:SubTechnique a owl:Class ; rdfs:subClassOf apt:Technique ; rdfs:label "Sub-technique" .
+apt:Mitigation a owl:Class ; rdfs:subClassOf cyber:Control ; rdfs:label "Mitigation" .
+apt:DataSource a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Data source" .
+apt:DetectionStrategy a owl:Class ; rdfs:subClassOf cyber:Control ; rdfs:label "Detection strategy" .
+apt:AdversaryEmulationProfile a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Adversary emulation profile" .
+
+### Properties
+
+apt:hasAction a owl:ObjectProperty ;
+  rdfs:domain apt:PurpleTeamLoop ;
+  rdfs:range apt:PurpleTeamAction ;
+  rdfs:label "has action" .
+
+apt:producesEvidence a owl:ObjectProperty ;
+  rdfs:domain apt:PurpleTeamAction ;
+  rdfs:range apt:EvidenceEnvelope ;
+  rdfs:label "produces evidence" .
+
+apt:requiresGate a owl:ObjectProperty ;
+  rdfs:domain apt:AgenticPurpleTeamAction ;
+  rdfs:range apt:ControlGate ;
+  rdfs:label "requires gate" .
+
+apt:hasSafetyBoundary a owl:ObjectProperty ;
+  rdfs:domain apt:ControlLoopRun ;
+  rdfs:range apt:SafetyBoundary ;
+  rdfs:label "has safety boundary" .
+
+apt:hasReceipt a owl:ObjectProperty ;
+  rdfs:domain apt:ControlLoopRun ;
+  rdfs:range apt:RunReceipt ;
+  rdfs:label "has receipt" .
+
+apt:hasSummary a owl:ObjectProperty ;
+  rdfs:domain apt:ControlLoopRun ;
+  rdfs:range apt:RunSummary ;
+  rdfs:label "has summary" .
+
+apt:validatesControl a owl:ObjectProperty ;
+  rdfs:domain apt:AtomicValidationAction ;
+  rdfs:range apt:CountermeasureRule ;
+  rdfs:label "validates control" .
+
+apt:mapsToTechnique a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range apt:Technique ;
+  rdfs:label "maps to technique" .
+
+apt:usesDataSource a owl:ObjectProperty ;
+  rdfs:domain apt:DetectionStrategy ;
+  rdfs:range apt:DataSource ;
+  rdfs:label "uses data source" .
+
+apt:mitigatesTechnique a owl:ObjectProperty ;
+  rdfs:domain apt:Mitigation ;
+  rdfs:range apt:Technique ;
+  rdfs:label "mitigates technique" .
+
+apt:techniqueId a owl:DatatypeProperty ;
+  rdfs:domain apt:Technique ;
+  rdfs:range xsd:string ;
+  rdfs:label "technique ID" .
+
+apt:tacticId a owl:DatatypeProperty ;
+  rdfs:domain apt:Tactic ;
+  rdfs:range xsd:string ;
+  rdfs:label "tactic ID" .
+
+apt:frameworkName a owl:DatatypeProperty ;
+  rdfs:domain apt:AttackFramework ;
+  rdfs:range xsd:string ;
+  rdfs:label "framework name" .
+
+apt:frameworkVersion a owl:DatatypeProperty ;
+  rdfs:domain apt:AttackFramework ;
+  rdfs:range xsd:string ;
+  rdfs:label "framework version" .
+
+apt:actionClass a owl:DatatypeProperty ;
+  rdfs:domain apt:AgenticPurpleTeamAction ;
+  rdfs:range xsd:string ;
+  rdfs:label "action class" .
+
+apt:safetyMode a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "safety mode" .
+
+apt:runId a owl:DatatypeProperty ;
+  rdfs:domain apt:ControlLoopRun ;
+  rdfs:range xsd:string ;
+  rdfs:label "run ID" .
+
+apt:receiptHash a owl:DatatypeProperty ;
+  rdfs:domain apt:RunReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "receipt hash" .
+
+apt:externalId a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "external ID" .
+
+apt:sourceUrl a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "source URL" .
+
+apt:importPolicy a owl:DatatypeProperty ;
+  rdfs:domain apt:AttackFramework ;
+  rdfs:range xsd:string ;
+  rdfs:label "import policy" .
