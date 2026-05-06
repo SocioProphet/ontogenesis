@@ -1,0 +1,42 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/agentic-purple-team#> .
+@prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix mitre: <https://socioprophet.github.io/ontogenesis/alignments/mitre-attack#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:scope-d-synthetic-run a apt:ControlLoopRun ;
+  apt:runId "scope-d-example-run" ;
+  apt:hasSafetyBoundary ex:synthetic-lab-boundary ;
+  apt:hasReceipt ex:synthetic-run-receipt ;
+  apt:hasSummary ex:synthetic-run-summary ;
+  rdfs:label "SCOPE-D synthetic run example" .
+
+ex:synthetic-lab-boundary a apt:SafetyBoundary ;
+  apt:safetyMode "synthetic_only" ;
+  rdfs:label "Synthetic lab safety boundary" .
+
+ex:synthetic-run-receipt a apt:RunReceipt ;
+  apt:receiptHash "0000000000000000000000000000000000000000000000000000000000000000" ;
+  rdfs:label "Synthetic run receipt" .
+
+ex:synthetic-run-summary a apt:RunSummary ;
+  rdfs:label "Synthetic run summary" .
+
+ex:synthetic-tool-poisoning-atomic a apt:AtomicTestCase ;
+  apt:safetyMode "synthetic_only" ;
+  apt:mapsToTechnique mitre:ToolPoisoningEquivalent ;
+  rdfs:label "Synthetic MCP tool poisoning atomic test" .
+
+ex:generate-synthetic-event a apt:AtomicValidationAction ;
+  apt:actionClass "synthetic_event" ;
+  apt:safetyMode "synthetic_only" ;
+  apt:validatesControl ex:mcp-tool-boundary-control ;
+  apt:producesEvidence ex:synthetic-event-envelope ;
+  rdfs:label "Generate synthetic MCP tool-risk event" .
+
+ex:mcp-tool-boundary-control a apt:CountermeasureRule ;
+  apt:mapsToTechnique mitre:ToolPoisoningEquivalent ;
+  rdfs:label "Require explicit capability scopes for MCP tools" .
+
+ex:synthetic-event-envelope a apt:EvidenceEnvelope ;
+  rdfs:label "Synthetic MCP tool-risk evidence envelope" .
