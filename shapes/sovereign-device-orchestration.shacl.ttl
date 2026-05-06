@@ -1,0 +1,109 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sdo: <https://socioprophet.github.io/ontogenesis/platform/sdo#> .
+
+sdo:DeviceNodeShape a sh:NodeShape ;
+    sh:targetClass sdo:DeviceNode ;
+    sh:property [
+        sh:path sdo:nodeId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:sourceAdapter ;
+        sh:class sdo:AdapterState ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:trustState ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .
+
+sdo:AdapterStateShape a sh:NodeShape ;
+    sh:targetClass sdo:AdapterState ;
+    sh:property [
+        sh:path sdo:adapterId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] .
+
+sdo:RoutineShape a sh:NodeShape ;
+    sh:targetClass sdo:Routine ;
+    sh:property [
+        sh:path sdo:routineId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:capabilityClass ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:signature ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .
+
+sdo:PolicyDecisionShape a sh:NodeShape ;
+    sh:targetClass sdo:PolicyDecision ;
+    sh:property [
+        sh:path sdo:decisionId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:policyOutcome ;
+        sh:in ( "allowed" "denied" "requires_approval" "requires_local_only" "redacted" "degraded" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:capabilityClass ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .
+
+sdo:EvidenceReceiptShape a sh:NodeShape ;
+    sh:targetClass sdo:EvidenceReceipt ;
+    sh:property [
+        sh:path sdo:receiptId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:relatedEvent ;
+        sh:class sdo:OrchestrationEvent ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:subjectNode ;
+        sh:class sdo:DeviceNode ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:sourceAdapter ;
+        sh:class sdo:AdapterState ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:policyOutcome ;
+        sh:in ( "allowed" "denied" "requires_approval" "requires_local_only" "redacted" "degraded" ) ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:retentionClass ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path sdo:redactionClass ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .
