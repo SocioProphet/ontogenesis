@@ -63,3 +63,5 @@ jobs:
             --notes-file "$notes_file"
         env:
           GH_TOKEN: ${{ github.token }}
+
+# Touchpoint: keeps the workflow eligible for a deterministic main-branch push trigger.
