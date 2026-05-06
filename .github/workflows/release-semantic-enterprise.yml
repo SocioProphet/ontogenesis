@@ -1,0 +1,74 @@
+name: release-semantic-enterprise
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to create'
+        required: true
+        default: 'semantic-enterprise-v0.1.0'
+      target:
+        description: 'Commit SHA to tag'
+        required: true
+        default: 'df32880ca9a93a9a02c0282a148e341a5b39e782'
+      title:
+        description: 'GitHub Release title'
+        required: true
+        default: 'Semantic Enterprise v0.1.0'
+      notes_file:
+        description: 'Release notes file path'
+        required: true
+        default: 'docs/releases/semantic-enterprise-v0.1.0.md'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target }}
+          fetch-depth: 0
+
+      - name: Validate release inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ inputs.tag }}" != semantic-enterprise-v* ]]; then
+            echo "Tag must start with semantic-enterprise-v" >&2
+            exit 1
+          fi
+
+          if ! git cat-file -e "${{ inputs.target }}^{commit}"; then
+            echo "Target commit does not exist: ${{ inputs.target }}" >&2
+            exit 1
+          fi
+
+          if [[ ! -f "${{ inputs.notes_file }}" ]]; then
+            echo "Release notes file not found: ${{ inputs.notes_file }}" >&2
+            exit 1
+          fi
+
+          if gh release view "${{ inputs.tag }}" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Release already exists: ${{ inputs.tag }}" >&2
+            exit 1
+          fi
+
+          echo "Release inputs validated."
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create GitHub Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "${{ inputs.tag }}" \
+            --repo "${{ github.repository }}" \
+            --target "${{ inputs.target }}" \
+            --title "${{ inputs.title }}" \
+            --notes-file "${{ inputs.notes_file }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
