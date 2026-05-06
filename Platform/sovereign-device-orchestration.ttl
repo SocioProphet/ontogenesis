@@ -1,0 +1,101 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix sdo: <https://socioprophet.github.io/ontogenesis/platform/sdo#> .
+
+sdo:Ontology a owl:Ontology ;
+    rdfs:label "Sovereign Device Orchestration Ontology" ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:comment "Vendor-neutral ontology for governed device, home, browser, shell, agent, and cloud orchestration contracts." .
+
+sdo:DeviceNode a owl:Class ;
+    rdfs:label "Device node" ;
+    rdfs:comment "A governed node in the human, device, home, browser, shell, agent, vehicle, wearable, or cloud graph." .
+
+sdo:AdapterState a owl:Class ;
+    rdfs:label "Adapter state" ;
+    rdfs:comment "The health, operating mode, credential boundary, and capability surface of an ecosystem adapter." .
+
+sdo:OrchestrationEvent a owl:Class ;
+    rdfs:label "Orchestration event" ;
+    rdfs:comment "An observed or inferred event from a device, routine, assistant, agent, policy, or sync path." .
+
+sdo:Routine a owl:Class ;
+    rdfs:label "Routine" ;
+    rdfs:comment "An inspectable automation object compiled from natural language, UI, or code into a signed executable representation." .
+
+sdo:PolicyDecision a owl:Class ;
+    rdfs:label "Policy decision" ;
+    rdfs:comment "A Guardrail Fabric decision that allows, denies, redacts, degrades, or requires approval for orchestration activity." .
+
+sdo:EvidenceReceipt a owl:Class ;
+    rdfs:label "Evidence receipt" ;
+    rdfs:comment "A durable receipt emitted for perception, proposal, approval, denial, actuation, override, repair, and sync export." .
+
+sdo:nodeId a owl:DatatypeProperty ;
+    rdfs:domain sdo:DeviceNode ;
+    rdfs:range xsd:string .
+
+sdo:adapterId a owl:DatatypeProperty ;
+    rdfs:domain sdo:AdapterState ;
+    rdfs:range xsd:string .
+
+sdo:eventId a owl:DatatypeProperty ;
+    rdfs:domain sdo:OrchestrationEvent ;
+    rdfs:range xsd:string .
+
+sdo:routineId a owl:DatatypeProperty ;
+    rdfs:domain sdo:Routine ;
+    rdfs:range xsd:string .
+
+sdo:decisionId a owl:DatatypeProperty ;
+    rdfs:domain sdo:PolicyDecision ;
+    rdfs:range xsd:string .
+
+sdo:receiptId a owl:DatatypeProperty ;
+    rdfs:domain sdo:EvidenceReceipt ;
+    rdfs:range xsd:string .
+
+sdo:subjectNode a owl:ObjectProperty ;
+    rdfs:range sdo:DeviceNode .
+
+sdo:sourceAdapter a owl:ObjectProperty ;
+    rdfs:range sdo:AdapterState .
+
+sdo:relatedRoutine a owl:ObjectProperty ;
+    rdfs:range sdo:Routine .
+
+sdo:relatedPolicyDecision a owl:ObjectProperty ;
+    rdfs:range sdo:PolicyDecision .
+
+sdo:relatedEvent a owl:ObjectProperty ;
+    rdfs:range sdo:OrchestrationEvent .
+
+sdo:lineageParentReceipt a owl:ObjectProperty ;
+    rdfs:domain sdo:EvidenceReceipt ;
+    rdfs:range sdo:EvidenceReceipt .
+
+sdo:policyOutcome a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Controlled vocabulary: allowed, denied, requires_approval, requires_local_only, redacted, degraded." .
+
+sdo:capabilityClass a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Controlled vocabulary includes observe, explain, search, draft, propose, low_risk_actuation, medium_risk_actuation, high_risk_actuation, and irreversible_action." .
+
+sdo:redactionClass a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+sdo:retentionClass a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+sdo:trustState a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+sdo:revocationStatus a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+sdo:signature a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
