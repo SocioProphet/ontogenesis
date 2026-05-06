@@ -1,0 +1,65 @@
+name: auto-release-semantic-enterprise-v0.1.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/auto-release-semantic-enterprise-v0.1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate release inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="semantic-enterprise-v0.1.0"
+          notes_file="docs/releases/semantic-enterprise-v0.1.0.md"
+
+          if [[ ! -f "$notes_file" ]]; then
+            echo "Release notes file not found: $notes_file" >&2
+            exit 1
+          fi
+
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Release already exists: $tag"
+            echo "No action taken."
+            exit 0
+          fi
+
+          echo "Release inputs validated."
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create release if absent
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="semantic-enterprise-v0.1.0"
+          title="Semantic Enterprise v0.1.0"
+          notes_file="docs/releases/semantic-enterprise-v0.1.0.md"
+          target="${{ github.sha }}"
+
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Release already exists: $tag"
+            exit 0
+          fi
+
+          gh release create "$tag" \
+            --repo "${{ github.repository }}" \
+            --target "$target" \
+            --title "$title" \
+            --notes-file "$notes_file"
+        env:
+          GH_TOKEN: ${{ github.token }}
