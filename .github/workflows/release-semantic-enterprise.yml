@@ -10,7 +10,7 @@ on:
       target:
         description: 'Commit SHA to tag'
         required: true
-        default: 'df32880ca9a93a9a02c0282a148e341a5b39e782'
+        default: 'cb50ba22dbe9ba705f6bc1f88b3de84193f5b39f'
       title:
         description: 'GitHub Release title'
         required: true
