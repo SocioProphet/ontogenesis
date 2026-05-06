@@ -67,6 +67,10 @@ This repo defines a layered ontology stack plus gates/tools.
 - `Alignments/d3fend.ttl`
 - `Alignments/iof-sco.ttl`
 - `Alignments/dodaf-cco.ttl`
+- `Alignments/mitre-attack.ttl`
+  - governed MITRE ATT&CK / ATLAS alignment scaffold
+  - seed ATT&CK tactic/technique hooks and SourceOS-local technique equivalents
+  - map-not-vendor-by-default import policy for future STIX/TAXII-generated modules
 
 These are governed alignment scaffolds. They are not full vendored external ontology trees.
 
@@ -103,6 +107,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `Domains/party-identity.ttl` — party, identity, accounts, entitlements, role assignments
 - `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 - `Domains/product-service.ttl` — product/service offerings, plans, SKUs, capabilities, entitlements, and service instances
+- `Domains/agentic-purple-team.ttl` — governed agentic purple-team loops/actions, evidence envelopes, safety boundaries, gates, atomic tests, countermeasure rules, run receipts/summaries, AI/MCP/agent-skill risk, graph robustness, and MITRE-compatible local technique model
 
 ## Bindings / governed profiles
 - `bindings/valueflows_governed/`
@@ -121,6 +126,8 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - semantic enterprise lifecycle, mapping, named graph, alignment, SHACL, and implementation contracts
 - `docs/specs/valueflows-governed-canonical-v0.4.md`
   - governed ValueFlows profile spec
+- `docs/specs/agentic-purple-team-and-mitre.md`
+  - SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
 
 ## Supplemental registries and contexts
 - `catalog/registry.ttl` and `catalog/registry.jsonld` — primary module registries
@@ -129,7 +136,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
