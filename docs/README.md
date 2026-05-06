@@ -16,6 +16,7 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`specs/shir-v0.1.md`](specs/shir-v0.1.md) — Semantic Hyperknowledge Intermediate Representation draft spec
 - [`specs/ontology-query-adapter.md`](specs/ontology-query-adapter.md) — ontology-query adapter contract for the Lattice FederatedQueryPlane
 - [`specs/semantic_enterprise_architecture.md`](specs/semantic_enterprise_architecture.md) — semantic enterprise lifecycle, mapping, named graph, SHACL, and implementation contracts
+- [`specs/agentic-purple-team-and-mitre.md`](specs/agentic-purple-team-and-mitre.md) — SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, MITRE ATT&CK/ATLAS alignment, SourceOS-local technique equivalents, and future governed STIX/TAXII import
 - [`specs/audit_policy.md`](specs/audit_policy.md) — audit and policy constraints
 - [`specs/prophet_cli_spec.md`](specs/prophet_cli_spec.md) — Prophet CLI ontology spec
 - [`specs/valueflows-governed-canonical-v0.4.md`](specs/valueflows-governed-canonical-v0.4.md) — ValueFlows governed profile spec
