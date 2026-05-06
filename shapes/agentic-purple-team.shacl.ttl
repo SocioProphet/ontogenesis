@@ -1,0 +1,67 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix apt:  <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+apt:ControlLoopRunShape a sh:NodeShape ;
+  sh:targetClass apt:ControlLoopRun ;
+  sh:property [
+    sh:path apt:runId ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:pattern "^scope-d-[A-Za-z0-9._:-]+$" ;
+    sh:message "ControlLoopRun must have a scope-d run ID." ;
+  ] ;
+  sh:property [
+    sh:path apt:hasSafetyBoundary ;
+    sh:class apt:SafetyBoundary ;
+    sh:minCount 1 ;
+    sh:message "ControlLoopRun must reference a SafetyBoundary." ;
+  ] ;
+  sh:property [
+    sh:path apt:hasReceipt ;
+    sh:class apt:RunReceipt ;
+    sh:minCount 1 ;
+    sh:message "ControlLoopRun must reference a RunReceipt." ;
+  ] .
+
+apt:AgenticPurpleTeamActionShape a sh:NodeShape ;
+  sh:targetClass apt:AgenticPurpleTeamAction ;
+  sh:property [
+    sh:path apt:actionClass ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:in ( "read" "synthetic_event" "dry_run" "network_call" "write" "deployment" "destructive_action" "credential_access" "memory_write" ) ;
+    sh:message "Agentic purple-team actions must declare a governed action class." ;
+  ] ;
+  sh:property [
+    sh:path apt:safetyMode ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:in ( "read_only" "synthetic_only" "dry_run" "write_with_gate" "blocked" ) ;
+    sh:message "Agentic purple-team actions must declare a safety mode." ;
+  ] .
+
+apt:AtomicTestCaseShape a sh:NodeShape ;
+  sh:targetClass apt:AtomicTestCase ;
+  sh:property [
+    sh:path apt:mapsToTechnique ;
+    sh:class apt:Technique ;
+    sh:minCount 1 ;
+    sh:message "AtomicTestCase must map to at least one attack technique or local equivalent." ;
+  ] ;
+  sh:property [
+    sh:path apt:safetyMode ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:in ( "synthetic_only" "dry_run" "read_only" ) ;
+    sh:message "AtomicTestCase examples must remain synthetic/read-only/dry-run in Ontogenesis." ;
+  ] .
+
+apt:TechniqueShape a sh:NodeShape ;
+  sh:targetClass apt:Technique ;
+  sh:property [
+    sh:path apt:techniqueId ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "Technique must have a technique ID." ;
+  ] .
