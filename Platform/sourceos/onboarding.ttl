@@ -1,0 +1,129 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix srcos: <https://schemas.srcos.ai/v2/> .
+@prefix plat: <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Platform/sourceos/onboarding.ttl> a owl:Ontology ;
+  dct:title "SourceOS Onboarding Control Plane Ontology" ;
+  dct:description "Semantic lift for SourceOS/SociOS onboarding control-plane contracts: workspace scopes, trust modes, capability packs, connector action scopes, automation templates, and onboarding receipts." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> ;
+  owl:imports <Platform/platform.ttl> .
+
+srcos:WorkspaceScope a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Workspace scope" .
+
+srcos:TrustMode a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Trust mode" .
+
+srcos:CapabilityPack a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Capability pack" .
+
+srcos:ConnectorActionScope a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Connector action scope" .
+
+srcos:AutomationTemplate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Automation template" .
+
+srcos:OnboardingReceipt a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Onboarding receipt" .
+
+srcos:RoleProfile a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Role profile" .
+
+srcos:PermissionVocabularyEntry a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Permission vocabulary entry" .
+
+srcos:workspaceKind a owl:DatatypeProperty ;
+  rdfs:domain srcos:WorkspaceScope ;
+  rdfs:range xsd:string ;
+  rdfs:label "workspace kind" .
+
+srcos:mountMode a owl:DatatypeProperty ;
+  rdfs:domain srcos:WorkspaceScope ;
+  rdfs:range xsd:string ;
+  rdfs:label "mount mode" .
+
+srcos:skillRef a owl:DatatypeProperty ;
+  rdfs:domain srcos:CapabilityPack ;
+  rdfs:range xsd:string ;
+  rdfs:label "skill reference" .
+
+srcos:permissionRef a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "permission reference" .
+
+srcos:connectorKind a owl:DatatypeProperty ;
+  rdfs:domain srcos:ConnectorActionScope ;
+  rdfs:range xsd:string ;
+  rdfs:label "connector kind" .
+
+srcos:action a owl:DatatypeProperty ;
+  rdfs:domain srcos:ConnectorActionScope ;
+  rdfs:range xsd:string ;
+  rdfs:label "connector action" .
+
+srcos:accessLevel a owl:DatatypeProperty ;
+  rdfs:domain srcos:ConnectorActionScope ;
+  rdfs:range xsd:string ;
+  rdfs:label "access level" .
+
+srcos:riskLevel a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "risk level" .
+
+srcos:receiptRequired a owl:DatatypeProperty ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "receipt required" .
+
+srcos:requiresExplicitApproval a owl:DatatypeProperty ;
+  rdfs:domain srcos:ConnectorActionScope ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "requires explicit approval" .
+
+srcos:workspaceScopeRef a owl:ObjectProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range srcos:WorkspaceScope ;
+  rdfs:label "workspace scope reference" .
+
+srcos:trustModeRef a owl:ObjectProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range srcos:TrustMode ;
+  rdfs:label "trust mode reference" .
+
+srcos:enabledCapabilityPack a owl:ObjectProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range srcos:CapabilityPack ;
+  rdfs:label "enabled capability pack" .
+
+srcos:enabledConnectorActionScope a owl:ObjectProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range srcos:ConnectorActionScope ;
+  rdfs:label "enabled connector action scope" .
+
+srcos:enabledAutomationTemplate a owl:ObjectProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range srcos:AutomationTemplate ;
+  rdfs:label "enabled automation template" .
+
+srcos:trialTask a owl:DatatypeProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "trial task" .
+
+srcos:revocationInstruction a owl:DatatypeProperty ;
+  rdfs:domain srcos:OnboardingReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "revocation instruction" .
