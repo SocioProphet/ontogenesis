@@ -1,0 +1,84 @@
+name: release-semantic-enterprise-on-issue-command
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  release-from-issue-command:
+    if: >-
+      github.event.issue.number == 52 &&
+      github.event.comment.user.login == 'mdheller' &&
+      contains(github.event.comment.body, '/release semantic-enterprise-v0.1.0')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Resolve release target
+        id: target
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Validate release inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="semantic-enterprise-v0.1.0"
+          notes_file="docs/releases/semantic-enterprise-v0.1.0.md"
+
+          if [[ ! -f "$notes_file" ]]; then
+            gh issue comment 52 \
+              --repo "${{ github.repository }}" \
+              --body "Release command failed: release notes file not found: $notes_file"
+            exit 1
+          fi
+
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh issue comment 52 \
+              --repo "${{ github.repository }}" \
+              --body "Release already exists: $tag. No action taken."
+            exit 0
+          fi
+
+          echo "Release inputs validated for target ${{ steps.target.outputs.sha }}."
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create release if absent
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="semantic-enterprise-v0.1.0"
+          title="Semantic Enterprise v0.1.0"
+          notes_file="docs/releases/semantic-enterprise-v0.1.0.md"
+          target="${{ steps.target.outputs.sha }}"
+
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh issue comment 52 \
+              --repo "${{ github.repository }}" \
+              --body "Release already exists: $tag. No action taken."
+            exit 0
+          fi
+
+          gh release create "$tag" \
+            --repo "${{ github.repository }}" \
+            --target "$target" \
+            --title "$title" \
+            --notes-file "$notes_file"
+
+          gh issue comment 52 \
+            --repo "${{ github.repository }}" \
+            --body "Created release $tag targeting $target."
+        env:
+          GH_TOKEN: ${{ github.token }}
