@@ -8,7 +8,9 @@ on:
       - 'examples/scenarios/**'
       - 'examples/queries/**'
       - 'examples/named-graphs/**'
+      - 'manifests/**'
       - 'scripts/validate_semantic_import_contract.py'
+      - 'scripts/validate_semantic_manifest.py'
       - '.github/workflows/semantic-import-contract.yml'
   push:
     branches: [main]
@@ -18,7 +20,9 @@ on:
       - 'examples/scenarios/**'
       - 'examples/queries/**'
       - 'examples/named-graphs/**'
+      - 'manifests/**'
       - 'scripts/validate_semantic_import_contract.py'
+      - 'scripts/validate_semantic_manifest.py'
       - '.github/workflows/semantic-import-contract.yml'
 
 jobs:
@@ -32,3 +36,5 @@ jobs:
           python-version: '3.11'
       - name: Validate semantic import contract
         run: python scripts/validate_semantic_import_contract.py
+      - name: Validate semantic manifest
+        run: python scripts/validate_semantic_manifest.py
