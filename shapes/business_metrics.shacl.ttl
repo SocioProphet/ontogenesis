@@ -1,0 +1,28 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix bizm: <https://socioprophet.github.io/ontogenesis/domains/business/metrics#> .
+
+<shapes/business_metrics.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass bizm:MetricConcept ;
+  sh:message "Business metric concepts must declare unitFamily, grainFamily, timeBehavior, and scopeFamily." ;
+  sh:property [
+    sh:path bizm:unitFamily ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizm:grainFamily ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizm:timeBehavior ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizm:scopeFamily ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .

@@ -64,6 +64,7 @@ og:Noether a og:Module ; og:layer "EPI" ; og:path "epi/noether.ttl" ; og:baseIRI
 og:EPI a og:Module ; og:layer "EPI" ; og:path "epi/epi.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/epi#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Epi-Onto-Learning" .
 
 og:DomainBusinessCore a og:Module ; og:layer "Domains" ; og:path "Domains/business_core.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/business#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Business core domain" .
+og:DomainBusinessMetrics a og:Module ; og:layer "Domains" ; og:path "Domains/business_metrics.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/business/metrics#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Business metrics domain" .
 og:DomainCyberneticSelf a og:Module ; og:layer "Domains" ; og:path "Domains/cybernetic-self.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/cybernetic-self#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Cybernetic self domain" .
 og:DomainPartyIdentity a og:Module ; og:layer "Domains" ; og:path "Domains/party-identity.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/party#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Party and identity domain" .
 og:DomainOrgLegal a og:Module ; og:layer "Domains" ; og:path "Domains/org-legal.ttl" ; og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/legal#" ; og:semver "0.1.0" ; og:status "draft" ; rdfs:label "Organization and legal domain" .

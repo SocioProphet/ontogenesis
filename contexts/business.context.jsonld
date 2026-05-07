@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "biz": "https://socioprophet.github.io/ontogenesis/domains/business#",
+    "bizm": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "unitFamily": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#unitFamily",
+    "grainFamily": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#grainFamily",
+    "timeBehavior": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#timeBehavior",
+    "scopeFamily": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#scopeFamily",
+    "legalName": "https://socioprophet.github.io/ontogenesis/domains/business#legalName",
+    "currency": "https://socioprophet.github.io/ontogenesis/domains/business#currency",
+    "pricingModel": "https://socioprophet.github.io/ontogenesis/domains/business#pricingModel"
+  }
+}
