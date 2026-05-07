@@ -5,6 +5,7 @@
     "middle": "https://socioprophet.github.io/ontogenesis/middle#",
     "lower": "https://socioprophet.github.io/ontogenesis/lower#",
     "plat": "https://socioprophet.github.io/ontogenesis/platform#",
+    "sdo": "https://socioprophet.github.io/ontogenesis/platform/sdo#",
     "prop": "https://socioprophet.github.io/ontogenesis/prophet#",
     "capd": "https://socioprophet.github.io/ontogenesis/prophet#capd#",
     "nl": "https://socioprophet.github.io/ontogenesis/noether#",
