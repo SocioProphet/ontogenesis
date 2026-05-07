@@ -1,0 +1,77 @@
+{
+  "@context": "../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:dictionary-doctrine",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:dictionary-doctrine",
+  "skos:prefLabel": "Dictionary Doctrine",
+  "skos:altLabel": [
+    "Concept Dictionary Doctrine",
+    "Catalog of a Mind pattern"
+  ],
+  "sourceAnchor": [
+    {
+      "@id": "systema:source-anchor:fuller-source-card-ledger-v0-2",
+      "@type": "SourceAnchor",
+      "sourceRef": "SocioProphet/ProCybernetica:docs/source-captures/FULLER_SYNERGETICS_COMPLETION_CAPTURE.md",
+      "sourceKind": "source_capture",
+      "extractionConfidence": "C",
+      "reviewState": "candidate",
+      "quoteBoundary": "operational_translation",
+      "uncertaintyNote": "Derived from mixed-confidence Fuller/Synergetics upload extraction and source-card inventory. Treat as candidate doctrine until source-card review promotes specific source claims."
+    }
+  ],
+  "definition": [
+    {
+      "@id": "systema:definition:dictionary-doctrine:v0-1",
+      "@type": "ConceptDefinition",
+      "definitionText": "A serious doctrine-bearing concept is a source-anchored, cross-referenced, promoted object, not just a word or tag.",
+      "claimLevel": "operational_definition"
+    }
+  ],
+  "operationalDefinition": "Concept records should preserve preferred label, aliases, source anchors, definitions, allowed uses, forbidden uses, implementation surfaces, evidence requirements, promotion state, and revision history.",
+  "allowedUse": [
+    "source-anchored ontology concept records",
+    "Sherlock evaluated concept results",
+    "ProCybernetica conformance and doctrine references"
+  ],
+  "forbiddenUse": [
+    "treating low-confidence OCR as authoritative quotation",
+    "using analogy as proof",
+    "creating duplicate concept definitions across repos without owner mapping"
+  ],
+  "implementationSurface": [
+    {
+      "@id": "systema:surface:ontogenesis-systema-concept-entry",
+      "@type": "ImplementationSurface",
+      "ownerRepo": "SocioProphet/ontogenesis",
+      "surfacePath": "docs/specs/systema-concept-entry-v0.md"
+    },
+    {
+      "@id": "systema:surface:procybernetica-systema-control",
+      "@type": "ImplementationSurface",
+      "ownerRepo": "SocioProphet/ProCybernetica",
+      "surfacePath": "docs/integration/SYSTEMA_PATTERN_INVENTORY_CONTROL.md"
+    }
+  ],
+  "evidenceRequirement": [
+    {
+      "@id": "systema:evidence-requirement:source-confidence",
+      "@type": "EvidenceRequirement",
+      "evidenceRequirementText": "Concept promotion requires source anchor, extraction confidence, review state, quote boundary, and uncertainty note."
+    },
+    {
+      "@id": "systema:evidence-requirement:implementation-owner",
+      "@type": "EvidenceRequirement",
+      "evidenceRequirementText": "Operational concept promotion requires an owning repo and implementation surface."
+    }
+  ],
+  "promotionState": "extracted_candidate",
+  "revision": [
+    {
+      "@id": "systema:revision:dictionary-doctrine:v0-1",
+      "@type": "ConceptRevision",
+      "revisionNote": "Initial Systema concept-entry fixture for Turn 6.",
+      "revisionDate": "2026-05-07"
+    }
+  ]
+}
