@@ -1,0 +1,35 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/security-tools.registry.ttl> a owl:Ontology ;
+  dct:title "Security Tools Registry Extension" ;
+  dct:description "Registry extension for the SCOPE-D security-tools domain module and SHACL gate introduced by the BlackArch cannibalization lane." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:DomainSecurityTools a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/security-tools.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/security-tools#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Security tools domain" .
+
+og:SecurityToolsShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/security-tools.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/security-tools#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Security tools SHACL gates" .
+
+og:SecurityToolsBlackArchSmokeExample a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/security-tools/blackarch-smoke-tool.example.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/security-tools#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Security tools BlackArch smoke example" .
