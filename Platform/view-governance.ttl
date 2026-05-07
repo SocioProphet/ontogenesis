@@ -1,0 +1,203 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix view:  <https://socioprophet.github.io/ontogenesis/platform/view#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix plat:  <https://socioprophet.github.io/ontogenesis/platform#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Platform/view-governance.ttl> a owl:Ontology ;
+  dct:title "View Governance" ;
+  dct:description "Ontology terms for authority-bound graph and analysis views: ViewContract, disclosure modes, typed absence, policy barriers, redaction boundaries, revocation epochs, and view signatures. The portable schema shape is owned by Semantic SerDes; this module governs semantic meaning and SHACL promotion gates." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+# ---------------------------------------------------------------------------
+# Core contract and signature concepts
+# ---------------------------------------------------------------------------
+
+view:ViewContract a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "View Contract" ;
+  rdfs:comment "A policy, identity, workspace, ontology, runtime-evidence, traversal-evidence, and transport-bound contract describing which view of graph/analysis state a principal may receive. It is not merely a graph projection; it binds data access to authority and replay context." .
+
+view:ViewSignature a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "View Signature" ;
+  rdfs:comment "A digestible commitment over the authority roots and data-view inputs that determine a governed view: principal authority, agent authority when applicable, policy authority, workspace/environment authority, semantic authority, graph source, and relevant runtime/traversal evidence." .
+
+view:ViewSensitiveAnalysis a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "View-Sensitive Analysis" ;
+  rdfs:comment "An analysis whose visible result depends on the active ViewContract. The same underlying graph state may yield different visible projections for different principals, policies, revocation epochs, workspaces, or disclosure modes." .
+
+# ---------------------------------------------------------------------------
+# Disclosure and absence concepts
+# ---------------------------------------------------------------------------
+
+view:DisclosureMode a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Disclosure Mode" ;
+  rdfs:comment "A policy-governed mode describing how view data is disclosed: full, redacted, typed absence, aggregate, metadata-only, or deny. Concrete mode values are encoded as controlled labels in portable schemas." .
+
+view:TypedAbsence a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Typed Absence" ;
+  rdfs:comment "An explicit, policy-governed absence token. It distinguishes not authorized, not materialized, redacted by policy, revoked, and unknown, avoiding unsafe silent nulls or misleading empty results." .
+
+view:RedactionBoundary a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Redaction Boundary" ;
+  rdfs:comment "A boundary across which raw content, identifiers, sensitive attributes, or materialized payloads may not pass unless a governing policy decision allows it." .
+
+view:MaterializationBoundary a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Materialization Boundary" ;
+  rdfs:comment "A boundary that separates metadata-only navigation from fetching or hydrating payloads, properties, subgraphs, or sensitive fields. ViewContracts must bind materialization to policy decisions and receipts." .
+
+# ---------------------------------------------------------------------------
+# Policy / revocation concepts
+# ---------------------------------------------------------------------------
+
+view:PolicyBarrier a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Policy Barrier" ;
+  rdfs:comment "A required policy decision point in a view lifecycle. Policy barriers prevent materialization, transport, replay, or graph-operation visibility unless the active policy authority permits the action." .
+
+view:RevocationEpoch a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Revocation Epoch" ;
+  rdfs:comment "A monotonically advancing revocation boundary for view authorization. A ViewContract is evaluated against the revocation epoch of relevant identity, agent, policy, workspace, and materialization authorities." .
+
+# ---------------------------------------------------------------------------
+# Authority roots
+# ---------------------------------------------------------------------------
+
+view:PrincipalAuthority a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Principal Authority" ;
+  rdfs:comment "The identity/session authority root for a human, agent, service, or workload principal." .
+
+view:AgentAuthority a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Agent Authority" ;
+  rdfs:comment "The agent registry authority root for agent identity, session, tool grants, memory grants, denied scopes, revocation status, and runtime authority." .
+
+view:PolicyAuthority a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Policy Authority" ;
+  rdfs:comment "The policy authority root for policy bundles, compiled plans, policy decisions, verdicts, obligations, validation reports, release packs, replay reports, and revocation epoch." .
+
+view:WorkspaceAuthority a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Workspace Authority" ;
+  rdfs:comment "The Sociosphere/Lattice authority root for workspace, environment, release-set, artifact-set, policy, tenant/workspace, rollback, and topology fingerprints." .
+
+view:RuntimeEvidenceAuthority a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Runtime Evidence Authority" ;
+  rdfs:comment "The execution evidence root for work-order, placement, verdict, run, replay, and session artifacts, typically owned by AgentPlane." .
+
+view:TraversalEvidenceAuthority a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Traversal Evidence Authority" ;
+  rdfs:comment "The traversal and materialization evidence root for CairnLine, cairn before/after, step trace, materialization trace, cut certificates, and frontier commitments." .
+
+# ---------------------------------------------------------------------------
+# Object properties binding ViewContract to authority roots
+# ---------------------------------------------------------------------------
+
+view:hasViewSignature a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:ViewSignature ;
+  rdfs:label "has view signature" .
+
+view:hasPrincipalAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:PrincipalAuthority ;
+  rdfs:label "has principal authority" .
+
+view:hasAgentAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:AgentAuthority ;
+  rdfs:label "has agent authority" .
+
+view:hasPolicyAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:PolicyAuthority ;
+  rdfs:label "has policy authority" .
+
+view:hasWorkspaceAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:WorkspaceAuthority ;
+  rdfs:label "has workspace authority" .
+
+view:hasDisclosureMode a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:DisclosureMode ;
+  rdfs:label "has disclosure mode" .
+
+view:hasPolicyBarrier a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:PolicyBarrier ;
+  rdfs:label "has policy barrier" .
+
+view:hasRedactionBoundary a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:RedactionBoundary ;
+  rdfs:label "has redaction boundary" .
+
+view:hasMaterializationBoundary a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:MaterializationBoundary ;
+  rdfs:label "has materialization boundary" .
+
+view:hasRevocationEpoch a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:RevocationEpoch ;
+  rdfs:label "has revocation epoch" .
+
+view:hasRuntimeEvidenceAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:RuntimeEvidenceAuthority ;
+  rdfs:label "has runtime evidence authority" .
+
+view:hasTraversalEvidenceAuthority a owl:ObjectProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range view:TraversalEvidenceAuthority ;
+  rdfs:label "has traversal evidence authority" .
+
+# ---------------------------------------------------------------------------
+# Reference/digest properties for portable contract interop
+# ---------------------------------------------------------------------------
+
+view:authorityRef a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "authority reference" ;
+  rdfs:comment "Opaque repo-owned URI/URN reference to an authority object such as an agent session, policy decision, workspace fingerprint, runtime artifact, or traversal trace." .
+
+view:contractHash a owl:DatatypeProperty ;
+  rdfs:domain view:ViewContract ;
+  rdfs:range xsd:string ;
+  rdfs:label "contract hash" ;
+  rdfs:comment "Content commitment over the portable ViewContract payload." .
+
+view:viewSignatureHash a owl:DatatypeProperty ;
+  rdfs:domain view:ViewSignature ;
+  rdfs:range xsd:string ;
+  rdfs:label "view signature hash" ;
+  rdfs:comment "Digest over the declared view-signature inputs." .
+
+view:revocationEpochValue a owl:DatatypeProperty ;
+  rdfs:domain view:RevocationEpoch ;
+  rdfs:range xsd:integer ;
+  rdfs:label "revocation epoch value" .
+
+view:absenceReason a owl:DatatypeProperty ;
+  rdfs:domain view:TypedAbsence ;
+  rdfs:range xsd:string ;
+  rdfs:label "absence reason" ;
+  rdfs:comment "Controlled absence reason: not_authorized, not_materialized, redacted_by_policy, revoked, or unknown." .
