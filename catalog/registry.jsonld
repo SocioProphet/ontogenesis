@@ -34,6 +34,8 @@
     {"id":"https://socioprophet.github.io/ontogenesis/og#ValueFlowsToSHIRProjection","layer":"Bindings","path":"bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json","baseIRI":"https://socioprophet.github.io/ontogenesis/bindings/valueflows-governed#","semver":"0.1.0","status":"draft"},
     {"id":"https://socioprophet.github.io/ontogenesis/og#SHIRv01","layer":"Specifications","path":"docs/specs/shir-v0.1.md","baseIRI":"https://socioprophet.github.io/ontogenesis/shir#","semver":"0.1.0","status":"draft"},
     {"id":"https://socioprophet.github.io/ontogenesis/og#SemanticEnterpriseArchitecture","layer":"Specifications","path":"docs/specs/semantic_enterprise_architecture.md","baseIRI":"https://socioprophet.github.io/ontogenesis/semantic-enterprise#","semver":"0.1.0","status":"draft"},
-    {"id":"https://socioprophet.github.io/ontogenesis/og#SemanticEnterpriseRegistry","layer":"Catalog","path":"catalog/semantic_enterprise_registry.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/semantic-enterprise#","semver":"0.1.0","status":"draft"}
+    {"id":"https://socioprophet.github.io/ontogenesis/og#SemanticEnterpriseRegistry","layer":"Catalog","path":"catalog/semantic_enterprise_registry.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/semantic-enterprise#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainBusinessCore","layer":"Domains","path":"Domains/business_core.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/business#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainBusinessMetrics","layer":"Domains","path":"Domains/business_metrics.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/business/metrics#","semver":"0.1.0","status":"draft"}
   ]
 }
