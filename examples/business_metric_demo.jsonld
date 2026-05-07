@@ -1,0 +1,21 @@
+{
+  "@context": "../contexts/business.context.jsonld",
+  "@graph": [
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/examples/company/acme-cyber",
+      "type": "biz:Company",
+      "label": "ACME Cyber",
+      "legalName": "ACME Cyber Inc.",
+      "currency": "USD"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/domains/business/metrics#AnnualRecurringRevenue",
+      "type": "bizm:MetricConcept",
+      "label": "Annual Recurring Revenue",
+      "unitFamily": "currency/year",
+      "grainFamily": "time.month_end, geography, segment",
+      "timeBehavior": "snapshot",
+      "scopeFamily": "company, offering, geography"
+    }
+  ]
+}
