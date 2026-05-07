@@ -1,0 +1,23 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/business#> .
+@prefix bizd:  <https://socioprophet.github.io/ontogenesis/domains/business/drivers#> .
+@prefix bizm:  <https://socioprophet.github.io/ontogenesis/domains/business/metrics#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:CACPressureToARR a bizd:DriverEdge ;
+  rdfs:label "CAC pressure to ARR driver" ;
+  bizd:fromMetric bizm:CustomerAcquisitionCost ;
+  bizd:toMetric bizm:AnnualRecurringRevenue ;
+  bizd:hasLever ex:ImproveQualificationDiscipline ;
+  bizd:relationClass bizd:negative ;
+  bizd:requiresEvidencePolicy bizd:preferredEvidence ;
+  bizd:sign "negative" ;
+  bizd:relationType "conditional" ;
+  bizd:lagValue "1"^^xsd:decimal ;
+  bizd:lagUnit "quarter" ;
+  bizd:confidence "medium" ;
+  bizd:conditionText "When acquisition cost rises faster than win rate or average contract value, net new ARR productivity is expected to deteriorate unless qualification, pricing, or channel mix improves." .
+
+ex:ImproveQualificationDiscipline a bizd:Lever ;
+  rdfs:label "Improve qualification discipline" .
