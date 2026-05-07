@@ -1,0 +1,166 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix systema: <https://socioprophet.github.io/ontogenesis/systema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+systema:SystemaConceptEntryShape
+    a sh:NodeShape ;
+    sh:targetClass systema:SystemaConceptEntry ;
+    sh:property [
+        sh:path systema:conceptId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:sourceAnchor ;
+        sh:minCount 1 ;
+        sh:class systema:SourceAnchor ;
+    ] ;
+    sh:property [
+        sh:path systema:definition ;
+        sh:minCount 1 ;
+        sh:class systema:ConceptDefinition ;
+    ] ;
+    sh:property [
+        sh:path systema:operationalDefinition ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:promotionState ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in (
+            "observed_term"
+            "extracted_candidate"
+            "source_anchored"
+            "reviewed_definition"
+            "operational_definition"
+            "implementation_linked"
+            "tested_doctrine"
+            "public_standard"
+            "deprecated"
+            "contested"
+        ) ;
+    ] ;
+    sh:property [
+        sh:path systema:allowedUse ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:forbiddenUse ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:implementationSurface ;
+        sh:minCount 1 ;
+        sh:class systema:ImplementationSurface ;
+    ] ;
+    sh:property [
+        sh:path systema:evidenceRequirement ;
+        sh:minCount 1 ;
+        sh:class systema:EvidenceRequirement ;
+    ] .
+
+systema:SourceAnchorShape
+    a sh:NodeShape ;
+    sh:targetClass systema:SourceAnchor ;
+    sh:property [
+        sh:path systema:sourceRef ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:sourceKind ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:extractionConfidence ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "A" "B" "C" "D" "E" ) ;
+    ] ;
+    sh:property [
+        sh:path systema:reviewState ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in (
+            "unreviewed"
+            "candidate"
+            "manually_reviewed"
+            "independently_verified"
+            "rejected"
+            "contested"
+        ) ;
+    ] ;
+    sh:property [
+        sh:path systema:quoteBoundary ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in (
+            "exact"
+            "near_verbatim"
+            "paraphrase"
+            "operational_translation"
+            "analogy"
+            "unsupported"
+        ) ;
+    ] ;
+    sh:property [
+        sh:path systema:uncertaintyNote ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+systema:ConceptDefinitionShape
+    a sh:NodeShape ;
+    sh:targetClass systema:ConceptDefinition ;
+    sh:property [
+        sh:path systema:definitionText ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:claimLevel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in (
+            "historical_source_claim"
+            "operational_definition"
+            "design_analogy"
+            "formal_claim"
+            "implementation_requirement"
+            "conformance_rule"
+        ) ;
+    ] .
+
+systema:ImplementationSurfaceShape
+    a sh:NodeShape ;
+    sh:targetClass systema:ImplementationSurface ;
+    sh:property [
+        sh:path systema:ownerRepo ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path systema:surfacePath ;
+        sh:datatype xsd:string ;
+    ] .
+
+systema:EvidenceRequirementShape
+    a sh:NodeShape ;
+    sh:targetClass systema:EvidenceRequirement ;
+    sh:property [
+        sh:path systema:evidenceRequirementText ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
