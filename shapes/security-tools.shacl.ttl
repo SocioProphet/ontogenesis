@@ -1,0 +1,186 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix st:   <https://socioprophet.github.io/ontogenesis/domains/security-tools#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+st:SecurityToolShape a sh:NodeShape ;
+  sh:targetClass st:SecurityTool ;
+  sh:property [
+    sh:path st:toolId ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:pattern "^tool-[A-Za-z0-9._:-]+$" ;
+    sh:message "SecurityTool must have exactly one stable tool ID." ;
+  ] ;
+  sh:property [
+    sh:path st:sourceCorpus ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must declare its source corpus." ;
+  ] ;
+  sh:property [
+    sh:path st:category ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "SecurityTool must retain at least one source category." ;
+  ] ;
+  sh:property [
+    sh:path st:hasCapability ;
+    sh:class st:SecurityCapability ;
+    sh:minCount 1 ;
+    sh:message "SecurityTool must map to at least one normalized SecurityCapability." ;
+  ] ;
+  sh:property [
+    sh:path st:hasSafetyClass ;
+    sh:class st:SafetyClass ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must have exactly one SafetyClass." ;
+  ] ;
+  sh:property [
+    sh:path st:hasExecutionMode ;
+    sh:class st:ExecutionMode ;
+    sh:minCount 1 ;
+    sh:message "SecurityTool must declare at least one permitted descriptive ExecutionMode." ;
+  ] ;
+  sh:property [
+    sh:path st:defaultExecutionMode ;
+    sh:class st:ExecutionMode ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must have exactly one default ExecutionMode." ;
+  ] ;
+  sh:property [
+    sh:path st:hasRiskSignal ;
+    sh:class st:ToolRiskSignal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must have one ToolRiskSignal node." ;
+  ] ;
+  sh:property [
+    sh:path st:hasEvidenceContract ;
+    sh:class st:ToolEvidenceContract ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must have one ToolEvidenceContract." ;
+  ] ;
+  sh:property [
+    sh:path st:hasPackageProvenance ;
+    sh:class st:PackageProvenance ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "SecurityTool must retain package provenance." ;
+  ] ;
+  sh:property [
+    sh:path st:wrapperRequired ;
+    sh:datatype xsd:boolean ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:hasValue true ;
+    sh:message "SecurityTool imports must require a wrapper before any future execution path." ;
+  ] ;
+  sh:property [
+    sh:path st:productionAllowed ;
+    sh:datatype xsd:boolean ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:hasValue false ;
+    sh:message "SecurityTool imports must not allow production execution." ;
+  ] .
+
+st:ToolRiskSignalShape a sh:NodeShape ;
+  sh:targetClass st:ToolRiskSignal ;
+  sh:property [ sh:path st:requiresNetwork ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare requiresNetwork." ] ;
+  sh:property [ sh:path st:requiresRoot ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare requiresRoot." ] ;
+  sh:property [ sh:path st:requiresRawSocket ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare requiresRawSocket." ] ;
+  sh:property [ sh:path st:requiresCaptureDevice ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare requiresCaptureDevice." ] ;
+  sh:property [ sh:path st:mayMutateTarget ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare mayMutateTarget." ] ;
+  sh:property [ sh:path st:mayHandleSecrets ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare mayHandleSecrets." ] ;
+  sh:property [ sh:path st:mayContactExternalServices ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare mayContactExternalServices." ] ;
+  sh:property [ sh:path st:physicalDomain ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ; sh:message "ToolRiskSignal must declare physicalDomain." ] .
+
+st:ToolEvidenceContractShape a sh:NodeShape ;
+  sh:targetClass st:ToolEvidenceContract ;
+  sh:property [
+    sh:path st:evidenceType ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "ToolEvidenceContract must declare at least one expected evidence type." ;
+  ] ;
+  sh:property [
+    sh:path st:redactionRequired ;
+    sh:datatype xsd:boolean ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "ToolEvidenceContract must declare whether redaction is required." ;
+  ] ;
+  sh:property [
+    sh:path st:rawOutputAllowed ;
+    sh:datatype xsd:boolean ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:hasValue false ;
+    sh:message "Imported catalog evidence contracts must not allow raw output by default." ;
+  ] .
+
+st:PackageProvenanceShape a sh:NodeShape ;
+  sh:targetClass st:PackageProvenance ;
+  sh:property [
+    sh:path st:sourceRef ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "PackageProvenance must include a source reference." ;
+  ] ;
+  sh:property [
+    sh:path st:packagePath ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "PackageProvenance must include package path." ;
+  ] ;
+  sh:property [
+    sh:path st:observedAt ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "PackageProvenance must include observation time." ;
+  ] ;
+  sh:property [
+    sh:path st:claimLevel ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "extracted" "inferred" "reviewed" "rejected" ) ;
+    sh:message "PackageProvenance claimLevel must be one of extracted, inferred, reviewed, or rejected." ;
+  ] .
+
+st:RestrictedCatalogOnlyShape a sh:NodeShape ;
+  sh:targetSubjectsOf st:hasSafetyClass ;
+  sh:sparql [
+    sh:message "RestrictedCatalogOnly, BlockedRuntime, and UnknownReviewRequired tools cannot default to ReadOnly or SandboxedLab." ;
+    sh:select """
+      PREFIX st: <https://socioprophet.github.io/ontogenesis/domains/security-tools#>
+      SELECT $this WHERE {
+        $this st:hasSafetyClass ?safety ;
+              st:defaultExecutionMode ?mode .
+        FILTER (?safety IN (st:RestrictedCatalogOnly, st:BlockedRuntime, st:UnknownReviewRequired))
+        FILTER (?mode IN (st:ReadOnly, st:SandboxedLab))
+      }
+    """ ;
+  ] .
+
+st:PhysicalDomainGateShape a sh:NodeShape ;
+  sh:targetClass st:SecurityTool ;
+  sh:sparql [
+    sh:message "Physical-domain tools must require physical_domain_authorization." ;
+    sh:select """
+      PREFIX st: <https://socioprophet.github.io/ontogenesis/domains/security-tools#>
+      SELECT $this WHERE {
+        $this st:hasRiskSignal ?risk .
+        ?risk st:physicalDomain true .
+        FILTER NOT EXISTS { $this st:requiresGate "physical_domain_authorization" }
+      }
+    """ ;
+  ] .
