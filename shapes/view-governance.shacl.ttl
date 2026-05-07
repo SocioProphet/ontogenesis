@@ -1,0 +1,152 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix view: <https://socioprophet.github.io/ontogenesis/platform/view#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# ViewContract base gate
+# ---------------------------------------------------------------------------
+
+view:ViewContractShape a sh:NodeShape ;
+  sh:targetClass view:ViewContract ;
+  sh:message "A ViewContract must bind principal, policy, workspace, disclosure, revocation epoch, and view signature authority roots." ;
+  sh:property [
+    sh:path view:hasPrincipalAuthority ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:hasPolicyAuthority ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:hasWorkspaceAuthority ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:hasDisclosureMode ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:hasRevocationEpoch ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:hasViewSignature ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path view:contractHash ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^sha256:[A-Fa-f0-9]{64}$" ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# Authority reference gates
+# ---------------------------------------------------------------------------
+
+view:PrincipalAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:PrincipalAuthority ;
+  sh:message "PrincipalAuthority must carry at least one authorityRef to a platform, Regis, or identity proof object." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+view:AgentAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:AgentAuthority ;
+  sh:message "AgentAuthority must carry at least one authorityRef to Agent Registry state." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+view:PolicyAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:PolicyAuthority ;
+  sh:message "PolicyAuthority must carry at least one authorityRef to Policy Fabric decision or bundle state." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+view:WorkspaceAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:WorkspaceAuthority ;
+  sh:message "WorkspaceAuthority must carry workspace/environment fingerprint authority refs." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# View signature and revocation gates
+# ---------------------------------------------------------------------------
+
+view:ViewSignatureShape a sh:NodeShape ;
+  sh:targetClass view:ViewSignature ;
+  sh:message "ViewSignature must carry a sha256 viewSignatureHash." ;
+  sh:property [
+    sh:path view:viewSignatureHash ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^sha256:[A-Fa-f0-9]{64}$" ;
+  ] .
+
+view:RevocationEpochShape a sh:NodeShape ;
+  sh:targetClass view:RevocationEpoch ;
+  sh:message "RevocationEpoch must carry a non-negative integer revocationEpochValue." ;
+  sh:property [
+    sh:path view:revocationEpochValue ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:integer ;
+    sh:minInclusive 0 ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# Typed absence gate
+# ---------------------------------------------------------------------------
+
+view:TypedAbsenceShape a sh:NodeShape ;
+  sh:targetClass view:TypedAbsence ;
+  sh:message "TypedAbsence must declare an allowed absence reason." ;
+  sh:property [
+    sh:path view:absenceReason ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ( "not_authorized" "not_materialized" "redacted_by_policy" "revoked" "unknown" ) ;
+  ] .
+
+# ---------------------------------------------------------------------------
+# Evidence-authority gates
+# ---------------------------------------------------------------------------
+
+view:RuntimeEvidenceAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:RuntimeEvidenceAuthority ;
+  sh:message "RuntimeEvidenceAuthority must preserve at least one AgentPlane or policy-verdict authority ref." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+view:TraversalEvidenceAuthorityShape a sh:NodeShape ;
+  sh:targetClass view:TraversalEvidenceAuthority ;
+  sh:message "TraversalEvidenceAuthority must preserve at least one CairnPath authority ref." ;
+  sh:property [
+    sh:path view:authorityRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
