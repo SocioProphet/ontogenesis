@@ -1,0 +1,232 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix st:    <https://socioprophet.github.io/ontogenesis/domains/security-tools#> .
+@prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<Domains/security-tools.ttl> a owl:Ontology ;
+  dct:title "Domain — Security Tools" ;
+  dct:description "Security-tool catalog, safety-class, execution-mode, evidence-contract, and lab-channel ontology for SCOPE-D and SourceOS. Designed for BlackArch-style corpus cannibalization without treating catalogs as runtime authority." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> , <Domains/agentic-purple-team.ttl> .
+
+### Core classes
+
+st:SecurityTool a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Security tool" ;
+  rdfs:comment "A cataloged security tool or package candidate. A SecurityTool record is metadata and policy context, not execution authorization." .
+
+st:SecurityCapability a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Security capability" .
+
+st:SafetyClass a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Safety class" .
+
+st:ExecutionMode a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Execution mode" ;
+  rdfs:comment "Descriptive mode used by SCOPE-D policy. ExecutionMode does not grant runtime authority." .
+
+st:ToolRiskSignal a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Tool risk signal" .
+
+st:ToolEvidenceContract a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Tool evidence contract" .
+
+st:PackageProvenance a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Package provenance" .
+
+st:SecurityLabChannel a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Security lab channel" ;
+  rdfs:comment "A SourceOS/SociOS lab-channel candidate derived from classified metadata and policy gates." .
+
+st:ToolPromotionState a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Tool promotion state" .
+
+### Properties
+
+st:toolId a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:string ;
+  rdfs:label "tool ID" .
+
+st:sourceCorpus a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:string ;
+  rdfs:label "source corpus" .
+
+st:category a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:string ;
+  rdfs:label "source category" .
+
+st:hasCapability a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:SecurityCapability ;
+  rdfs:label "has capability" .
+
+st:hasSafetyClass a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:SafetyClass ;
+  rdfs:label "has safety class" .
+
+st:hasExecutionMode a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:ExecutionMode ;
+  rdfs:label "has execution mode" .
+
+st:defaultExecutionMode a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:ExecutionMode ;
+  rdfs:label "default execution mode" .
+
+st:hasRiskSignal a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:ToolRiskSignal ;
+  rdfs:label "has risk signal" .
+
+st:hasEvidenceContract a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:ToolEvidenceContract ;
+  rdfs:label "has evidence contract" .
+
+st:hasPackageProvenance a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:PackageProvenance ;
+  rdfs:label "has package provenance" .
+
+st:hasPromotionState a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:ToolPromotionState ;
+  rdfs:label "has promotion state" .
+
+st:eligibleForLabChannel a owl:ObjectProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range st:SecurityLabChannel ;
+  rdfs:label "eligible for lab channel" .
+
+st:requiresGate a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:string ;
+  rdfs:label "requires gate" .
+
+st:wrapperRequired a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "wrapper required" .
+
+st:productionAllowed a owl:DatatypeProperty ;
+  rdfs:domain st:SecurityTool ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "production allowed" .
+
+st:rawOutputAllowed a owl:DatatypeProperty ;
+  rdfs:domain st:ToolEvidenceContract ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "raw output allowed" .
+
+st:redactionRequired a owl:DatatypeProperty ;
+  rdfs:domain st:ToolEvidenceContract ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "redaction required" .
+
+st:evidenceType a owl:DatatypeProperty ;
+  rdfs:domain st:ToolEvidenceContract ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence type" .
+
+st:sourceRef a owl:DatatypeProperty ;
+  rdfs:domain st:PackageProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "source reference" .
+
+st:packagePath a owl:DatatypeProperty ;
+  rdfs:domain st:PackageProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "package path" .
+
+st:observedAt a owl:DatatypeProperty ;
+  rdfs:domain st:PackageProvenance ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "observed at" .
+
+st:claimLevel a owl:DatatypeProperty ;
+  rdfs:domain st:PackageProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "claim level" .
+
+st:requiresNetwork a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "requires network" .
+st:requiresRoot a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "requires root" .
+st:requiresRawSocket a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "requires raw socket" .
+st:requiresCaptureDevice a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "requires capture device" .
+st:mayMutateTarget a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "may mutate target" .
+st:mayHandleSecrets a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "may handle secrets" .
+st:mayContactExternalServices a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "may contact external services" .
+st:physicalDomain a owl:DatatypeProperty ; rdfs:domain st:ToolRiskSignal ; rdfs:range xsd:boolean ; rdfs:label "physical domain" .
+
+### Controlled individuals — safety classes
+
+st:AllowDefensive a st:SafetyClass ; rdfs:label "allow defensive" .
+st:LabGated a st:SafetyClass ; rdfs:label "lab gated" .
+st:RestrictedCatalogOnly a st:SafetyClass ; rdfs:label "restricted catalog only" .
+st:BlockedRuntime a st:SafetyClass ; rdfs:label "blocked runtime" .
+st:UnknownReviewRequired a st:SafetyClass ; rdfs:label "unknown review required" .
+
+### Controlled individuals — execution modes
+
+st:CatalogOnly a st:ExecutionMode ; rdfs:label "catalog only" .
+st:SyntheticOnly a st:ExecutionMode ; rdfs:label "synthetic only" .
+st:ReadOnly a st:ExecutionMode ; rdfs:label "read only" .
+st:SandboxedLab a st:ExecutionMode ; rdfs:label "sandboxed lab" .
+st:Blocked a st:ExecutionMode ; rdfs:label "blocked" .
+
+### Controlled individuals — capabilities
+
+st:DefensiveHostAssessment a st:SecurityCapability ; rdfs:label "defensive host assessment" .
+st:CodeAudit a st:SecurityCapability ; rdfs:label "code audit" .
+st:ForensicAnalysis a st:SecurityCapability ; rdfs:label "forensic analysis" .
+st:AuthorizedScanning a st:SecurityCapability ; rdfs:label "authorized scanning" .
+st:WebApplicationValidation a st:SecurityCapability ; rdfs:label "web application validation" .
+st:NetworkAnalysis a st:SecurityCapability ; rdfs:label "network analysis" .
+st:ReverseEngineering a st:SecurityCapability ; rdfs:label "reverse engineering" .
+st:FuzzValidation a st:SecurityCapability ; rdfs:label "fuzz validation" .
+st:HardwareLab a st:SecurityCapability ; rdfs:label "hardware lab" .
+st:AIInfraAssessment a st:SecurityCapability ; rdfs:label "AI infrastructure assessment" .
+st:RestrictedTaxonomy a st:SecurityCapability ; rdfs:label "restricted taxonomy" .
+st:ThreatModeling a st:SecurityCapability ; rdfs:label "threat modeling" .
+st:UnknownCapability a st:SecurityCapability ; rdfs:label "unknown capability" .
+
+### Controlled individuals — promotion states
+
+st:Cataloged a st:ToolPromotionState ; rdfs:label "cataloged" .
+st:Classified a st:ToolPromotionState ; rdfs:label "classified" .
+st:Validated a st:ToolPromotionState ; rdfs:label "validated" .
+st:FixtureBacked a st:ToolPromotionState ; rdfs:label "fixture backed" .
+st:WrapperSpecified a st:ToolPromotionState ; rdfs:label "wrapper specified" .
+st:LabCandidate a st:ToolPromotionState ; rdfs:label "lab candidate" .
+st:LabApproved a st:ToolPromotionState ; rdfs:label "lab approved" .
+st:Deprecated a st:ToolPromotionState ; rdfs:label "deprecated" .
+
+### Controlled individuals — lab channels
+
+st:SourceOSSecCore a st:SecurityLabChannel ; rdfs:label "SourceOS security core" .
+st:SourceOSSecCodeAudit a st:SecurityLabChannel ; rdfs:label "SourceOS security code audit" .
+st:SourceOSSecForensics a st:SecurityLabChannel ; rdfs:label "SourceOS security forensics" .
+st:SourceOSSecWebLab a st:SecurityLabChannel ; rdfs:label "SourceOS security web lab" .
+st:SourceOSSecNetworkLab a st:SecurityLabChannel ; rdfs:label "SourceOS security network lab" .
+st:SourceOSSecReverseLab a st:SecurityLabChannel ; rdfs:label "SourceOS security reverse lab" .
+st:SourceOSSecFuzzLab a st:SecurityLabChannel ; rdfs:label "SourceOS security fuzz lab" .
+st:SourceOSSecPhysicalLab a st:SecurityLabChannel ; rdfs:label "SourceOS security physical lab" .
