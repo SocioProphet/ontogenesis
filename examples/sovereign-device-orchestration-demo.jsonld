@@ -1,0 +1,139 @@
+{
+  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
+  "id": "https://socioprophet.github.io/ontogenesis/examples/sovereign-device-orchestration-demo",
+  "type": "upper:InformationArtifact",
+  "label": "Sovereign Device Orchestration Demo Graph",
+  "sdo:adapterStates": [
+    {
+      "id": "sdo:adapter-home-assistant-fixture",
+      "type": "sdo:AdapterState",
+      "sdo:adapterId": "adapter:home-assistant-fixture",
+      "label": "Home Assistant fixture adapter"
+    },
+    {
+      "id": "sdo:adapter-guardrail-fabric-fixture",
+      "type": "sdo:AdapterState",
+      "sdo:adapterId": "adapter:guardrail-fabric-fixture",
+      "label": "Guardrail Fabric fixture adapter"
+    }
+  ],
+  "sdo:deviceNodes": [
+    {
+      "id": "sdo:node-living-room-fan-01",
+      "type": "sdo:DeviceNode",
+      "sdo:nodeId": "node:living-room-fan-01",
+      "sdo:sourceAdapter": { "id": "sdo:adapter-home-assistant-fixture" },
+      "sdo:trustState": "trusted",
+      "sdo:revocationStatus": "active",
+      "label": "Living room fan"
+    },
+    {
+      "id": "sdo:node-security-system-01",
+      "type": "sdo:DeviceNode",
+      "sdo:nodeId": "node:security-system-01",
+      "sdo:sourceAdapter": { "id": "sdo:adapter-home-assistant-fixture" },
+      "sdo:trustState": "limited",
+      "sdo:revocationStatus": "active",
+      "label": "Household security system"
+    },
+    {
+      "id": "sdo:node-front-door-camera-01",
+      "type": "sdo:DeviceNode",
+      "sdo:nodeId": "node:front-door-camera-01",
+      "sdo:sourceAdapter": { "id": "sdo:adapter-home-assistant-fixture" },
+      "sdo:trustState": "trusted",
+      "sdo:revocationStatus": "active",
+      "label": "Front door camera"
+    }
+  ],
+  "sdo:events": [
+    {
+      "id": "sdo:event-living-room-temp-high",
+      "type": "sdo:OrchestrationEvent",
+      "sdo:eventId": "event:sensor:living-room-temp-high",
+      "sdo:subjectNode": { "id": "sdo:node-living-room-fan-01" },
+      "sdo:sourceAdapter": { "id": "sdo:adapter-home-assistant-fixture" },
+      "label": "Living room temperature crossed cooling threshold"
+    },
+    {
+      "id": "sdo:event-agent-propose-arm-security",
+      "type": "sdo:OrchestrationEvent",
+      "sdo:eventId": "event:agent:propose-arm-security",
+      "sdo:subjectNode": { "id": "sdo:node-security-system-01" },
+      "sdo:sourceAdapter": { "id": "sdo:adapter-home-assistant-fixture" },
+      "label": "Agent proposed arming security"
+    }
+  ],
+  "sdo:routines": [
+    {
+      "id": "sdo:routine-cool-living-room-when-hot",
+      "type": "sdo:Routine",
+      "sdo:routineId": "routine:cool-living-room-when-hot",
+      "sdo:capabilityClass": "low_risk_actuation",
+      "sdo:signature": "fixture-signature:not-cryptographic",
+      "label": "Cool living room when hot"
+    },
+    {
+      "id": "sdo:routine-arm-security-after-midnight",
+      "type": "sdo:Routine",
+      "sdo:routineId": "routine:arm-security-after-midnight",
+      "sdo:capabilityClass": "high_risk_actuation",
+      "sdo:signature": "fixture-signature:not-cryptographic",
+      "label": "Arm security after midnight"
+    }
+  ],
+  "sdo:policyDecisions": [
+    {
+      "id": "sdo:decision-allow-cool-living-room",
+      "type": "sdo:PolicyDecision",
+      "sdo:decisionId": "decision:allow-cool-living-room",
+      "sdo:policyOutcome": "allowed",
+      "sdo:capabilityClass": "low_risk_actuation",
+      "sdo:subjectNode": { "id": "sdo:node-living-room-fan-01" },
+      "sdo:relatedEvent": { "id": "sdo:event-living-room-temp-high" },
+      "sdo:relatedRoutine": { "id": "sdo:routine-cool-living-room-when-hot" },
+      "label": "Policy allowed low-risk fan cooling"
+    },
+    {
+      "id": "sdo:decision-requires-approval-arm-security",
+      "type": "sdo:PolicyDecision",
+      "sdo:decisionId": "decision:requires-approval-arm-security",
+      "sdo:policyOutcome": "requires_approval",
+      "sdo:capabilityClass": "high_risk_actuation",
+      "sdo:subjectNode": { "id": "sdo:node-security-system-01" },
+      "sdo:relatedEvent": { "id": "sdo:event-agent-propose-arm-security" },
+      "sdo:relatedRoutine": { "id": "sdo:routine-arm-security-after-midnight" },
+      "label": "Policy required approval for security arming"
+    }
+  ],
+  "sdo:evidenceReceipts": [
+    {
+      "id": "sdo:receipt-policy-allow-cool-living-room",
+      "type": "sdo:EvidenceReceipt",
+      "sdo:receiptId": "receipt:policy:allow-cool-living-room",
+      "sdo:relatedEvent": { "id": "sdo:event-living-room-temp-high" },
+      "sdo:subjectNode": { "id": "sdo:node-living-room-fan-01" },
+      "sdo:sourceAdapter": { "id": "sdo:adapter-guardrail-fabric-fixture" },
+      "sdo:relatedPolicyDecision": { "id": "sdo:decision-allow-cool-living-room" },
+      "sdo:policyOutcome": "allowed",
+      "sdo:retentionClass": "audit_1y",
+      "sdo:redactionClass": "none",
+      "sdo:signature": "fixture-signature:not-cryptographic",
+      "label": "Receipt for allowed fan cooling policy decision"
+    },
+    {
+      "id": "sdo:receipt-policy-requires-approval-arm-security",
+      "type": "sdo:EvidenceReceipt",
+      "sdo:receiptId": "receipt:policy:requires-approval-arm-security",
+      "sdo:relatedEvent": { "id": "sdo:event-agent-propose-arm-security" },
+      "sdo:subjectNode": { "id": "sdo:node-security-system-01" },
+      "sdo:sourceAdapter": { "id": "sdo:adapter-guardrail-fabric-fixture" },
+      "sdo:relatedPolicyDecision": { "id": "sdo:decision-requires-approval-arm-security" },
+      "sdo:policyOutcome": "requires_approval",
+      "sdo:retentionClass": "audit_1y",
+      "sdo:redactionClass": "none",
+      "sdo:signature": "fixture-signature:not-cryptographic",
+      "label": "Receipt for approval-required security policy decision"
+    }
+  ]
+}
