@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "systema": "https://socioprophet.github.io/ontogenesis/systema#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "plat": "https://socioprophet.github.io/ontogenesis/platform#",
+    "shir": "https://socioprophet.github.io/ontogenesis/shir#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ConceptEntry": "systema:SystemaConceptEntry",
+    "SourceAnchor": "systema:SourceAnchor",
+    "ConceptDefinition": "systema:ConceptDefinition",
+    "ConceptUseBoundary": "systema:ConceptUseBoundary",
+    "ImplementationSurface": "systema:ImplementationSurface",
+    "EvidenceRequirement": "systema:EvidenceRequirement",
+    "ConceptRevision": "systema:ConceptRevision",
+    "conceptId": "systema:conceptId",
+    "sourceAnchor": {
+      "@id": "systema:sourceAnchor",
+      "@type": "@id"
+    },
+    "sourceRef": "systema:sourceRef",
+    "sourceKind": "systema:sourceKind",
+    "extractionConfidence": "systema:extractionConfidence",
+    "reviewState": "systema:reviewState",
+    "quoteBoundary": "systema:quoteBoundary",
+    "uncertaintyNote": "systema:uncertaintyNote",
+    "definition": {
+      "@id": "systema:definition",
+      "@type": "@id"
+    },
+    "definitionText": "systema:definitionText",
+    "operationalDefinition": "systema:operationalDefinition",
+    "claimLevel": "systema:claimLevel",
+    "allowedUse": "systema:allowedUse",
+    "forbiddenUse": "systema:forbiddenUse",
+    "implementationSurface": {
+      "@id": "systema:implementationSurface",
+      "@type": "@id"
+    },
+    "ownerRepo": "systema:ownerRepo",
+    "surfacePath": "systema:surfacePath",
+    "evidenceRequirement": {
+      "@id": "systema:evidenceRequirement",
+      "@type": "@id"
+    },
+    "evidenceRequirementText": "systema:evidenceRequirementText",
+    "promotionState": "systema:promotionState",
+    "revision": {
+      "@id": "systema:revision",
+      "@type": "@id"
+    },
+    "revisionNote": "systema:revisionNote",
+    "revisionDate": {
+      "@id": "systema:revisionDate",
+      "@type": "xsd:date"
+    }
+  }
+}
