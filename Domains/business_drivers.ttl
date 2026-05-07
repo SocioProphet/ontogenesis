@@ -1,0 +1,43 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix bizd:  <https://socioprophet.github.io/ontogenesis/domains/business/drivers#> .
+@prefix bizm:  <https://socioprophet.github.io/ontogenesis/domains/business/metrics#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/business_drivers.ttl> a owl:Ontology ;
+  dct:title "Domain — Business Drivers" ;
+  dct:description "Canonical causal and operational driver vocabulary for value-driver graphs, modeled levers, lagged effects, evidence policies, and metric-to-metric causal edges." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/business_metrics.ttl> .
+
+bizd:DriverEdge a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Driver edge" .
+bizd:Lever a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Lever" .
+bizd:DriverRelation a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Driver relation" .
+bizd:EvidencePolicy a owl:Class ; rdfs:subClassOf upper:Policy ; rdfs:label "Evidence policy" .
+
+bizd:fromMetric a owl:ObjectProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range bizm:MetricConcept ; rdfs:label "from metric" .
+bizd:toMetric a owl:ObjectProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range bizm:MetricConcept ; rdfs:label "to metric" .
+bizd:hasLever a owl:ObjectProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range bizd:Lever ; rdfs:label "has lever" .
+bizd:relationClass a owl:ObjectProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range bizd:DriverRelation ; rdfs:label "relation class" .
+bizd:requiresEvidencePolicy a owl:ObjectProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range bizd:EvidencePolicy ; rdfs:label "requires evidence policy" .
+
+bizd:sign a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:string ; rdfs:label "sign" .
+bizd:lagValue a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:decimal ; rdfs:label "lag value" .
+bizd:lagUnit a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:string ; rdfs:label "lag unit" .
+bizd:relationType a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:string ; rdfs:label "relation type" .
+bizd:confidence a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:string ; rdfs:label "confidence" .
+bizd:conditionText a owl:DatatypeProperty ; rdfs:domain bizd:DriverEdge ; rdfs:range xsd:string ; rdfs:label "condition text" .
+
+bizd:positive a bizd:DriverRelation ; rdfs:label "positive relation" .
+bizd:negative a bizd:DriverRelation ; rdfs:label "negative relation" .
+bizd:mixed a bizd:DriverRelation ; rdfs:label "mixed relation" .
+bizd:linear a bizd:DriverRelation ; rdfs:label "linear relation" .
+bizd:inverse a bizd:DriverRelation ; rdfs:label "inverse relation" .
+bizd:conditional a bizd:DriverRelation ; rdfs:label "conditional relation" .
+
+bizd:requiredEvidence a bizd:EvidencePolicy ; rdfs:label "required evidence" .
+bizd:preferredEvidence a bizd:EvidencePolicy ; rdfs:label "preferred evidence" .
+bizd:optionalEvidence a bizd:EvidencePolicy ; rdfs:label "optional evidence" .
