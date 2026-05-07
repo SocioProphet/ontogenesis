@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "pb": "https://socioprophet.github.io/ontogenesis/platform/path-b#"
+  },
+  "@id": "pb:PathBScenarioAlpha",
+  "@type": "pb:WorldGameScenario",
+  "pb:mapsToRepo": [
+    "SocioProphet/gaia-world-model",
+    "SocioProphet/sherlock-search",
+    "SocioProphet/agentplane",
+    "SourceOS-Linux/sourceos-syncd"
+  ],
+  "pb:hasValidationBoundary": "Design semantics only. No unsupported physical claims.",
+  "description": "Projection fidelity, governed agent transitions, local-first coherence, and evidence indexing."
+}
