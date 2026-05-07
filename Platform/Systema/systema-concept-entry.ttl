@@ -1,0 +1,184 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix systema: <https://socioprophet.github.io/ontogenesis/systema#> .
+
+<https://socioprophet.github.io/ontogenesis/platform/systema-concept-entry>
+    a owl:Ontology ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:label "Systema Concept Entry ontology" ;
+    rdfs:comment "Source-anchored concept dictionary model for Systema doctrine-bearing concepts." .
+
+systema:SystemaConceptEntry
+    a owl:Class ;
+    rdfs:label "Systema Concept Entry" ;
+    rdfs:comment "Governed concept record with source anchors, definitions, use boundaries, implementation surfaces, evidence requirements, promotion state, and revision history." .
+
+systema:SourceAnchor
+    a owl:Class ;
+    rdfs:label "Source Anchor" ;
+    rdfs:comment "Source reference with confidence, review state, quote boundary, and uncertainty note." .
+
+systema:ConceptDefinition
+    a owl:Class ;
+    rdfs:label "Concept Definition" ;
+    rdfs:comment "Definition body for a concept, including claim level." .
+
+systema:ConceptUseBoundary
+    a owl:Class ;
+    rdfs:label "Concept Use Boundary" ;
+    rdfs:comment "Allowed and forbidden uses for a concept." .
+
+systema:ImplementationSurface
+    a owl:Class ;
+    rdfs:label "Implementation Surface" ;
+    rdfs:comment "Repository, path, artifact, or downstream surface where a concept is implemented or consumed." .
+
+systema:EvidenceRequirement
+    a owl:Class ;
+    rdfs:label "Evidence Requirement" ;
+    rdfs:comment "Evidence required for a concept to be promoted or used in a specific claim/action context." .
+
+systema:ConceptRevision
+    a owl:Class ;
+    rdfs:label "Concept Revision" ;
+    rdfs:comment "Revision history item for a concept record." .
+
+systema:conceptId
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "concept id" .
+
+systema:sourceAnchor
+    a owl:ObjectProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range systema:SourceAnchor ;
+    rdfs:label "source anchor" .
+
+systema:sourceRef
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SourceAnchor ;
+    rdfs:range xsd:string ;
+    rdfs:label "source reference" .
+
+systema:sourceKind
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SourceAnchor ;
+    rdfs:range xsd:string ;
+    rdfs:label "source kind" .
+
+systema:extractionConfidence
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SourceAnchor ;
+    rdfs:range xsd:string ;
+    rdfs:label "extraction confidence" .
+
+systema:reviewState
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SourceAnchor ;
+    rdfs:range xsd:string ;
+    rdfs:label "review state" .
+
+systema:quoteBoundary
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SourceAnchor ;
+    rdfs:range xsd:string ;
+    rdfs:label "quote boundary" .
+
+systema:uncertaintyNote
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "uncertainty note" .
+
+systema:definition
+    a owl:ObjectProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range systema:ConceptDefinition ;
+    rdfs:label "definition" .
+
+systema:definitionText
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ConceptDefinition ;
+    rdfs:range xsd:string ;
+    rdfs:label "definition text" .
+
+systema:operationalDefinition
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "operational definition" .
+
+systema:claimLevel
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ConceptDefinition ;
+    rdfs:range xsd:string ;
+    rdfs:label "claim level" .
+
+systema:allowedUse
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "allowed use" .
+
+systema:forbiddenUse
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "forbidden use" .
+
+systema:implementationSurface
+    a owl:ObjectProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range systema:ImplementationSurface ;
+    rdfs:label "implementation surface" .
+
+systema:ownerRepo
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ImplementationSurface ;
+    rdfs:range xsd:string ;
+    rdfs:label "owner repository" .
+
+systema:surfacePath
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ImplementationSurface ;
+    rdfs:range xsd:string ;
+    rdfs:label "surface path" .
+
+systema:evidenceRequirement
+    a owl:ObjectProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range systema:EvidenceRequirement ;
+    rdfs:label "evidence requirement" .
+
+systema:evidenceRequirementText
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:EvidenceRequirement ;
+    rdfs:range xsd:string ;
+    rdfs:label "evidence requirement text" .
+
+systema:promotionState
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "promotion state" .
+
+systema:revision
+    a owl:ObjectProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range systema:ConceptRevision ;
+    rdfs:label "revision" .
+
+systema:revisionNote
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ConceptRevision ;
+    rdfs:range xsd:string ;
+    rdfs:label "revision note" .
+
+systema:revisionDate
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:ConceptRevision ;
+    rdfs:range xsd:date ;
+    rdfs:label "revision date" .
