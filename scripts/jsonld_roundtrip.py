@@ -16,6 +16,7 @@ CONTEXTS = [
     ROOT / "contexts/main.context.jsonld",
     ROOT / "prophet/contexts/prophet.context.jsonld",
     ROOT / "epi/contexts/epi.context.jsonld",
+    ROOT / "contexts/governed-intelligence.context.jsonld",
 ]
 
 def main() -> int:

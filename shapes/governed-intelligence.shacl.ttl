@@ -1,0 +1,92 @@
+@prefix gi: <https://socioprophet.github.io/ontogenesis/middle/governed-intelligence#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gi:AnchorShape a sh:NodeShape ;
+  sh:targetClass gi:Anchor ;
+  sh:property [ sh:path gi:selectorKind ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:sparql [
+    sh:message "Anchor must provide at least one supported selector." ;
+    sh:select """
+      SELECT $this WHERE {
+        FILTER(
+          NOT EXISTS { $this gi:textSpanSelector ?a } &&
+          NOT EXISTS { $this gi:imageRegionSelector ?b } &&
+          NOT EXISTS { $this gi:geospatialSelector ?c } &&
+          NOT EXISTS { $this gi:h3Cell ?d } &&
+          NOT EXISTS { $this gi:codeRangeSelector ?e } &&
+          NOT EXISTS { $this gi:logSelector ?f } &&
+          NOT EXISTS { $this gi:tableCellSelector ?g } &&
+          NOT EXISTS { $this gi:mediaSegmentSelector ?h } &&
+          NOT EXISTS { $this gi:genericSelector ?i }
+        )
+      }
+    """
+  ] .
+
+gi:EvidenceShape a sh:NodeShape ;
+  sh:targetClass gi:Evidence ;
+  sh:property [ sh:path gi:hasAnchor ; sh:minCount 1 ; sh:class gi:Anchor ] ;
+  sh:property [ sh:path gi:evidenceSource ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+gi:ProofCertificateShape a sh:NodeShape ;
+  sh:targetClass gi:ProofCertificate ;
+  sh:property [ sh:path gi:certificateDigest ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:proofMethod ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+gi:ClaimShape a sh:NodeShape ;
+  sh:targetClass gi:Claim ;
+  sh:property [ sh:path gi:hasEvidence ; sh:minCount 1 ; sh:class gi:Evidence ] ;
+  sh:property [ sh:path gi:claimContext ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:confidenceScore ; sh:minCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxInclusive 1 ] ;
+  sh:property [ sh:path gi:uncertaintyScore ; sh:minCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxInclusive 1 ] ;
+  sh:property [ sh:path gi:validFrom ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path gi:transactionTime ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path gi:lifecycleStatus ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:hasProofCertificate ; sh:maxCount 1 ; sh:class gi:ProofCertificate ] .
+
+gi:VectorCandidateShape a sh:NodeShape ;
+  sh:targetClass gi:VectorCandidate ;
+  sh:property [ sh:path gi:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:in ( "candidate_only" ) ] .
+
+gi:PolicyDecisionShape a sh:NodeShape ;
+  sh:targetClass gi:PolicyDecision ;
+  sh:property [ sh:path gi:decidesClaim ; sh:minCount 1 ; sh:class gi:Claim ] ;
+  sh:property [ sh:path gi:decision ; sh:minCount 1 ; sh:datatype xsd:string ; sh:in ( "allow" "deny" "require_review" "provisional" ) ] .
+
+gi:ActionProposalShape a sh:NodeShape ;
+  sh:targetClass gi:ActionProposal ;
+  sh:property [ sh:path gi:proposedBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path gi:proposedAction ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:proposalCreatedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path gi:status ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+gi:ActionAdmissionShape a sh:NodeShape ;
+  sh:targetClass gi:ActionAdmission ;
+  sh:property [ sh:path gi:admitsProposal ; sh:minCount 1 ; sh:class gi:ActionProposal ] ;
+  sh:property [ sh:path gi:admittedBy ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path gi:admittedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] ;
+  sh:property [ sh:path gi:requiresPolicyDecision ; sh:minCount 1 ; sh:class gi:PolicyDecision ] ;
+  sh:property [ sh:path gi:status ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+gi:RuntimeReceiptShape a sh:NodeShape ;
+  sh:targetClass gi:RuntimeReceipt ;
+  sh:property [ sh:path gi:forActionAdmission ; sh:minCount 1 ; sh:class gi:ActionAdmission ] ;
+  sh:property [ sh:path gi:runtimeIdentity ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:sandboxProfile ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:inputHash ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:outputHash ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:runtimeLogRef ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:referencesPolicyDecision ; sh:minCount 1 ; sh:class gi:PolicyDecision ] ;
+  sh:property [ sh:path gi:receiptStatus ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+gi:RevocationShape a sh:NodeShape ;
+  sh:targetClass gi:Revocation ;
+  sh:property [ sh:path gi:revokesResource ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path gi:revocationReason ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:revokedAt ; sh:minCount 1 ; sh:datatype xsd:dateTime ] .
+
+gi:SlashTopicProfileShape a sh:NodeShape ;
+  sh:targetClass gi:SlashTopicProfile ;
+  sh:property [ sh:path gi:topic ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path gi:slashSeverity ; sh:minCount 1 ; sh:datatype xsd:string ] .

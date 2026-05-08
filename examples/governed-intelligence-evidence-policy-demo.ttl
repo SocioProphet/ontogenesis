@@ -1,0 +1,36 @@
+@prefix ex: <https://socioprophet.github.io/ontogenesis/examples/governed-intelligence#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/middle/governed-intelligence#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:entity-server-42 a gi:Entity .
+
+ex:anchor-text-incident-17 a gi:Anchor ;
+  gi:selectorKind "text_span" ;
+  gi:textSpanSelector "urn:doc:incident-17#char=210,302" .
+
+ex:evidence-incident-span a gi:Evidence ;
+  gi:aboutEntity ex:entity-server-42 ;
+  gi:hasAnchor ex:anchor-text-incident-17 ;
+  gi:evidenceSource "incident-17.md" .
+
+ex:proofcert-17 a gi:ProofCertificate ;
+  gi:certificateDigest "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ;
+  gi:proofMethod "merkle_inclusion" .
+
+ex:claim-unpatched-cve a gi:Claim ;
+  gi:aboutEntity ex:entity-server-42 ;
+  gi:claimText "Server 42 still exposes CVE-2030-0001 in production." ;
+  gi:claimContext "security-observe-2026-05-08" ;
+  gi:hasEvidence ex:evidence-incident-span ;
+  gi:confidenceScore "0.84"^^xsd:decimal ;
+  gi:uncertaintyScore "0.11"^^xsd:decimal ;
+  gi:validFrom "2026-05-08T19:00:00Z"^^xsd:dateTime ;
+  gi:validUntil "2026-05-09T19:00:00Z"^^xsd:dateTime ;
+  gi:transactionTime "2026-05-08T19:05:00Z"^^xsd:dateTime ;
+  gi:lifecycleStatus "active" ;
+  gi:hasProofCertificate ex:proofcert-17 .
+
+ex:policydecision-require-review a gi:PolicyDecision ;
+  gi:decidesClaim ex:claim-unpatched-cve ;
+  gi:decision "require_review" ;
+  gi:decisionRationale "Automated confidence is below autonomous-remediation threshold." .

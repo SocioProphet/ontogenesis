@@ -34,6 +34,7 @@ This runs:
 - `examples/` — example instance graphs and JSON-LD inputs
 - `catalog/registry.ttl` — module index with layer, path, SemVer, and base IRI metadata
 - `scripts/` — validation, dist, ledger, signing, and SBOM utilities
+- `bindings/governed_intelligence/` — canonical governed-intelligence contracts and mapping notes
 - `docs/` — specifications, onboarding, architecture notes, and diagrams
 
 ## Documentation index

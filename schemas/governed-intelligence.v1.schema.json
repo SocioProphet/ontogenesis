@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.github.io/ontogenesis/schemas/governed-intelligence.v1.schema.json",
+  "title": "Governed Intelligence Canonical Objects v1",
+  "description": "Canonical SocioProphet governed-intelligence object model.",
+  "oneOf": [
+    { "$ref": "#/$defs/Entity" },
+    { "$ref": "#/$defs/Anchor" },
+    { "$ref": "#/$defs/Evidence" },
+    { "$ref": "#/$defs/Claim" },
+    { "$ref": "#/$defs/ProofCertificate" },
+    { "$ref": "#/$defs/ExplanationTrace" },
+    { "$ref": "#/$defs/VectorCandidate" },
+    { "$ref": "#/$defs/PolicyDecision" },
+    { "$ref": "#/$defs/ActionProposal" },
+    { "$ref": "#/$defs/ActionAdmission" },
+    { "$ref": "#/$defs/RuntimeReceipt" },
+    { "$ref": "#/$defs/LearningEvent" },
+    { "$ref": "#/$defs/Revocation" },
+    { "$ref": "#/$defs/SlashTopicProfile" }
+  ],
+  "$defs": {
+    "Entity": {"type": "object", "required": ["objectType", "id"], "properties": {"objectType": {"const": "Entity"}, "id": {"type": "string", "minLength": 1}, "label": {"type": "string"}}, "additionalProperties": true},
+    "Anchor": {
+      "type": "object",
+      "required": ["objectType", "id", "selectorKind"],
+      "properties": {
+        "objectType": { "const": "Anchor" },
+        "id": { "type": "string", "minLength": 1 },
+        "selectorKind": {"type": "string", "enum": ["text_span", "image_region", "geospatial", "h3_cell", "code_range", "log_entry", "table_cell", "media_segment", "generic"]},
+        "textSpanSelector": { "type": "string" },
+        "imageRegionSelector": { "type": "string" },
+        "geospatialSelector": { "type": "string" },
+        "h3Cell": { "type": "string" },
+        "codeRangeSelector": { "type": "string" },
+        "logSelector": { "type": "string" },
+        "tableCellSelector": { "type": "string" },
+        "mediaSegmentSelector": { "type": "string" },
+        "genericSelector": { "type": "string" }
+      },
+      "anyOf": [{"required": ["textSpanSelector"]}, {"required": ["imageRegionSelector"]}, {"required": ["geospatialSelector"]}, {"required": ["h3Cell"]}, {"required": ["codeRangeSelector"]}, {"required": ["logSelector"]}, {"required": ["tableCellSelector"]}, {"required": ["mediaSegmentSelector"]}, {"required": ["genericSelector"]}],
+      "additionalProperties": true
+    },
+    "Evidence": {"type": "object", "required": ["objectType", "id", "anchorId", "source"], "properties": {"objectType": {"const": "Evidence"}, "id": {"type": "string", "minLength": 1}, "anchorId": {"type": "string", "minLength": 1}, "entityId": {"type": "string"}, "source": {"type": "string", "minLength": 1}}, "additionalProperties": true},
+    "ProofCertificate": {"type": "object", "required": ["objectType", "id", "certificateDigest", "proofMethod"], "properties": {"objectType": {"const": "ProofCertificate"}, "id": {"type": "string", "minLength": 1}, "certificateDigest": {"type": "string", "minLength": 1}, "proofMethod": {"type": "string", "minLength": 1}}, "additionalProperties": true},
+    "Claim": {"type": "object", "required": ["objectType", "id", "evidenceIds", "context", "confidence", "uncertainty", "validFrom", "transactionTime", "lifecycleStatus"], "properties": {"objectType": {"const": "Claim"}, "id": {"type": "string", "minLength": 1}, "text": {"type": "string"}, "evidenceIds": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1}, "context": {"type": "string", "minLength": 1}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "uncertainty": {"type": "number", "minimum": 0, "maximum": 1}, "validFrom": {"type": "string", "format": "date-time"}, "validUntil": {"type": "string", "format": "date-time"}, "transactionTime": {"type": "string", "format": "date-time"}, "lifecycleStatus": {"type": "string", "minLength": 1}, "proofCertificateId": {"type": "string"}}, "additionalProperties": true},
+    "ExplanationTrace": {"type": "object", "required": ["objectType", "id"], "properties": {"objectType": {"const": "ExplanationTrace"}, "id": {"type": "string", "minLength": 1}, "stepRefs": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": true},
+    "VectorCandidate": {"type": "object", "required": ["objectType", "id", "status"], "properties": {"objectType": {"const": "VectorCandidate"}, "id": {"type": "string", "minLength": 1}, "status": {"const": "candidate_only"}, "candidateForClaimId": {"type": "string"}}, "additionalProperties": true},
+    "PolicyDecision": {"type": "object", "required": ["objectType", "id", "claimId", "decision"], "properties": {"objectType": {"const": "PolicyDecision"}, "id": {"type": "string", "minLength": 1}, "claimId": {"type": "string", "minLength": 1}, "decision": {"type": "string", "enum": ["allow", "deny", "require_review", "provisional"]}, "rationale": {"type": "string"}}, "additionalProperties": true},
+    "ActionProposal": {"type": "object", "required": ["objectType", "id", "proposedBy", "proposedAction", "status", "proposalCreatedAt"], "properties": {"objectType": {"const": "ActionProposal"}, "id": {"type": "string", "minLength": 1}, "entityId": {"type": "string"}, "proposedBy": {"type": "string", "minLength": 1}, "proposedAction": {"type": "string", "minLength": 1}, "status": {"type": "string", "minLength": 1}, "proposalCreatedAt": {"type": "string", "format": "date-time"}}, "additionalProperties": true},
+    "ActionAdmission": {"type": "object", "required": ["objectType", "id", "proposalId", "admittedBy", "admittedAt", "status", "policyDecisionId"], "properties": {"objectType": {"const": "ActionAdmission"}, "id": {"type": "string", "minLength": 1}, "proposalId": {"type": "string", "minLength": 1}, "admittedBy": {"type": "string", "minLength": 1}, "admittedAt": {"type": "string", "format": "date-time"}, "status": {"type": "string", "minLength": 1}, "policyDecisionId": {"type": "string", "minLength": 1}}, "additionalProperties": true},
+    "RuntimeReceipt": {"type": "object", "required": ["objectType", "id", "actionAdmissionId", "runtimeIdentity", "sandboxProfile", "inputHash", "outputHash", "runtimeLogRef", "policyDecisionId", "status"], "properties": {"objectType": {"const": "RuntimeReceipt"}, "id": {"type": "string", "minLength": 1}, "actionAdmissionId": {"type": "string", "minLength": 1}, "runtimeIdentity": {"type": "string", "minLength": 1}, "sandboxProfile": {"type": "string", "minLength": 1}, "inputHash": {"type": "string", "minLength": 1}, "outputHash": {"type": "string", "minLength": 1}, "runtimeLogRef": {"type": "string", "minLength": 1}, "policyDecisionId": {"type": "string", "minLength": 1}, "status": {"type": "string", "minLength": 1}}, "additionalProperties": true},
+    "LearningEvent": {"type": "object", "required": ["objectType", "id", "receiptId"], "properties": {"objectType": {"const": "LearningEvent"}, "id": {"type": "string", "minLength": 1}, "receiptId": {"type": "string", "minLength": 1}, "outcome": {"type": "string"}}, "additionalProperties": true},
+    "Revocation": {"type": "object", "required": ["objectType", "id", "revokesResourceId", "revokedAt", "reason"], "properties": {"objectType": {"const": "Revocation"}, "id": {"type": "string", "minLength": 1}, "revokesResourceId": {"type": "string", "minLength": 1}, "revokedAt": {"type": "string", "format": "date-time"}, "reason": {"type": "string", "minLength": 1}}, "additionalProperties": true},
+    "SlashTopicProfile": {"type": "object", "required": ["objectType", "id", "topic", "severity"], "properties": {"objectType": {"const": "SlashTopicProfile"}, "id": {"type": "string", "minLength": 1}, "topic": {"type": "string", "minLength": 1}, "severity": {"type": "string", "minLength": 1}, "notes": {"type": "string"}}, "additionalProperties": true}
+  }
+}

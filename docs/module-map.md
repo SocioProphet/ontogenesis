@@ -116,6 +116,10 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - ontology-native semantic lift is present via `bindings/valueflows_governed/valueflows-governed.context.jsonld`, `shapes/valueflows-governed.shacl.ttl`, and `examples/valueflows-governed-task-flow-demo.jsonld`
   - terminal and revocation semantics are represented for completed/canceled processes and tasks, plus revoked/expired delegations and capability grants
   - SHIR projection surface is present via `bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json`, `docs/valueflows-to-shir-projection.md`, and `examples/valueflows-shir-receipt.example.json`
+- `bindings/governed_intelligence/`
+  - canonical governed-intelligence contract map and mapping notes
+  - ontology-native surfaces: `Middle/governed-intelligence.ttl`, `shapes/governed-intelligence.shacl.ttl`, `contexts/governed-intelligence.context.jsonld`, `schemas/governed-intelligence.v1.schema.json`
+  - vector manifests: `manifests/governed-intelligence.vector-encoding.manifest.v1.json`; examples: `examples/governed-intelligence-evidence-policy-demo.ttl`, `examples/governed-intelligence-action-receipt-demo.ttl`
 
 ## Specifications and profiles
 - `docs/specs/shir-v0.1.md`

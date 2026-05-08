@@ -1,0 +1,90 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/middle/governed-intelligence#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Middle/governed-intelligence.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Governed Intelligence" ;
+  dct:description "Canonical governed-intelligence object substrate for evidence, claims, policy decisions, action admission, runtime receipts, and learning events." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+gi:Entity a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Entity" .
+gi:Anchor a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Anchor" .
+gi:Evidence a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Evidence" .
+gi:Claim a owl:Class ; rdfs:subClassOf upper:Evidence ; rdfs:label "Claim" .
+gi:ProofCertificate a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Proof certificate" .
+gi:ExplanationTrace a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Explanation trace" .
+gi:VectorCandidate a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Vector candidate" .
+gi:PolicyDecision a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Policy decision" .
+gi:ActionProposal a owl:Class ; rdfs:subClassOf upper:Action ; rdfs:label "Action proposal" .
+gi:ActionAdmission a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Action admission" .
+gi:RuntimeReceipt a owl:Class ; rdfs:subClassOf upper:Receipt ; rdfs:label "Runtime receipt" .
+gi:LearningEvent a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Learning event" .
+gi:Revocation a owl:Class ; rdfs:subClassOf upper:Process ; rdfs:label "Revocation" .
+gi:SlashTopicProfile a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Slash topic profile" .
+
+gi:hasAnchor a owl:ObjectProperty ; rdfs:domain gi:Evidence ; rdfs:range gi:Anchor ; rdfs:label "has anchor" .
+gi:aboutEntity a owl:ObjectProperty ; rdfs:range gi:Entity ; rdfs:label "about entity" .
+gi:hasEvidence a owl:ObjectProperty ; rdfs:domain gi:Claim ; rdfs:range gi:Evidence ; rdfs:label "has evidence" .
+gi:hasProofCertificate a owl:ObjectProperty ; rdfs:domain gi:Claim ; rdfs:range gi:ProofCertificate ; rdfs:label "has proof certificate" .
+gi:hasExplanationTrace a owl:ObjectProperty ; rdfs:domain gi:Claim ; rdfs:range gi:ExplanationTrace ; rdfs:label "has explanation trace" .
+gi:candidateForClaim a owl:ObjectProperty ; rdfs:domain gi:VectorCandidate ; rdfs:range gi:Claim ; rdfs:label "candidate for claim" .
+gi:decidesClaim a owl:ObjectProperty ; rdfs:domain gi:PolicyDecision ; rdfs:range gi:Claim ; rdfs:label "decides claim" .
+gi:admitsProposal a owl:ObjectProperty ; rdfs:domain gi:ActionAdmission ; rdfs:range gi:ActionProposal ; rdfs:label "admits proposal" .
+gi:requiresPolicyDecision a owl:ObjectProperty ; rdfs:domain gi:ActionAdmission ; rdfs:range gi:PolicyDecision ; rdfs:label "requires policy decision" .
+gi:forActionAdmission a owl:ObjectProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range gi:ActionAdmission ; rdfs:label "for action admission" .
+gi:referencesPolicyDecision a owl:ObjectProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range gi:PolicyDecision ; rdfs:label "references policy decision" .
+gi:learnsFromReceipt a owl:ObjectProperty ; rdfs:domain gi:LearningEvent ; rdfs:range gi:RuntimeReceipt ; rdfs:label "learns from receipt" .
+gi:revokesResource a owl:ObjectProperty ; rdfs:domain gi:Revocation ; rdfs:label "revokes resource" .
+
+gi:selectorKind a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "selector kind" .
+gi:textSpanSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "text span selector" .
+gi:imageRegionSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "image region selector" .
+gi:geospatialSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "geospatial selector" .
+gi:h3Cell a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "H3 cell" .
+gi:codeRangeSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "code range selector" .
+gi:logSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "log selector" .
+gi:tableCellSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "table cell selector" .
+gi:mediaSegmentSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "audio/video segment selector" .
+gi:genericSelector a owl:DatatypeProperty ; rdfs:domain gi:Anchor ; rdfs:range xsd:string ; rdfs:label "generic selector" .
+
+gi:evidenceSource a owl:DatatypeProperty ; rdfs:domain gi:Evidence ; rdfs:range xsd:string ; rdfs:label "evidence source" .
+gi:claimText a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:string ; rdfs:label "claim text" .
+gi:claimContext a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:string ; rdfs:label "claim context" .
+gi:confidenceScore a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:decimal ; rdfs:label "confidence score" .
+gi:uncertaintyScore a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:decimal ; rdfs:label "uncertainty score" .
+gi:validFrom a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:dateTime ; rdfs:label "valid from" .
+gi:validUntil a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:dateTime ; rdfs:label "valid until" .
+gi:transactionTime a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:dateTime ; rdfs:label "transaction time" .
+gi:lifecycleStatus a owl:DatatypeProperty ; rdfs:domain gi:Claim ; rdfs:range xsd:string ; rdfs:label "lifecycle status" .
+
+gi:certificateDigest a owl:DatatypeProperty ; rdfs:domain gi:ProofCertificate ; rdfs:range xsd:string ; rdfs:label "certificate digest" .
+gi:proofMethod a owl:DatatypeProperty ; rdfs:domain gi:ProofCertificate ; rdfs:range xsd:string ; rdfs:label "proof method" .
+gi:explanationStepRef a owl:DatatypeProperty ; rdfs:domain gi:ExplanationTrace ; rdfs:range xsd:string ; rdfs:label "explanation step reference" .
+
+gi:status a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "status" .
+gi:decision a owl:DatatypeProperty ; rdfs:domain gi:PolicyDecision ; rdfs:range xsd:string ; rdfs:label "decision" .
+gi:decisionRationale a owl:DatatypeProperty ; rdfs:domain gi:PolicyDecision ; rdfs:range xsd:string ; rdfs:label "decision rationale" .
+
+gi:proposedBy a owl:ObjectProperty ; rdfs:domain gi:ActionProposal ; rdfs:label "proposed by" .
+gi:proposedAction a owl:DatatypeProperty ; rdfs:domain gi:ActionProposal ; rdfs:range xsd:string ; rdfs:label "proposed action" .
+gi:proposalCreatedAt a owl:DatatypeProperty ; rdfs:domain gi:ActionProposal ; rdfs:range xsd:dateTime ; rdfs:label "proposal created at" .
+gi:admittedBy a owl:ObjectProperty ; rdfs:domain gi:ActionAdmission ; rdfs:label "admitted by" .
+gi:admittedAt a owl:DatatypeProperty ; rdfs:domain gi:ActionAdmission ; rdfs:range xsd:dateTime ; rdfs:label "admitted at" .
+
+gi:runtimeIdentity a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "runtime identity" .
+gi:sandboxProfile a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "sandbox profile" .
+gi:inputHash a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "input hash" .
+gi:outputHash a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "output hash" .
+gi:runtimeLogRef a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "runtime log reference" .
+gi:receiptStatus a owl:DatatypeProperty ; rdfs:domain gi:RuntimeReceipt ; rdfs:range xsd:string ; rdfs:label "receipt status" .
+
+gi:learningOutcome a owl:DatatypeProperty ; rdfs:domain gi:LearningEvent ; rdfs:range xsd:string ; rdfs:label "learning outcome" .
+gi:revocationReason a owl:DatatypeProperty ; rdfs:domain gi:Revocation ; rdfs:range xsd:string ; rdfs:label "revocation reason" .
+gi:revokedAt a owl:DatatypeProperty ; rdfs:domain gi:Revocation ; rdfs:range xsd:dateTime ; rdfs:label "revoked at" .
+gi:topic a owl:DatatypeProperty ; rdfs:domain gi:SlashTopicProfile ; rdfs:range xsd:string ; rdfs:label "topic" .
+gi:slashSeverity a owl:DatatypeProperty ; rdfs:domain gi:SlashTopicProfile ; rdfs:range xsd:string ; rdfs:label "slash severity" .

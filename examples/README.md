@@ -16,3 +16,5 @@ Files:
 - `human-digital-twin-demo.jsonld` — bounded human digital twin example
 - `valueflows-governed-task-flow-demo.jsonld` — compact governed task-flow example showing completed, revoked, and canceled terminal states across process run, delegation, capability grant, task, commitment, and checkpoint state
 
+- `governed-intelligence-evidence-policy-demo.ttl` — worked `Anchor -> Evidence -> Claim -> PolicyDecision` example
+- `governed-intelligence-action-receipt-demo.ttl` — worked `ActionProposal -> ActionAdmission -> RuntimeReceipt` example

@@ -1,0 +1,53 @@
+@prefix ex: <https://socioprophet.github.io/ontogenesis/examples/governed-intelligence#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/middle/governed-intelligence#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:entity-server-42 a gi:Entity .
+
+ex:anchor-text-incident-18 a gi:Anchor ;
+  gi:selectorKind "text_span" ;
+  gi:textSpanSelector "urn:doc:incident-18#char=55,121" .
+
+ex:evidence-incident-span-2 a gi:Evidence ;
+  gi:aboutEntity ex:entity-server-42 ;
+  gi:hasAnchor ex:anchor-text-incident-18 ;
+  gi:evidenceSource "incident-18.md" .
+
+ex:claim-remediation-ready a gi:Claim ;
+  gi:aboutEntity ex:entity-server-42 ;
+  gi:claimContext "remediation-window-2026-05-08" ;
+  gi:hasEvidence ex:evidence-incident-span-2 ;
+  gi:confidenceScore "0.93"^^xsd:decimal ;
+  gi:uncertaintyScore "0.04"^^xsd:decimal ;
+  gi:validFrom "2026-05-08T20:00:00Z"^^xsd:dateTime ;
+  gi:transactionTime "2026-05-08T20:01:00Z"^^xsd:dateTime ;
+  gi:lifecycleStatus "active" .
+
+ex:policydecision-allow-remediation a gi:PolicyDecision ;
+  gi:decidesClaim ex:claim-remediation-ready ;
+  gi:decision "allow" ;
+  gi:decisionRationale "Change window is open and risk score is acceptable." .
+
+ex:actionproposal-hotfix a gi:ActionProposal ;
+  gi:aboutEntity ex:entity-server-42 ;
+  gi:proposedBy ex:agent-remediator-1 ;
+  gi:proposedAction "Apply kernel hotfix package security-patch-2030-0001" ;
+  gi:proposalCreatedAt "2026-05-08T20:02:00Z"^^xsd:dateTime ;
+  gi:status "proposed" .
+
+ex:actionadmission-hotfix a gi:ActionAdmission ;
+  gi:admitsProposal ex:actionproposal-hotfix ;
+  gi:admittedBy ex:policy-runtime-1 ;
+  gi:admittedAt "2026-05-08T20:03:00Z"^^xsd:dateTime ;
+  gi:requiresPolicyDecision ex:policydecision-allow-remediation ;
+  gi:status "admitted" .
+
+ex:runtimereceipt-hotfix a gi:RuntimeReceipt ;
+  gi:forActionAdmission ex:actionadmission-hotfix ;
+  gi:runtimeIdentity "agentplane.runtime/1.2.3" ;
+  gi:sandboxProfile "strict-network-egress-deny" ;
+  gi:inputHash "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" ;
+  gi:outputHash "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" ;
+  gi:runtimeLogRef "urn:log:agentplane:run-2030-0001" ;
+  gi:referencesPolicyDecision ex:policydecision-allow-remediation ;
+  gi:receiptStatus "succeeded" .

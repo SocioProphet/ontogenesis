@@ -1,0 +1,41 @@
+{
+  "manifest_id": "governed-intelligence.vector-encoding.v1",
+  "version": "1.0.0",
+  "namespace": "https://socioprophet.github.io/ontogenesis/middle/governed-intelligence#",
+  "candidate_policy": {
+    "vector_candidate_status": "candidate_only",
+    "promotion_note": "VectorCandidate embeddings are candidates and are not admitted claims."
+  },
+  "object_profiles": [
+    {
+      "object_type": "Entity",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "entity_id", "field": "id", "transform": "token_hash" },
+        { "role": "entity_label", "field": "label", "transform": "subword_embedding" },
+        { "role": "entity_type", "field": "type", "transform": "one_hot" }
+      ]
+    },
+    {
+      "object_type": "Claim",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "claim_text", "field": "text", "transform": "sentence_embedding" },
+        { "role": "claim_context", "field": "context", "transform": "sentence_embedding" },
+        { "role": "claim_confidence", "field": "confidence", "transform": "scalar_bucket" },
+        { "role": "claim_uncertainty", "field": "uncertainty", "transform": "scalar_bucket" },
+        { "role": "claim_evidence", "field": "evidenceIds", "transform": "set_hash" }
+      ]
+    },
+    {
+      "object_type": "ActionProposal",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "proposal_actor", "field": "proposedBy", "transform": "token_hash" },
+        { "role": "proposal_action", "field": "proposedAction", "transform": "sentence_embedding" },
+        { "role": "proposal_status", "field": "status", "transform": "one_hot" },
+        { "role": "proposal_time", "field": "proposalCreatedAt", "transform": "time_bucket" }
+      ]
+    }
+  ]
+}
