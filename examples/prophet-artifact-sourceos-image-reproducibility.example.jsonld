@@ -1,0 +1,81 @@
+{
+  "@context": "../contexts/prophet-artifact.context.jsonld",
+  "id": "prop:artifact-sourceos-image-repro",
+  "type": "prop:ProphetArtifact",
+  "apiVersion": "socioprophet.org/v1alpha1",
+  "kind": "ProphetArtifact",
+  "metadata": {
+    "name": "sourceos-image-repro-build",
+    "version": "2.0.0",
+    "ownerRepo": "SourceOS-Linux/sourceos-build"
+  },
+  "spec": {
+    "artifactKind": "prop:runtimeKind",
+    "actions": [
+      {
+        "id": "prop:artifact-sourceos-action-build",
+        "type": "prop:ArtifactAction",
+        "name": "build sourceos image",
+        "verb": "prop:build",
+        "requiresNetwork": false,
+        "privileged": true
+      },
+      {
+        "id": "prop:artifact-sourceos-action-attest",
+        "type": "prop:ArtifactAction",
+        "name": "attest reproducible build evidence",
+        "verb": "prop:attest",
+        "requiresNetwork": false,
+        "privileged": true
+      }
+    ],
+    "runtime": {
+      "id": "prop:artifact-sourceos-runtime",
+      "type": "prop:ArtifactRuntime",
+      "substrate": "prop:sourceosSubstrate",
+      "profile": "sourceos-nix-image-builder"
+    },
+    "provenance": {
+      "id": "prop:artifact-sourceos-provenance",
+      "type": "prop:ArtifactProvenance",
+      "sourceUri": "https://github.com/SourceOS-Linux/sourceos-build",
+      "license": "MIT",
+      "attribution": "SourceOS release engineering"
+    },
+    "policy": {
+      "id": "prop:artifact-sourceos-policy",
+      "type": "prop:ArtifactPolicy",
+      "safetyClass": "prop:privilegedClass",
+      "promotionGate": "sourceos_repro_build_gate",
+      "networkPosture": "offline",
+      "requiresHumanReview": true
+    },
+    "evidence": {
+      "id": "prop:artifact-sourceos-evidence",
+      "type": "prop:ArtifactEvidence",
+      "logs": ["s3://sourceos-evidence/repro/build.log"],
+      "checksums": ["sha256:d9f70bca3e574ed4f5e48c1d4ea6228f4ed663e79ce278f4f765ec698e772dbd"],
+      "sboms": ["s3://sourceos-evidence/repro/spdx.json"],
+      "signatures": ["s3://sourceos-evidence/repro/spdx.sig"]
+    },
+    "metrics": [
+      {
+        "id": "prop:artifact-sourceos-metric",
+        "type": "prop:ArtifactMetric",
+        "name": "reproducibility_delta",
+        "unit": "percent",
+        "threshold": "0.0",
+        "direction": "minimize",
+        "publishToScoreboard": true
+      }
+    ],
+    "registrations": {
+      "id": "prop:artifact-sourceos-registration",
+      "type": "prop:ArtifactRegistration",
+      "sociosphere": true,
+      "sherlock": true,
+      "holmes": true,
+      "deliveryExcellence": true
+    }
+  }
+}

@@ -14,8 +14,15 @@ from pyld import jsonld
 ROOT = Path(__file__).resolve().parents[1]
 CONTEXTS = [
     ROOT / "contexts/main.context.jsonld",
+    ROOT / "contexts/prophet-artifact.context.jsonld",
     ROOT / "prophet/contexts/prophet.context.jsonld",
     ROOT / "epi/contexts/epi.context.jsonld",
+]
+
+EXAMPLE_DOCS = [
+    ROOT / "examples/prophet-artifact-gaia-bounded-osm-ingest.example.jsonld",
+    ROOT / "examples/prophet-artifact-notebook-promotion.example.jsonld",
+    ROOT / "examples/prophet-artifact-sourceos-image-reproducibility.example.jsonld",
 ]
 
 def main() -> int:
@@ -36,6 +43,22 @@ def main() -> int:
             print(f"[FAIL] {cpath}: compacted doc missing 'label'")
             return 1
         print(f"[OK] {cpath}")
+
+    for ep in EXAMPLE_DOCS:
+        if not ep.exists():
+            print(f"[SKIP] missing {ep}")
+            continue
+        doc = json.loads(ep.read_text(encoding="utf-8"))
+        if isinstance(doc.get("@context"), str) and not doc["@context"].startswith(("http://", "https://")):
+            ctx_path = (ep.parent / doc["@context"]).resolve()
+            ctx_doc = json.loads(ctx_path.read_text(encoding="utf-8"))
+            doc["@context"] = ctx_doc["@context"] if "@context" in ctx_doc else ctx_doc
+        expanded = jsonld.expand(doc)
+        compacted = jsonld.compact(expanded, doc["@context"])
+        if "apiVersion" not in compacted or "spec" not in compacted:
+            print(f"[FAIL] {ep}: compacted doc missing expected artifact keys")
+            return 1
+        print(f"[OK] {ep}")
     return 0
 
 if __name__ == "__main__":

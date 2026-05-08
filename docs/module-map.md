@@ -82,9 +82,11 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - provenance carriers: schemaRef + leafRef
 - `prophet/capd.ttl`
   - CapD refinement: Requirements, image/chart artifacts, privacy policy hooks
+- `prophet/prophet_artifact.ttl`
+  - computational artifact contract: identity, kind, actions, runtime substrate, provenance, policy, evidence, metrics, and registrations
 - `prophet/prophet_diagrams.ttl` (+ `prophet/diagrams/*.mmd`)
   - pointers to Mermaid sources for architecture diagrams
-- SHACL: `prophet/shapes/prophet_cli.shacl.ttl`
+- SHACL: `prophet/shapes/prophet_cli.shacl.ttl`, `prophet/shapes/prophet_artifact.shacl.ttl`
 
 ## EPI (Epi‑Onto‑Learning)
 - `epi/noether.ttl`
@@ -133,6 +135,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `catalog/registry.ttl` and `catalog/registry.jsonld` — primary module registries
 - `catalog/semantic_enterprise_registry.ttl` — supplemental semantic-enterprise registry tranche
 - `contexts/main.context.jsonld` — main JSON-LD context
+- `contexts/prophet-artifact.context.jsonld` — prophet artifact JSON/YAML context alignment
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 
 ## Gates and audits

@@ -1,0 +1,79 @@
+{
+  "@context": "../contexts/prophet-artifact.context.jsonld",
+  "id": "prop:artifact-notebook-promotion",
+  "type": "prop:ProphetArtifact",
+  "apiVersion": "socioprophet.org/v1alpha1",
+  "kind": "ProphetArtifact",
+  "metadata": {
+    "name": "city-forecast-notebook-promotion",
+    "version": "0.5.1",
+    "ownerRepo": "SocioProphet/notebook-promotion"
+  },
+  "spec": {
+    "artifactKind": "prop:notebookKind",
+    "actions": [
+      {
+        "id": "prop:artifact-notebook-action-prepare",
+        "type": "prop:ArtifactAction",
+        "name": "prepare notebook execution bundle",
+        "verb": "prop:prepare",
+        "requiresNetwork": false,
+        "privileged": false
+      },
+      {
+        "id": "prop:artifact-notebook-action-publish",
+        "type": "prop:ArtifactAction",
+        "name": "publish promoted artifact",
+        "verb": "prop:publish",
+        "requiresNetwork": true,
+        "privileged": false
+      }
+    ],
+    "runtime": {
+      "id": "prop:artifact-notebook-runtime",
+      "type": "prop:ArtifactRuntime",
+      "substrate": "prop:notebookSubstrate",
+      "profile": "jupyter-lab-cpu"
+    },
+    "provenance": {
+      "id": "prop:artifact-notebook-provenance",
+      "type": "prop:ArtifactProvenance",
+      "sourceUri": "https://github.com/SocioProphet/notebook-promotion/blob/main/notebooks/city_forecast.ipynb",
+      "license": "Apache-2.0",
+      "attribution": "SocioProphet Applied Intelligence Team"
+    },
+    "policy": {
+      "id": "prop:artifact-notebook-policy",
+      "type": "prop:ArtifactPolicy",
+      "safetyClass": "prop:advisory",
+      "promotionGate": "notebook_promotion_gate",
+      "networkPosture": "offline",
+      "requiresHumanReview": false
+    },
+    "evidence": {
+      "id": "prop:artifact-notebook-evidence",
+      "type": "prop:ArtifactEvidence",
+      "logs": ["s3://prophet-evidence/notebook/promotion.log"],
+      "checksums": ["sha256:3596d2e9fa65df1b091d9380c971f986f2fc6f04b003b14d4af1f658e2f49584"]
+    },
+    "metrics": [
+      {
+        "id": "prop:artifact-notebook-metric",
+        "type": "prop:ArtifactMetric",
+        "name": "promotion_latency_seconds",
+        "unit": "seconds",
+        "threshold": "300",
+        "direction": "minimize",
+        "publishToScoreboard": false
+      }
+    ],
+    "registrations": {
+      "id": "prop:artifact-notebook-registration",
+      "type": "prop:ArtifactRegistration",
+      "sociosphere": true,
+      "sherlock": false,
+      "holmes": true,
+      "deliveryExcellence": true
+    }
+  }
+}

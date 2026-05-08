@@ -19,6 +19,7 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`specs/agentic-purple-team-and-mitre.md`](specs/agentic-purple-team-and-mitre.md) — SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, MITRE ATT&CK/ATLAS alignment, SourceOS-local technique equivalents, and future governed STIX/TAXII import
 - [`specs/audit_policy.md`](specs/audit_policy.md) — audit and policy constraints
 - [`specs/prophet_cli_spec.md`](specs/prophet_cli_spec.md) — Prophet CLI ontology spec
+- [`specs/prophet_artifact_contract.md`](specs/prophet_artifact_contract.md) — Prophet computational artifact ontology, SHACL gates, JSON-LD context, and downstream consumer contract
 - [`specs/valueflows-governed-canonical-v0.4.md`](specs/valueflows-governed-canonical-v0.4.md) — ValueFlows governed profile spec
 - [`specs/business_ontology_bridge.md`](specs/business_ontology_bridge.md) — business ontology bridge notes
 
@@ -41,4 +42,3 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`cybernetic-self-tranche-note.md`](cybernetic-self-tranche-note.md)
 - [`product-service-tranche-note.md`](product-service-tranche-note.md)
 - [`socioprophet-ontology-v0.md`](socioprophet-ontology-v0.md)
-
