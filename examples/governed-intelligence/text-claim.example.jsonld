@@ -1,0 +1,54 @@
+{
+  "@context": "../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:anchor:sourceos-boot-doc-span-001",
+      "@type": "Anchor",
+      "artifactRef": "github:SocioProphet/sourceos-boot/docs/trust-boundary.md@main",
+      "selectorType": "text_span",
+      "selector": "line=42-47",
+      "sourceRef": "github:SocioProphet/sourceos-boot",
+      "confidence": 0.94
+    },
+    {
+      "@id": "urn:sp:evidence:sourceos-boot-doc-support-001",
+      "@type": "Evidence",
+      "hasAnchor": "urn:sp:anchor:sourceos-boot-doc-span-001",
+      "sourceRef": "github:SocioProphet/sourceos-boot/docs/trust-boundary.md@main",
+      "lifecycleStatus": "proposed",
+      "confidence": 0.91,
+      "validTime": "2026-05-09T00:00:00Z",
+      "transactionTime": "2026-05-09T00:00:00Z"
+    },
+    {
+      "@id": "urn:sp:claim:sourceos-boot-bootreleaseset-001",
+      "@type": "Claim",
+      "subjectRef": "repo:SourceOS-Linux/sourceos-boot",
+      "predicateRef": "implements",
+      "objectRef": "concept:BootReleaseSetTrustBoundary",
+      "contextRef": "/sourceos/boot/trust",
+      "hasEvidence": "urn:sp:evidence:sourceos-boot-doc-support-001",
+      "lifecycleStatus": "proposed",
+      "confidence": 0.83,
+      "validTime": "2026-05-09T00:00:00Z",
+      "transactionTime": "2026-05-09T00:00:00Z"
+    },
+    {
+      "@id": "urn:sp:explanation:sourceos-boot-bootreleaseset-001",
+      "@type": "ExplanationTrace",
+      "hasClaim": "urn:sp:claim:sourceos-boot-bootreleaseset-001",
+      "hasEvidence": "urn:sp:evidence:sourceos-boot-doc-support-001",
+      "sourceRef": "holmes:reasoning-trace:sourceos-boot-bootreleaseset-001",
+      "confidence": 0.79,
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:policy:sourceos-boot-bootreleaseset-001",
+      "@type": "PolicyDecision",
+      "targets": "urn:sp:claim:sourceos-boot-bootreleaseset-001",
+      "decision": "provisional",
+      "sourceRef": "guardrail-fabric:claim-admission-policy:technical-document-claim-v0",
+      "lifecycleStatus": "provisional"
+    }
+  ]
+}
