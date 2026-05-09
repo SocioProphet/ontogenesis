@@ -1,0 +1,308 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<Platform/GovernedIntelligence/governed-intelligence.ttl> a owl:Ontology ;
+  dct:title "Governed Intelligence Object Model" ;
+  dct:description "Canonical SocioProphet vocabulary for evidence-bound claims, candidate retrieval, policy admission, action proposals, runtime receipts, and learning events." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Canonical object classes
+
+gi:Entity a owl:Class ;
+  rdfs:subClassOf upper:Entity ;
+  rdfs:label "Governed entity" ;
+  skos:definition "Canonical actor, concept, repository, region, model, artifact, or domain object participating in governed intelligence flows." .
+
+gi:Anchor a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Anchor" ;
+  skos:definition "Pointer into a source artifact such as a text span, image region, geospatial selector, code range, log range, table cell, or media segment." .
+
+gi:Evidence a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Governed evidence" ;
+  skos:definition "Source-backed support, opposition, qualification, or context for a claim or action." .
+
+gi:Claim a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Claim" ;
+  skos:definition "Typed assertion over subject, predicate, object, context, evidence, uncertainty, and lifecycle state." .
+
+gi:ProofCertificate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Proof certificate" ;
+  skos:definition "Structured or machine-checkable reasoning artifact for a claim." .
+
+gi:ExplanationTrace a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Explanation trace" ;
+  skos:definition "Human/operator-readable reasoning, model, graph, phrase, or fusion trace supporting or qualifying a claim." .
+
+gi:VectorCandidate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Vector candidate" ;
+  skos:definition "Candidate retrieved by vector-symbolic or embedding-based recall. It is not authoritative and must remain candidate-only until downstream evidence, proof, and policy admission." .
+
+gi:PolicyDecision a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Policy decision" ;
+  skos:definition "Admission decision for a claim, action, model output, artifact, or workflow." .
+
+gi:ActionProposal a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Action proposal" ;
+  skos:definition "Structured proposal to perform effectful work with intent, scope, expected effects, required capabilities, and evidence." .
+
+gi:ActionAdmission a owl:Class ;
+  rdfs:subClassOf gi:PolicyDecision ;
+  rdfs:label "Action admission" ;
+  skos:definition "Policy-bound admission state for an action proposal." .
+
+gi:RuntimeReceipt a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Runtime receipt" ;
+  skos:definition "Execution record containing action, agent/runtime identity, policy reference, inputs, outputs, hashes, logs, and status." .
+
+gi:LearningEvent a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Learning event" ;
+  skos:definition "Evaluation, drift, calibration, adoption, rollout, or feedback event." .
+
+gi:Revocation a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Revocation" ;
+  skos:definition "Lifecycle event that withdraws, supersedes, expires, or invalidates a claim, action, policy decision, artifact, or receipt." .
+
+gi:SlashTopicProfile a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Slash-topic profile" ;
+  skos:definition "Governance membrane defining allowed objects, required evidence, policy profile, query behavior, and display expectations for a slash topic." .
+
+gi:VectorEncodingManifest a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Vector encoding manifest" ;
+  skos:definition "Manifest declaring deterministic vector-symbolic role bindings, codebooks, cleanup indexes, and candidate-only output constraints." .
+
+### Core object properties
+
+gi:hasAnchor a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:Anchor ;
+  rdfs:label "has anchor" .
+
+gi:hasEvidence a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:Evidence ;
+  rdfs:label "has evidence" .
+
+gi:hasClaim a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:Claim ;
+  rdfs:label "has claim" .
+
+gi:supportsClaim a owl:ObjectProperty ;
+  rdfs:domain gi:Evidence ;
+  rdfs:range gi:Claim ;
+  rdfs:label "supports claim" .
+
+gi:opposesClaim a owl:ObjectProperty ;
+  rdfs:domain gi:Evidence ;
+  rdfs:range gi:Claim ;
+  rdfs:label "opposes claim" .
+
+gi:hasProofCertificate a owl:ObjectProperty ;
+  rdfs:domain gi:Claim ;
+  rdfs:range gi:ProofCertificate ;
+  rdfs:label "has proof certificate" .
+
+gi:hasExplanationTrace a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:ExplanationTrace ;
+  rdfs:label "has explanation trace" .
+
+gi:hasVectorCandidate a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:VectorCandidate ;
+  rdfs:label "has vector candidate" .
+
+gi:hasPolicyDecision a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:PolicyDecision ;
+  rdfs:label "has policy decision" .
+
+gi:targets a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range upper:Entity ;
+  rdfs:label "targets" .
+
+gi:proposesAction a owl:ObjectProperty ;
+  rdfs:domain gi:ActionProposal ;
+  rdfs:range upper:Process ;
+  rdfs:label "proposes action" .
+
+gi:admitsAction a owl:ObjectProperty ;
+  rdfs:domain gi:ActionAdmission ;
+  rdfs:range gi:ActionProposal ;
+  rdfs:label "admits action" .
+
+gi:recordsAction a owl:ObjectProperty ;
+  rdfs:domain gi:RuntimeReceipt ;
+  rdfs:range gi:ActionProposal ;
+  rdfs:label "records action" .
+
+gi:usesEncodingManifest a owl:ObjectProperty ;
+  rdfs:domain gi:VectorCandidate ;
+  rdfs:range gi:VectorEncodingManifest ;
+  rdfs:label "uses encoding manifest" .
+
+gi:supersedes a owl:ObjectProperty ;
+  rdfs:domain gi:Revocation ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "supersedes" .
+
+### Datatype properties
+
+gi:identifier a owl:DatatypeProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "identifier" .
+
+gi:entityType a owl:DatatypeProperty ;
+  rdfs:domain gi:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "entity type" .
+
+gi:selectorType a owl:DatatypeProperty ;
+  rdfs:domain gi:Anchor ;
+  rdfs:range xsd:string ;
+  rdfs:label "selector type" .
+
+gi:selector a owl:DatatypeProperty ;
+  rdfs:domain gi:Anchor ;
+  rdfs:range xsd:string ;
+  rdfs:label "selector" .
+
+gi:sourceRef a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "source reference" .
+
+gi:artifactRef a owl:DatatypeProperty ;
+  rdfs:domain gi:Anchor ;
+  rdfs:range xsd:string ;
+  rdfs:label "artifact reference" .
+
+gi:subjectRef a owl:DatatypeProperty ;
+  rdfs:domain gi:Claim ;
+  rdfs:range xsd:string ;
+  rdfs:label "subject reference" .
+
+gi:predicateRef a owl:DatatypeProperty ;
+  rdfs:domain gi:Claim ;
+  rdfs:range xsd:string ;
+  rdfs:label "predicate reference" .
+
+gi:objectRef a owl:DatatypeProperty ;
+  rdfs:domain gi:Claim ;
+  rdfs:range xsd:string ;
+  rdfs:label "object reference" .
+
+gi:contextRef a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "context reference" .
+
+gi:lifecycleStatus a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "lifecycle status" .
+
+gi:decision a owl:DatatypeProperty ;
+  rdfs:domain gi:PolicyDecision ;
+  rdfs:range xsd:string ;
+  rdfs:label "decision" .
+
+gi:candidateStatus a owl:DatatypeProperty ;
+  rdfs:domain gi:VectorCandidate ;
+  rdfs:range xsd:string ;
+  rdfs:label "candidate status" .
+
+gi:similarity a owl:DatatypeProperty ;
+  rdfs:domain gi:VectorCandidate ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "similarity" .
+
+gi:matchedRoles a owl:DatatypeProperty ;
+  rdfs:domain gi:VectorCandidate ;
+  rdfs:range xsd:string ;
+  rdfs:label "matched roles" .
+
+gi:confidence a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "confidence" .
+
+gi:validTime a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "valid time" .
+
+gi:transactionTime a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "transaction time" .
+
+gi:inputHash a owl:DatatypeProperty ;
+  rdfs:domain gi:RuntimeReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "input hash" .
+
+gi:outputHash a owl:DatatypeProperty ;
+  rdfs:domain gi:RuntimeReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "output hash" .
+
+gi:logRef a owl:DatatypeProperty ;
+  rdfs:domain gi:RuntimeReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "log reference" .
+
+gi:actionType a owl:DatatypeProperty ;
+  rdfs:domain gi:ActionProposal ;
+  rdfs:range xsd:string ;
+  rdfs:label "action type" .
+
+gi:scope a owl:DatatypeProperty ;
+  rdfs:domain gi:ActionProposal ;
+  rdfs:range xsd:string ;
+  rdfs:label "scope" .
+
+gi:expectedEffect a owl:DatatypeProperty ;
+  rdfs:domain gi:ActionProposal ;
+  rdfs:range xsd:string ;
+  rdfs:label "expected effect" .
+
+gi:eventType a owl:DatatypeProperty ;
+  rdfs:domain gi:LearningEvent ;
+  rdfs:range xsd:string ;
+  rdfs:label "event type" .
+
+### Controlled value individuals
+
+gi:CandidateOnly a skos:Concept ;
+  skos:prefLabel "candidate_only" ;
+  skos:definition "Vector candidate status indicating that the artifact is retrieval evidence only and not admitted truth." .
+
+gi:Allow a skos:Concept ; skos:prefLabel "allow" .
+gi:Deny a skos:Concept ; skos:prefLabel "deny" .
+gi:RequireReview a skos:Concept ; skos:prefLabel "require_review" .
+gi:Provisional a skos:Concept ; skos:prefLabel "provisional" .
