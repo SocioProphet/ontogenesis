@@ -44,6 +44,12 @@ This repo defines a layered ontology stack plus gates/tools.
   - wireguard tunnels and peers
 - `Platform/lattice-ontology-query.ttl`
   - governed ontology-query adapter contract for Lattice FederatedQueryPlane; distinct from SPARQL routing
+- `Platform/GovernedIntelligence/`
+  - `governed-intelligence.ttl` — canonical SocioProphet governed-intelligence object model: Entity, Anchor, Evidence, Claim, ProofCertificate, ExplanationTrace, VectorCandidate, PolicyDecision, ActionProposal, ActionAdmission, RuntimeReceipt, LearningEvent, Revocation, SlashTopicProfile, and VectorEncodingManifest
+  - SHACL: `shapes/governed_intelligence.shacl.ttl`
+  - JSON-LD context: `contexts/governed-intelligence.context.jsonld`
+  - examples: `examples/governed-intelligence/`
+  - spec: `docs/specs/governed-intelligence-object-model-v0.md`
 - `Platform/Parsing/`
   - `core.ttl` — utterances, tokens, spans, links, candidates, evidence, and promotion decisions
   - `link-grammar.ttl` — Link Grammar connectors, disjuncts, linkages, lexicon entries, and parse-failure terms
@@ -118,6 +124,8 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - SHIR projection surface is present via `bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json`, `docs/valueflows-to-shir-projection.md`, and `examples/valueflows-shir-receipt.example.json`
 
 ## Specifications and profiles
+- `docs/specs/governed-intelligence-object-model-v0.md`
+  - canonical governed-intelligence object model for claims, anchors, evidence, policy decisions, vector candidates, action proposals, runtime receipts, learning events, revocations, and slash-topic profiles
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
 - `docs/specs/ontology-query-adapter.md`
@@ -134,9 +142,10 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `catalog/semantic_enterprise_registry.ttl` — supplemental semantic-enterprise registry tranche
 - `contexts/main.context.jsonld` — main JSON-LD context
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
+- `contexts/governed-intelligence.context.jsonld` — governed-intelligence context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
