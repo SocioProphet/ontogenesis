@@ -1,0 +1,54 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/governed_intelligence_registry.ttl> a owl:Ontology ;
+  dct:title "Governed Intelligence Registry" ;
+  dct:description "Supplemental registry tranche for the governed-intelligence object model, SHACL gates, JSON-LD context, and examples." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> ;
+  owl:imports <Platform/GovernedIntelligence/governed-intelligence.ttl> .
+
+og:GovernedIntelligence a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/GovernedIntelligence/governed-intelligence.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed intelligence object model" .
+
+og:GovernedIntelligenceShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/governed_intelligence.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed intelligence SHACL gates" .
+
+og:GovernedIntelligenceContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/governed-intelligence.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed intelligence JSON-LD context" .
+
+og:GovernedIntelligenceSpec a og:Module ;
+  og:layer "Specifications" ;
+  og:path "docs/specs/governed-intelligence-object-model-v0.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed intelligence object model specification" .
+
+og:GovernedIntelligenceExamples a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/governed-intelligence/" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed intelligence examples" .

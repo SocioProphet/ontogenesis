@@ -1,0 +1,55 @@
+{
+  "id": "urn:sp:vector-encoding:claim-role-binding-v0",
+  "schemaRef": "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#Claim",
+  "codebookRef": "urn:sp:codebook:governed-intelligence:v0",
+  "vectorType": "bipolar_role_binding",
+  "dimension": 4096,
+  "seedMaterial": "socioprophet-governed-intelligence-v0",
+  "status": "draft",
+  "roleBindings": [
+    {
+      "role": "subjectRef",
+      "path": "$.subjectRef",
+      "required": true
+    },
+    {
+      "role": "predicateRef",
+      "path": "$.predicateRef",
+      "required": true
+    },
+    {
+      "role": "objectRef",
+      "path": "$.objectRef",
+      "required": true
+    },
+    {
+      "role": "contextRef",
+      "path": "$.contextRef",
+      "required": true
+    },
+    {
+      "role": "evidenceRef",
+      "path": "$.hasEvidence",
+      "required": true
+    },
+    {
+      "role": "lifecycleStatus",
+      "path": "$.lifecycleStatus",
+      "required": true
+    }
+  ],
+  "bundlingStrategy": "role_bound_superposition",
+  "cleanupIndexRef": "urn:sp:cleanup-index:governed-intelligence:claims:v0",
+  "candidateOutput": {
+    "type": "VectorCandidate",
+    "requiredStatus": "candidate_only",
+    "admissionAuthority": "none"
+  },
+  "validationTests": [
+    "deterministic-codebook-seed",
+    "required-role-coverage",
+    "candidate-only-status",
+    "no-policy-admission-from-vector-similarity"
+  ],
+  "notes": "Vector candidates are retrieval and analogy aids only. They must be converted into proposed claims and verified through evidence, proof/explanation, and policy before admission."
+}

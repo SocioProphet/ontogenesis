@@ -1,0 +1,124 @@
+{
+  "@context": {
+    "gi": "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dct": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Entity": "gi:Entity",
+    "Anchor": "gi:Anchor",
+    "Evidence": "gi:Evidence",
+    "Claim": "gi:Claim",
+    "ProofCertificate": "gi:ProofCertificate",
+    "ExplanationTrace": "gi:ExplanationTrace",
+    "VectorCandidate": "gi:VectorCandidate",
+    "PolicyDecision": "gi:PolicyDecision",
+    "ActionProposal": "gi:ActionProposal",
+    "ActionAdmission": "gi:ActionAdmission",
+    "RuntimeReceipt": "gi:RuntimeReceipt",
+    "LearningEvent": "gi:LearningEvent",
+    "Revocation": "gi:Revocation",
+    "SlashTopicProfile": "gi:SlashTopicProfile",
+    "VectorEncodingManifest": "gi:VectorEncodingManifest",
+
+    "identifier": "gi:identifier",
+    "entityType": "gi:entityType",
+    "artifactRef": "gi:artifactRef",
+    "selectorType": "gi:selectorType",
+    "selector": "gi:selector",
+    "sourceRef": "gi:sourceRef",
+    "subjectRef": "gi:subjectRef",
+    "predicateRef": "gi:predicateRef",
+    "objectRef": "gi:objectRef",
+    "contextRef": "gi:contextRef",
+    "lifecycleStatus": "gi:lifecycleStatus",
+    "candidateStatus": "gi:candidateStatus",
+    "similarity": {
+      "@id": "gi:similarity",
+      "@type": "xsd:decimal"
+    },
+    "matchedRoles": "gi:matchedRoles",
+    "confidence": {
+      "@id": "gi:confidence",
+      "@type": "xsd:decimal"
+    },
+    "decision": "gi:decision",
+    "actionType": "gi:actionType",
+    "scope": "gi:scope",
+    "expectedEffect": "gi:expectedEffect",
+    "inputHash": "gi:inputHash",
+    "outputHash": "gi:outputHash",
+    "logRef": "gi:logRef",
+    "eventType": "gi:eventType",
+    "validTime": {
+      "@id": "gi:validTime",
+      "@type": "xsd:dateTime"
+    },
+    "transactionTime": {
+      "@id": "gi:transactionTime",
+      "@type": "xsd:dateTime"
+    },
+
+    "hasAnchor": {
+      "@id": "gi:hasAnchor",
+      "@type": "@id"
+    },
+    "hasEvidence": {
+      "@id": "gi:hasEvidence",
+      "@type": "@id"
+    },
+    "hasClaim": {
+      "@id": "gi:hasClaim",
+      "@type": "@id"
+    },
+    "supportsClaim": {
+      "@id": "gi:supportsClaim",
+      "@type": "@id"
+    },
+    "opposesClaim": {
+      "@id": "gi:opposesClaim",
+      "@type": "@id"
+    },
+    "hasProofCertificate": {
+      "@id": "gi:hasProofCertificate",
+      "@type": "@id"
+    },
+    "hasExplanationTrace": {
+      "@id": "gi:hasExplanationTrace",
+      "@type": "@id"
+    },
+    "hasVectorCandidate": {
+      "@id": "gi:hasVectorCandidate",
+      "@type": "@id"
+    },
+    "hasPolicyDecision": {
+      "@id": "gi:hasPolicyDecision",
+      "@type": "@id"
+    },
+    "targets": {
+      "@id": "gi:targets",
+      "@type": "@id"
+    },
+    "proposesAction": {
+      "@id": "gi:proposesAction",
+      "@type": "@id"
+    },
+    "admitsAction": {
+      "@id": "gi:admitsAction",
+      "@type": "@id"
+    },
+    "recordsAction": {
+      "@id": "gi:recordsAction",
+      "@type": "@id"
+    },
+    "usesEncodingManifest": {
+      "@id": "gi:usesEncodingManifest",
+      "@type": "@id"
+    },
+    "supersedes": {
+      "@id": "gi:supersedes",
+      "@type": "@id"
+    }
+  }
+}

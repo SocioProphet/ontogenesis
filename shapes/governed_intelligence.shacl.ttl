@@ -1,0 +1,225 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL gates for the governed-intelligence object model.
+# These shapes intentionally enforce the core operating invariants:
+# - claims require subject/predicate/object/context/status;
+# - anchors require selector type and selector;
+# - vector candidates remain candidate_only;
+# - policy decisions use the approved admission vocabulary;
+# - runtime receipts carry action/runtime evidence.
+
+gi:AnchorShape
+  a sh:NodeShape ;
+  sh:targetClass gi:Anchor ;
+  sh:property [
+    sh:path gi:artifactRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:selectorType ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in (
+      "text_span"
+      "image_region"
+      "geometry"
+      "h3_cell"
+      "code_range"
+      "log_range"
+      "table_cell"
+      "audio_segment"
+      "video_clip"
+      "generic_selector"
+    ) ;
+  ] ;
+  sh:property [
+    sh:path gi:selector ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+gi:EvidenceShape
+  a sh:NodeShape ;
+  sh:targetClass gi:Evidence ;
+  sh:property [
+    sh:path gi:hasAnchor ;
+    sh:minCount 1 ;
+    sh:class gi:Anchor ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:ClaimShape
+  a sh:NodeShape ;
+  sh:targetClass gi:Claim ;
+  sh:property [
+    sh:path gi:subjectRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:predicateRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:objectRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:contextRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:hasEvidence ;
+    sh:minCount 1 ;
+    sh:class gi:Evidence ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:VectorCandidateShape
+  a sh:NodeShape ;
+  sh:targetClass gi:VectorCandidate ;
+  sh:property [
+    sh:path gi:candidateStatus ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:hasValue "candidate_only" ;
+  ] ;
+  sh:property [
+    sh:path gi:similarity ;
+    sh:minCount 1 ;
+    sh:datatype xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path gi:matchedRoles ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+gi:PolicyDecisionShape
+  a sh:NodeShape ;
+  sh:targetClass gi:PolicyDecision ;
+  sh:property [
+    sh:path gi:decision ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "allow" "deny" "require_review" "provisional" ) ;
+  ] ;
+  sh:property [
+    sh:path gi:targets ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+gi:ActionProposalShape
+  a sh:NodeShape ;
+  sh:targetClass gi:ActionProposal ;
+  sh:property [
+    sh:path gi:actionType ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:scope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:expectedEffect ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:hasEvidence ;
+    sh:minCount 1 ;
+    sh:class gi:Evidence ;
+  ] .
+
+gi:RuntimeReceiptShape
+  a sh:NodeShape ;
+  sh:targetClass gi:RuntimeReceipt ;
+  sh:property [
+    sh:path gi:recordsAction ;
+    sh:minCount 1 ;
+    sh:class gi:ActionProposal ;
+  ] ;
+  sh:property [
+    sh:path gi:hasPolicyDecision ;
+    sh:minCount 1 ;
+    sh:class gi:PolicyDecision ;
+  ] ;
+  sh:property [
+    sh:path gi:inputHash ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:outputHash ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:logRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .

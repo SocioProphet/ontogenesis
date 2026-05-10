@@ -1,0 +1,62 @@
+{
+  "@context": "../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:anchor:gaia-bounded-ingest-region-001",
+      "@type": "Anchor",
+      "artifactRef": "gaia:region:bbox:-75.25,40.25,-75.05,40.45",
+      "selectorType": "geometry",
+      "selector": "bbox=-75.25,40.25,-75.05,40.45;crs=EPSG:4326",
+      "sourceRef": "gaia-world-model:bounded-region-request",
+      "confidence": 1.0
+    },
+    {
+      "@id": "urn:sp:evidence:gaia-bounded-ingest-region-001",
+      "@type": "Evidence",
+      "hasAnchor": "urn:sp:anchor:gaia-bounded-ingest-region-001",
+      "sourceRef": "gaia-world-model:bounded-region-request",
+      "lifecycleStatus": "proposed",
+      "confidence": 1.0,
+      "validTime": "2026-05-09T00:00:00Z",
+      "transactionTime": "2026-05-09T00:00:00Z"
+    },
+    {
+      "@id": "urn:sp:action:gaia-bounded-osm-ingest-001",
+      "@type": "ActionProposal",
+      "actionType": "gaia.bounded_osm_ingest",
+      "scope": "bbox=-75.25,40.25,-75.05,40.45;mode=staged_non_destructive",
+      "expectedEffect": "create normalized feature batch and attribution receipt without publishing admitted map state",
+      "hasEvidence": "urn:sp:evidence:gaia-bounded-ingest-region-001",
+      "sourceRef": "agentplane:proposal:gaia-bounded-osm-ingest-001",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:policy:gaia-bounded-osm-ingest-001",
+      "@type": "PolicyDecision",
+      "targets": "urn:sp:action:gaia-bounded-osm-ingest-001",
+      "decision": "allow",
+      "sourceRef": "guardrail-fabric:action-admission-policy:bounded-ingest-v0",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:admission:gaia-bounded-osm-ingest-001",
+      "@type": "ActionAdmission",
+      "targets": "urn:sp:action:gaia-bounded-osm-ingest-001",
+      "decision": "allow",
+      "sourceRef": "guardrail-fabric:action-admission-policy:bounded-ingest-v0",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:receipt:gaia-bounded-osm-ingest-001",
+      "@type": "RuntimeReceipt",
+      "recordsAction": "urn:sp:action:gaia-bounded-osm-ingest-001",
+      "hasPolicyDecision": "urn:sp:policy:gaia-bounded-osm-ingest-001",
+      "inputHash": "sha256:input-placeholder",
+      "outputHash": "sha256:output-placeholder",
+      "logRef": "agentplane:runtime-log:gaia-bounded-osm-ingest-001",
+      "sourceRef": "agentplane:runtime-receipt:gaia-bounded-osm-ingest-001",
+      "lifecycleStatus": "admitted",
+      "transactionTime": "2026-05-09T00:00:00Z"
+    }
+  ]
+}
