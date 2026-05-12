@@ -1,0 +1,58 @@
+{
+  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
+  "id": "https://socioprophet.github.io/ontogenesis/catalog/civic-stack-registry",
+  "type": "upper:InformationArtifact",
+  "label": "Civic Stack Registry (JSON-LD)",
+  "modules": [
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CivicStackAlignmentSpec",
+      "layer": "Specifications",
+      "path": "docs/specs/seven-model-org-foaf-vcard-alignment.md",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CivicStackContext",
+      "layer": "Contexts",
+      "path": "contexts/civic-stack.context.jsonld",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#AlignmentW3COrg",
+      "layer": "Alignments",
+      "path": "Alignments/w3c-org.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/alignments#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CivicOrgAlignmentShapes",
+      "layer": "Shapes",
+      "path": "shapes/civic-org-alignment.shacl.ttl",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+      "semver": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "https://socioprophet.github.io/ontogenesis/og#CivicOrgServiceStackExample",
+      "layer": "Examples",
+      "path": "examples/civic-org-service-stack.example.jsonld",
+      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+      "semver": "0.1.0",
+      "status": "draft"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "SocioProphet/ontogenesis#80",
+      "label": "Seven-model civic organizational alignment"
+    },
+    {
+      "id": "SocioProphet/ontogenesis#81",
+      "label": "RationalGRL and open artifact compiler semantics follow-up"
+    }
+  ]
+}
