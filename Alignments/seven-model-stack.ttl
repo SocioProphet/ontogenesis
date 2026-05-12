@@ -1,0 +1,164 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix stack: <https://socioprophet.github.io/ontogenesis/alignments/seven-model-stack#> .
+@prefix cstack:<https://socioprophet.github.io/ontogenesis/civic-stack#> .
+@prefix enrm:  <https://socioprophet.github.io/ontogenesis/domains/environment-reference#> .
+@prefix cgrm:  <https://socioprophet.github.io/ontogenesis/domains/civic-governance#> .
+@prefix prm:   <https://socioprophet.github.io/ontogenesis/domains/performance-reference#> .
+@prefix srm:   <https://socioprophet.github.io/ontogenesis/domains/service-reference#> .
+@prefix drm:   <https://socioprophet.github.io/ontogenesis/domains/data-reference#> .
+@prefix trm:   <https://socioprophet.github.io/ontogenesis/domains/technical-reference#> .
+@prefix biz:   <https://socioprophet.github.io/ontogenesis/domains/business#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix prod:  <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix dom:   <https://socioprophet.github.io/ontogenesis/domains/metadata#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/seven-model-stack.ttl> a owl:Ontology ;
+  dct:title "Alignment — Seven-Model Civic Stack" ;
+  dct:description "Alignment layer binding EnRM, CGRM, PRM+, BRM+, SRM+, DRM+, and TRM+ into one governed civic operating architecture." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>,
+              <Domains/business_core.ttl>,
+              <Domains/party-identity.ttl>,
+              <Domains/org-legal.ttl>,
+              <Domains/product-service.ttl>,
+              <Domains/metadata.ttl>,
+              <Domains/civic-governance.ttl>,
+              <Domains/environment-reference.ttl>,
+              <Domains/performance-reference.ttl>,
+              <Domains/service-reference.ttl>,
+              <Domains/data-reference.ttl>,
+              <Domains/technical-reference.ttl>,
+              <Alignments/w3c-org.ttl> .
+
+stack:ReferenceModel a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Reference model" .
+
+stack:SevenModelCivicStack a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Seven-model civic stack" .
+
+stack:ModelBinding a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Model binding" .
+
+stack:EnRM a stack:ReferenceModel ;
+  rdfs:label "Environment Reference Model" ;
+  dct:description "Exogenous constraints, resource stocks, exposure, hazards, vulnerabilities, critical infrastructure, and externalities." .
+
+stack:CGRM a stack:ReferenceModel ;
+  rdfs:label "Civic-Governance Reference Model" ;
+  dct:description "Jurisdictions, authorities, rights, obligations, policies, permits, sanctions, legal basis, and access basis." .
+
+stack:PRMPlus a stack:ReferenceModel ;
+  rdfs:label "Performance Reference Model Plus" ;
+  dct:description "Public-value outcomes, indicators, targets, observations, scorecards, resilience, equity, trust, and audit completeness." .
+
+stack:BRMPlus a stack:ReferenceModel ;
+  rdfs:label "Business / Value-Network Reference Model Plus" ;
+  dct:description "Actors, parties, organizations, value networks, capabilities, legal entities, and business activities." .
+
+stack:SRMPlus a stack:ReferenceModel ;
+  rdfs:label "Service Component Reference Model Plus" ;
+  dct:description "Governed services, interfaces, SLAs, policy guards, lifecycle stages, dependencies, providers, and consumers." .
+
+stack:DRMPlus a stack:ReferenceModel ;
+  rdfs:label "Data Reference Model Plus" ;
+  dct:description "Datasets, records, identifiers, provenance, consent, access basis, quality metrics, data contracts, and lineage." .
+
+stack:TRMPlus a stack:ReferenceModel ;
+  rdfs:label "Technical Reference Model Plus" ;
+  dct:description "Runtime, workload, trust anchors, attestations, edge nodes, network slices, policy enforcement, and observability." .
+
+stack:bindsReferenceModel a owl:ObjectProperty ;
+  rdfs:domain stack:ModelBinding ;
+  rdfs:range stack:ReferenceModel ;
+  rdfs:label "binds reference model" .
+
+stack:bindsClass a owl:ObjectProperty ;
+  rdfs:domain stack:ModelBinding ;
+  rdfs:range upper:Entity ;
+  rdfs:label "binds class" .
+
+stack:consumesModel a owl:ObjectProperty ;
+  rdfs:domain stack:SevenModelCivicStack ;
+  rdfs:range stack:ReferenceModel ;
+  rdfs:label "consumes model" .
+
+stack:hasModelBinding a owl:ObjectProperty ;
+  rdfs:domain stack:SevenModelCivicStack ;
+  rdfs:range stack:ModelBinding ;
+  rdfs:label "has model binding" .
+
+stack:bindingRole a owl:DatatypeProperty ;
+  rdfs:domain stack:ModelBinding ;
+  rdfs:range xsd:string ;
+  rdfs:label "binding role" .
+
+stack:CivicOperatingArchitectureV0 a stack:SevenModelCivicStack ;
+  rdfs:label "Seven-Model Civic Operating Architecture v0" ;
+  stack:consumesModel stack:EnRM, stack:CGRM, stack:PRMPlus, stack:BRMPlus, stack:SRMPlus, stack:DRMPlus, stack:TRMPlus .
+
+stack:EnRMEnvironmentFactorBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:EnRM ;
+  stack:bindsClass enrm:EnvironmentFactor ;
+  stack:bindingRole "primary class family" ;
+  rdfs:label "EnRM environment-factor binding" .
+
+stack:CGRMPolicyBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:CGRM ;
+  stack:bindsClass cgrm:Policy ;
+  stack:bindingRole "primary governance class family" ;
+  rdfs:label "CGRM policy binding" .
+
+stack:PRMObservationBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:PRMPlus ;
+  stack:bindsClass prm:Observation ;
+  stack:bindingRole "primary measurement class family" ;
+  rdfs:label "PRM+ observation binding" .
+
+stack:BRMActorBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:BRMPlus ;
+  stack:bindsClass party:Party ;
+  stack:bindingRole "actor and value-network class family" ;
+  rdfs:label "BRM+ actor binding" .
+
+stack:BRMLegalEntityBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:BRMPlus ;
+  stack:bindsClass legal:LegalEntity ;
+  stack:bindingRole "legal organization class family" ;
+  rdfs:label "BRM+ legal-entity binding" .
+
+stack:SRMServiceBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:SRMPlus ;
+  stack:bindsClass srm:Service ;
+  stack:bindingRole "primary service class family" ;
+  rdfs:label "SRM+ service binding" .
+
+stack:DRMDatasetBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:DRMPlus ;
+  stack:bindsClass drm:Dataset ;
+  stack:bindingRole "primary data class family" ;
+  rdfs:label "DRM+ dataset binding" .
+
+stack:TRMAttestationBinding a stack:ModelBinding ;
+  stack:bindsReferenceModel stack:TRMPlus ;
+  stack:bindsClass trm:Attestation ;
+  stack:bindingRole "runtime assurance class family" ;
+  rdfs:label "TRM+ attestation binding" .
+
+stack:CivicOperatingArchitectureV0
+  stack:hasModelBinding stack:EnRMEnvironmentFactorBinding,
+                        stack:CGRMPolicyBinding,
+                        stack:PRMObservationBinding,
+                        stack:BRMActorBinding,
+                        stack:BRMLegalEntityBinding,
+                        stack:SRMServiceBinding,
+                        stack:DRMDatasetBinding,
+                        stack:TRMAttestationBinding .

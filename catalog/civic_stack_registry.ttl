@@ -7,7 +7,7 @@
 
 <catalog/civic_stack_registry.ttl> a owl:Ontology ;
   dct:title "Civic Stack Registry" ;
-  dct:description "Supplemental registry for the Seven-Model Civic Operating Architecture ORG/FOAF/vCard alignment tranche." ;
+  dct:description "Supplemental registry for the Seven-Model Civic Operating Architecture alignment and domain tranche." ;
   owl:versionInfo "0.1.0" ;
   owl:imports <catalog/registry.ttl>, <Upper/upper-core.ttl> .
 
@@ -34,6 +34,62 @@ og:AlignmentW3COrg a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "W3C ORG / FOAF / vCard civic stack alignment" .
+
+og:AlignmentSevenModelStack a og:Module ;
+  og:layer "Alignments" ;
+  og:path "Alignments/seven-model-stack.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments/seven-model-stack#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Seven-model civic stack alignment" .
+
+og:DomainCivicGovernanceReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/civic-governance.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/civic-governance#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Civic Governance Reference Model domain" .
+
+og:DomainEnvironmentReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/environment-reference.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/environment-reference#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Environment Reference Model domain" .
+
+og:DomainPerformanceReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/performance-reference.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/performance-reference#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Performance Reference Model domain" .
+
+og:DomainServiceReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/service-reference.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/service-reference#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Service Reference Model domain" .
+
+og:DomainDataReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/data-reference.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/data-reference#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Data Reference Model domain" .
+
+og:DomainTechnicalReference a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/technical-reference.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/technical-reference#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Technical Reference Model domain" .
 
 og:CivicOrgAlignmentShapes a og:Module ;
   og:layer "Shapes" ;

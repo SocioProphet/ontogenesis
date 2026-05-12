@@ -11,6 +11,13 @@
     "legal": "https://socioprophet.github.io/ontogenesis/domains/legal#",
     "prod": "https://socioprophet.github.io/ontogenesis/domains/product-service#",
     "cstack": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+    "cgrm": "https://socioprophet.github.io/ontogenesis/domains/civic-governance#",
+    "enrm": "https://socioprophet.github.io/ontogenesis/domains/environment-reference#",
+    "prm": "https://socioprophet.github.io/ontogenesis/domains/performance-reference#",
+    "srm": "https://socioprophet.github.io/ontogenesis/domains/service-reference#",
+    "drm": "https://socioprophet.github.io/ontogenesis/domains/data-reference#",
+    "trm": "https://socioprophet.github.io/ontogenesis/domains/technical-reference#",
+    "stack": "https://socioprophet.github.io/ontogenesis/alignments/seven-model-stack#",
     "align": "https://socioprophet.github.io/ontogenesis/alignments#",
     "smap": "https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#",
 
@@ -40,13 +47,17 @@
     "startedAtTime": {"@id": "prov:startedAtTime", "@type": "xsd:dateTime"},
     "resultTime": {"@id": "sosa:resultTime", "@type": "xsd:dateTime"},
 
-    "hasLegalBasis": {"@id": "cstack:hasLegalBasis", "@type": "@id"},
-    "hasAccessBasis": {"@id": "cstack:hasAccessBasis", "@type": "@id"},
-    "hasResponsiblePost": {"@id": "cstack:hasResponsiblePost", "@type": "@id"},
+    "hasLegalBasis": {"@id": "cgrm:hasLegalBasis", "@type": "@id"},
+    "hasAccessBasis": {"@id": "drm:hasAccessBasis", "@type": "@id"},
+    "hasResponsiblePost": {"@id": "srm:hasResponsiblePost", "@type": "@id"},
     "hasEvidenceRef": "cstack:hasEvidenceRef",
     "hasProvenanceRef": "cstack:hasProvenanceRef",
     "hasExternalityVector": "cstack:hasExternalityVector",
-    "emissionsKgCO2e": {"@id": "cstack:emissionsKgCO2e", "@type": "xsd:decimal"},
-    "signature": "cstack:signature"
+    "emissionsKgCO2e": {"@id": "enrm:emissionsKgCO2e", "@type": "xsd:decimal"},
+    "energyKWh": {"@id": "enrm:energyKWh", "@type": "xsd:decimal"},
+    "signature": "trm:signature",
+    "scoreValue": {"@id": "prm:scoreValue", "@type": "xsd:decimal"},
+    "threshold": {"@id": "prm:threshold", "@type": "xsd:decimal"},
+    "value": {"@id": "prm:value", "@type": "xsd:decimal"}
   }
 }

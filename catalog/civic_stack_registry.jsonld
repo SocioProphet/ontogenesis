@@ -4,55 +4,21 @@
   "type": "upper:InformationArtifact",
   "label": "Civic Stack Registry (JSON-LD)",
   "modules": [
-    {
-      "id": "https://socioprophet.github.io/ontogenesis/og#CivicStackAlignmentSpec",
-      "layer": "Specifications",
-      "path": "docs/specs/seven-model-org-foaf-vcard-alignment.md",
-      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
-      "semver": "0.1.0",
-      "status": "draft"
-    },
-    {
-      "id": "https://socioprophet.github.io/ontogenesis/og#CivicStackContext",
-      "layer": "Contexts",
-      "path": "contexts/civic-stack.context.jsonld",
-      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
-      "semver": "0.1.0",
-      "status": "draft"
-    },
-    {
-      "id": "https://socioprophet.github.io/ontogenesis/og#AlignmentW3COrg",
-      "layer": "Alignments",
-      "path": "Alignments/w3c-org.ttl",
-      "baseIRI": "https://socioprophet.github.io/ontogenesis/alignments#",
-      "semver": "0.1.0",
-      "status": "draft"
-    },
-    {
-      "id": "https://socioprophet.github.io/ontogenesis/og#CivicOrgAlignmentShapes",
-      "layer": "Shapes",
-      "path": "shapes/civic-org-alignment.shacl.ttl",
-      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
-      "semver": "0.1.0",
-      "status": "draft"
-    },
-    {
-      "id": "https://socioprophet.github.io/ontogenesis/og#CivicOrgServiceStackExample",
-      "layer": "Examples",
-      "path": "examples/civic-org-service-stack.example.jsonld",
-      "baseIRI": "https://socioprophet.github.io/ontogenesis/civic-stack#",
-      "semver": "0.1.0",
-      "status": "draft"
-    }
+    {"id":"https://socioprophet.github.io/ontogenesis/og#CivicStackAlignmentSpec","layer":"Specifications","path":"docs/specs/seven-model-org-foaf-vcard-alignment.md","baseIRI":"https://socioprophet.github.io/ontogenesis/civic-stack#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#CivicStackContext","layer":"Contexts","path":"contexts/civic-stack.context.jsonld","baseIRI":"https://socioprophet.github.io/ontogenesis/civic-stack#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#AlignmentW3COrg","layer":"Alignments","path":"Alignments/w3c-org.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/alignments#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#AlignmentSevenModelStack","layer":"Alignments","path":"Alignments/seven-model-stack.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/alignments/seven-model-stack#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainCivicGovernanceReference","layer":"Domains","path":"Domains/civic-governance.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/civic-governance#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainEnvironmentReference","layer":"Domains","path":"Domains/environment-reference.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/environment-reference#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainPerformanceReference","layer":"Domains","path":"Domains/performance-reference.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/performance-reference#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainServiceReference","layer":"Domains","path":"Domains/service-reference.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/service-reference#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainDataReference","layer":"Domains","path":"Domains/data-reference.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/data-reference#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#DomainTechnicalReference","layer":"Domains","path":"Domains/technical-reference.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/domains/technical-reference#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#CivicOrgAlignmentShapes","layer":"Shapes","path":"shapes/civic-org-alignment.shacl.ttl","baseIRI":"https://socioprophet.github.io/ontogenesis/civic-stack#","semver":"0.1.0","status":"draft"},
+    {"id":"https://socioprophet.github.io/ontogenesis/og#CivicOrgServiceStackExample","layer":"Examples","path":"examples/civic-org-service-stack.example.jsonld","baseIRI":"https://socioprophet.github.io/ontogenesis/civic-stack#","semver":"0.1.0","status":"draft"}
   ],
   "tracks": [
-    {
-      "id": "SocioProphet/ontogenesis#80",
-      "label": "Seven-model civic organizational alignment"
-    },
-    {
-      "id": "SocioProphet/ontogenesis#81",
-      "label": "RationalGRL and open artifact compiler semantics follow-up"
-    }
+    {"id":"SocioProphet/ontogenesis#80","label":"Seven-model civic organizational alignment"},
+    {"id":"SocioProphet/ontogenesis#81","label":"RationalGRL and open artifact compiler semantics follow-up"}
   ]
 }

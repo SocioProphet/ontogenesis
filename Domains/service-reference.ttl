@@ -1,0 +1,150 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix srm:   <https://socioprophet.github.io/ontogenesis/domains/service-reference#> .
+@prefix prm:   <https://socioprophet.github.io/ontogenesis/domains/performance-reference#> .
+@prefix cgrm:  <https://socioprophet.github.io/ontogenesis/domains/civic-governance#> .
+@prefix cstack:<https://socioprophet.github.io/ontogenesis/civic-stack#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix prod:  <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/service-reference.ttl> a owl:Ontology ;
+  dct:title "Domain — Service Reference Model" ;
+  dct:description "SRM+ primitives for governed services, interfaces, SLAs, policy guards, lifecycle stages, dependencies, providers, consumers, and service-change events." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/product-service.ttl>, <Domains/civic-governance.ttl>, <Domains/performance-reference.ttl>, <Alignments/w3c-org.ttl> .
+
+srm:Service a owl:Class ;
+  rdfs:subClassOf cstack:RegulatedService, prod:ServiceInstance ;
+  rdfs:label "Service" .
+
+srm:ServiceComponent a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Service component" .
+
+srm:Interface a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Interface" .
+
+srm:SLA a owl:Class ;
+  rdfs:subClassOf prm:Target ;
+  rdfs:label "Service level agreement" .
+
+srm:PolicyGuard a owl:Class ;
+  rdfs:subClassOf cgrm:Policy ;
+  rdfs:label "Policy guard" .
+
+srm:LifecycleStage a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Lifecycle stage" .
+
+srm:Dependency a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Service dependency" .
+
+srm:ProviderBinding a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Provider binding" .
+
+srm:ConsumerBinding a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Consumer binding" .
+
+srm:ServiceChangeEvent a owl:Class ;
+  rdfs:subClassOf cstack:ChangeEvent ;
+  rdfs:label "Service change event" .
+
+srm:providesService a owl:ObjectProperty ;
+  rdfs:domain upper:Agent ;
+  rdfs:range srm:Service ;
+  rdfs:label "provides service" .
+
+srm:consumesService a owl:ObjectProperty ;
+  rdfs:domain upper:Agent ;
+  rdfs:range srm:Service ;
+  rdfs:label "consumes service" .
+
+srm:hasComponent a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:ServiceComponent ;
+  rdfs:label "has component" .
+
+srm:hasInterface a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:Interface ;
+  rdfs:label "has interface" .
+
+srm:hasSLA a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:SLA ;
+  rdfs:label "has SLA" .
+
+srm:hasPolicyGuard a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:PolicyGuard ;
+  rdfs:label "has policy guard" .
+
+srm:hasLifecycleStage a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:LifecycleStage ;
+  rdfs:label "has lifecycle stage" .
+
+srm:dependsOn a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range srm:Dependency ;
+  rdfs:label "depends on" .
+
+srm:dependencyTarget a owl:ObjectProperty ;
+  rdfs:domain srm:Dependency ;
+  rdfs:range upper:Entity ;
+  rdfs:label "dependency target" .
+
+srm:responsibleFor a owl:ObjectProperty ;
+  rdfs:domain org:Post ;
+  rdfs:range srm:Service ;
+  rdfs:label "responsible for" .
+
+srm:hasResponsiblePost a owl:ObjectProperty ;
+  rdfs:subPropertyOf cstack:hasResponsiblePost ;
+  rdfs:domain srm:Service ;
+  rdfs:range org:Post ;
+  rdfs:label "has responsible post" .
+
+srm:hasProvider a owl:ObjectProperty ;
+  rdfs:domain srm:ProviderBinding ;
+  rdfs:range upper:Agent ;
+  rdfs:label "has provider" .
+
+srm:hasConsumer a owl:ObjectProperty ;
+  rdfs:domain srm:ConsumerBinding ;
+  rdfs:range upper:Agent ;
+  rdfs:label "has consumer" .
+
+srm:governedByPolicy a owl:ObjectProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range cgrm:Policy ;
+  rdfs:label "governed by policy" .
+
+srm:serviceCode a owl:DatatypeProperty ;
+  rdfs:domain srm:Service ;
+  rdfs:range xsd:string ;
+  rdfs:label "service code" .
+
+srm:interfaceUrl a owl:DatatypeProperty ;
+  rdfs:domain srm:Interface ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "interface URL" .
+
+srm:lifecycleStatus a owl:DatatypeProperty ;
+  rdfs:domain srm:LifecycleStage ;
+  rdfs:range xsd:string ;
+  rdfs:label "lifecycle status" .
+
+srm:dependencyKind a owl:DatatypeProperty ;
+  rdfs:domain srm:Dependency ;
+  rdfs:range xsd:string ;
+  rdfs:label "dependency kind" .

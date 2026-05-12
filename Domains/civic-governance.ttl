@@ -1,0 +1,156 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cgrm:  <https://socioprophet.github.io/ontogenesis/domains/civic-governance#> .
+@prefix cstack:<https://socioprophet.github.io/ontogenesis/civic-stack#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/civic-governance.ttl> a owl:Ontology ;
+  dct:title "Domain — Civic Governance Reference Model" ;
+  dct:description "CGRM primitives for jurisdictions, authorities, policies, rights, obligations, permits, sanctions, budgets, consultation, legal basis, and access basis in the Seven-Model Civic Operating Architecture." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Domains/party-identity.ttl>, <Domains/org-legal.ttl>, <Alignments/w3c-org.ttl> .
+
+cgrm:Jurisdiction a owl:Class ;
+  rdfs:subClassOf legal:Jurisdiction ;
+  rdfs:label "Civic jurisdiction" .
+
+cgrm:Authority a owl:Class ;
+  rdfs:subClassOf legal:LegalEntity, org:FormalOrganization ;
+  rdfs:label "Civic authority" .
+
+cgrm:Policy a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Civic policy" .
+
+cgrm:Right a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Right" .
+
+cgrm:Obligation a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Obligation" .
+
+cgrm:Permit a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Permit" .
+
+cgrm:Sanction a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Sanction" .
+
+cgrm:LegalBasis a owl:Class ;
+  rdfs:subClassOf cgrm:Policy ;
+  rdfs:label "Legal basis" .
+
+cgrm:AccessBasis a owl:Class ;
+  rdfs:subClassOf cgrm:Policy ;
+  rdfs:label "Access basis" .
+
+cgrm:BudgetLine a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Budget line" .
+
+cgrm:PublicConsultation a owl:Class ;
+  rdfs:subClassOf prov:Activity ;
+  rdfs:label "Public consultation" .
+
+cgrm:RegulatoryProgram a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Regulatory program" .
+
+cgrm:CivicDecision a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Civic decision" .
+
+cgrm:PolicyChangeEvent a owl:Class ;
+  rdfs:subClassOf cstack:ChangeEvent ;
+  rdfs:label "Policy change event" .
+
+cgrm:issuedBy a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range cgrm:Authority ;
+  rdfs:label "issued by" .
+
+cgrm:hasJurisdiction a owl:ObjectProperty ;
+  rdfs:domain cgrm:Authority ;
+  rdfs:range cgrm:Jurisdiction ;
+  rdfs:label "has jurisdiction" .
+
+cgrm:governs a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range upper:Entity ;
+  rdfs:label "governs" .
+
+cgrm:grantsRight a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range cgrm:Right ;
+  rdfs:label "grants right" .
+
+cgrm:imposesObligation a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range cgrm:Obligation ;
+  rdfs:label "imposes obligation" .
+
+cgrm:authorizesPermit a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range cgrm:Permit ;
+  rdfs:label "authorizes permit" .
+
+cgrm:definesSanction a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range cgrm:Sanction ;
+  rdfs:label "defines sanction" .
+
+cgrm:appliesToParty a owl:ObjectProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range party:Party ;
+  rdfs:label "applies to party" .
+
+cgrm:hasLegalBasis a owl:ObjectProperty ;
+  rdfs:subPropertyOf cstack:hasLegalBasis ;
+  rdfs:domain upper:Entity ;
+  rdfs:range cgrm:LegalBasis ;
+  rdfs:label "has legal basis" .
+
+cgrm:hasAccessBasis a owl:ObjectProperty ;
+  rdfs:subPropertyOf cstack:hasAccessBasis ;
+  rdfs:domain upper:Entity ;
+  rdfs:range cgrm:AccessBasis ;
+  rdfs:label "has access basis" .
+
+cgrm:consultsOn a owl:ObjectProperty ;
+  rdfs:domain cgrm:PublicConsultation ;
+  rdfs:range cgrm:Policy ;
+  rdfs:label "consults on" .
+
+cgrm:fundsProgram a owl:ObjectProperty ;
+  rdfs:domain cgrm:BudgetLine ;
+  rdfs:range cgrm:RegulatoryProgram ;
+  rdfs:label "funds program" .
+
+cgrm:policyCode a owl:DatatypeProperty ;
+  rdfs:domain cgrm:Policy ;
+  rdfs:range xsd:string ;
+  rdfs:label "policy code" .
+
+cgrm:jurisdictionCode a owl:DatatypeProperty ;
+  rdfs:domain cgrm:Jurisdiction ;
+  rdfs:range xsd:string ;
+  rdfs:label "jurisdiction code" .
+
+cgrm:decisionStatus a owl:DatatypeProperty ;
+  rdfs:domain cgrm:CivicDecision ;
+  rdfs:range xsd:string ;
+  rdfs:label "decision status" .
+
+cgrm:budgetAmount a owl:DatatypeProperty ;
+  rdfs:domain cgrm:BudgetLine ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "budget amount" .
