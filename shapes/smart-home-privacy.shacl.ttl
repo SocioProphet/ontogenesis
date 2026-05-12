@@ -1,0 +1,70 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix shp: <https://socioprophet.github.io/ontogenesis/domains/smart-home-privacy#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<shapes/smart-home-privacy.shacl.ttl> a sh:NodeShape ;
+  rdfs:label "Smart home privacy SHACL bundle" .
+
+shp:SmartHomeDeviceShape a sh:NodeShape ;
+  sh:targetClass shp:SmartHomeDevice ;
+  sh:property [
+    sh:path shp:hasVendor ;
+    sh:minCount 1 ;
+    sh:class shp:SmartHomeVendor ;
+    sh:message "Every smart-home device must bind to a vendor."
+  ] ;
+  sh:property [
+    sh:path shp:hasDeviceType ;
+    sh:minCount 1 ;
+    sh:class shp:DeviceType ;
+    sh:message "Every smart-home device must declare at least one device type."
+  ] .
+
+shp:PolicyDocumentShape a sh:NodeShape ;
+  sh:targetClass shp:PolicyDocument ;
+  sh:property [
+    sh:path shp:assertsClaim ;
+    sh:minCount 1 ;
+    sh:class shp:PrivacyClaim ;
+    sh:message "Every analyzed policy document must emit at least one privacy claim."
+  ] .
+
+shp:PrivacyClaimShape a sh:NodeShape ;
+  sh:targetClass shp:PrivacyClaim ;
+  sh:property [
+    sh:path shp:evidenceForClaim ;
+    sh:minCount 1 ;
+    sh:class shp:EvidenceRecord ;
+    sh:message "Every privacy claim must preserve evidence."
+  ] .
+
+shp:CoverageFindingShape a sh:NodeShape ;
+  sh:targetClass shp:CoverageFinding ;
+  sh:property [
+    sh:path shp:findingSubject ;
+    sh:minCount 1 ;
+    sh:message "Every coverage finding must identify the affected subject."
+  ] ;
+  sh:property [
+    sh:path shp:findingType ;
+    sh:minCount 1 ;
+    sh:class shp:CoverageFinding ;
+    sh:message "Every coverage finding must name a controlled finding type."
+  ] ;
+  sh:property [
+    sh:path shp:confidenceScore ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+    sh:message "Coverage-finding confidence must be a decimal in [0,1]."
+  ] .
+
+shp:EvidenceRecordShape a sh:NodeShape ;
+  sh:targetClass shp:EvidenceRecord ;
+  sh:property [
+    sh:path shp:observedAt ;
+    sh:datatype xsd:dateTime ;
+    sh:message "Evidence records should use xsd:dateTime observation timestamps."
+  ] .
