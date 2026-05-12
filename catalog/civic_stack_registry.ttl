@@ -1,0 +1,52 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/civic_stack_registry.ttl> a owl:Ontology ;
+  dct:title "Civic Stack Registry" ;
+  dct:description "Supplemental registry for the Seven-Model Civic Operating Architecture ORG/FOAF/vCard alignment tranche." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl>, <Upper/upper-core.ttl> .
+
+og:CivicStackAlignmentSpec a og:Module ;
+  og:layer "Specifications" ;
+  og:path "docs/specs/seven-model-org-foaf-vcard-alignment.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/civic-stack#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Seven-model ORG/FOAF/vCard alignment specification" .
+
+og:CivicStackContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/civic-stack.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/civic-stack#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Civic stack JSON-LD context" .
+
+og:AlignmentW3COrg a og:Module ;
+  og:layer "Alignments" ;
+  og:path "Alignments/w3c-org.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/alignments#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "W3C ORG / FOAF / vCard civic stack alignment" .
+
+og:CivicOrgAlignmentShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/civic-org-alignment.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/civic-stack#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Civic organization alignment SHACL gates" .
+
+og:CivicOrgServiceStackExample a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/civic-org-service-stack.example.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/civic-stack#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Civic organization service stack example" .
