@@ -1,0 +1,170 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix trm:   <https://socioprophet.github.io/ontogenesis/domains/technical-reference#> .
+@prefix srm:   <https://socioprophet.github.io/ontogenesis/domains/service-reference#> .
+@prefix cgrm:  <https://socioprophet.github.io/ontogenesis/domains/civic-governance#> .
+@prefix cstack:<https://socioprophet.github.io/ontogenesis/civic-stack#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix lower: <https://socioprophet.github.io/ontogenesis/lower#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/technical-reference.ttl> a owl:Ontology ;
+  dct:title "Domain — Technical Reference Model" ;
+  dct:description "TRM+ primitives for runtime, workload, trust anchor, attestation, network slice, edge node, observability signal, policy enforcement point, and deployment evidence in the Seven-Model Civic Operating Architecture." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Lower/bindings-core.ttl>, <Domains/service-reference.ttl>, <Domains/civic-governance.ttl>, <Alignments/w3c-org.ttl> .
+
+trm:Runtime a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Runtime" .
+
+trm:Workload a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Workload" .
+
+trm:TrustAnchor a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Trust anchor" .
+
+trm:Attestation a owl:Class ;
+  rdfs:subClassOf cstack:AttestationEvent, prov:Activity ;
+  rdfs:label "Attestation" .
+
+trm:NetworkSlice a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Network slice" .
+
+trm:EdgeNode a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Edge node" .
+
+trm:ObservabilitySignal a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Observability signal" .
+
+trm:PolicyEnforcementPoint a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Policy enforcement point" .
+
+trm:Deployment a owl:Class ;
+  rdfs:subClassOf prov:Activity ;
+  rdfs:label "Deployment" .
+
+trm:SupplyChainEvidence a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Supply-chain evidence" .
+
+trm:ArtifactDigest a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact digest" .
+
+trm:executesWorkload a owl:ObjectProperty ;
+  rdfs:domain trm:Runtime ;
+  rdfs:range trm:Workload ;
+  rdfs:label "executes workload" .
+
+trm:hostsService a owl:ObjectProperty ;
+  rdfs:domain trm:Workload ;
+  rdfs:range srm:Service ;
+  rdfs:label "hosts service" .
+
+trm:hasTrustAnchor a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range trm:TrustAnchor ;
+  rdfs:label "has trust anchor" .
+
+trm:attests a owl:ObjectProperty ;
+  rdfs:subPropertyOf cstack:attestsTarget ;
+  rdfs:domain trm:Attestation ;
+  rdfs:range upper:Entity ;
+  rdfs:label "attests" .
+
+trm:hasAttestation a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range trm:Attestation ;
+  rdfs:label "has attestation" .
+
+trm:usesNetworkSlice a owl:ObjectProperty ;
+  rdfs:domain trm:Workload ;
+  rdfs:range trm:NetworkSlice ;
+  rdfs:label "uses network slice" .
+
+trm:runsOnEdgeNode a owl:ObjectProperty ;
+  rdfs:domain trm:Workload ;
+  rdfs:range trm:EdgeNode ;
+  rdfs:label "runs on edge node" .
+
+trm:emitsSignal a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range trm:ObservabilitySignal ;
+  rdfs:label "emits signal" .
+
+trm:enforcesPolicy a owl:ObjectProperty ;
+  rdfs:domain trm:PolicyEnforcementPoint ;
+  rdfs:range cgrm:Policy ;
+  rdfs:label "enforces policy" .
+
+trm:responsiblePost a owl:ObjectProperty ;
+  rdfs:domain trm:Workload ;
+  rdfs:range org:Post ;
+  rdfs:label "responsible post" .
+
+trm:deploymentTarget a owl:ObjectProperty ;
+  rdfs:domain trm:Deployment ;
+  rdfs:range trm:Runtime ;
+  rdfs:label "deployment target" .
+
+trm:deploymentArtifact a owl:ObjectProperty ;
+  rdfs:domain trm:Deployment ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "deployment artifact" .
+
+trm:hasSupplyChainEvidence a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range trm:SupplyChainEvidence ;
+  rdfs:label "has supply-chain evidence" .
+
+trm:hasArtifactDigest a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range trm:ArtifactDigest ;
+  rdfs:label "has artifact digest" .
+
+trm:runtimeKind a owl:DatatypeProperty ;
+  rdfs:domain trm:Runtime ;
+  rdfs:range xsd:string ;
+  rdfs:label "runtime kind" .
+
+trm:workloadKind a owl:DatatypeProperty ;
+  rdfs:domain trm:Workload ;
+  rdfs:range xsd:string ;
+  rdfs:label "workload kind" .
+
+trm:signalName a owl:DatatypeProperty ;
+  rdfs:domain trm:ObservabilitySignal ;
+  rdfs:range xsd:string ;
+  rdfs:label "signal name" .
+
+trm:signalValue a owl:DatatypeProperty ;
+  rdfs:domain trm:ObservabilitySignal ;
+  rdfs:range xsd:string ;
+  rdfs:label "signal value" .
+
+trm:signature a owl:DatatypeProperty ;
+  rdfs:subPropertyOf cstack:signature ;
+  rdfs:domain trm:Attestation ;
+  rdfs:range xsd:string ;
+  rdfs:label "signature" .
+
+trm:digestValue a owl:DatatypeProperty ;
+  rdfs:domain trm:ArtifactDigest ;
+  rdfs:range xsd:string ;
+  rdfs:label "digest value" .
+
+trm:digestAlgorithm a owl:DatatypeProperty ;
+  rdfs:domain trm:ArtifactDigest ;
+  rdfs:range xsd:string ;
+  rdfs:label "digest algorithm" .
