@@ -1,0 +1,224 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix cstack: <https://socioprophet.github.io/ontogenesis/civic-stack#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix party: <https://socioprophet.github.io/ontogenesis/domains/party#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix prod:  <https://socioprophet.github.io/ontogenesis/domains/product-service#> .
+@prefix dom:   <https://socioprophet.github.io/ontogenesis/domains/metadata#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix geo:   <http://www.opengis.net/ont/geosparql#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/w3c-org.ttl> a owl:Ontology ;
+  dct:title "Alignment — W3C ORG / FOAF / vCard civic stack" ;
+  dct:description "Governed alignment scaffold from Ontogenesis party, legal, product-service, and metadata primitives to W3C ORG, FOAF, vCard, PROV-O, TIME, GeoSPARQL, DCAT, and SOSA. This bridge supports the Seven-Model Civic Operating Architecture without replacing Ontogenesis-local semantics." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl>, <Middle/semantic-mapping.ttl>, <Domains/party-identity.ttl>, <Domains/org-legal.ttl>, <Domains/product-service.ttl>, <Domains/metadata.ttl> .
+
+align:w3cOrgExternalOntology a smap:ExternalOntology ;
+  smap:standardName "W3C ORG" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://www.w3.org/TR/vocab-org/" ;
+  rdfs:label "W3C Organization Ontology" .
+
+align:foafExternalOntology a smap:ExternalOntology ;
+  smap:standardName "FOAF" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "http://xmlns.com/foaf/spec/" ;
+  rdfs:label "FOAF vocabulary" .
+
+align:vcardExternalOntology a smap:ExternalOntology ;
+  smap:standardName "vCard RDF" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://www.w3.org/TR/vcard-rdf/" ;
+  rdfs:label "vCard RDF vocabulary" .
+
+align:provTimeGeoDcatSosaExternalSet a smap:ExternalOntology ;
+  smap:standardName "PROV/TIME/GeoSPARQL/DCAT/SOSA civic evidence set" ;
+  smap:standardVersion "external" ;
+  smap:standardUrl "https://www.w3.org/" ;
+  rdfs:label "Civic evidence external vocabulary set" .
+
+cstack:CivicStackObject a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Civic stack object" ;
+  rdfs:comment "Transitional superclass for Seven-Model Civic Operating Architecture bridge terms before full EnRM/CGRM/PRM/SRM/DRM/TRM modules land." .
+
+cstack:RegulatedService a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Regulated service" .
+
+cstack:RegulatedDataset a owl:Class ;
+  rdfs:subClassOf dom:Dataset ;
+  rdfs:label "Regulated dataset" .
+
+cstack:ServiceEvent a owl:Class ;
+  rdfs:subClassOf cstack:CivicStackObject ;
+  rdfs:label "Service event" .
+
+cstack:PerformanceObservation a owl:Class ;
+  rdfs:subClassOf cstack:CivicStackObject ;
+  rdfs:label "Performance observation" .
+
+cstack:EnvironmentalExposure a owl:Class ;
+  rdfs:subClassOf cstack:CivicStackObject ;
+  rdfs:label "Environmental exposure" .
+
+cstack:AttestationEvent a owl:Class ;
+  rdfs:subClassOf cstack:CivicStackObject ;
+  rdfs:label "Attestation event" .
+
+cstack:ChangeEvent a owl:Class ;
+  rdfs:subClassOf cstack:CivicStackObject ;
+  rdfs:label "Civic stack change event" .
+
+cstack:hasResponsiblePost a owl:ObjectProperty ;
+  rdfs:domain cstack:RegulatedService ;
+  rdfs:range org:Post ;
+  rdfs:label "has responsible post" .
+
+cstack:hasLegalBasis a owl:ObjectProperty ;
+  rdfs:domain cstack:CivicStackObject ;
+  rdfs:range upper:Policy ;
+  rdfs:label "has legal basis" .
+
+cstack:hasAccessBasis a owl:ObjectProperty ;
+  rdfs:domain cstack:RegulatedDataset ;
+  rdfs:range upper:Policy ;
+  rdfs:label "has access basis" .
+
+cstack:attestsTarget a owl:ObjectProperty ;
+  rdfs:domain cstack:AttestationEvent ;
+  rdfs:range upper:Entity ;
+  rdfs:label "attests target" .
+
+cstack:hasExposure a owl:ObjectProperty ;
+  rdfs:domain org:Site ;
+  rdfs:range cstack:EnvironmentalExposure ;
+  rdfs:label "has exposure" .
+
+cstack:hasProvenanceRef a owl:DatatypeProperty ;
+  rdfs:domain cstack:CivicStackObject ;
+  rdfs:range xsd:string ;
+  rdfs:label "has provenance reference" .
+
+cstack:hasEvidenceRef a owl:DatatypeProperty ;
+  rdfs:domain cstack:CivicStackObject ;
+  rdfs:range xsd:string ;
+  rdfs:label "has evidence reference" .
+
+cstack:signature a owl:DatatypeProperty ;
+  rdfs:domain cstack:AttestationEvent ;
+  rdfs:range xsd:string ;
+  rdfs:label "signature" .
+
+cstack:hasExternalityVector a owl:DatatypeProperty ;
+  rdfs:domain cstack:ServiceEvent ;
+  rdfs:range xsd:string ;
+  rdfs:label "has externality vector" .
+
+cstack:emissionsKgCO2e a owl:DatatypeProperty ;
+  rdfs:domain cstack:CivicStackObject ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "emissions kilograms CO2e" .
+
+align:PartyToFoafAgent a smap:MappingAssertion ;
+  smap:mapsFrom party:Party ;
+  smap:mapsTo foaf:Agent ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:foafExternalOntology ;
+  smap:confidence 0.86 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis party and FOAF agent both represent acting social or technical subjects. Close match is safer than exact equivalence because Ontogenesis also carries service and device principals." .
+
+align:NaturalPersonToFoafPerson a smap:MappingAssertion ;
+  smap:mapsFrom party:NaturalPerson ;
+  smap:mapsTo foaf:Person ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:foafExternalOntology ;
+  smap:confidence 0.90 ;
+  smap:status "draft" ;
+  smap:rationale "Natural person maps closely to FOAF Person while preserving local identity governance semantics." .
+
+align:OrganizationToOrgOrganization a smap:MappingAssertion ;
+  smap:mapsFrom party:Organization ;
+  smap:mapsTo org:Organization ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:w3cOrgExternalOntology ;
+  smap:confidence 0.86 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis organizations map to ORG organizations, but local party and legal distinctions remain authoritative." .
+
+align:LegalEntityToOrgFormalOrganization a smap:MappingAssertion ;
+  smap:mapsFrom legal:LegalEntity ;
+  smap:mapsTo org:FormalOrganization ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:w3cOrgExternalOntology ;
+  smap:confidence 0.82 ;
+  smap:status "draft" ;
+  smap:rationale "Legal entities are formal organizations in many cases, but local incorporation and jurisdiction semantics are stricter than ORG." .
+
+align:RoleAssignmentToOrgMembership a smap:MappingAssertion ;
+  smap:mapsFrom party:RoleAssignment ;
+  smap:mapsTo org:Membership ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:w3cOrgExternalOntology ;
+  smap:confidence 0.74 ;
+  smap:status "draft" ;
+  smap:rationale "A role assignment can model membership-like responsibility, but ORG membership binds member, organization, and role more specifically. Bridge via SHACL rather than equivalence." .
+
+align:ServiceInstanceToRegulatedService a smap:MappingAssertion ;
+  smap:mapsFrom prod:ServiceInstance ;
+  smap:mapsTo cstack:RegulatedService ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:provTimeGeoDcatSosaExternalSet ;
+  smap:confidence 0.75 ;
+  smap:status "draft" ;
+  smap:rationale "A provisioned service instance can be lifted into the civic stack when it carries legal basis, responsible post, evidence, and scoreability." .
+
+align:DatasetToDcatDataset a smap:MappingAssertion ;
+  smap:mapsFrom dom:Dataset ;
+  smap:mapsTo dcat:Dataset ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:provTimeGeoDcatSosaExternalSet ;
+  smap:confidence 0.84 ;
+  smap:status "draft" ;
+  smap:rationale "Ontogenesis metadata datasets are catalog-compatible with DCAT datasets, while local access-basis and provenance requirements remain governed." .
+
+align:SiteToOrgSite a smap:MappingAssertion ;
+  smap:mapsFrom cstack:EnvironmentalExposure ;
+  smap:mapsTo org:Site ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:w3cOrgExternalOntology ;
+  smap:confidence 0.60 ;
+  smap:status "draft" ;
+  smap:rationale "Environmental exposure is anchored to sites but is not equivalent to a site. The mapping records the site-mediated bridge for EnRM follow-up." .
+
+align:PerformanceObservationToSosaObservation a smap:MappingAssertion ;
+  smap:mapsFrom cstack:PerformanceObservation ;
+  smap:mapsTo sosa:Observation ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:provTimeGeoDcatSosaExternalSet ;
+  smap:confidence 0.80 ;
+  smap:status "draft" ;
+  smap:rationale "PRM+ observations can use SOSA-compatible observation structure while retaining public-value and policy-score semantics locally." .
+
+align:AttestationEventToProvActivity a smap:MappingAssertion ;
+  smap:mapsFrom cstack:AttestationEvent ;
+  smap:mapsTo prov:Activity ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:provTimeGeoDcatSosaExternalSet ;
+  smap:confidence 0.82 ;
+  smap:status "draft" ;
+  smap:rationale "Attestation is activity-like evidence generation. Exact equivalence is deferred until TRM+ attestation semantics land." .
