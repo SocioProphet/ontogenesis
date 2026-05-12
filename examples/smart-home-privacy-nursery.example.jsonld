@@ -1,0 +1,73 @@
+{
+  "@context": "https://socioprophet.github.io/ontogenesis/contexts/smart-home-privacy.context.jsonld",
+  "@graph": [
+    {
+      "id": "https://example.socioprophet.org/vendor/example-babycare",
+      "type": "shp:SmartHomeVendor",
+      "label": "Example BabyCare Vendor"
+    },
+    {
+      "id": "https://example.socioprophet.org/device/example-nursery-monitor",
+      "type": "shp:SmartHomeDevice",
+      "label": "Example nursery baby monitor",
+      "vendor": "https://example.socioprophet.org/vendor/example-babycare",
+      "deviceType": "shp:BabyMonitor",
+      "capability": ["shp:ObserveCapability", "shp:RecordCapability", "shp:TransmitCapability"],
+      "dataAttribute": ["shp:VideoStream", "shp:AudioStream"],
+      "physicalContext": "shp:NurseryContext",
+      "hasRiskInference": ["shp:ChildSurveillanceRisk", "shp:OccupancyInferenceRisk"]
+    },
+    {
+      "id": "https://example.socioprophet.org/policy/example-babycare-privacy-policy",
+      "type": "shp:PolicyDocument",
+      "label": "Example BabyCare privacy policy",
+      "policyCoversDevice": "https://example.socioprophet.org/device/example-nursery-monitor",
+      "assertsClaim": [
+        "https://example.socioprophet.org/claim/example-collection-video-audio",
+        "https://example.socioprophet.org/claim/example-sharing-vague-personal-data"
+      ]
+    },
+    {
+      "id": "https://example.socioprophet.org/evidence/example-policy-span-001",
+      "type": "shp:EvidenceRecord",
+      "label": "Example extracted policy span",
+      "policyHash": "sha256:example-not-production",
+      "crawlPath": "vendor-site > privacy-policy > device-data-section",
+      "observedAt": "2026-05-12T00:00:00Z"
+    },
+    {
+      "id": "https://example.socioprophet.org/claim/example-collection-video-audio",
+      "type": "shp:CollectionClaim",
+      "label": "Policy claims collection of audio/video data",
+      "claimDeviceType": "shp:BabyMonitor",
+      "claimDataAttribute": ["shp:VideoStream", "shp:AudioStream"],
+      "purposeText": "Provide local child safety monitoring and device operation.",
+      "evidenceForClaim": "https://example.socioprophet.org/evidence/example-policy-span-001",
+      "confidenceScore": 0.82
+    },
+    {
+      "id": "https://example.socioprophet.org/claim/example-sharing-vague-personal-data",
+      "type": "shp:SharingClaim",
+      "label": "Policy vaguely claims sharing of personal data",
+      "claimDataAttribute": ["shp:VideoStream", "shp:AudioStream"],
+      "destinationText": "service providers and partners",
+      "jurisdictionText": "generic policy text",
+      "evidenceForClaim": "https://example.socioprophet.org/evidence/example-policy-span-001",
+      "confidenceScore": 0.63
+    },
+    {
+      "id": "https://example.socioprophet.org/finding/example-vague-sharing",
+      "type": "shp:CoverageFinding",
+      "label": "Vague sharing finding for nursery monitor",
+      "findingSubject": "https://example.socioprophet.org/policy/example-babycare-privacy-policy",
+      "findingType": "shp:VagueSharingFinding",
+      "confidenceScore": 0.77,
+      "requiresConsentBoundary": "https://example.socioprophet.org/boundary/hpb-nursery-default"
+    },
+    {
+      "id": "https://example.socioprophet.org/boundary/hpb-nursery-default",
+      "type": "shp:ConsentBoundary",
+      "label": "Nursery audio/video requires explicit consent and local-first retention"
+    }
+  ]
+}
