@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "comment": "http://www.w3.org/2000/01/rdf-schema#comment",
+
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "party": "https://socioprophet.github.io/ontogenesis/domains/party#",
+    "legal": "https://socioprophet.github.io/ontogenesis/domains/legal#",
+    "prod": "https://socioprophet.github.io/ontogenesis/domains/product-service#",
+    "cstack": "https://socioprophet.github.io/ontogenesis/civic-stack#",
+    "align": "https://socioprophet.github.io/ontogenesis/alignments#",
+    "smap": "https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#",
+
+    "org": "http://www.w3.org/ns/org#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "time": "http://www.w3.org/2006/time#",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "member": {"@id": "org:member", "@type": "@id"},
+    "organization": {"@id": "org:organization", "@type": "@id"},
+    "role": {"@id": "org:role", "@type": "@id"},
+    "postIn": {"@id": "org:postIn", "@type": "@id"},
+    "hasSite": {"@id": "org:hasSite", "@type": "@id"},
+    "hasUnit": {"@id": "org:hasUnit", "@type": "@id"},
+    "hasGeometry": {"@id": "geo:hasGeometry", "@type": "@id"},
+    "asWKT": {"@id": "geo:asWKT", "@type": "geo:wktLiteral"},
+    "hasAddress": {"@id": "vcard:hasAddress", "@type": "@id"},
+    "wasGeneratedBy": {"@id": "prov:wasGeneratedBy", "@type": "@id"},
+    "wasAssociatedWith": {"@id": "prov:wasAssociatedWith", "@type": "@id"},
+    "generatedAtTime": {"@id": "prov:generatedAtTime", "@type": "xsd:dateTime"},
+    "startedAtTime": {"@id": "prov:startedAtTime", "@type": "xsd:dateTime"},
+    "resultTime": {"@id": "sosa:resultTime", "@type": "xsd:dateTime"},
+
+    "hasLegalBasis": {"@id": "cstack:hasLegalBasis", "@type": "@id"},
+    "hasAccessBasis": {"@id": "cstack:hasAccessBasis", "@type": "@id"},
+    "hasResponsiblePost": {"@id": "cstack:hasResponsiblePost", "@type": "@id"},
+    "hasEvidenceRef": "cstack:hasEvidenceRef",
+    "hasProvenanceRef": "cstack:hasProvenanceRef",
+    "hasExternalityVector": "cstack:hasExternalityVector",
+    "emissionsKgCO2e": {"@id": "cstack:emissionsKgCO2e", "@type": "xsd:decimal"},
+    "signature": "cstack:signature"
+  }
+}
