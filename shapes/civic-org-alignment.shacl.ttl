@@ -1,0 +1,137 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+@prefix geo:    <http://www.opengis.net/ont/geosparql#> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix cstack: <https://socioprophet.github.io/ontogenesis/civic-stack#> .
+
+<shapes/civic-org-alignment.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass cstack:CivicStackObject ;
+  sh:message "Civic organization alignment SHACL bundle loaded." .
+
+cstack:MembershipShape a sh:NodeShape ;
+  sh:targetClass org:Membership ;
+  sh:property [
+    sh:path org:member ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "A civic membership must identify exactly one member." ;
+  ] ;
+  sh:property [
+    sh:path org:organization ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "A civic membership must identify exactly one organization." ;
+  ] ;
+  sh:property [
+    sh:path org:role ;
+    sh:minCount 1 ;
+    sh:message "A civic membership must identify at least one role." ;
+  ] .
+
+cstack:SiteAddressOrGeometryShape a sh:NodeShape ;
+  sh:targetClass org:Site ;
+  sh:or (
+    [ sh:property [ sh:path geo:hasGeometry ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path vcard:hasAddress ; sh:minCount 1 ] ]
+  ) ;
+  sh:message "A civic site must carry GeoSPARQL geometry or a vCard address." .
+
+cstack:RegulatedServiceShape a sh:NodeShape ;
+  sh:targetClass cstack:RegulatedService ;
+  sh:property [
+    sh:path cstack:hasLegalBasis ;
+    sh:minCount 1 ;
+    sh:message "A regulated civic service must cite at least one legal basis." ;
+  ] ;
+  sh:property [
+    sh:path cstack:hasResponsiblePost ;
+    sh:minCount 1 ;
+    sh:message "A regulated civic service must identify a responsible post." ;
+  ] .
+
+cstack:RegulatedDatasetShape a sh:NodeShape ;
+  sh:targetClass cstack:RegulatedDataset ;
+  sh:property [
+    sh:path prov:wasGeneratedBy ;
+    sh:minCount 1 ;
+    sh:message "A regulated dataset must identify its generating activity or service." ;
+  ] ;
+  sh:property [
+    sh:path cstack:hasAccessBasis ;
+    sh:minCount 1 ;
+    sh:message "A regulated dataset must cite at least one access basis." ;
+  ] ;
+  sh:property [
+    sh:path cstack:hasProvenanceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A regulated dataset must carry a provenance reference." ;
+  ] .
+
+cstack:ServiceEventShape a sh:NodeShape ;
+  sh:targetClass cstack:ServiceEvent ;
+  sh:property [
+    sh:path prov:wasGeneratedBy ;
+    sh:minCount 1 ;
+    sh:message "A civic service event must identify the generating service or activity." ;
+  ] ;
+  sh:property [
+    sh:path cstack:hasLegalBasis ;
+    sh:minCount 1 ;
+    sh:message "A civic service event must cite legal basis." ;
+  ] ;
+  sh:property [
+    sh:path cstack:hasEvidenceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A civic service event must carry an evidence reference." ;
+  ] .
+
+cstack:AttestationEventShape a sh:NodeShape ;
+  sh:targetClass cstack:AttestationEvent ;
+  sh:property [
+    sh:path cstack:attestsTarget ;
+    sh:minCount 1 ;
+    sh:message "An attestation event must identify the attested target." ;
+  ] ;
+  sh:property [
+    sh:path prov:generatedAtTime ;
+    sh:minCount 1 ;
+    sh:datatype xsd:dateTime ;
+    sh:message "An attestation event must carry a generation time." ;
+  ] ;
+  sh:or (
+    [ sh:property [ sh:path cstack:signature ; sh:minCount 1 ; sh:datatype xsd:string ] ]
+    [ sh:property [ sh:path cstack:hasEvidenceRef ; sh:minCount 1 ; sh:datatype xsd:string ] ]
+  ) ;
+  sh:message "An attestation event must carry either a signature or an evidence reference." .
+
+cstack:OrgChangeEventShape a sh:NodeShape ;
+  sh:targetClass org:ChangeEvent ;
+  sh:property [
+    sh:path time:inXSDDateTime ;
+    sh:minCount 1 ;
+    sh:message "An ORG change event must carry a TIME timestamp." ;
+  ] ;
+  sh:property [
+    sh:path prov:wasAssociatedWith ;
+    sh:minCount 1 ;
+    sh:message "An ORG change event must identify an associated agent." ;
+  ] .
+
+cstack:CivicChangeEventShape a sh:NodeShape ;
+  sh:targetClass cstack:ChangeEvent ;
+  sh:property [
+    sh:path time:inXSDDateTime ;
+    sh:minCount 1 ;
+    sh:message "A civic-stack change event must carry a TIME timestamp." ;
+  ] ;
+  sh:property [
+    sh:path prov:wasAssociatedWith ;
+    sh:minCount 1 ;
+    sh:message "A civic-stack change event must identify an associated agent." ;
+  ] .
