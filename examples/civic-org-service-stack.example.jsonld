@@ -1,0 +1,112 @@
+{
+  "@context": "https://socioprophet.github.io/ontogenesis/contexts/civic-stack.context.jsonld",
+  "id": "urn:org:socioprophet:civic-stack-demo",
+  "type": "org:FormalOrganization",
+  "label": "SocioProphet civic-stack demo organization",
+  "org:identifier": "urn:org:socioprophet",
+  "hasSite": {
+    "id": "urn:site:socioprophet:phl-edge",
+    "type": "org:Site",
+    "label": "Philadelphia edge site",
+    "hasAddress": {
+      "type": "vcard:Work",
+      "vcard:locality": "Philadelphia",
+      "vcard:region": "PA",
+      "vcard:country-name": "US"
+    },
+    "hasGeometry": {
+      "type": "geo:Geometry",
+      "asWKT": "POINT(-75.1652 39.9526)"
+    },
+    "cstack:hasExposure": {
+      "id": "urn:exposure:socioprophet:phl-edge:grid-carbon:2026-05-12T00:00:00Z",
+      "type": "cstack:EnvironmentalExposure",
+      "label": "Grid carbon intensity exposure",
+      "cstack:exposureKind": "grid-carbon-intensity",
+      "emissionsKgCO2e": 0.352,
+      "generatedAtTime": "2026-05-12T00:00:00Z",
+      "hasProvenanceRef": "urn:prov:gaia:exposure:phl-edge:grid-carbon:2026-05-12"
+    }
+  },
+  "hasUnit": {
+    "id": "urn:org:socioprophet:sociosphere-unit",
+    "type": "org:OrganizationalUnit",
+    "label": "SocioSphere governance unit"
+  },
+  "org:hasPost": {
+    "id": "urn:post:socioprophet:civic-service-steward",
+    "type": "org:Post",
+    "label": "Civic service steward"
+  },
+  "org:hasMembership": {
+    "id": "urn:membership:socioprophet:civic-service-steward:demo",
+    "type": "org:Membership",
+    "member": {
+      "id": "did:key:z6MkCivicStackDemoAgent",
+      "type": "foaf:Person",
+      "label": "Civic stack demo operator"
+    },
+    "organization": "urn:org:socioprophet:civic-stack-demo",
+    "role": {
+      "id": "urn:role:socioprophet:civic-service-steward",
+      "type": "org:Role",
+      "label": "Civic service steward"
+    },
+    "postIn": "urn:post:socioprophet:civic-service-steward",
+    "startedAtTime": "2026-05-12T00:00:00Z"
+  },
+  "cstack:providesService": {
+    "id": "urn:svc:socioprophet:civic-evidence-routing",
+    "type": "cstack:RegulatedService",
+    "label": "Civic evidence routing service",
+    "hasResponsiblePost": "urn:post:socioprophet:civic-service-steward",
+    "hasLegalBasis": "urn:policy:socioprophet:civic-evidence-routing-v0",
+    "cstack:hasInterface": "urn:api:socioprophet:civic-evidence-routing:v0",
+    "cstack:hasServiceLevel": "urn:prm:target:civic-evidence-routing:trace-completeness"
+  },
+  "dcat:dataset": {
+    "id": "urn:dataset:socioprophet:civic-service-events-demo",
+    "type": "cstack:RegulatedDataset",
+    "label": "Civic service events demo dataset",
+    "wasGeneratedBy": "urn:svc:socioprophet:civic-evidence-routing",
+    "hasAccessBasis": "urn:policy:socioprophet:civic-service-event-access-v0",
+    "hasProvenanceRef": "urn:prov:socioprophet:civic-service-events-demo:trace"
+  },
+  "cstack:serviceEvent": {
+    "id": "urn:event:socioprophet:civic-evidence-routing:2026-05-12T00:05:00Z",
+    "type": "cstack:ServiceEvent",
+    "label": "Civic evidence routing service event",
+    "wasAssociatedWith": "did:key:z6MkCivicStackDemoAgent",
+    "wasGeneratedBy": "urn:svc:socioprophet:civic-evidence-routing",
+    "generatedAtTime": "2026-05-12T00:05:00Z",
+    "hasLegalBasis": "urn:policy:socioprophet:civic-evidence-routing-v0",
+    "hasExternalityVector": "energy_kwh=0.004; emissions_kg_co2e=0.0014",
+    "hasEvidenceRef": "urn:evidence:socioprophet:civic-evidence-routing:event:2026-05-12T00:05:00Z"
+  },
+  "cstack:performanceObservation": {
+    "id": "urn:obs:socioprophet:civic-evidence-routing:trace-completeness:2026-05-12T00:10:00Z",
+    "type": ["cstack:PerformanceObservation", "sosa:Observation"],
+    "sosa:hasFeatureOfInterest": "urn:svc:socioprophet:civic-evidence-routing",
+    "sosa:observedProperty": "trace_completeness_ratio",
+    "sosa:hasSimpleResult": 1.0,
+    "resultTime": "2026-05-12T00:10:00Z",
+    "emissionsKgCO2e": 0.0014,
+    "hasEvidenceRef": "urn:evidence:socioprophet:civic-evidence-routing:score:2026-05-12T00:10:00Z"
+  },
+  "cstack:attestation": {
+    "id": "urn:attest:socioprophet:civic-evidence-routing:2026-05-12T00:04:30Z",
+    "type": "cstack:AttestationEvent",
+    "cstack:attestsTarget": "urn:svc:socioprophet:civic-evidence-routing",
+    "wasAssociatedWith": "urn:post:socioprophet:civic-service-steward",
+    "generatedAtTime": "2026-05-12T00:04:30Z",
+    "signature": "base64:MEUCICivicStackDemoSignature",
+    "hasEvidenceRef": "urn:evidence:socioprophet:civic-evidence-routing:attestation:2026-05-12T00:04:30Z"
+  },
+  "org:changedBy": {
+    "id": "urn:change:socioprophet:civic-stack-demo:initial-publication",
+    "type": ["org:ChangeEvent", "cstack:ChangeEvent"],
+    "time:inXSDDateTime": "2026-05-12T00:00:00Z",
+    "wasAssociatedWith": "did:key:z6MkCivicStackDemoAgent",
+    "prov:used": "urn:evidence:socioprophet:civic-stack-demo:publication-plan"
+  }
+}
