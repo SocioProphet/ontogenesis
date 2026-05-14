@@ -1,0 +1,44 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bizd:  <https://socioprophet.github.io/ontogenesis/domains/business/drivers#> .
+@prefix bizm:  <https://socioprophet.github.io/ontogenesis/domains/business/metrics#> .
+
+<shapes/business_drivers.shacl.ttl> a sh:NodeShape ;
+  sh:targetClass bizd:DriverEdge ;
+  sh:message "Business driver edges must declare fromMetric, toMetric, sign, relationType, lagValue, lagUnit, and confidence." ;
+  sh:property [
+    sh:path bizd:fromMetric ;
+    sh:minCount 1 ;
+    sh:class bizm:MetricConcept ;
+  ] ;
+  sh:property [
+    sh:path bizd:toMetric ;
+    sh:minCount 1 ;
+    sh:class bizm:MetricConcept ;
+  ] ;
+  sh:property [
+    sh:path bizd:sign ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizd:relationType ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizd:lagValue ;
+    sh:minCount 1 ;
+    sh:datatype xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path bizd:lagUnit ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path bizd:confidence ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
