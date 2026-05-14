@@ -1,0 +1,35 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/knowledge_context_registry.ttl> a owl:Ontology ;
+  dct:title "Knowledge Context Registry Supplement" ;
+  dct:description "Supplemental registry tranche for the Platform Knowledge Context semantic governance module." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:PlatformKnowledgeContext a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/knowledge-context.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Knowledge Context" .
+
+og:PlatformKnowledgeContextShapes a og:Module ;
+  og:layer "SHACL" ;
+  og:path "shapes/knowledge-context.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Knowledge Context SHACL gates" .
+
+og:PlatformKnowledgeContextContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/knowledge-context.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Knowledge Context JSON-LD context" .
