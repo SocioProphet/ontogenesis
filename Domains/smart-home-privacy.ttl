@@ -67,7 +67,7 @@ shp:CoverageFinding a owl:Class ;
   rdfs:label "Coverage finding" .
 
 shp:FindingTypeCode a owl:Class ;
-  rdfs:subClassOf shp:CoverageFinding ;
+  rdfs:subClassOf upper:InformationArtifact ;
   rdfs:label "Finding type code" .
 
 shp:EvidenceRecord a owl:Class ;
@@ -148,7 +148,7 @@ shp:findingSubject a owl:ObjectProperty ;
 
 shp:findingType a owl:ObjectProperty ;
   rdfs:domain shp:CoverageFinding ;
-  rdfs:range shp:CoverageFinding ;
+  rdfs:range shp:FindingTypeCode ;
   rdfs:label "finding type" .
 
 shp:hasRiskInference a owl:ObjectProperty ;
