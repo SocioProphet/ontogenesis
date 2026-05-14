@@ -44,6 +44,13 @@ This repo defines a layered ontology stack plus gates/tools.
   - wireguard tunnels and peers
 - `Platform/lattice-ontology-query.ttl`
   - governed ontology-query adapter contract for Lattice FederatedQueryPlane; distinct from SPARQL routing
+- `Platform/knowledge-context.ttl`
+  - Knowledge Context v1 semantic governance: passages, mentions, entities, claims, provenance, embedding references, vector index references, and entity resolution records
+- `Platform/ReasoningFailure/`
+  - `reasoning-failure.ttl` — reasoning-failure ontology slice covering failure modes, perturbations, invariants, verifiers, traces, mitigation patterns, residual risk, regression cases, and evidence receipts
+  - SHACL: `shapes/reasoning_failure.shacl.ttl`
+  - JSON-LD context: `contexts/reasoning-failure.context.jsonld`
+  - example: `examples/reasoning_failure_demo.ttl`
 - `Platform/GovernedIntelligence/`
   - `governed-intelligence.ttl` — canonical SocioProphet governed-intelligence object model: Entity, Anchor, Evidence, Claim, ProofCertificate, ExplanationTrace, VectorCandidate, PolicyDecision, ActionProposal, ActionAdmission, RuntimeReceipt, LearningEvent, Revocation, SlashTopicProfile, and VectorEncodingManifest
   - SHACL: `shapes/governed_intelligence.shacl.ttl`
@@ -114,6 +121,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 - `Domains/product-service.ttl` — product/service offerings, plans, SKUs, capabilities, entitlements, and service instances
 - `Domains/agentic-purple-team.ttl` — governed agentic purple-team loops/actions, evidence envelopes, safety boundaries, gates, atomic tests, countermeasure rules, run receipts/summaries, AI/MCP/agent-skill risk, graph robustness, and MITRE-compatible local technique model
+- `Domains/smart-home-privacy.ttl` — smart-home privacy governance for vendors, devices, capabilities, physical contexts, privacy claims, evidence, coverage findings, risk inferences, consent boundaries, GAIA bindings, and HDT impact bindings
 
 ## Bindings / governed profiles
 - `bindings/valueflows_governed/`
@@ -136,16 +144,24 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - governed ValueFlows profile spec
 - `docs/specs/agentic-purple-team-and-mitre.md`
   - SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
+- `docs/specs/smart_home_privacy_gaia_hdt_bridge.md`
+  - smart-home privacy bridge specification for Ontogenesis, GAIA, HolographMe/HDT, Sherlock, SourceOS, ProCybernetica, Sociosphere, and Policy Fabric
 
 ## Supplemental registries and contexts
 - `catalog/registry.ttl` and `catalog/registry.jsonld` — primary module registries
 - `catalog/semantic_enterprise_registry.ttl` — supplemental semantic-enterprise registry tranche
+- `catalog/knowledge_context_registry.ttl` — supplemental Knowledge Context registry tranche; transitional until #93 normalizes registry posture
+- `catalog/reasoning_failure_registry.ttl` — supplemental reasoning-failure registry tranche; transitional until #93 normalizes registry posture
+- `catalog/smart_home_privacy_registry.ttl` — supplemental smart-home privacy registry tranche; transitional until #93 normalizes registry posture
 - `contexts/main.context.jsonld` — main JSON-LD context
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 - `contexts/governed-intelligence.context.jsonld` — governed-intelligence context
+- `contexts/knowledge-context.context.jsonld` — Knowledge Context context
+- `contexts/reasoning-failure.context.jsonld` — reasoning-failure context
+- `contexts/smart-home-privacy.context.jsonld` — smart-home privacy context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
