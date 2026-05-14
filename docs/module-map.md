@@ -46,6 +46,12 @@ This repo defines a layered ontology stack plus gates/tools.
   - governed ontology-query adapter contract for Lattice FederatedQueryPlane; distinct from SPARQL routing
 - `Platform/knowledge-context.ttl`
   - Knowledge Context v1 semantic governance: passages, mentions, entities, claims, provenance, embedding references, vector index references, and entity resolution records
+- `Platform/view-governance.ttl`
+  - ViewContract semantic governance for authority-bound graph/analysis views, disclosure modes, typed absence, policy barriers, materialization boundaries, revocation epochs, and view signatures
+  - SHACL: `shapes/view-governance.shacl.ttl`
+  - JSON-LD context: `contexts/view-governance.context.jsonld`
+  - example: `examples/view-governance-demo.ttl`
+  - spec: `docs/specs/view-governance.md`
 - `Platform/ReasoningFailure/`
   - `reasoning-failure.ttl` — reasoning-failure ontology slice covering failure modes, perturbations, invariants, verifiers, traces, mitigation patterns, residual risk, regression cases, and evidence receipts
   - SHACL: `shapes/reasoning_failure.shacl.ttl`
@@ -137,6 +143,8 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `docs/specs/lc-vsm-query-chatops-object-model-v0.md`
   - LC-VSM query and ChatOps semantic profile binding Matrix/WordOps surface events, Sherlock search packets, resolver plans, evidence bundles, semantic bindings, lifecycle cells, and DevSecOps audit events
   - Example trace: `examples/lc-vsm-query-chatops-sample.json`
+- `docs/specs/view-governance.md`
+  - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, view signatures, and cross-repo ownership boundaries
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
 - `docs/specs/ontology-query-adapter.md`
@@ -156,15 +164,17 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `catalog/knowledge_context_registry.ttl` — supplemental Knowledge Context registry tranche; transitional until #93 normalizes registry posture
 - `catalog/reasoning_failure_registry.ttl` — supplemental reasoning-failure registry tranche; transitional until #93 normalizes registry posture
 - `catalog/smart_home_privacy_registry.ttl` — supplemental smart-home privacy registry tranche; transitional until #93 normalizes registry posture
+- `catalog/view_governance_registry.ttl` — supplemental View Governance registry tranche; transitional until #93 normalizes registry posture
 - `contexts/main.context.jsonld` — main JSON-LD context
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 - `contexts/governed-intelligence.context.jsonld` — governed-intelligence context
 - `contexts/knowledge-context.context.jsonld` — Knowledge Context context
 - `contexts/reasoning-failure.context.jsonld` — reasoning-failure context
 - `contexts/smart-home-privacy.context.jsonld` — smart-home privacy context
+- `contexts/view-governance.context.jsonld` — View Governance context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`, `shapes/view-governance.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
