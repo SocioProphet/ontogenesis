@@ -1,0 +1,215 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+
+prop:ProphetArtifactShape a sh:NodeShape ;
+  sh:targetClass prop:ProphetArtifact ;
+  sh:property [
+    sh:path prop:apiVersion ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:hasValue "socioprophet.org/v1alpha1" ;
+    sh:message "ProphetArtifact must declare apiVersion socioprophet.org/v1alpha1." ;
+  ] ;
+  sh:property [
+    sh:path prop:recordKind ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:hasValue "ProphetArtifact" ;
+    sh:message "ProphetArtifact must declare kind ProphetArtifact." ;
+  ] ;
+  sh:property [
+    sh:path prop:artifactName ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[a-z0-9][a-z0-9.-]*[a-z0-9]$" ;
+    sh:message "ProphetArtifact must include metadata.name in canonical slug format." ;
+  ] ;
+  sh:property [
+    sh:path prop:artifactVersion ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$" ;
+    sh:message "ProphetArtifact must include metadata.version in SemVer format." ;
+  ] ;
+  sh:property [
+    sh:path prop:ownerRepo ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" ;
+    sh:message "ProphetArtifact must include metadata.ownerRepo in owner/repo format." ;
+  ] ;
+  sh:property [
+    sh:path prop:artifactKind ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:in (
+      prop:workflowKind
+      prop:datasetKind
+      prop:modelKind
+      prop:benchmarkKind
+      prop:notebookKind
+      prop:runtimeKind
+      prop:paperKind
+      prop:agentSkillKind
+      prop:scoreboardKind
+    ) ;
+    sh:message "ProphetArtifact must use a supported artifactKind vocabulary value." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasAction ;
+    sh:minCount 1 ;
+    sh:class prop:ArtifactAction ;
+    sh:message "ProphetArtifact must declare one or more actions." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasRuntime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class prop:ArtifactRuntime ;
+    sh:message "ProphetArtifact must declare runtime metadata." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasProvenance ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class prop:ArtifactProvenance ;
+    sh:message "ProphetArtifact must declare provenance metadata." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasPolicy ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class prop:ArtifactPolicy ;
+    sh:message "ProphetArtifact must declare policy metadata." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasEvidence ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class prop:ArtifactEvidence ;
+    sh:message "ProphetArtifact must declare evidence metadata." ;
+  ] ;
+  sh:property [
+    sh:path prop:hasMetric ;
+    sh:minCount 1 ;
+    sh:class prop:ArtifactMetric ;
+    sh:message "ProphetArtifact must declare metric metadata." ;
+  ] .
+
+prop:ArtifactActionShape a sh:NodeShape ;
+  sh:targetClass prop:ArtifactAction ;
+  sh:property [
+    sh:path prop:actionName ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactAction must include action name." ;
+  ] ;
+  sh:property [
+    sh:path prop:verb ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:in (
+      prop:detect
+      prop:fetch
+      prop:prepare
+      prop:build
+      prop:run
+      prop:validate
+      prop:benchmark
+      prop:tune
+      prop:publish
+      prop:attest
+    ) ;
+    sh:message "ArtifactAction verb must use the canonical action vocabulary." ;
+  ] .
+
+prop:ArtifactRuntimeShape a sh:NodeShape ;
+  sh:targetClass prop:ArtifactRuntime ;
+  sh:property [
+    sh:path prop:runtimeSubstrate ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:in (
+      prop:localSubstrate
+      prop:containerSubstrate
+      prop:latticeForgeSubstrate
+      prop:sourceosSubstrate
+      prop:kubernetesSubstrate
+      prop:notebookSubstrate
+      prop:beamSubstrate
+      prop:raySubstrate
+    ) ;
+    sh:message "ArtifactRuntime must declare a supported runtime substrate." ;
+  ] .
+
+prop:ArtifactProvenanceShape a sh:NodeShape ;
+  sh:targetClass prop:ArtifactProvenance ;
+  sh:property [
+    sh:path prop:sourceUri ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:anyURI ;
+    sh:message "ArtifactProvenance must include sourceUri." ;
+  ] ;
+  sh:property [
+    sh:path prop:license ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactProvenance must include license." ;
+  ] ;
+  sh:property [
+    sh:path prop:attribution ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactProvenance must include attribution." ;
+  ] .
+
+prop:ArtifactPolicyShape a sh:NodeShape ;
+  sh:targetClass prop:ArtifactPolicy ;
+  sh:property [
+    sh:path prop:hasSafetyClass ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:in (
+      prop:advisory
+      prop:bounded
+      prop:privilegedClass
+      prop:prohibited
+    ) ;
+    sh:message "ArtifactPolicy must include a valid safety class." ;
+  ] ;
+  sh:property [
+    sh:path prop:promotionGate ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactPolicy must include promotionGate." ;
+  ] .
+
+prop:ArtifactEvidenceShape a sh:NodeShape ;
+  sh:targetClass prop:ArtifactEvidence ;
+  sh:property [
+    sh:path prop:logEvidence ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactEvidence must include one or more logs." ;
+  ] ;
+  sh:property [
+    sh:path prop:checksumEvidence ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ArtifactEvidence must include one or more checksums." ;
+  ] .

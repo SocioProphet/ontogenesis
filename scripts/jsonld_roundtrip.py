@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTEXTS = [
     ROOT / "contexts/main.context.jsonld",
     ROOT / "contexts/view-governance.context.jsonld",
+    ROOT / "contexts/prophet-artifact.context.jsonld",
     ROOT / "prophet/contexts/prophet.context.jsonld",
     ROOT / "epi/contexts/epi.context.jsonld",
 ]

@@ -1,0 +1,50 @@
+PREFIX prop: <https://socioprophet.github.io/ontogenesis/prophet#>
+
+# Invariant: Prophet artifact contract vocabulary + canonical examples must exist.
+SELECT ?missing WHERE {
+  {
+    VALUES ?missing {
+      prop:ProphetArtifact
+      prop:ArtifactAction
+      prop:ArtifactRuntime
+      prop:ArtifactProvenance
+      prop:ArtifactPolicy
+      prop:ArtifactEvidence
+      prop:ArtifactMetric
+      prop:ArtifactRegistration
+      prop:workflowKind
+      prop:datasetKind
+      prop:modelKind
+      prop:benchmarkKind
+      prop:notebookKind
+      prop:runtimeKind
+      prop:paperKind
+      prop:agentSkillKind
+      prop:scoreboardKind
+      prop:detect
+      prop:fetch
+      prop:prepare
+      prop:build
+      prop:run
+      prop:validate
+      prop:benchmark
+      prop:tune
+      prop:publish
+      prop:attest
+      prop:advisory
+      prop:bounded
+      prop:privilegedClass
+      prop:prohibited
+    }
+    FILTER NOT EXISTS { ?missing a ?t . }
+  }
+  UNION
+  {
+    VALUES ?missing {
+      prop:artifact-gaia-bounded-osm-ingest
+      prop:artifact-notebook-promotion
+      prop:artifact-sourceos-image-repro
+    }
+    FILTER NOT EXISTS { ?missing a prop:ProphetArtifact . }
+  }
+}

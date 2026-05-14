@@ -103,6 +103,13 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - provenance carriers: schemaRef + leafRef
 - `prophet/capd.ttl`
   - CapD refinement: Requirements, image/chart artifacts, privacy policy hooks
+- `prophet/prophet_artifact.ttl`
+  - computational artifact contract for governed workflows, datasets, models, benchmarks, notebooks, runtimes, papers, agent skills, and scoreboards
+  - SHACL: `prophet/shapes/prophet_artifact.shacl.ttl`
+  - JSON-LD context: `contexts/prophet-artifact.context.jsonld`
+  - examples: `examples/prophet_artifact_examples.ttl`, `examples/prophet-artifact-*.example.jsonld`
+  - spec: `docs/specs/prophet_artifact_contract.md`
+  - integrity query: `tests/prophet-artifact-integrity.rq`
 - `prophet/prophet_diagrams.ttl` (+ `prophet/diagrams/*.mmd`)
   - pointers to Mermaid sources for architecture diagrams
 - SHACL: `prophet/shapes/prophet_cli.shacl.ttl`
@@ -150,6 +157,8 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - Example trace: `examples/lc-vsm-query-chatops-sample.json`
 - `docs/specs/view-governance.md`
   - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, view signatures, and cross-repo ownership boundaries
+- `docs/specs/prophet_artifact_contract.md`
+  - Prophet computational artifact contract for governed artifact kinds, actions, runtime substrates, provenance, policy, evidence, metrics, and registrations
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
 - `docs/specs/ontology-query-adapter.md`
@@ -170,6 +179,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `catalog/reasoning_failure_registry.ttl` — supplemental reasoning-failure registry tranche; transitional until #93 normalizes registry posture
 - `catalog/smart_home_privacy_registry.ttl` — supplemental smart-home privacy registry tranche; transitional until #93 normalizes registry posture
 - `catalog/view_governance_registry.ttl` — supplemental View Governance registry tranche; transitional until #93 normalizes registry posture
+- `catalog/prophet_artifact_registry.ttl` — supplemental Prophet Artifact registry tranche; transitional until #93 normalizes registry posture
 - `contexts/main.context.jsonld` — main JSON-LD context
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 - `contexts/governed-intelligence.context.jsonld` — governed-intelligence context
@@ -177,9 +187,10 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `contexts/reasoning-failure.context.jsonld` — reasoning-failure context
 - `contexts/smart-home-privacy.context.jsonld` — smart-home privacy context
 - `contexts/view-governance.context.jsonld` — View Governance context
+- `contexts/prophet-artifact.context.jsonld` — Prophet Artifact context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`, `shapes/view-governance.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`, `shapes/view-governance.shacl.ttl`, `prophet/shapes/prophet_artifact.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM

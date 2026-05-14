@@ -1,0 +1,317 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix prop:  <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<prophet/prophet_artifact.ttl> a owl:Ontology ;
+  dct:title "Prophet Computational Artifact Ontology" ;
+  dct:description "Normative ontology contract for executable computational artifacts promoted through Prophet and Ontogenesis gates." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core artifact contract classes
+
+prop:ProphetArtifact a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Prophet Artifact" .
+
+prop:ArtifactKind a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact kind" .
+
+prop:ArtifactAction a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Artifact action" .
+
+prop:ArtifactActionVerb a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact action verb" .
+
+prop:ArtifactRuntime a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact runtime" .
+
+prop:RuntimeSubstrate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Runtime substrate" .
+
+prop:ArtifactProvenance a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Artifact provenance" .
+
+prop:ArtifactEvidence a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Artifact evidence" .
+
+prop:ArtifactMetric a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact metric" .
+
+prop:ArtifactRegistration a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Artifact registration" .
+
+prop:ArtifactPolicy a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Artifact policy" .
+
+prop:SafetyClass a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Safety class" .
+
+### Artifact identity + linkage fields
+
+prop:apiVersion a owl:DatatypeProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "apiVersion" .
+
+prop:recordKind a owl:DatatypeProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "kind" .
+
+prop:artifactName a owl:DatatypeProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "artifact name" .
+
+prop:artifactVersion a owl:DatatypeProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "artifact version" .
+
+prop:ownerRepo a owl:DatatypeProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "owner repo" .
+
+prop:artifactKind a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactKind ;
+  rdfs:label "artifact kind" .
+
+prop:hasAction a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactAction ;
+  rdfs:label "has action" .
+
+prop:hasRuntime a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactRuntime ;
+  rdfs:label "has runtime" .
+
+prop:hasProvenance a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactProvenance ;
+  rdfs:label "has provenance" .
+
+prop:hasPolicy a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactPolicy ;
+  rdfs:label "has policy" .
+
+prop:hasEvidence a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactEvidence ;
+  rdfs:label "has evidence" .
+
+prop:hasMetric a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactMetric ;
+  rdfs:label "has metric" .
+
+prop:hasRegistration a owl:ObjectProperty ;
+  rdfs:domain prop:ProphetArtifact ;
+  rdfs:range prop:ArtifactRegistration ;
+  rdfs:label "has registration" .
+
+### Action fields
+
+prop:actionName a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range xsd:string ;
+  rdfs:label "action name" .
+
+prop:verb a owl:ObjectProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range prop:ArtifactActionVerb ;
+  rdfs:label "verb" .
+
+prop:adapter a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range xsd:string ;
+  rdfs:label "adapter" .
+
+prop:command a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range xsd:string ;
+  rdfs:label "command" .
+
+prop:requiresNetwork a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "requires network" .
+
+prop:privileged a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactAction ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "privileged" .
+
+### Runtime, provenance, policy, evidence, metrics, registrations
+
+prop:runtimeSubstrate a owl:ObjectProperty ;
+  rdfs:domain prop:ArtifactRuntime ;
+  rdfs:range prop:RuntimeSubstrate ;
+  rdfs:label "runtime substrate" .
+
+prop:runtimeProfile a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactRuntime ;
+  rdfs:range xsd:string ;
+  rdfs:label "runtime profile" .
+
+prop:sourceUri a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactProvenance ;
+  rdfs:range xsd:anyURI ;
+  rdfs:label "source uri" .
+
+prop:license a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "license" .
+
+prop:attribution a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "attribution" .
+
+prop:hasSafetyClass a owl:ObjectProperty ;
+  rdfs:domain prop:ArtifactPolicy ;
+  rdfs:range prop:SafetyClass ;
+  rdfs:label "has safety class" .
+
+prop:promotionGate a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactPolicy ;
+  rdfs:range xsd:string ;
+  rdfs:label "promotion gate" .
+
+prop:networkPosture a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactPolicy ;
+  rdfs:range xsd:string ;
+  rdfs:label "network posture" .
+
+prop:requiresHumanReview a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactPolicy ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "requires human review" .
+
+prop:logEvidence a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "log evidence" .
+
+prop:checksumEvidence a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "checksum evidence" .
+
+prop:sbomEvidence a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "sbom evidence" .
+
+prop:signatureEvidence a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactEvidence ;
+  rdfs:range xsd:string ;
+  rdfs:label "signature evidence" .
+
+prop:metricName a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactMetric ;
+  rdfs:range xsd:string ;
+  rdfs:label "metric name" .
+
+prop:metricUnit a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactMetric ;
+  rdfs:range xsd:string ;
+  rdfs:label "metric unit" .
+
+prop:metricThreshold a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactMetric ;
+  rdfs:range xsd:string ;
+  rdfs:label "metric threshold" .
+
+prop:metricDirection a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactMetric ;
+  rdfs:range xsd:string ;
+  rdfs:label "metric direction" .
+
+prop:publishToScoreboard a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactMetric ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "publish to scoreboard" .
+
+prop:registerSociosphere a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactRegistration ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "register sociosphere" .
+
+prop:registerSherlock a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactRegistration ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "register sherlock" .
+
+prop:registerHolmes a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactRegistration ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "register holmes" .
+
+prop:registerDeliveryExcellence a owl:DatatypeProperty ;
+  rdfs:domain prop:ArtifactRegistration ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "register delivery excellence" .
+
+### Controlled vocabulary — artifact kinds
+
+prop:workflowKind a prop:ArtifactKind ; rdfs:label "workflow" .
+prop:datasetKind a prop:ArtifactKind ; rdfs:label "dataset" .
+prop:modelKind a prop:ArtifactKind ; rdfs:label "model" .
+prop:benchmarkKind a prop:ArtifactKind ; rdfs:label "benchmark" .
+prop:notebookKind a prop:ArtifactKind ; rdfs:label "notebook" .
+prop:runtimeKind a prop:ArtifactKind ; rdfs:label "runtime" .
+prop:paperKind a prop:ArtifactKind ; rdfs:label "paper" .
+prop:agentSkillKind a prop:ArtifactKind ; rdfs:label "agent-skill" .
+prop:scoreboardKind a prop:ArtifactKind ; rdfs:label "scoreboard" .
+
+### Controlled vocabulary — action verbs
+
+prop:detect a prop:ArtifactActionVerb ; rdfs:label "detect" .
+prop:fetch a prop:ArtifactActionVerb ; rdfs:label "fetch" .
+prop:prepare a prop:ArtifactActionVerb ; rdfs:label "prepare" .
+prop:build a prop:ArtifactActionVerb ; rdfs:label "build" .
+prop:run a prop:ArtifactActionVerb ; rdfs:label "run" .
+prop:validate a prop:ArtifactActionVerb ; rdfs:label "validate" .
+prop:benchmark a prop:ArtifactActionVerb ; rdfs:label "benchmark" .
+prop:tune a prop:ArtifactActionVerb ; rdfs:label "tune" .
+prop:publish a prop:ArtifactActionVerb ; rdfs:label "publish" .
+prop:attest a prop:ArtifactActionVerb ; rdfs:label "attest" .
+
+### Controlled vocabulary — safety classes
+
+prop:advisory a prop:SafetyClass ; rdfs:label "advisory" .
+prop:bounded a prop:SafetyClass ; rdfs:label "bounded" .
+prop:privilegedClass a prop:SafetyClass ; rdfs:label "privileged" .
+prop:prohibited a prop:SafetyClass ; rdfs:label "prohibited" .
+
+### Controlled vocabulary — runtime substrate
+
+prop:localSubstrate a prop:RuntimeSubstrate ; rdfs:label "local" .
+prop:containerSubstrate a prop:RuntimeSubstrate ; rdfs:label "container" .
+prop:latticeForgeSubstrate a prop:RuntimeSubstrate ; rdfs:label "lattice-forge" .
+prop:sourceosSubstrate a prop:RuntimeSubstrate ; rdfs:label "sourceos" .
+prop:kubernetesSubstrate a prop:RuntimeSubstrate ; rdfs:label "kubernetes" .
+prop:notebookSubstrate a prop:RuntimeSubstrate ; rdfs:label "notebook" .
+prop:beamSubstrate a prop:RuntimeSubstrate ; rdfs:label "beam" .
+prop:raySubstrate a prop:RuntimeSubstrate ; rdfs:label "ray" .
