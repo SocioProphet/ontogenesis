@@ -66,6 +66,10 @@ shp:CoverageFinding a owl:Class ;
   rdfs:subClassOf upper:Assertion ;
   rdfs:label "Coverage finding" .
 
+shp:FindingTypeCode a owl:Class ;
+  rdfs:subClassOf shp:CoverageFinding ;
+  rdfs:label "Finding type code" .
+
 shp:EvidenceRecord a owl:Class ;
   rdfs:subClassOf upper:Evidence ;
   rdfs:label "Evidence record" .
@@ -249,15 +253,15 @@ shp:BathroomContext a shp:PhysicalContext ; rdfs:label "bathroom" ; shp:sensitiv
 shp:KitchenContext a shp:PhysicalContext ; rdfs:label "kitchen" .
 shp:SharedAreaContext a shp:PhysicalContext ; rdfs:label "shared area" .
 
-### Initial controlled finding types
-shp:NoPolicyFinding a shp:CoverageFinding ; rdfs:label "no policy" .
-shp:NoDevicePolicyFinding a shp:CoverageFinding ; rdfs:label "no device policy" .
-shp:PolicyPathObstructedFinding a shp:CoverageFinding ; rdfs:label "policy path obstructed" .
-shp:BroadCollectionFinding a shp:CoverageFinding ; rdfs:label "broad collection" .
-shp:VagueSharingFinding a shp:CoverageFinding ; rdfs:label "vague sharing" .
-shp:IncompleteCoverageFinding a shp:CoverageFinding ; rdfs:label "incomplete coverage" .
-shp:IrrelevantTemplateDataFinding a shp:CoverageFinding ; rdfs:label "irrelevant template data" .
-shp:ContextCollapseFinding a shp:CoverageFinding ; rdfs:label "context collapse" .
+### Controlled finding type codes (enumeration)
+shp:NoPolicyFinding a shp:FindingTypeCode ; rdfs:label "no policy" .
+shp:NoDevicePolicyFinding a shp:FindingTypeCode ; rdfs:label "no device policy" .
+shp:PolicyPathObstructedFinding a shp:FindingTypeCode ; rdfs:label "policy path obstructed" .
+shp:BroadCollectionFinding a shp:FindingTypeCode ; rdfs:label "broad collection" .
+shp:VagueSharingFinding a shp:FindingTypeCode ; rdfs:label "vague sharing" .
+shp:IncompleteCoverageFinding a shp:FindingTypeCode ; rdfs:label "incomplete coverage" .
+shp:IrrelevantTemplateDataFinding a shp:FindingTypeCode ; rdfs:label "irrelevant template data" .
+shp:ContextCollapseFinding a shp:FindingTypeCode ; rdfs:label "context collapse" .
 
 ### Initial controlled risk inferences
 shp:OccupancyInferenceRisk a shp:RiskInference ; rdfs:label "occupancy inference risk" .
