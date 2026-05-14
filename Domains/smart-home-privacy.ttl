@@ -1,0 +1,268 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix shp:   <https://socioprophet.github.io/ontogenesis/domains/smart-home-privacy#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/smart-home-privacy.ttl> a owl:Ontology ;
+  dct:title "Domain — Smart Home Privacy" ;
+  dct:description "Canonical smart-home privacy vocabulary for binding vendor privacy-policy claims to device capabilities, physical context, evidence, GAIA world-model context, and HDT consent/impact boundaries." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core actors, devices, contexts, and documents
+shp:SmartHomeVendor a owl:Class ;
+  rdfs:subClassOf upper:Agent ;
+  rdfs:label "Smart home vendor" .
+
+shp:SmartHomeDevice a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Smart home device" .
+
+shp:DeviceType a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Device type" .
+
+shp:DeviceCapability a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Device capability" .
+
+shp:DataAttribute a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Data attribute" .
+
+shp:PhysicalContext a owl:Class ;
+  rdfs:subClassOf upper:Entity ;
+  rdfs:label "Physical context" .
+
+shp:PolicyDocument a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Policy document" .
+
+### Claims and findings
+shp:PrivacyClaim a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Privacy claim" .
+
+shp:CollectionClaim a owl:Class ;
+  rdfs:subClassOf shp:PrivacyClaim ;
+  rdfs:label "Collection claim" .
+
+shp:SharingClaim a owl:Class ;
+  rdfs:subClassOf shp:PrivacyClaim ;
+  rdfs:label "Sharing claim" .
+
+shp:RetentionClaim a owl:Class ;
+  rdfs:subClassOf shp:PrivacyClaim ;
+  rdfs:label "Retention claim" .
+
+shp:NegativeCollectionClaim a owl:Class ;
+  rdfs:subClassOf shp:PrivacyClaim ;
+  rdfs:label "Negative collection claim" .
+
+shp:CoverageFinding a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Coverage finding" .
+
+shp:EvidenceRecord a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Evidence record" .
+
+shp:RiskInference a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Risk inference" .
+
+shp:ConsentBoundary a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Consent boundary" .
+
+shp:GAIAContextBinding a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "GAIA context binding" .
+
+shp:HDTImpactBinding a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "HDT impact binding" .
+
+### Object properties
+shp:hasVendor a owl:ObjectProperty ;
+  rdfs:domain shp:SmartHomeDevice ;
+  rdfs:range shp:SmartHomeVendor ;
+  rdfs:label "has vendor" .
+
+shp:hasDeviceType a owl:ObjectProperty ;
+  rdfs:domain shp:SmartHomeDevice ;
+  rdfs:range shp:DeviceType ;
+  rdfs:label "has device type" .
+
+shp:hasCapability a owl:ObjectProperty ;
+  rdfs:domain shp:SmartHomeDevice ;
+  rdfs:range shp:DeviceCapability ;
+  rdfs:label "has capability" .
+
+shp:emitsDataAttribute a owl:ObjectProperty ;
+  rdfs:domain shp:SmartHomeDevice ;
+  rdfs:range shp:DataAttribute ;
+  rdfs:label "emits data attribute" .
+
+shp:locatedInContext a owl:ObjectProperty ;
+  rdfs:domain shp:SmartHomeDevice ;
+  rdfs:range shp:PhysicalContext ;
+  rdfs:label "located in context" .
+
+shp:policyCoversDevice a owl:ObjectProperty ;
+  rdfs:domain shp:PolicyDocument ;
+  rdfs:range shp:SmartHomeDevice ;
+  rdfs:label "policy covers device" .
+
+shp:assertsClaim a owl:ObjectProperty ;
+  rdfs:domain shp:PolicyDocument ;
+  rdfs:range shp:PrivacyClaim ;
+  rdfs:label "asserts claim" .
+
+shp:claimDataAttribute a owl:ObjectProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range shp:DataAttribute ;
+  rdfs:label "claim data attribute" .
+
+shp:claimDeviceType a owl:ObjectProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range shp:DeviceType ;
+  rdfs:label "claim device type" .
+
+shp:evidenceForClaim a owl:ObjectProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range shp:EvidenceRecord ;
+  rdfs:label "evidence for claim" .
+
+shp:findingSubject a owl:ObjectProperty ;
+  rdfs:domain shp:CoverageFinding ;
+  rdfs:range upper:Entity ;
+  rdfs:label "finding subject" .
+
+shp:findingType a owl:ObjectProperty ;
+  rdfs:domain shp:CoverageFinding ;
+  rdfs:range shp:CoverageFinding ;
+  rdfs:label "finding type" .
+
+shp:hasRiskInference a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range shp:RiskInference ;
+  rdfs:label "has risk inference" .
+
+shp:gaiaContext a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range shp:PhysicalContext ;
+  rdfs:label "GAIA context" .
+
+shp:hdtImpact a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range shp:HDTImpactBinding ;
+  rdfs:label "HDT impact" .
+
+shp:requiresConsentBoundary a owl:ObjectProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range shp:ConsentBoundary ;
+  rdfs:label "requires consent boundary" .
+
+### Datatype properties
+shp:purposeText a owl:DatatypeProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range xsd:string ;
+  rdfs:label "purpose text" .
+
+shp:destinationText a owl:DatatypeProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range xsd:string ;
+  rdfs:label "destination text" .
+
+shp:jurisdictionText a owl:DatatypeProperty ;
+  rdfs:domain shp:PrivacyClaim ;
+  rdfs:range xsd:string ;
+  rdfs:label "jurisdiction text" .
+
+shp:policyHash a owl:DatatypeProperty ;
+  rdfs:domain shp:EvidenceRecord ;
+  rdfs:range xsd:string ;
+  rdfs:label "policy hash" .
+
+shp:crawlPath a owl:DatatypeProperty ;
+  rdfs:domain shp:EvidenceRecord ;
+  rdfs:range xsd:string ;
+  rdfs:label "crawl path" .
+
+shp:observedAt a owl:DatatypeProperty ;
+  rdfs:domain shp:EvidenceRecord ;
+  rdfs:range xsd:dateTime ;
+  rdfs:label "observed at" .
+
+shp:confidenceScore a owl:DatatypeProperty ;
+  rdfs:domain upper:Assertion ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "confidence score" .
+
+shp:sensitivityTier a owl:DatatypeProperty ;
+  rdfs:domain upper:Entity ;
+  rdfs:range xsd:string ;
+  rdfs:label "sensitivity tier" .
+
+### Initial controlled device types
+shp:Camera a shp:DeviceType ; rdfs:label "camera" .
+shp:DoorbellCamera a shp:DeviceType ; rdfs:label "doorbell camera" .
+shp:BabyMonitor a shp:DeviceType ; rdfs:label "baby monitor" .
+shp:DoorLock a shp:DeviceType ; rdfs:label "door lock" .
+shp:Thermostat a shp:DeviceType ; rdfs:label "thermostat" .
+shp:MotionSensor a shp:DeviceType ; rdfs:label "motion sensor" .
+shp:ContactSensor a shp:DeviceType ; rdfs:label "contact sensor" .
+shp:WaterSensor a shp:DeviceType ; rdfs:label "water sensor" .
+shp:SmartPlug a shp:DeviceType ; rdfs:label "smart plug" .
+shp:SmartLight a shp:DeviceType ; rdfs:label "smart light" .
+
+### Initial controlled capabilities
+shp:ObserveCapability a shp:DeviceCapability ; rdfs:label "observe" .
+shp:RecordCapability a shp:DeviceCapability ; rdfs:label "record" .
+shp:ActuateCapability a shp:DeviceCapability ; rdfs:label "actuate" .
+shp:TransmitCapability a shp:DeviceCapability ; rdfs:label "transmit" .
+shp:StoreCapability a shp:DeviceCapability ; rdfs:label "store" .
+shp:InferCapability a shp:DeviceCapability ; rdfs:label "infer" .
+
+### Initial controlled data attributes
+shp:VideoStream a shp:DataAttribute ; rdfs:label "video stream" .
+shp:AudioStream a shp:DataAttribute ; rdfs:label "audio stream" .
+shp:MotionEvent a shp:DataAttribute ; rdfs:label "motion event" .
+shp:LockStatus a shp:DataAttribute ; rdfs:label "lock status" .
+shp:OccupancySignal a shp:DataAttribute ; rdfs:label "occupancy signal" .
+shp:TemperatureState a shp:DataAttribute ; rdfs:label "temperature state" .
+shp:EnergyUse a shp:DataAttribute ; rdfs:label "energy use" .
+shp:WaterFlow a shp:DataAttribute ; rdfs:label "water flow" .
+shp:ConnectivityStatus a shp:DataAttribute ; rdfs:label "connectivity status" .
+
+### Initial controlled physical contexts
+shp:IndoorContext a shp:PhysicalContext ; rdfs:label "indoor" .
+shp:OutdoorContext a shp:PhysicalContext ; rdfs:label "outdoor" .
+shp:EntrywayContext a shp:PhysicalContext ; rdfs:label "entryway" .
+shp:NurseryContext a shp:PhysicalContext ; rdfs:label "nursery" ; shp:sensitivityTier "high" .
+shp:BedroomContext a shp:PhysicalContext ; rdfs:label "bedroom" ; shp:sensitivityTier "high" .
+shp:BathroomContext a shp:PhysicalContext ; rdfs:label "bathroom" ; shp:sensitivityTier "high" .
+shp:KitchenContext a shp:PhysicalContext ; rdfs:label "kitchen" .
+shp:SharedAreaContext a shp:PhysicalContext ; rdfs:label "shared area" .
+
+### Initial controlled finding types
+shp:NoPolicyFinding a shp:CoverageFinding ; rdfs:label "no policy" .
+shp:NoDevicePolicyFinding a shp:CoverageFinding ; rdfs:label "no device policy" .
+shp:PolicyPathObstructedFinding a shp:CoverageFinding ; rdfs:label "policy path obstructed" .
+shp:BroadCollectionFinding a shp:CoverageFinding ; rdfs:label "broad collection" .
+shp:VagueSharingFinding a shp:CoverageFinding ; rdfs:label "vague sharing" .
+shp:IncompleteCoverageFinding a shp:CoverageFinding ; rdfs:label "incomplete coverage" .
+shp:IrrelevantTemplateDataFinding a shp:CoverageFinding ; rdfs:label "irrelevant template data" .
+shp:ContextCollapseFinding a shp:CoverageFinding ; rdfs:label "context collapse" .
+
+### Initial controlled risk inferences
+shp:OccupancyInferenceRisk a shp:RiskInference ; rdfs:label "occupancy inference risk" .
+shp:ScheduleInferenceRisk a shp:RiskInference ; rdfs:label "schedule inference risk" .
+shp:ChildSurveillanceRisk a shp:RiskInference ; rdfs:label "child surveillance risk" .
+shp:InsuranceRisk a shp:RiskInference ; rdfs:label "insurance risk" .
+shp:LawEnforcementAccessRisk a shp:RiskInference ; rdfs:label "law enforcement access risk" .
+shp:LandlordSurveillanceRisk a shp:RiskInference ; rdfs:label "landlord surveillance risk" .
