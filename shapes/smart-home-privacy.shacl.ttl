@@ -42,6 +42,7 @@ shp:PrivacyClaimShape a sh:NodeShape ;
 
 shp:CoverageFindingShape a sh:NodeShape ;
   sh:targetClass shp:CoverageFinding ;
+  sh:not [ sh:class shp:FindingTypeCode ] ;
   sh:property [
     sh:path shp:findingSubject ;
     sh:minCount 1 ;
