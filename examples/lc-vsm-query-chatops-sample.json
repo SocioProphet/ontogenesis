@@ -1,0 +1,179 @@
+{
+  "profile_version": "lc-vsm-query-chatops-v0",
+  "trace_id": "trace:lcvsm-chatops:sherlock-matrix-001",
+  "surface_event": {
+    "object_type": "SurfaceEventProfile",
+    "surface": "matrix",
+    "room_ref": "matrix:room:support-ops",
+    "event_ref": "matrix:event:example-001",
+    "thread_ref": "matrix:thread:example-001",
+    "sender_ref": "actor:human:operator-example",
+    "surface_timestamp": "2026-05-12T15:30:00-04:00",
+    "command_or_message_kind": "chatops_query",
+    "redaction_or_edit_state": "current",
+    "authorization_context": {
+      "room_policy": "support-ops-query-only",
+      "capability_scope": ["search", "summarize", "propose_action"]
+    }
+  },
+  "query_intent": {
+    "object_type": "QueryIntentProfile",
+    "intent_id": "intent:sherlock-matrix-alignment-001",
+    "surface_event_ref": "matrix:event:example-001",
+    "requested_capability": "find_and_align_distributed_work",
+    "topic_refs": ["topic:sherlock-search", "topic:matrix-chatops", "topic:lc-vsm"],
+    "slash_topic_refs": ["slash:sherlock", "slash:chatops", "slash:ontology"],
+    "target_scope": [
+      "repo:SocioProphet/sherlock-search",
+      "repo:SocioProphet/prophet-platform",
+      "repo:SocioProphet/sociosphere",
+      "repo:SocioProphet/ontogenesis",
+      "repo:SocioProphet/global-devsecops-intelligence"
+    ],
+    "freshness_requirement": "current_repo_state",
+    "evidence_requirement": "cite_files_and_prs",
+    "actionability_level": "implementation_plan",
+    "policy_scope": "query_only_until_human_approval"
+  },
+  "sherlock_search_packet": {
+    "object_type": "SherlockSearchPacket",
+    "packet_id": "sherlock:packet:matrix-chatops-001",
+    "intent_ref": "intent:sherlock-matrix-alignment-001",
+    "resolver_scope": ["github_repo", "github_pr", "ontology_docs", "registry"],
+    "required_output": "evidence_bundle_with_alignment_map"
+  },
+  "resolver_plan": {
+    "object_type": "ResolverPlan",
+    "plan_id": "resolver-plan:sherlock-matrix-001",
+    "packet_ref": "sherlock:packet:matrix-chatops-001",
+    "selected_resolvers": [
+      {
+        "resolver_id": "github-code-search",
+        "source_fidelity_class": "repository_indexed_source",
+        "known_blind_spots": ["unindexed_binary_artifacts", "stale_code_search_index"]
+      },
+      {
+        "resolver_id": "github-pr-search",
+        "source_fidelity_class": "platform_api_metadata",
+        "known_blind_spots": ["deleted_branches", "private_uninstalled_repos"]
+      },
+      {
+        "resolver_id": "ontogenesis-docs",
+        "source_fidelity_class": "canonical_semantic_docs",
+        "known_blind_spots": ["runtime_packet_fields_not_yet_promoted"]
+      }
+    ]
+  },
+  "evidence_bundle": {
+    "object_type": "EvidenceBundleProfile",
+    "bundle_id": "evidence:sherlock-matrix-chatops-001",
+    "query_or_intent_ref": "intent:sherlock-matrix-alignment-001",
+    "resolver_refs": ["github-code-search", "github-pr-search", "ontogenesis-docs"],
+    "evidence_atoms": [
+      {
+        "evidence_id": "evidence:doc:sherlock-query-matrix-chatops",
+        "source_system": "github",
+        "artifact_ref": "repo:SocioProphet/sherlock-search:docs/architecture/sherlock-query-matrix-chatops.md",
+        "claim_supported": "Sherlock is the governed query/search/discovery layer for Matrix ChatOps flows."
+      },
+      {
+        "evidence_id": "evidence:doc:wordops-surface-adapter",
+        "source_system": "github",
+        "artifact_ref": "repo:SocioProphet/prophet-platform:docs/WORDOPS_SURFACE_ADAPTER_MODEL.md",
+        "claim_supported": "WordOps normalizes surface-native events into governed envelopes."
+      },
+      {
+        "evidence_id": "evidence:doc:lattice-federated-query-spine",
+        "source_system": "github",
+        "artifact_ref": "repo:SocioProphet/sociosphere:registry/lattice-federated-query-spine.yaml",
+        "claim_supported": "SocioSphere owns the federated query spine registry and routing map."
+      },
+      {
+        "evidence_id": "evidence:doc:ops-ingestion-measurement",
+        "source_system": "github",
+        "artifact_ref": "repo:SocioProphet/global-devsecops-intelligence:docs/architecture/ops-ingestion-and-measurement-plane.md",
+        "claim_supported": "DevSecOps ingestion records ChatOps and query events as measurable operational evidence."
+      }
+    ],
+    "source_fidelity_rating": "mixed_canonical_and_runtime_metadata",
+    "freshness_rating": "current_as_of_trace_timestamp",
+    "confidence_statement": "High confidence for repository responsibility split; medium confidence for exact runtime field names until packet schemas are promoted.",
+    "known_gaps": [
+      "No enforced JSON-LD context yet for LC-VSM Query ChatOps profile.",
+      "No SHACL gates yet for Sherlock packet to evidence bundle promotion.",
+      "Runtime packet field names still live in Sherlock and WordOps docs."
+    ],
+    "claim_promotion_recommendation": "promote_after_context_and_shacl_tranche"
+  },
+  "semantic_binding": {
+    "object_type": "SemanticBindingProfile",
+    "binding_id": "binding:lcvsm-chatops-001",
+    "bindings": [
+      {
+        "from": "intent:sherlock-matrix-alignment-001",
+        "to": "SlashTopicProfile:sherlock"
+      },
+      {
+        "from": "evidence:sherlock-matrix-chatops-001",
+        "to": "SocioGraphClaim:candidate:sherlock-matrix-spine"
+      },
+      {
+        "from": "resolver-plan:sherlock-matrix-001",
+        "to": "PolicyDecision:select-governed-resolvers"
+      },
+      {
+        "from": "SocioGraphClaim:candidate:sherlock-matrix-spine",
+        "to": "ProofCertificate:pending"
+      }
+    ]
+  },
+  "matrix_cells": [
+    {
+      "object_type": "MatrixCellProfile",
+      "cell_id": "cell:intake:runtime_surface",
+      "lifecycle_phase": "intake",
+      "actor_stratum": "runtime_surface",
+      "required_input": "SurfaceEventProfile",
+      "required_output": "QueryIntentProfile",
+      "control": "room authorization and redaction state"
+    },
+    {
+      "object_type": "MatrixCellProfile",
+      "cell_id": "cell:retrieve:resolver",
+      "lifecycle_phase": "retrieve",
+      "actor_stratum": "resolver",
+      "required_input": "ResolverPlan",
+      "required_output": "ResolverResult evidence atoms",
+      "control": "source-fidelity declaration"
+    },
+    {
+      "object_type": "MatrixCellProfile",
+      "cell_id": "cell:bind_semantics:ontogenesis",
+      "lifecycle_phase": "bind_semantics",
+      "actor_stratum": "policy_authority",
+      "required_input": "EvidenceBundleProfile",
+      "required_output": "SemanticBindingProfile",
+      "control": "ontology promotion gates"
+    },
+    {
+      "object_type": "MatrixCellProfile",
+      "cell_id": "cell:audit:compliance_observer",
+      "lifecycle_phase": "audit",
+      "actor_stratum": "compliance_observer",
+      "required_input": "RuntimeReceipt or OpsEventEnvelope",
+      "required_output": "audit read model",
+      "control": "retention and proof policy"
+    }
+  ],
+  "ops_event_envelope": {
+    "object_type": "OpsEventEnvelope",
+    "event_id": "ops:event:sherlock-matrix-chatops-001",
+    "event_kind": "chatops_query_evidence_bundle_rendered",
+    "source_trace_ref": "trace:lcvsm-chatops:sherlock-matrix-001",
+    "metrics": {
+      "resolver_count": 3,
+      "evidence_atom_count": 4,
+      "known_gap_count": 3
+    }
+  }
+}
