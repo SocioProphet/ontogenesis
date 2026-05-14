@@ -1,0 +1,68 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/prophet_artifact_registry.ttl> a owl:Ontology ;
+  dct:title "Prophet Artifact Registry Supplement" ;
+  dct:description "Supplemental registry tranche for Prophet computational artifact ontology, SHACL gates, JSON-LD context, examples, documentation, and integrity checks." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> ;
+  owl:imports <prophet/prophet_artifact.ttl> .
+
+og:ProphetArtifactOntology a og:Module ;
+  og:layer "Prophet" ;
+  og:path "prophet/prophet_artifact.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet computational artifact ontology" .
+
+og:ProphetArtifactShapes a og:Module ;
+  og:layer "SHACL" ;
+  og:path "prophet/shapes/prophet_artifact.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact SHACL gates" .
+
+og:ProphetArtifactContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/prophet-artifact.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact JSON-LD context" .
+
+og:ProphetArtifactExamples a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/prophet_artifact_examples.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact RDF examples" .
+
+og:ProphetArtifactJSONLDExamples a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/prophet-artifact-gaia-bounded-osm-ingest.example.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact JSON-LD examples" .
+
+og:ProphetArtifactContractDoc a og:Module ;
+  og:layer "Specifications" ;
+  og:path "docs/specs/prophet_artifact_contract.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact contract documentation" .
+
+og:ProphetArtifactIntegrityQuery a og:Module ;
+  og:layer "Tests" ;
+  og:path "tests/prophet-artifact-integrity.rq" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/prophet#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Prophet artifact integrity query" .
