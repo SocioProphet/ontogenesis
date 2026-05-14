@@ -61,6 +61,8 @@ This repo defines a layered ontology stack plus gates/tools.
   - `governed-intelligence.ttl` — canonical SocioProphet governed-intelligence object model: Entity, Anchor, Evidence, Claim, ProofCertificate, ExplanationTrace, VectorCandidate, PolicyDecision, ActionProposal, ActionAdmission, RuntimeReceipt, LearningEvent, Revocation, SlashTopicProfile, and VectorEncodingManifest
   - SHACL: `shapes/governed_intelligence.shacl.ttl`
   - JSON-LD context: `contexts/governed-intelligence.context.jsonld`
+  - JSON Schema: `schemas/governed-intelligence.v1.schema.json`
+  - vector manifest: `manifests/governed-intelligence.vector-encoding.manifest.v1.json`
   - examples: `examples/governed-intelligence/`
   - spec: `docs/specs/governed-intelligence-object-model-v0.md`
 - `Platform/Parsing/`
@@ -136,6 +138,9 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - ontology-native semantic lift is present via `bindings/valueflows_governed/valueflows-governed.context.jsonld`, `shapes/valueflows-governed.shacl.ttl`, and `examples/valueflows-governed-task-flow-demo.jsonld`
   - terminal and revocation semantics are represented for completed/canceled processes and tasks, plus revoked/expired delegations and capability grants
   - SHIR projection surface is present via `bindings/valueflows_governed/valueflows-to-shir.projection.v0.1.json`, `docs/valueflows-to-shir-projection.md`, and `examples/valueflows-shir-receipt.example.json`
+- `bindings/governed_intelligence/`
+  - portable contract notes for the canonical Platform-scoped governed-intelligence model
+  - binds the ontology, SHACL, JSON-LD context, JSON Schema, and vector manifest without introducing a duplicate Middle-layer ontology
 
 ## Specifications and profiles
 - `docs/specs/governed-intelligence-object-model-v0.md`
