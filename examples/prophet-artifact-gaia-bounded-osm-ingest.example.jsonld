@@ -1,0 +1,83 @@
+{
+  "@context": "../contexts/prophet-artifact.context.jsonld",
+  "id": "prop:artifact-gaia-bounded-osm-ingest",
+  "type": "prop:ProphetArtifact",
+  "apiVersion": "socioprophet.org/v1alpha1",
+  "kind": "ProphetArtifact",
+  "metadata": {
+    "name": "gaia-bounded-osm-ingest",
+    "version": "1.2.0",
+    "ownerRepo": "SocioProphet/gaia-osm-ingest"
+  },
+  "spec": {
+    "artifactKind": "prop:datasetKind",
+    "actions": [
+      {
+        "id": "prop:artifact-gaia-osm-ingest-action-fetch",
+        "type": "prop:ArtifactAction",
+        "name": "fetch bounded osm tiles",
+        "verb": "prop:fetch",
+        "adapter": "gaia-osm-fetch",
+        "requiresNetwork": true,
+        "privileged": false
+      },
+      {
+        "id": "prop:artifact-gaia-osm-ingest-action-validate",
+        "type": "prop:ArtifactAction",
+        "name": "validate osm extract integrity",
+        "verb": "prop:validate",
+        "adapter": "gaia-osm-validate",
+        "requiresNetwork": false,
+        "privileged": false
+      }
+    ],
+    "runtime": {
+      "id": "prop:artifact-gaia-osm-ingest-runtime",
+      "type": "prop:ArtifactRuntime",
+      "substrate": "prop:latticeForgeSubstrate",
+      "profile": "gaia-bounded-ingest"
+    },
+    "provenance": {
+      "id": "prop:artifact-gaia-osm-ingest-provenance",
+      "type": "prop:ArtifactProvenance",
+      "sourceUri": "urn:source:gaia-osm-bounded-ingest",
+      "license": "ODbL-1.0",
+      "attribution": "OpenStreetMap contributors"
+    },
+    "policy": {
+      "id": "prop:artifact-gaia-osm-ingest-policy",
+      "type": "prop:ArtifactPolicy",
+      "safetyClass": "prop:bounded",
+      "promotionGate": "gaia_ingest_gate",
+      "networkPosture": "allowlisted",
+      "requiresHumanReview": true
+    },
+    "evidence": {
+      "id": "prop:artifact-gaia-osm-ingest-evidence",
+      "type": "prop:ArtifactEvidence",
+      "logs": ["urn:evidence:gaia-osm-ingest-log"],
+      "checksums": ["sha256:8e389f7c2e9d4ca8019af0902af6f665889f2798e7fffb4f892db67b0e22df88"],
+      "sboms": ["urn:evidence:gaia-osm-sbom"],
+      "signatures": ["urn:evidence:gaia-osm-signature"]
+    },
+    "metrics": [
+      {
+        "id": "prop:artifact-gaia-osm-ingest-metric",
+        "type": "prop:ArtifactMetric",
+        "name": "tile_coverage_percent",
+        "unit": "percent",
+        "threshold": "99.0",
+        "direction": "maximize",
+        "publishToScoreboard": true
+      }
+    ],
+    "registrations": {
+      "id": "prop:artifact-gaia-osm-ingest-registration",
+      "type": "prop:ArtifactRegistration",
+      "sociosphere": true,
+      "sherlock": true,
+      "holmes": false,
+      "deliveryExcellence": true
+    }
+  }
+}
