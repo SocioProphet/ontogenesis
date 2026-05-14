@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kc": "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#",
+    "plat": "https://socioprophet.github.io/ontogenesis/platform#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/",
+    "id": "@id",
+    "type": "@type",
+    "artifactId": "kc:artifactId",
+    "confidence": { "@id": "kc:confidence", "@type": "http://www.w3.org/2001/XMLSchema#decimal" },
+    "text": "kc:text",
+    "surfaceForm": "kc:surfaceForm",
+    "hasPassage": { "@id": "kc:hasPassage", "@type": "@id" },
+    "mentionsEntity": { "@id": "kc:mentionsEntity", "@type": "@id" },
+    "inPassage": { "@id": "kc:inPassage", "@type": "@id" },
+    "generatedBy": { "@id": "kc:generatedBy", "@type": "@id" },
+    "targetsNode": { "@id": "kc:targetsNode", "@type": "@id" },
+    "usesVectorIndex": { "@id": "kc:usesVectorIndex", "@type": "@id" },
+    "embeddingModel": "kc:embeddingModel",
+    "vectorBackend": "kc:vectorBackend",
+    "metric": "kc:metric",
+    "schemaLabel": "kc:schemaLabel",
+    "contextLabel": "kc:contextLabel"
+  }
+}
