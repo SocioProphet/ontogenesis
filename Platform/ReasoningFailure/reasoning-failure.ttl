@@ -1,0 +1,126 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rfail: <https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Platform/ReasoningFailure/reasoning-failure.ttl> a owl:Ontology ;
+  dct:title "Reasoning Failure Ontology v0.1" ;
+  dct:description "Compact semantic anchors for reasoning failure cases, perturbations, invariants, verifier evidence, mitigations, residual risk, and regression status across the SocioProphet and SourceOS estate." ;
+  owl:versionInfo "0.1.0" .
+
+rfail:ReasoningFailureCase a owl:Class ; rdfs:label "Reasoning failure case" .
+rfail:ReasoningFailureMode a owl:Class ; rdfs:label "Reasoning failure mode" .
+rfail:FailureFamily a owl:Class ; rdfs:label "Failure family" .
+rfail:ReasoningTask a owl:Class ; rdfs:label "Reasoning task" .
+rfail:Perturbation a owl:Class ; rdfs:label "Perturbation" .
+rfail:Invariant a owl:Class ; rdfs:label "Invariant" .
+rfail:Verifier a owl:Class ; rdfs:label "Verifier" .
+rfail:Trace a owl:Class ; rdfs:label "Trace" .
+rfail:MitigationPattern a owl:Class ; rdfs:label "Mitigation pattern" .
+rfail:ResidualRisk a owl:Class ; rdfs:label "Residual risk" .
+rfail:RegressionCase a owl:Class ; rdfs:label "Regression case" .
+rfail:ModelRun a owl:Class ; rdfs:label "Model run" .
+rfail:AgentRun a owl:Class ; rdfs:label "Agent run" .
+rfail:ToolRun a owl:Class ; rdfs:label "Tool run" .
+rfail:EvidenceReceipt a owl:Class ; rdfs:label "Evidence receipt" .
+rfail:RelationSemantics a owl:Class ; rdfs:label "Relation semantics" .
+
+rfail:hasFailureMode a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:ReasoningFailureMode ; rdfs:label "has failure mode" .
+rfail:hasFailureFamily a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureMode ; rdfs:range rfail:FailureFamily ; rdfs:label "has failure family" .
+rfail:hasTask a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:ReasoningTask ; rdfs:label "has task" .
+rfail:hasPerturbation a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:Perturbation ; rdfs:label "has perturbation" .
+rfail:hasInvariant a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:Invariant ; rdfs:label "has invariant" .
+rfail:hasVerifier a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:Verifier ; rdfs:label "has verifier" .
+rfail:hasTrace a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:Trace ; rdfs:label "has trace" .
+rfail:hasMitigation a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:MitigationPattern ; rdfs:label "has mitigation" .
+rfail:hasResidualRisk a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:ResidualRisk ; rdfs:label "has residual risk" .
+rfail:hasEvidenceReceipt a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:EvidenceReceipt ; rdfs:label "has evidence receipt" .
+rfail:hasRegressionCase a owl:ObjectProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range rfail:RegressionCase ; rdfs:label "has regression case" .
+rfail:hasRelationSemantics a owl:ObjectProperty ; rdfs:domain rfail:ReasoningTask ; rdfs:range rfail:RelationSemantics ; rdfs:label "has relation semantics" .
+
+rfail:label a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "label" .
+rfail:description a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "description" .
+rfail:severity a owl:DatatypeProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range xsd:string ; rdfs:label "severity" .
+rfail:domain a owl:DatatypeProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range xsd:string ; rdfs:label "domain" .
+rfail:expectedOutcome a owl:DatatypeProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range xsd:string ; rdfs:label "expected outcome" .
+rfail:observedOutput a owl:DatatypeProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range xsd:string ; rdfs:label "observed output" .
+rfail:riskAction a owl:DatatypeProperty ; rdfs:domain rfail:ReasoningFailureCase ; rdfs:range xsd:string ; rdfs:label "risk action" .
+rfail:status a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "status" .
+rfail:relationDirection a owl:DatatypeProperty ; rdfs:domain rfail:RelationSemantics ; rdfs:range xsd:string ; rdfs:label "relation direction" .
+rfail:inverseRelation a owl:DatatypeProperty ; rdfs:domain rfail:RelationSemantics ; rdfs:range xsd:string ; rdfs:label "inverse relation" .
+rfail:symmetryProfile a owl:DatatypeProperty ; rdfs:domain rfail:RelationSemantics ; rdfs:range xsd:string ; rdfs:label "symmetry profile" .
+rfail:transitivityProfile a owl:DatatypeProperty ; rdfs:domain rfail:RelationSemantics ; rdfs:range xsd:string ; rdfs:label "transitivity profile" .
+
+rfail:CognitiveStateFamily a rfail:FailureFamily ; rdfs:label "Cognitive state and memory family" .
+rfail:BiasFamily a rfail:FailureFamily ; rdfs:label "Bias and framing family" .
+rfail:FormalReasoningFamily a rfail:FailureFamily ; rdfs:label "Formal reasoning family" .
+rfail:ExactnessFamily a rfail:FailureFamily ; rdfs:label "Exactness and tokenization family" .
+rfail:TaskSpecificationFamily a rfail:FailureFamily ; rdfs:label "Task specification family" .
+rfail:SocialReasoningFamily a rfail:FailureFamily ; rdfs:label "Social reasoning family" .
+rfail:CodeReasoningFamily a rfail:FailureFamily ; rdfs:label "Code reasoning family" .
+rfail:CausalTemporalFamily a rfail:FailureFamily ; rdfs:label "Causal and temporal family" .
+rfail:MultimodalEmbodiedFamily a rfail:FailureFamily ; rdfs:label "Multimodal and embodied family" .
+rfail:ScientificReasoningFamily a rfail:FailureFamily ; rdfs:label "Scientific reasoning family" .
+rfail:MultiAgentFamily a rfail:FailureFamily ; rdfs:label "Multi-agent failure family" .
+
+rfail:WorkingMemoryInterference a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CognitiveStateFamily ; rdfs:label "Working memory interference" .
+rfail:ExecutiveControlFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CognitiveStateFamily ; rdfs:label "Executive control failure" .
+rfail:StaleContextContamination a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CognitiveStateFamily ; rdfs:label "Stale context contamination" .
+
+rfail:AnchoringBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Anchoring bias" .
+rfail:ConfirmationBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Confirmation bias" .
+rfail:ConformityPressure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Conformity pressure" .
+rfail:FramingSensitivity a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Framing sensitivity" .
+rfail:PositionOrderBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Position and order bias" .
+rfail:PopularityBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Popularity bias" .
+rfail:AttributionBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Attribution bias" .
+rfail:VerbosityBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Verbosity bias" .
+rfail:EvaluatorBias a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:BiasFamily ; rdfs:label "Evaluator bias" .
+
+rfail:ReversalCurse a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:FormalReasoningFamily ; rdfs:label "Reversal curse" .
+rfail:InverseRelationFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:FormalReasoningFamily ; rdfs:label "Inverse relation failure" .
+rfail:TwoHopCompositionFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:FormalReasoningFamily ; rdfs:label "Two-hop composition failure" .
+rfail:ShortcutExploitation a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:FormalReasoningFamily ; rdfs:label "Shortcut exploitation" .
+
+rfail:ExactStringFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:ExactnessFamily ; rdfs:label "Exact string failure" .
+rfail:TokenizationCountingFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:ExactnessFamily ; rdfs:label "Tokenization and counting failure" .
+rfail:ArithmeticFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:ExactnessFamily ; rdfs:label "Arithmetic failure" .
+
+rfail:ContradictoryTask a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:TaskSpecificationFamily ; rdfs:label "Contradictory task" .
+rfail:ImpossibleTask a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:TaskSpecificationFamily ; rdfs:label "Impossible task" .
+rfail:UnderSpecifiedTask a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:TaskSpecificationFamily ; rdfs:label "Under-specified task" .
+
+rfail:TheoryOfMindFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:SocialReasoningFamily ; rdfs:label "Theory-of-mind failure" .
+rfail:MoralNormInconsistency a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:SocialReasoningFamily ; rdfs:label "Moral and norm inconsistency" .
+rfail:AnthropomorphicTrustInflation a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:SocialReasoningFamily ; rdfs:label "Anthropomorphic trust inflation" .
+
+rfail:CodeIdentifierSwapFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CodeReasoningFamily ; rdfs:label "Code identifier swap failure" .
+rfail:CodeMutationRobustnessFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CodeReasoningFamily ; rdfs:label "Code mutation robustness failure" .
+
+rfail:CausalFallacy a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CausalTemporalFamily ; rdfs:label "Causal fallacy" .
+rfail:TemporalInconsistency a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:CausalTemporalFamily ; rdfs:label "Temporal inconsistency" .
+
+rfail:MultimodalContradiction a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultimodalEmbodiedFamily ; rdfs:label "Multimodal contradiction" .
+rfail:BlindFaithInText a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultimodalEmbodiedFamily ; rdfs:label "Blind faith in text" .
+rfail:EmbodiedSpatialFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultimodalEmbodiedFamily ; rdfs:label "Embodied spatial failure" .
+
+rfail:ScientificClaimUnsupported a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:ScientificReasoningFamily ; rdfs:label "Unsupported scientific claim" .
+rfail:UnitDimensionalFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:ScientificReasoningFamily ; rdfs:label "Unit and dimensional failure" .
+
+rfail:InterAgentMisalignment a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultiAgentFamily ; rdfs:label "Inter-agent misalignment" .
+rfail:PrematureTerminationFailure a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultiAgentFamily ; rdfs:label "Premature termination failure" .
+rfail:AgentObfuscationRisk a rfail:ReasoningFailureMode ; rfail:hasFailureFamily rfail:MultiAgentFamily ; rdfs:label "Agent obfuscation risk" .
+
+rfail:DeterministicToolDelegation a rfail:MitigationPattern ; rdfs:label "Deterministic tool delegation" .
+rfail:ReverseRelationTesting a rfail:MitigationPattern ; rdfs:label "Reverse relation testing" .
+rfail:SemanticPermutationTesting a rfail:MitigationPattern ; rdfs:label "Semantic-aware permutation testing" .
+rfail:GraphSyntheticData a rfail:MitigationPattern ; rdfs:label "Graph synthetic data" .
+rfail:LogicScaffolding a rfail:MitigationPattern ; rdfs:label "Logic scaffolding" .
+rfail:SelfChallengeCounterexamples a rfail:MitigationPattern ; rdfs:label "Self-challenge counterexamples" .
+rfail:OntologyGuidedIntervention a rfail:MitigationPattern ; rdfs:label "Ontology-guided intervention" .
+rfail:SimulatorGrounding a rfail:MitigationPattern ; rdfs:label "Simulator or world-model grounding" .
+rfail:IndependentVerifier a rfail:MitigationPattern ; rdfs:label "Independent verifier" .
+rfail:AgentTraceMonitoring a rfail:MitigationPattern ; rdfs:label "Agent trace monitoring" .

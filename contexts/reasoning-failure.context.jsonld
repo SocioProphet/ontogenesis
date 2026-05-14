@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "rfail": "https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#",
+    "label": "rfail:label",
+    "description": "rfail:description",
+    "severity": "rfail:severity",
+    "domain": "rfail:domain",
+    "expectedOutcome": "rfail:expectedOutcome",
+    "observedOutput": "rfail:observedOutput",
+    "riskAction": "rfail:riskAction",
+    "status": "rfail:status",
+    "relationDirection": "rfail:relationDirection",
+    "inverseRelation": "rfail:inverseRelation",
+    "symmetryProfile": "rfail:symmetryProfile",
+    "transitivityProfile": "rfail:transitivityProfile",
+    "hasFailureMode": {"@id": "rfail:hasFailureMode", "@type": "@id"},
+    "hasFailureFamily": {"@id": "rfail:hasFailureFamily", "@type": "@id"},
+    "hasTask": {"@id": "rfail:hasTask", "@type": "@id"},
+    "hasPerturbation": {"@id": "rfail:hasPerturbation", "@type": "@id"},
+    "hasInvariant": {"@id": "rfail:hasInvariant", "@type": "@id"},
+    "hasVerifier": {"@id": "rfail:hasVerifier", "@type": "@id"},
+    "hasTrace": {"@id": "rfail:hasTrace", "@type": "@id"},
+    "hasMitigation": {"@id": "rfail:hasMitigation", "@type": "@id"},
+    "hasResidualRisk": {"@id": "rfail:hasResidualRisk", "@type": "@id"},
+    "hasEvidenceReceipt": {"@id": "rfail:hasEvidenceReceipt", "@type": "@id"},
+    "hasRegressionCase": {"@id": "rfail:hasRegressionCase", "@type": "@id"},
+    "hasRelationSemantics": {"@id": "rfail:hasRelationSemantics", "@type": "@id"}
+  }
+}

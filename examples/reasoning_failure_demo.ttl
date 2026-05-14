@@ -1,0 +1,86 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rfail: <https://socioprophet.github.io/ontogenesis/platform/reasoning-failure#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<examples/reasoning_failure_demo.ttl> rdfs:label "Reasoning failure demo fixture v0.1" .
+
+rfail:ExactStringTask001 a rfail:ReasoningTask ;
+  rdfs:label "Exact string preservation task" ;
+  rfail:description "Preserve an identifier, filename, checksum, or version string exactly across transformation." .
+
+rfail:ExactnessInvariant001 a rfail:Invariant ;
+  rdfs:label "Identifier must be byte-identical" ;
+  rfail:description "The output identifier must match the input identifier byte-for-byte after transformation." .
+
+rfail:StringVerifier001 a rfail:Verifier ;
+  rdfs:label "Deterministic string verifier" ;
+  rfail:status "deterministic" ;
+  rfail:description "Compares byte-identical strings and rejects normalization, dropped characters, or invented characters." .
+
+rfail:Receipt001 a rfail:EvidenceReceipt ;
+  rdfs:label "Synthetic exactness receipt" ;
+  rfail:description "Synthetic receipt placeholder for exact-string verifier result." .
+
+rfail:ResidualRisk001 a rfail:ResidualRisk ;
+  rdfs:label "Residual exactness risk" ;
+  rfail:description "Model output remains unsafe for identifiers unless deterministic string verification passes." .
+
+rfail:ExactStringCase001 a rfail:ReasoningFailureCase ;
+  rdfs:label "Exact string mutation under prose rewrite" ;
+  rfail:hasFailureMode rfail:ExactStringFailure ;
+  rfail:hasTask rfail:ExactStringTask001 ;
+  rfail:hasInvariant rfail:ExactnessInvariant001 ;
+  rfail:hasVerifier rfail:StringVerifier001 ;
+  rfail:hasEvidenceReceipt rfail:Receipt001 ;
+  rfail:hasResidualRisk rfail:ResidualRisk001 ;
+  rfail:hasMitigation rfail:DeterministicToolDelegation ;
+  rfail:severity "high" ;
+  rfail:domain "configuration" ;
+  rfail:expectedOutcome "Preserve sourceos-syncd.release-set.v0.1 exactly." ;
+  rfail:observedOutput "Mutated or normalized the identifier." ;
+  rfail:riskAction "require-tool-verification" .
+
+rfail:DirectedRelationSemantics001 a rfail:RelationSemantics ;
+  rdfs:label "Parent-of directed relation semantics" ;
+  rfail:relationDirection "directed" ;
+  rfail:inverseRelation "child-of" ;
+  rfail:symmetryProfile "asymmetric" ;
+  rfail:transitivityProfile "transitive" .
+
+rfail:RelationTask001 a rfail:ReasoningTask ;
+  rdfs:label "Inverse relation reasoning task" ;
+  rfail:description "Infer or verify inverse relation behavior without assuming symmetry." ;
+  rfail:hasRelationSemantics rfail:DirectedRelationSemantics001 .
+
+rfail:RelationInvariant001 a rfail:Invariant ;
+  rdfs:label "Inverse relation must preserve direction" ;
+  rfail:description "If A is parent-of B, then B is child-of A; parent-of is not symmetric." .
+
+rfail:RelationVerifier001 a rfail:Verifier ;
+  rdfs:label "Relation semantics verifier" ;
+  rfail:status "schema" ;
+  rfail:description "Checks directionality, inverse relation, symmetry, and transitivity metadata." .
+
+rfail:Receipt002 a rfail:EvidenceReceipt ;
+  rdfs:label "Synthetic relation receipt" ;
+  rfail:description "Synthetic receipt placeholder for inverse relation verifier result." .
+
+rfail:ResidualRisk002 a rfail:ResidualRisk ;
+  rdfs:label "Residual relation risk" ;
+  rfail:description "Relation claims remain unsafe until inverse and directionality rules are explicitly checked." .
+
+rfail:ReversalCase001 a rfail:ReasoningFailureCase ;
+  rdfs:label "Reversal curse on directed relation" ;
+  rfail:hasFailureMode rfail:ReversalCurse, rfail:InverseRelationFailure ;
+  rfail:hasTask rfail:RelationTask001 ;
+  rfail:hasInvariant rfail:RelationInvariant001 ;
+  rfail:hasVerifier rfail:RelationVerifier001 ;
+  rfail:hasEvidenceReceipt rfail:Receipt002 ;
+  rfail:hasResidualRisk rfail:ResidualRisk002 ;
+  rfail:hasMitigation rfail:ReverseRelationTesting, rfail:OntologyGuidedIntervention ;
+  rfail:severity "high" ;
+  rfail:domain "ontology" ;
+  rfail:expectedOutcome "Preserve directed inverse semantics." ;
+  rfail:observedOutput "Treats directed relation as symmetric or drops inverse relation." ;
+  rfail:riskAction "require-independent-verifier" .
