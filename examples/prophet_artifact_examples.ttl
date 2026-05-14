@@ -1,0 +1,192 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix prop: <https://socioprophet.github.io/ontogenesis/prophet#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+### GAIA bounded OSM ingest
+
+prop:artifact-gaia-bounded-osm-ingest a prop:ProphetArtifact ;
+  prop:apiVersion "socioprophet.org/v1alpha1" ;
+  prop:recordKind "ProphetArtifact" ;
+  prop:artifactName "gaia-bounded-osm-ingest" ;
+  prop:artifactVersion "1.2.0" ;
+  prop:ownerRepo "SocioProphet/gaia-osm-ingest" ;
+  prop:artifactKind prop:datasetKind ;
+  prop:hasAction prop:artifact-gaia-osm-ingest-action-fetch, prop:artifact-gaia-osm-ingest-action-validate ;
+  prop:hasRuntime prop:artifact-gaia-osm-ingest-runtime ;
+  prop:hasProvenance prop:artifact-gaia-osm-ingest-provenance ;
+  prop:hasPolicy prop:artifact-gaia-osm-ingest-policy ;
+  prop:hasEvidence prop:artifact-gaia-osm-ingest-evidence ;
+  prop:hasMetric prop:artifact-gaia-osm-ingest-metric ;
+  prop:hasRegistration prop:artifact-gaia-osm-ingest-registration .
+
+prop:artifact-gaia-osm-ingest-action-fetch a prop:ArtifactAction ;
+  prop:actionName "fetch bounded osm tiles" ;
+  prop:verb prop:fetch ;
+  prop:adapter "gaia-osm-fetch" ;
+  prop:requiresNetwork true ;
+  prop:privileged false .
+
+prop:artifact-gaia-osm-ingest-action-validate a prop:ArtifactAction ;
+  prop:actionName "validate osm extract integrity" ;
+  prop:verb prop:validate ;
+  prop:adapter "gaia-osm-validate" ;
+  prop:requiresNetwork false ;
+  prop:privileged false .
+
+prop:artifact-gaia-osm-ingest-runtime a prop:ArtifactRuntime ;
+  prop:runtimeSubstrate prop:latticeForgeSubstrate ;
+  prop:runtimeProfile "gaia-bounded-ingest" .
+
+prop:artifact-gaia-osm-ingest-provenance a prop:ArtifactProvenance ;
+  prop:sourceUri "https://planet.openstreetmap.org/"^^xsd:anyURI ;
+  prop:license "ODbL-1.0" ;
+  prop:attribution "OpenStreetMap contributors" .
+
+prop:artifact-gaia-osm-ingest-policy a prop:ArtifactPolicy ;
+  prop:hasSafetyClass prop:bounded ;
+  prop:promotionGate "gaia_ingest_gate" ;
+  prop:networkPosture "allowlisted" ;
+  prop:requiresHumanReview true .
+
+prop:artifact-gaia-osm-ingest-evidence a prop:ArtifactEvidence ;
+  prop:logEvidence "s3://gaia-evidence/osm/ingest.log" ;
+  prop:checksumEvidence "sha256:8e389f7c2e9d4ca8019af0902af6f665889f2798e7fffb4f892db67b0e22df88" ;
+  prop:sbomEvidence "s3://gaia-evidence/osm/sbom.spdx.json" ;
+  prop:signatureEvidence "s3://gaia-evidence/osm/sbom.sig" .
+
+prop:artifact-gaia-osm-ingest-metric a prop:ArtifactMetric ;
+  prop:metricName "tile_coverage_percent" ;
+  prop:metricUnit "percent" ;
+  prop:metricThreshold "99.0" ;
+  prop:metricDirection "maximize" ;
+  prop:publishToScoreboard true .
+
+prop:artifact-gaia-osm-ingest-registration a prop:ArtifactRegistration ;
+  prop:registerSociosphere true ;
+  prop:registerSherlock true ;
+  prop:registerHolmes false ;
+  prop:registerDeliveryExcellence true .
+
+### Notebook-to-artifact promotion
+
+prop:artifact-notebook-promotion a prop:ProphetArtifact ;
+  prop:apiVersion "socioprophet.org/v1alpha1" ;
+  prop:recordKind "ProphetArtifact" ;
+  prop:artifactName "city-forecast-notebook-promotion" ;
+  prop:artifactVersion "0.5.1" ;
+  prop:ownerRepo "SocioProphet/notebook-promotion" ;
+  prop:artifactKind prop:notebookKind ;
+  prop:hasAction prop:artifact-notebook-action-prepare, prop:artifact-notebook-action-publish ;
+  prop:hasRuntime prop:artifact-notebook-runtime ;
+  prop:hasProvenance prop:artifact-notebook-provenance ;
+  prop:hasPolicy prop:artifact-notebook-policy ;
+  prop:hasEvidence prop:artifact-notebook-evidence ;
+  prop:hasMetric prop:artifact-notebook-metric ;
+  prop:hasRegistration prop:artifact-notebook-registration .
+
+prop:artifact-notebook-action-prepare a prop:ArtifactAction ;
+  prop:actionName "prepare notebook execution bundle" ;
+  prop:verb prop:prepare ;
+  prop:requiresNetwork false ;
+  prop:privileged false .
+
+prop:artifact-notebook-action-publish a prop:ArtifactAction ;
+  prop:actionName "publish promoted artifact" ;
+  prop:verb prop:publish ;
+  prop:requiresNetwork true ;
+  prop:privileged false .
+
+prop:artifact-notebook-runtime a prop:ArtifactRuntime ;
+  prop:runtimeSubstrate prop:notebookSubstrate ;
+  prop:runtimeProfile "jupyter-lab-cpu" .
+
+prop:artifact-notebook-provenance a prop:ArtifactProvenance ;
+  prop:sourceUri "https://github.com/SocioProphet/notebook-promotion/blob/main/notebooks/city_forecast.ipynb"^^xsd:anyURI ;
+  prop:license "Apache-2.0" ;
+  prop:attribution "SocioProphet Applied Intelligence Team" .
+
+prop:artifact-notebook-policy a prop:ArtifactPolicy ;
+  prop:hasSafetyClass prop:advisory ;
+  prop:promotionGate "notebook_promotion_gate" ;
+  prop:networkPosture "offline" ;
+  prop:requiresHumanReview false .
+
+prop:artifact-notebook-evidence a prop:ArtifactEvidence ;
+  prop:logEvidence "s3://prophet-evidence/notebook/promotion.log" ;
+  prop:checksumEvidence "sha256:3596d2e9fa65df1b091d9380c971f986f2fc6f04b003b14d4af1f658e2f49584" .
+
+prop:artifact-notebook-metric a prop:ArtifactMetric ;
+  prop:metricName "promotion_latency_seconds" ;
+  prop:metricUnit "seconds" ;
+  prop:metricThreshold "300" ;
+  prop:metricDirection "minimize" ;
+  prop:publishToScoreboard false .
+
+prop:artifact-notebook-registration a prop:ArtifactRegistration ;
+  prop:registerSociosphere true ;
+  prop:registerSherlock false ;
+  prop:registerHolmes true ;
+  prop:registerDeliveryExcellence true .
+
+### SourceOS image-build reproducibility
+
+prop:artifact-sourceos-image-repro a prop:ProphetArtifact ;
+  prop:apiVersion "socioprophet.org/v1alpha1" ;
+  prop:recordKind "ProphetArtifact" ;
+  prop:artifactName "sourceos-image-repro-build" ;
+  prop:artifactVersion "2.0.0" ;
+  prop:ownerRepo "SourceOS-Linux/sourceos-build" ;
+  prop:artifactKind prop:runtimeKind ;
+  prop:hasAction prop:artifact-sourceos-action-build, prop:artifact-sourceos-action-attest ;
+  prop:hasRuntime prop:artifact-sourceos-runtime ;
+  prop:hasProvenance prop:artifact-sourceos-provenance ;
+  prop:hasPolicy prop:artifact-sourceos-policy ;
+  prop:hasEvidence prop:artifact-sourceos-evidence ;
+  prop:hasMetric prop:artifact-sourceos-metric ;
+  prop:hasRegistration prop:artifact-sourceos-registration .
+
+prop:artifact-sourceos-action-build a prop:ArtifactAction ;
+  prop:actionName "build sourceos image" ;
+  prop:verb prop:build ;
+  prop:requiresNetwork false ;
+  prop:privileged true .
+
+prop:artifact-sourceos-action-attest a prop:ArtifactAction ;
+  prop:actionName "attest reproducible build evidence" ;
+  prop:verb prop:attest ;
+  prop:requiresNetwork false ;
+  prop:privileged true .
+
+prop:artifact-sourceos-runtime a prop:ArtifactRuntime ;
+  prop:runtimeSubstrate prop:sourceosSubstrate ;
+  prop:runtimeProfile "sourceos-nix-image-builder" .
+
+prop:artifact-sourceos-provenance a prop:ArtifactProvenance ;
+  prop:sourceUri "https://github.com/SourceOS-Linux/sourceos-build"^^xsd:anyURI ;
+  prop:license "MIT" ;
+  prop:attribution "SourceOS release engineering" .
+
+prop:artifact-sourceos-policy a prop:ArtifactPolicy ;
+  prop:hasSafetyClass prop:privilegedClass ;
+  prop:promotionGate "sourceos_repro_build_gate" ;
+  prop:networkPosture "offline" ;
+  prop:requiresHumanReview true .
+
+prop:artifact-sourceos-evidence a prop:ArtifactEvidence ;
+  prop:logEvidence "s3://sourceos-evidence/repro/build.log" ;
+  prop:checksumEvidence "sha256:d9f70bca3e574ed4f5e48c1d4ea6228f4ed663e79ce278f4f765ec698e772dbd" ;
+  prop:sbomEvidence "s3://sourceos-evidence/repro/spdx.json" ;
+  prop:signatureEvidence "s3://sourceos-evidence/repro/spdx.sig" .
+
+prop:artifact-sourceos-metric a prop:ArtifactMetric ;
+  prop:metricName "reproducibility_delta" ;
+  prop:metricUnit "percent" ;
+  prop:metricThreshold "0.0" ;
+  prop:metricDirection "minimize" ;
+  prop:publishToScoreboard true .
+
+prop:artifact-sourceos-registration a prop:ArtifactRegistration ;
+  prop:registerSociosphere true ;
+  prop:registerSherlock true ;
+  prop:registerHolmes true ;
+  prop:registerDeliveryExcellence true .
