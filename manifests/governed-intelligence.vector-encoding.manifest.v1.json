@@ -1,0 +1,53 @@
+{
+  "manifest_id": "governed-intelligence.vector-encoding.v1",
+  "version": "1.0.0",
+  "namespace": "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#",
+  "candidate_policy": {
+    "vector_candidate_status": "candidate_only",
+    "promotion_note": "VectorCandidate embeddings are candidates and are not admitted claims."
+  },
+  "object_profiles": [
+    {
+      "object_type": "Entity",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "entity_id", "field": "id", "transform": "token_hash" },
+        { "role": "entity_label", "field": "label", "transform": "subword_embedding" },
+        { "role": "entity_type", "field": "entityType", "transform": "one_hot" }
+      ]
+    },
+    {
+      "object_type": "Claim",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "claim_subject", "field": "subjectRef", "transform": "token_hash" },
+        { "role": "claim_predicate", "field": "predicateRef", "transform": "token_hash" },
+        { "role": "claim_object", "field": "objectRef", "transform": "token_hash" },
+        { "role": "claim_context", "field": "contextRef", "transform": "sentence_embedding" },
+        { "role": "claim_confidence", "field": "confidence", "transform": "scalar_bucket" },
+        { "role": "claim_evidence", "field": "hasEvidence", "transform": "set_hash" }
+      ]
+    },
+    {
+      "object_type": "ActionProposal",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "action_type", "field": "actionType", "transform": "token_hash" },
+        { "role": "action_scope", "field": "scope", "transform": "sentence_embedding" },
+        { "role": "expected_effect", "field": "expectedEffect", "transform": "sentence_embedding" },
+        { "role": "proposal_evidence", "field": "hasEvidence", "transform": "set_hash" }
+      ]
+    },
+    {
+      "object_type": "RuntimeReceipt",
+      "encoding": "role_bound_vector_symbolic",
+      "roles": [
+        { "role": "recorded_action", "field": "recordsAction", "transform": "token_hash" },
+        { "role": "policy_decision", "field": "hasPolicyDecision", "transform": "token_hash" },
+        { "role": "input_hash", "field": "inputHash", "transform": "token_hash" },
+        { "role": "output_hash", "field": "outputHash", "transform": "token_hash" },
+        { "role": "receipt_status", "field": "lifecycleStatus", "transform": "one_hot" }
+      ]
+    }
+  ]
+}
