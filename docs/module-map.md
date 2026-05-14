@@ -134,6 +134,9 @@ These are governed alignment scaffolds. They are not full vendored external onto
 ## Specifications and profiles
 - `docs/specs/governed-intelligence-object-model-v0.md`
   - canonical governed-intelligence object model for claims, anchors, evidence, policy decisions, vector candidates, action proposals, runtime receipts, learning events, revocations, and slash-topic profiles
+- `docs/specs/lc-vsm-query-chatops-object-model-v0.md`
+  - LC-VSM query and ChatOps semantic profile binding Matrix/WordOps surface events, Sherlock search packets, resolver plans, evidence bundles, semantic bindings, lifecycle cells, and DevSecOps audit events
+  - Example trace: `examples/lc-vsm-query-chatops-sample.json`
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
 - `docs/specs/ontology-query-adapter.md`
