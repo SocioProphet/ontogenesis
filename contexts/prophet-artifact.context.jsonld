@@ -1,0 +1,122 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "prop": "https://socioprophet.github.io/ontogenesis/prophet#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "id": "@id",
+    "type": "@type",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "apiVersion": "prop:apiVersion",
+    "kind": "prop:recordKind",
+    "metadata": {
+      "@id": "prop:metadata",
+      "@context": {
+        "name": "prop:artifactName",
+        "version": "prop:artifactVersion",
+        "ownerRepo": "prop:ownerRepo"
+      }
+    },
+    "spec": {
+      "@id": "prop:spec",
+      "@context": {
+        "artifactKind": {
+          "@id": "prop:artifactKind",
+          "@type": "@id"
+        },
+        "actions": {
+          "@id": "prop:hasAction",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "runtime": {
+          "@id": "prop:hasRuntime",
+          "@type": "@id"
+        },
+        "provenance": {
+          "@id": "prop:hasProvenance",
+          "@type": "@id"
+        },
+        "policy": {
+          "@id": "prop:hasPolicy",
+          "@type": "@id"
+        },
+        "evidence": {
+          "@id": "prop:hasEvidence",
+          "@type": "@id"
+        },
+        "metrics": {
+          "@id": "prop:hasMetric",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "registrations": {
+          "@id": "prop:hasRegistration",
+          "@type": "@id"
+        }
+      }
+    },
+    "name": "prop:actionName",
+    "verb": {
+      "@id": "prop:verb",
+      "@type": "@id"
+    },
+    "adapter": "prop:adapter",
+    "command": "prop:command",
+    "requiresNetwork": {
+      "@id": "prop:requiresNetwork",
+      "@type": "xsd:boolean"
+    },
+    "privileged": {
+      "@id": "prop:privileged",
+      "@type": "xsd:boolean"
+    },
+    "substrate": {
+      "@id": "prop:runtimeSubstrate",
+      "@type": "@id"
+    },
+    "profile": "prop:runtimeProfile",
+    "sourceUri": {
+      "@id": "prop:sourceUri",
+      "@type": "xsd:anyURI"
+    },
+    "license": "prop:license",
+    "attribution": "prop:attribution",
+    "safetyClass": {
+      "@id": "prop:hasSafetyClass",
+      "@type": "@id"
+    },
+    "promotionGate": "prop:promotionGate",
+    "networkPosture": "prop:networkPosture",
+    "requiresHumanReview": {
+      "@id": "prop:requiresHumanReview",
+      "@type": "xsd:boolean"
+    },
+    "logs": "prop:logEvidence",
+    "checksums": "prop:checksumEvidence",
+    "sboms": "prop:sbomEvidence",
+    "signatures": "prop:signatureEvidence",
+    "unit": "prop:metricUnit",
+    "threshold": "prop:metricThreshold",
+    "direction": "prop:metricDirection",
+    "publishToScoreboard": {
+      "@id": "prop:publishToScoreboard",
+      "@type": "xsd:boolean"
+    },
+    "sociosphere": {
+      "@id": "prop:registerSociosphere",
+      "@type": "xsd:boolean"
+    },
+    "sherlock": {
+      "@id": "prop:registerSherlock",
+      "@type": "xsd:boolean"
+    },
+    "holmes": {
+      "@id": "prop:registerHolmes",
+      "@type": "xsd:boolean"
+    },
+    "deliveryExcellence": {
+      "@id": "prop:registerDeliveryExcellence",
+      "@type": "xsd:boolean"
+    }
+  }
+}
