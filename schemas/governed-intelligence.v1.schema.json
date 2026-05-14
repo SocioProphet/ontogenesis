@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.github.io/ontogenesis/schemas/governed-intelligence.v1.schema.json",
+  "title": "Governed Intelligence Canonical Objects v1",
+  "description": "Portable JSON Schema surface aligned to the canonical Platform/GovernedIntelligence ontology.",
+  "oneOf": [
+    { "$ref": "#/$defs/Entity" },
+    { "$ref": "#/$defs/Anchor" },
+    { "$ref": "#/$defs/Evidence" },
+    { "$ref": "#/$defs/Claim" },
+    { "$ref": "#/$defs/ProofCertificate" },
+    { "$ref": "#/$defs/ExplanationTrace" },
+    { "$ref": "#/$defs/VectorCandidate" },
+    { "$ref": "#/$defs/PolicyDecision" },
+    { "$ref": "#/$defs/ActionProposal" },
+    { "$ref": "#/$defs/ActionAdmission" },
+    { "$ref": "#/$defs/RuntimeReceipt" },
+    { "$ref": "#/$defs/LearningEvent" },
+    { "$ref": "#/$defs/Revocation" },
+    { "$ref": "#/$defs/SlashTopicProfile" },
+    { "$ref": "#/$defs/VectorEncodingManifest" }
+  ],
+  "$defs": {
+    "Entity": {
+      "type": "object",
+      "required": ["objectType", "id"],
+      "properties": {
+        "objectType": { "const": "Entity" },
+        "id": { "type": "string", "minLength": 1 },
+        "identifier": { "type": "string" },
+        "entityType": { "type": "string" },
+        "label": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "Anchor": {
+      "type": "object",
+      "required": ["objectType", "id", "artifactRef", "selectorType", "selector", "sourceRef"],
+      "properties": {
+        "objectType": { "const": "Anchor" },
+        "id": { "type": "string", "minLength": 1 },
+        "artifactRef": { "type": "string", "minLength": 1 },
+        "selectorType": { "type": "string", "enum": ["text_span", "image_region", "geometry", "h3_cell", "code_range", "log_range", "table_cell", "audio_segment", "video_clip", "generic_selector"] },
+        "selector": { "type": "string", "minLength": 1 },
+        "sourceRef": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "Evidence": {
+      "type": "object",
+      "required": ["objectType", "id", "hasAnchor", "sourceRef", "lifecycleStatus"],
+      "properties": {
+        "objectType": { "const": "Evidence" },
+        "id": { "type": "string", "minLength": 1 },
+        "hasAnchor": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "sourceRef": { "type": "string", "minLength": 1 },
+        "lifecycleStatus": { "$ref": "#/$defs/LifecycleStatus" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": true
+    },
+    "Claim": {
+      "type": "object",
+      "required": ["objectType", "id", "subjectRef", "predicateRef", "objectRef", "contextRef", "hasEvidence", "lifecycleStatus"],
+      "properties": {
+        "objectType": { "const": "Claim" },
+        "id": { "type": "string", "minLength": 1 },
+        "subjectRef": { "type": "string", "minLength": 1 },
+        "predicateRef": { "type": "string", "minLength": 1 },
+        "objectRef": { "type": "string", "minLength": 1 },
+        "contextRef": { "type": "string", "minLength": 1 },
+        "hasEvidence": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "hasProofCertificate": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "validTime": { "type": "string", "format": "date-time" },
+        "transactionTime": { "type": "string", "format": "date-time" },
+        "lifecycleStatus": { "$ref": "#/$defs/LifecycleStatus" }
+      },
+      "additionalProperties": true
+    },
+    "ProofCertificate": {
+      "type": "object",
+      "required": ["objectType", "id"],
+      "properties": {
+        "objectType": { "const": "ProofCertificate" },
+        "id": { "type": "string", "minLength": 1 },
+        "certificateDigest": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "ExplanationTrace": {
+      "type": "object",
+      "required": ["objectType", "id"],
+      "properties": {
+        "objectType": { "const": "ExplanationTrace" },
+        "id": { "type": "string", "minLength": 1 },
+        "sourceRef": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "VectorCandidate": {
+      "type": "object",
+      "required": ["objectType", "id", "candidateStatus", "similarity", "matchedRoles"],
+      "properties": {
+        "objectType": { "const": "VectorCandidate" },
+        "id": { "type": "string", "minLength": 1 },
+        "candidateStatus": { "const": "candidate_only" },
+        "similarity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "matchedRoles": { "type": "string", "minLength": 1 },
+        "usesEncodingManifest": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "PolicyDecision": {
+      "type": "object",
+      "required": ["objectType", "id", "decision", "targets", "sourceRef"],
+      "properties": {
+        "objectType": { "const": "PolicyDecision" },
+        "id": { "type": "string", "minLength": 1 },
+        "decision": { "type": "string", "enum": ["allow", "deny", "require_review", "provisional"] },
+        "targets": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "sourceRef": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "ActionProposal": {
+      "type": "object",
+      "required": ["objectType", "id", "actionType", "scope", "expectedEffect", "hasEvidence"],
+      "properties": {
+        "objectType": { "const": "ActionProposal" },
+        "id": { "type": "string", "minLength": 1 },
+        "actionType": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 },
+        "expectedEffect": { "type": "string", "minLength": 1 },
+        "hasEvidence": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }
+      },
+      "additionalProperties": true
+    },
+    "ActionAdmission": {
+      "type": "object",
+      "required": ["objectType", "id", "admitsAction", "decision"],
+      "properties": {
+        "objectType": { "const": "ActionAdmission" },
+        "id": { "type": "string", "minLength": 1 },
+        "admitsAction": { "type": "string", "minLength": 1 },
+        "decision": { "type": "string", "enum": ["allow", "deny", "require_review", "provisional"] }
+      },
+      "additionalProperties": true
+    },
+    "RuntimeReceipt": {
+      "type": "object",
+      "required": ["objectType", "id", "recordsAction", "hasPolicyDecision", "inputHash", "outputHash", "logRef", "lifecycleStatus"],
+      "properties": {
+        "objectType": { "const": "RuntimeReceipt" },
+        "id": { "type": "string", "minLength": 1 },
+        "recordsAction": { "type": "string", "minLength": 1 },
+        "hasPolicyDecision": { "type": "string", "minLength": 1 },
+        "inputHash": { "type": "string", "minLength": 1 },
+        "outputHash": { "type": "string", "minLength": 1 },
+        "logRef": { "type": "string", "minLength": 1 },
+        "lifecycleStatus": { "$ref": "#/$defs/LifecycleStatus" }
+      },
+      "additionalProperties": true
+    },
+    "LearningEvent": {
+      "type": "object",
+      "required": ["objectType", "id", "eventType"],
+      "properties": {
+        "objectType": { "const": "LearningEvent" },
+        "id": { "type": "string", "minLength": 1 },
+        "eventType": { "type": "string", "minLength": 1 },
+        "sourceRef": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "Revocation": {
+      "type": "object",
+      "required": ["objectType", "id", "supersedes"],
+      "properties": {
+        "objectType": { "const": "Revocation" },
+        "id": { "type": "string", "minLength": 1 },
+        "supersedes": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "SlashTopicProfile": {
+      "type": "object",
+      "required": ["objectType", "id"],
+      "properties": {
+        "objectType": { "const": "SlashTopicProfile" },
+        "id": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "VectorEncodingManifest": {
+      "type": "object",
+      "required": ["objectType", "id", "namespace", "candidatePolicy"],
+      "properties": {
+        "objectType": { "const": "VectorEncodingManifest" },
+        "id": { "type": "string", "minLength": 1 },
+        "namespace": { "const": "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" },
+        "candidatePolicy": {
+          "type": "object",
+          "required": ["vectorCandidateStatus"],
+          "properties": {
+            "vectorCandidateStatus": { "const": "candidate_only" },
+            "promotionNote": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "LifecycleStatus": {
+      "type": "string",
+      "enum": ["proposed", "provisional", "admitted", "denied", "require_review", "superseded", "revoked", "expired"]
+    }
+  }
+}
