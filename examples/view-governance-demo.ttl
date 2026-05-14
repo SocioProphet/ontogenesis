@@ -1,0 +1,51 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:   <https://socioprophet.github.io/ontogenesis/examples/view-governance#> .
+@prefix view: <https://socioprophet.github.io/ontogenesis/platform/view#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:demo-view-contract a view:ViewContract ;
+  rdfs:label "Demo governed view contract" ;
+  view:hasPrincipalAuthority ex:demo-principal-authority ;
+  view:hasPolicyAuthority ex:demo-policy-authority ;
+  view:hasWorkspaceAuthority ex:demo-workspace-authority ;
+  view:hasDisclosureMode ex:demo-disclosure-mode ;
+  view:hasRevocationEpoch ex:demo-revocation-epoch ;
+  view:hasViewSignature ex:demo-view-signature ;
+  view:hasRuntimeEvidenceAuthority ex:demo-runtime-evidence-authority ;
+  view:hasTraversalEvidenceAuthority ex:demo-traversal-evidence-authority ;
+  view:contractHash "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" .
+
+ex:demo-principal-authority a view:PrincipalAuthority ;
+  rdfs:label "Demo principal authority" ;
+  view:authorityRef "urn:socioprophet:principal:demo-human-operator" .
+
+ex:demo-policy-authority a view:PolicyAuthority ;
+  rdfs:label "Demo policy authority" ;
+  view:authorityRef "urn:socioprophet:policy-fabric:decision:demo-view-allow" .
+
+ex:demo-workspace-authority a view:WorkspaceAuthority ;
+  rdfs:label "Demo workspace authority" ;
+  view:authorityRef "urn:socioprophet:sociosphere:workspace:demo-fingerprint" .
+
+ex:demo-disclosure-mode a view:DisclosureMode ;
+  rdfs:label "metadata-only disclosure" .
+
+ex:demo-revocation-epoch a view:RevocationEpoch ;
+  rdfs:label "Demo revocation epoch" ;
+  view:revocationEpochValue 7 .
+
+ex:demo-view-signature a view:ViewSignature ;
+  rdfs:label "Demo view signature" ;
+  view:viewSignatureHash "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" .
+
+ex:demo-runtime-evidence-authority a view:RuntimeEvidenceAuthority ;
+  rdfs:label "Demo runtime evidence authority" ;
+  view:authorityRef "urn:socioprophet:agentplane:run:demo-view-run" .
+
+ex:demo-traversal-evidence-authority a view:TraversalEvidenceAuthority ;
+  rdfs:label "Demo traversal evidence authority" ;
+  view:authorityRef "urn:socioprophet:cairnpath:trace:demo-view-trace" .
+
+ex:demo-typed-absence a view:TypedAbsence ;
+  rdfs:label "Demo typed absence" ;
+  view:absenceReason "not_materialized" .

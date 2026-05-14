@@ -1,0 +1,43 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/view_governance_registry.ttl> a owl:Ontology ;
+  dct:title "View Governance Registry Supplement" ;
+  dct:description "Supplemental registry tranche for the Platform View Governance semantic module, SHACL gates, JSON-LD context, and example fixture." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:PlatformViewGovernance a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/view-governance.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/view#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "View Governance" .
+
+og:PlatformViewGovernanceShapes a og:Module ;
+  og:layer "SHACL" ;
+  og:path "shapes/view-governance.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/view#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "View Governance SHACL gates" .
+
+og:PlatformViewGovernanceContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/view-governance.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/view#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "View Governance JSON-LD context" .
+
+og:PlatformViewGovernanceExample a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/view-governance-demo.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/view-governance#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "View Governance demo fixture" .
