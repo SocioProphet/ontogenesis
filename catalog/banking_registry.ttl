@@ -1,0 +1,68 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/banking_registry.ttl> a owl:Ontology ;
+  dct:title "Banking Registry Supplement" ;
+  dct:description "Supplemental registry tranche for the seed banking twin ontology modules, SHACL gate, JSON-LD context, example, and reference crosswalk." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> ;
+  owl:imports <Middle/banking-core.ttl> .
+
+og:MiddleBankingCore a og:Module ;
+  og:layer "Middle" ;
+  og:path "Middle/banking-core.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Banking core" .
+
+og:DomainBalanceSheet a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/balance-sheet.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Balance sheet domain" .
+
+og:DomainRegulatoryReporting a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/regulatory-reporting.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Regulatory reporting domain" .
+
+og:BankingCoreShapes a og:Module ;
+  og:layer "SHACL" ;
+  og:path "shapes/banking-core.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Banking core SHACL gates" .
+
+og:BankingContext a og:Module ;
+  og:layer "Contexts" ;
+  og:path "contexts/banking.context.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Banking JSON-LD context" .
+
+og:BankingTwinExample a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/banking_twin_minimal.jsonld" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Banking twin minimal example" .
+
+og:BankingReferenceCrosswalk a og:Module ;
+  og:layer "Specifications" ;
+  og:path "docs/banking-reference-crosswalk.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Banking FIBO BIAN reference crosswalk" .
