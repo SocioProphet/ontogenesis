@@ -1,0 +1,25 @@
+{
+  "@context": "../contexts/banking.context.jsonld",
+  "id": "banking:firm-001",
+  "type": "BankingFirm",
+  "hasLegalEntity": [
+    {
+      "id": "banking:entity-001",
+      "type": "LegalEntity",
+      "hasPortfolio": [
+        {
+          "id": "banking:portfolio-001",
+          "type": "Portfolio"
+        }
+      ],
+      "hasFilingPack": [
+        {
+          "id": "banking:filing-001",
+          "type": "FilingPack",
+          "publicationStatus": "draft",
+          "correctionStatus": "none"
+        }
+      ]
+    }
+  ]
+}
