@@ -1,8 +1,11 @@
 {
   "@context": {
     "banking": "https://socioprophet.github.io/ontogenesis/domains/banking#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "id": "@id",
     "type": "@type",
+    "label": "rdfs:label",
     "BankingFirm": "banking:BankingFirm",
     "LegalEntity": "banking:LegalEntity",
     "Portfolio": "banking:Portfolio",
