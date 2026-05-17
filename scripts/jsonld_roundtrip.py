@@ -16,6 +16,7 @@ CONTEXTS = [
     ROOT / "contexts/main.context.jsonld",
     ROOT / "contexts/view-governance.context.jsonld",
     ROOT / "contexts/prophet-artifact.context.jsonld",
+    ROOT / "contexts/banking.context.jsonld",
     ROOT / "prophet/contexts/prophet.context.jsonld",
     ROOT / "epi/contexts/epi.context.jsonld",
 ]
