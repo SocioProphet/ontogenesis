@@ -1,0 +1,18 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/corpus-event-semantics-registry.ttl> a owl:Ontology ;
+  dct:title "Corpus Event Semantics Supplemental Registry" ;
+  dct:description "Supplemental registry entry for the Platform corpus event semantics module. This avoids broad central-registry mutation while the module stabilizes." ;
+  owl:versionInfo "0.1.0" .
+
+og:CorpusEventSemantics a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/corpus-event-semantics.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/corpus-event#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Corpus event semantics" .
