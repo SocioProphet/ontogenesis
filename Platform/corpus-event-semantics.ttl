@@ -1,0 +1,143 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ces:   <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<Platform/corpus-event-semantics.ttl> a owl:Ontology ;
+  dct:title "Corpus Event Semantics" ;
+  dct:description "Semantic carriers for corpus-derived provenance, events, causal candidates, semantic table annotations, and diagnostic findings." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+ces:CorpusEvidenceBundle a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Corpus evidence bundle" .
+
+ces:SourceProvenance a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact, prov:Entity ;
+  rdfs:label "Source provenance" .
+
+ces:EventSchema a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Event schema" .
+
+ces:EventInstance a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Event instance" .
+
+ces:EventPrediction a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Event prediction" .
+
+ces:CausalRelationCandidate a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Causal relation candidate" .
+
+ces:SemanticTableAnnotationTask a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Semantic table annotation task" .
+
+ces:ColumnOntologyLink a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Column ontology link" .
+
+ces:DiagnosticFinding a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Diagnostic finding" .
+
+ces:ConceptHierarchyProbe a owl:Class ;
+  rdfs:subClassOf ces:DiagnosticFinding ;
+  rdfs:label "Concept hierarchy probe" .
+
+ces:KGSubgraphFinding a owl:Class ;
+  rdfs:subClassOf ces:DiagnosticFinding ;
+  rdfs:label "Knowledge graph subgraph finding" .
+
+ces:hasEvidenceBundle a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range ces:CorpusEvidenceBundle ;
+  rdfs:label "has evidence bundle" .
+
+ces:hasProvenance a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range ces:SourceProvenance ;
+  rdfs:label "has provenance" .
+
+ces:hasEvidence a owl:ObjectProperty ;
+  rdfs:domain upper:Assertion ;
+  rdfs:range upper:Evidence ;
+  rdfs:label "has evidence" .
+
+ces:usesEventSchema a owl:ObjectProperty ;
+  rdfs:domain ces:EventInstance ;
+  rdfs:range ces:EventSchema ;
+  rdfs:label "uses event schema" .
+
+ces:hasColumnLink a owl:ObjectProperty ;
+  rdfs:domain ces:SemanticTableAnnotationTask ;
+  rdfs:range ces:ColumnOntologyLink ;
+  rdfs:label "has column link" .
+
+ces:sourceQuality a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "source quality" .
+
+ces:evidenceRef a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence reference" .
+
+ces:eventId a owl:DatatypeProperty ;
+  rdfs:domain ces:EventInstance ;
+  rdfs:range xsd:string ;
+  rdfs:label "event id" .
+
+ces:eventType a owl:DatatypeProperty ;
+  rdfs:domain ces:EventInstance ;
+  rdfs:range xsd:string ;
+  rdfs:label "event type" .
+
+ces:claimStatus a owl:DatatypeProperty ;
+  rdfs:domain upper:Assertion ;
+  rdfs:range xsd:string ;
+  rdfs:label "claim status" .
+
+ces:confidence a owl:DatatypeProperty ;
+  rdfs:domain upper:Assertion ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "confidence" .
+
+ces:causeText a owl:DatatypeProperty ;
+  rdfs:domain ces:CausalRelationCandidate ;
+  rdfs:range xsd:string ;
+  rdfs:label "cause text" .
+
+ces:effectText a owl:DatatypeProperty ;
+  rdfs:domain ces:CausalRelationCandidate ;
+  rdfs:range xsd:string ;
+  rdfs:label "effect text" .
+
+ces:columnName a owl:DatatypeProperty ;
+  rdfs:domain ces:ColumnOntologyLink ;
+  rdfs:range xsd:string ;
+  rdfs:label "column name" .
+
+ces:ontologyTerm a owl:DatatypeProperty ;
+  rdfs:domain ces:ColumnOntologyLink ;
+  rdfs:range xsd:string ;
+  rdfs:label "ontology term" .
+
+ces:diagnosticCode a owl:DatatypeProperty ;
+  rdfs:domain ces:DiagnosticFinding ;
+  rdfs:range xsd:string ;
+  rdfs:label "diagnostic code" .
+
+ces:findingSeverity a owl:DatatypeProperty ;
+  rdfs:domain ces:DiagnosticFinding ;
+  rdfs:range xsd:string ;
+  rdfs:label "finding severity" .
