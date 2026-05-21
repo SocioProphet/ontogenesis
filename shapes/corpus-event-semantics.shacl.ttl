@@ -1,0 +1,62 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ces: <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<shapes/corpus-event-semantics.shacl.ttl> a owl:Ontology ;
+  dct:title "Corpus Event Semantics SHACL Shapes" ;
+  dct:description "Promotion-gate shapes for provenance-bearing corpus event, causal candidate, semantic table, and diagnostic finding records." ;
+  owl:versionInfo "0.1.0" .
+
+ces:SourceProvenanceShape a sh:NodeShape ;
+  sh:targetClass ces:SourceProvenance ;
+  sh:property [ sh:path ces:sourceQuality ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:evidenceRef ; sh:minCount 1 ; sh:datatype xsd:string ; ] .
+
+ces:CorpusEvidenceBundleShape a sh:NodeShape ;
+  sh:targetClass ces:CorpusEvidenceBundle ;
+  sh:property [ sh:path ces:evidenceRef ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:sourceQuality ; sh:minCount 1 ; sh:datatype xsd:string ; ] .
+
+ces:EventSchemaShape a sh:NodeShape ;
+  sh:targetClass ces:EventSchema ;
+  sh:property [ sh:path ces:evidenceRef ; sh:minCount 1 ; sh:datatype xsd:string ; ] .
+
+ces:EventInstanceShape a sh:NodeShape ;
+  sh:targetClass ces:EventInstance ;
+  sh:property [ sh:path ces:eventId ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:eventType ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:claimStatus ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:sourceQuality ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:usesEventSchema ; sh:minCount 1 ; sh:class ces:EventSchema ; ] ;
+  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] .
+
+ces:CausalRelationCandidateShape a sh:NodeShape ;
+  sh:targetClass ces:CausalRelationCandidate ;
+  sh:property [ sh:path ces:causeText ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:effectText ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:confidence ; sh:minCount 1 ; sh:datatype xsd:decimal ; ] ;
+  sh:property [ sh:path ces:claimStatus ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] .
+
+ces:SemanticTableAnnotationTaskShape a sh:NodeShape ;
+  sh:targetClass ces:SemanticTableAnnotationTask ;
+  sh:property [ sh:path ces:hasColumnLink ; sh:minCount 1 ; sh:class ces:ColumnOntologyLink ; ] ;
+  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] .
+
+ces:ColumnOntologyLinkShape a sh:NodeShape ;
+  sh:targetClass ces:ColumnOntologyLink ;
+  sh:property [ sh:path ces:columnName ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:ontologyTerm ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:confidence ; sh:minCount 1 ; sh:datatype xsd:decimal ; ] ;
+  sh:property [ sh:path ces:claimStatus ; sh:minCount 1 ; sh:datatype xsd:string ; ] .
+
+ces:DiagnosticFindingShape a sh:NodeShape ;
+  sh:targetClass ces:DiagnosticFinding ;
+  sh:property [ sh:path ces:diagnosticCode ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:findingSeverity ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:claimStatus ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
+  sh:property [ sh:path ces:hasEvidence ; sh:minCount 1 ; sh:class ces:CorpusEvidenceBundle ; ] ;
+  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] .

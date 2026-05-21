@@ -1,0 +1,16 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/corpus-event#> .
+@prefix ces:   <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:source-provenance-invalid-causal a ces:SourceProvenance ;
+  rdfs:label "Confirmed bibliographic provenance" ;
+  ces:sourceQuality "confirmed_bibliographic" ;
+  ces:evidenceRef "SocioProphet/sociosphere#334:papers/index.jsonl" .
+
+ex:causal-candidate-missing-confidence a ces:CausalRelationCandidate ;
+  rdfs:label "Invalid causal candidate missing confidence" ;
+  ces:causeText "evidence source is attached" ;
+  ces:effectText "candidate edge lacks confidence" ;
+  ces:claimStatus "candidate" ;
+  ces:hasProvenance ex:source-provenance-invalid-causal .
