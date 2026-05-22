@@ -1,4 +1,4 @@
-.PHONY: venv deps validate validate-corpus-event-semantics shacl jsonld build ledger verify sbom all
+.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery shacl jsonld build ledger verify sbom all
 
 venv:
 	python -m venv .venv
@@ -6,11 +6,14 @@ venv:
 deps:
 	.venv/bin/pip install -r requirements-dev.txt
 
-validate: validate-corpus-event-semantics
+validate: validate-corpus-event-semantics validate-registry-discovery
 	.venv/bin/python scripts/validate_rdf.py
 
 validate-corpus-event-semantics:
 	.venv/bin/python scripts/validate_corpus_event_semantics.py
+
+validate-registry-discovery:
+	.venv/bin/python scripts/validate_registry_discovery.py
 
 shacl:
 	.venv/bin/python scripts/shacl_gate.py
