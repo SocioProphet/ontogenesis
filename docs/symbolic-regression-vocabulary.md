@@ -28,7 +28,9 @@ Unknown and unchecked are allowed as draft states, but they should prevent autom
 
 ## Automated gate default
 
-`automated_shacl_gate` should be the default semantic review surface for high-confidence candidates. A candidate may use the automated gate when dimensional status is consistent, fit metrics are below policy threshold, complexity is within policy, evidence replay is present, and Ontogenesis SHACL validates without violation.
+`automated_shacl_gate` should be the default semantic review surface for high-confidence candidates only after a machine-readable gate policy exists. A candidate may use the automated gate when dimensional status is consistent, fit metrics are below policy threshold, complexity is within policy, evidence replay is present, and Ontogenesis SHACL validates without violation.
+
+TODO for the AgentPlane sprint: define the machine-readable high-confidence gate policy. The policy must encode the fit metric threshold, complexity ceiling, minimum dataset support or sample count, replay hash requirement, dimensional-status requirement, and any CHRONOS risk flags that force human review. Until that companion policy shape exists, the automated gate language in this document is advisory doctrine, not an executable admission rule.
 
 Human review surfaces are exception handlers. Use `git_pr`, `webprotege`, `sparql_editor`, `cli`, or `prophet_platform_ui` for dimensionally ambiguous equations, low-data fits, novel operator combinations, high-governance-risk carriers, or any candidate flagged by CHRONOS.
 
