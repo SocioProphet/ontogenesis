@@ -1,0 +1,75 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sr: <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<symbolic-regression/sr-assertion.ttl> a sr:VocabularyDraft ; sr:vocabVersion "0.1.0" ; sr:vocabularyPromotionState sr:VocabularyDraftState .
+
+sr:VocabularyDraft a rdfs:Class .
+sr:EquationCandidate a rdfs:Class .
+sr:ProgramCandidate a rdfs:Class .
+sr:SRAssertionProposal a rdfs:Class .
+sr:SRAssertion a rdfs:Class .
+sr:DatasetEvidenceRef a rdfs:Class .
+sr:FeatureSetRef a rdfs:Class .
+sr:OperatorLibraryRef a rdfs:Class .
+sr:FitMetric a rdfs:Class .
+sr:ComplexityMetric a rdfs:Class .
+sr:DimensionalAnalysisResult a rdfs:Class .
+sr:DiscoveryMethodRef a rdfs:Class .
+sr:EvidenceReplayRef a rdfs:Class .
+sr:SemanticReviewSurface a rdfs:Class .
+
+sr:UnitsStatus a rdfs:Class .
+sr:UnitsConsistent a sr:UnitsStatus .
+sr:UnitsInconsistent a sr:UnitsStatus .
+sr:UnitsUnknown a sr:UnitsStatus .
+sr:UnitsUnchecked a sr:UnitsStatus .
+
+sr:ProposalPromotionState a rdfs:Class .
+sr:ProposalCandidate a sr:ProposalPromotionState .
+sr:ProposalProposed a sr:ProposalPromotionState .
+sr:ProposalAdmitted a sr:ProposalPromotionState .
+sr:ProposalRejected a sr:ProposalPromotionState .
+sr:ProposalFailureCorpus a sr:ProposalPromotionState .
+
+sr:AdmissionState a rdfs:Class .
+sr:AdmissionPendingReview a sr:AdmissionState .
+sr:AdmissionAdmitted a sr:AdmissionState .
+sr:AdmissionRejected a sr:AdmissionState .
+sr:AdmissionBlocked a sr:AdmissionState .
+
+sr:VocabularyPromotionState a rdfs:Class .
+sr:VocabularyDraftState a sr:VocabularyPromotionState .
+sr:VocabularyStabilizingState a sr:VocabularyPromotionState .
+sr:VocabularyCanonicalState a sr:VocabularyPromotionState .
+
+sr:hasEquation a rdf:Property ; rdfs:range xsd:string .
+sr:hasLatexForm a rdf:Property ; rdfs:range xsd:string .
+sr:hasProgramText a rdf:Property ; rdfs:range xsd:string .
+sr:hasDatasetEvidence a rdf:Property ; rdfs:range sr:DatasetEvidenceRef .
+sr:hasFeatureSet a rdf:Property ; rdfs:range sr:FeatureSetRef .
+sr:hasOperatorLibrary a rdf:Property ; rdfs:range sr:OperatorLibraryRef .
+sr:hasFitMetric a rdf:Property ; rdfs:range sr:FitMetric .
+sr:hasComplexityMetric a rdf:Property ; rdfs:range sr:ComplexityMetric .
+sr:hasDimensionalAnalysis a rdf:Property ; rdfs:range sr:DimensionalAnalysisResult .
+sr:hasUnitsStatus a rdf:Property, owl:FunctionalProperty ; rdfs:range sr:UnitsStatus .
+sr:hasPromotionStatus a rdf:Property, owl:FunctionalProperty ; rdfs:range sr:ProposalPromotionState .
+sr:hasAdmissionState a rdf:Property, owl:FunctionalProperty ; rdfs:range sr:AdmissionState .
+sr:vocabVersion a rdf:Property, owl:FunctionalProperty ; rdfs:range xsd:string .
+sr:vocabularyPromotionState a rdf:Property, owl:FunctionalProperty ; rdfs:range sr:VocabularyPromotionState .
+sr:hasDiscoveryMethod a rdf:Property ; rdfs:range sr:DiscoveryMethodRef .
+sr:hasEvidenceReplay a rdf:Property ; rdfs:range sr:EvidenceReplayRef .
+sr:hasSemanticReviewSurface a rdf:Property ; rdfs:range sr:SemanticReviewSurface .
+sr:reviewSurfaceType a rdf:Property, owl:FunctionalProperty ; rdfs:range xsd:string .
+sr:webProtegeProjectRef a rdf:Property ; rdfs:range xsd:string .
+sr:metricName a rdf:Property ; rdfs:range xsd:string .
+sr:metricValue a rdf:Property ; rdfs:range xsd:decimal .
+sr:methodFamily a rdf:Property ; rdfs:range xsd:string .
+sr:datasetUri a rdf:Property ; rdfs:range xsd:anyURI .
+sr:nonAuthorityDeclaration a rdf:Property ; rdfs:range xsd:string .
+sr:discoveredAt a rdf:Property ; rdfs:range xsd:dateTime .
+sr:discoveredBy a rdf:Property ; rdfs:subPropertyOf prov:wasAssociatedWith .
