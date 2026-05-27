@@ -1,0 +1,163 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sr:   <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<symbolic-regression/sr-assertion.ttl> a sr:VocabularyDraft ;
+  rdfs:label "Symbolic Regression Assertion vocabulary draft" ;
+  sr:status "draft" ;
+  sr:authorityBoundary "Ontogenesis drafts semantic vocabulary only; sourceos-spec may later promote canonical schemas." .
+
+sr:VocabularyDraft a rdfs:Class ;
+  rdfs:label "Vocabulary Draft" .
+
+sr:EquationCandidate a rdfs:Class ;
+  rdfs:label "Equation Candidate" ;
+  rdfs:comment "A symbolic-regression output before semantic, evidence, policy, or runtime admission. An EquationCandidate is not a law, ontology assertion, policy, or controller." .
+
+sr:ProgramCandidate a rdfs:Class ;
+  rdfs:label "Program Candidate" ;
+  rdfs:comment "A generated program or function candidate from program-search or LLM-SR-style methods. It is candidate-only until admitted by the owning authority plane." .
+
+sr:SRAssertionProposal a rdfs:Class ;
+  rdfs:label "Symbolic Regression Assertion Proposal" ;
+  rdfs:comment "A proposal to review an equation or program candidate as a semantic assertion. This is the normal output of PROMETHEUS before review and admission." .
+
+sr:SRAssertion a rdfs:Class ;
+  rdfs:label "Symbolic Regression Assertion" ;
+  rdfs:comment "An admitted symbolic-regression assertion after evidence replay, semantic review, and governance. This class is included for vocabulary continuity; this draft does not promote any proposal to admitted status." .
+
+sr:DatasetEvidenceRef a rdfs:Class ;
+  rdfs:label "Dataset Evidence Reference" .
+
+sr:FeatureSetRef a rdfs:Class ;
+  rdfs:label "Feature Set Reference" .
+
+sr:OperatorLibraryRef a rdfs:Class ;
+  rdfs:label "Operator Library Reference" .
+
+sr:FitMetric a rdfs:Class ;
+  rdfs:label "Fit Metric" .
+
+sr:ComplexityMetric a rdfs:Class ;
+  rdfs:label "Complexity Metric" .
+
+sr:DimensionalAnalysisResult a rdfs:Class ;
+  rdfs:label "Dimensional Analysis Result" ;
+  rdfs:comment "First-class dimensional and units analysis result. Inconsistent candidates may be retained as failure corpus but must not be promoted beyond candidate status." .
+
+sr:DiscoveryMethodRef a rdfs:Class ;
+  rdfs:label "Discovery Method Reference" .
+
+sr:EvidenceReplayRef a rdfs:Class ;
+  rdfs:label "Evidence Replay Reference" .
+
+sr:SemanticReviewSurface a rdfs:Class ;
+  rdfs:label "Semantic Review Surface" ;
+  rdfs:comment "Optional review surface used by a deployment. Examples include Git PR, Prophet Platform UI, CLI, SPARQL/RDF editor, automated SHACL gate, or WebProtege. No specific review surface is mandatory." .
+
+sr:hasEquation a rdf:Property ;
+  rdfs:label "has equation" ;
+  rdfs:domain sr:EquationCandidate ;
+  rdfs:range xsd:string .
+
+sr:hasLatexForm a rdf:Property ;
+  rdfs:label "has LaTeX form" ;
+  rdfs:range xsd:string .
+
+sr:hasProgramText a rdf:Property ;
+  rdfs:label "has program text" ;
+  rdfs:domain sr:ProgramCandidate ;
+  rdfs:range xsd:string .
+
+sr:hasDatasetEvidence a rdf:Property ;
+  rdfs:label "has dataset evidence" ;
+  rdfs:range sr:DatasetEvidenceRef .
+
+sr:hasFeatureSet a rdf:Property ;
+  rdfs:label "has feature set" ;
+  rdfs:range sr:FeatureSetRef .
+
+sr:hasOperatorLibrary a rdf:Property ;
+  rdfs:label "has operator library" ;
+  rdfs:range sr:OperatorLibraryRef .
+
+sr:hasFitMetric a rdf:Property ;
+  rdfs:label "has fit metric" ;
+  rdfs:range sr:FitMetric .
+
+sr:hasComplexityMetric a rdf:Property ;
+  rdfs:label "has complexity metric" ;
+  rdfs:range sr:ComplexityMetric .
+
+sr:hasDimensionalAnalysis a rdf:Property ;
+  rdfs:label "has dimensional analysis" ;
+  rdfs:range sr:DimensionalAnalysisResult .
+
+sr:hasUnitsStatus a rdf:Property ;
+  rdfs:label "has units status" ;
+  rdfs:comment "Allowed lexical values: consistent, inconsistent, unknown, unchecked." ;
+  rdfs:range xsd:string .
+
+sr:hasPromotionStatus a rdf:Property ;
+  rdfs:label "has promotion status" ;
+  rdfs:comment "Expected values include candidate, proposed, admitted, rejected, failure_corpus." ;
+  rdfs:range xsd:string .
+
+sr:hasAdmissionState a rdf:Property ;
+  rdfs:label "has admission state" ;
+  rdfs:comment "Expected values include pending_review, admitted, rejected, blocked." ;
+  rdfs:range xsd:string .
+
+sr:hasDiscoveryMethod a rdf:Property ;
+  rdfs:label "has discovery method" ;
+  rdfs:range sr:DiscoveryMethodRef .
+
+sr:hasEvidenceReplay a rdf:Property ;
+  rdfs:label "has evidence replay" ;
+  rdfs:range sr:EvidenceReplayRef .
+
+sr:hasSemanticReviewSurface a rdf:Property ;
+  rdfs:label "has semantic review surface" ;
+  rdfs:range sr:SemanticReviewSurface .
+
+sr:reviewSurfaceType a rdf:Property ;
+  rdfs:label "review surface type" ;
+  rdfs:comment "Deployment-selected optional surface. Suggested values: git_pr, prophet_platform_ui, cli, sparql_editor, automated_shacl_gate, webprotege." ;
+  rdfs:range xsd:string .
+
+sr:webProtegeProjectRef a rdf:Property ;
+  rdfs:label "WebProtege project reference" ;
+  rdfs:comment "Optional reference only when a deployment uses WebProtege as one review surface." ;
+  rdfs:range xsd:string .
+
+sr:metricName a rdf:Property ;
+  rdfs:label "metric name" ;
+  rdfs:range xsd:string .
+
+sr:metricValue a rdf:Property ;
+  rdfs:label "metric value" ;
+  rdfs:range xsd:decimal .
+
+sr:methodFamily a rdf:Property ;
+  rdfs:label "method family" ;
+  rdfs:comment "Examples: PySR, SINDy, KAN, TPSR, LLM-SR, SNIP, FunSearch-style program search." ;
+  rdfs:range xsd:string .
+
+sr:datasetUri a rdf:Property ;
+  rdfs:label "dataset URI" ;
+  rdfs:range xsd:anyURI .
+
+sr:nonAuthorityDeclaration a rdf:Property ;
+  rdfs:label "non-authority declaration" ;
+  rdfs:range xsd:string .
+
+sr:discoveredAt a rdf:Property ;
+  rdfs:label "discovered at" ;
+  rdfs:range xsd:dateTime .
+
+sr:discoveredBy a rdf:Property ;
+  rdfs:label "discovered by" ;
+  rdfs:subPropertyOf prov:wasAssociatedWith .
