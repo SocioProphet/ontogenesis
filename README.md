@@ -23,6 +23,7 @@ This runs:
 - dist build
 - ledger build + verification
 - SPDX SBOM generation
+- SVF semantic-validation contract checks
 
 ## Complies with Standards
 
@@ -33,6 +34,7 @@ This repository provides ontology governance for SocioProphet standards and cont
 - `SocioProphet/socioprophet-standards-storage/docs/standards/080-knowledge-context.md` — platform pointer that delegates detailed Knowledge Context standards to the standards-knowledge package.
 - `Platform/knowledge-context.ttl` — Ontogenesis semantic governance module for Knowledge Context v1 artifacts.
 - `shapes/knowledge-context.shacl.ttl` — SHACL promotion gate for Knowledge Context semantic artifacts.
+- `svf/ontogenesis-semantic-validation-basic.json` — SVF contract declaration for semantic validation discovery through Sociosphere.
 
 ## What’s in this repository
 
@@ -43,7 +45,8 @@ This repository provides ontology governance for SocioProphet standards and cont
 - `shapes/` — SHACL constraints and promotion gates
 - `examples/` — example instance graphs and JSON-LD inputs
 - `catalog/registry.ttl` — module index with layer, path, SemVer, and base IRI metadata
-- `scripts/` — validation, dist, ledger, signing, and SBOM utilities
+- `svf/` — Sovereign Validation Fabric semantic-validation contract declarations
+- `scripts/` — validation, dist, ledger, signing, SBOM utilities, and SVF contract validator
 - `docs/` — specifications, onboarding, architecture notes, and diagrams
 
 ## Documentation index
@@ -53,6 +56,7 @@ Start here:
 - [`docs/how-to-add-a-module.md`](docs/how-to-add-a-module.md) — module authoring workflow
 - [`docs/module-map.md`](docs/module-map.md) — current module layout
 - [`docs/specs/namespaces.md`](docs/specs/namespaces.md) — canonical namespace references
+- [`docs/SVF-SEMANTIC-VALIDATION.md`](docs/SVF-SEMANTIC-VALIDATION.md) — SVF semantic-validation doctrine and claim boundary
 
 ## Validation and release discipline
 
@@ -65,6 +69,13 @@ Start here:
 5. `make ledger`
 6. `make verify`
 7. `make sbom`
+8. `make svf`
+
+`make svf` runs the repo-local SVF contract validator without executing a release or issuing a receipt:
+
+```bash
+make svf
+```
 
 On release tags (`v*`), CI performs deterministic dist builds, validation, ledger generation/verification, detached signatures, and SPDX SBOM emission.
 
@@ -73,6 +84,7 @@ On release tags (`v*`), CI performs deterministic dist builds, validation, ledge
 - `dist/` and `audit/` are **generated-only**.
 - Changes under `Upper/`, `Middle/`, `Lower/`, `Domains/`, `Platform/`, `prophet/`, and `epi/` should include regenerated derived outputs where policy requires.
 - Promotion gates are enforced through SHACL bundles in `shapes/`.
+- SVF semantic-validation contracts are advisory until `make svf` and the full Ontogenesis validation pipeline are observed green.
 
 ## Metadata
 
