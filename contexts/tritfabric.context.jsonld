@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "id": "@id",
+    "type": "@type",
+    "tf": "https://socioprophet.github.io/ontogenesis/domains/tritfabric#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "label": "http://www.w3.org/2000/01/rdf-schema#label",
+    "ModelCard": "tf:ModelCard",
+    "HFEvent": "tf:HFEvent",
+    "CreditRecord": "tf:CreditRecord",
+    "FrameworkCatalogEntry": "tf:FrameworkCatalogEntry",
+    "ServeAutoscalerReadiness": "tf:ServeAutoscalerReadiness",
+    "mathType": "tf:mathType",
+    "calcOps": "tf:calcOps",
+    "ledgerRef": "tf:ledgerRef",
+    "artifactRef": "tf:artifactRef",
+    "consent": "tf:consent",
+    "license": "tf:license",
+    "lineage": "tf:lineage",
+    "rubric": "tf:rubric",
+    "score": "tf:score",
+    "nonTransferable": "tf:nonTransferable",
+    "economicObligation": "tf:economicObligation",
+    "adapterStatus": "tf:adapterStatus",
+    "adapterType": "tf:adapterType",
+    "claimBoundary": "tf:claimBoundary",
+    "targetP95Ms": "tf:targetP95Ms",
+    "inflightWeight": "tf:inflightWeight"
+  }
+}

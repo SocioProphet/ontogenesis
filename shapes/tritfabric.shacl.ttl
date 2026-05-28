@@ -1,0 +1,127 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tf: <https://socioprophet.github.io/ontogenesis/domains/tritfabric#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Model-card promotion gates: a model-card-like artifact is not eligible for
+# promotion semantics unless calculus/evidence references are explicit.
+
+tf:ModelCardShape
+  a sh:NodeShape ;
+  sh:targetClass tf:ModelCard ;
+  sh:property [
+    sh:path tf:mathType ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "TritFabric model cards must declare mathType." ;
+  ] ;
+  sh:property [
+    sh:path tf:calcOps ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "TritFabric model cards must declare calcOps." ;
+  ] ;
+  sh:property [
+    sh:path tf:ledgerRef ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "TritFabric model cards must include a ledgerRef." ;
+  ] ;
+  sh:property [
+    sh:path tf:artifactRef ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "TritFabric model cards must include an artifactRef." ;
+  ] .
+
+# Community Learning Plane eligibility gates. These preserve the boundary that
+# consent, license, lineage, and rubric are admission requirements.
+
+tf:HFEventShape
+  a sh:NodeShape ;
+  sh:targetClass tf:HFEvent ;
+  sh:property [
+    sh:path tf:consent ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue true ;
+    sh:minCount 1 ;
+    sh:message "HFEvent requires consent=true." ;
+  ] ;
+  sh:property [
+    sh:path tf:license ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:minLength 1 ;
+    sh:message "HFEvent requires a license." ;
+  ] ;
+  sh:property [
+    sh:path tf:lineage ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:minLength 1 ;
+    sh:message "HFEvent requires lineage." ;
+  ] ;
+  sh:property [
+    sh:path tf:rubric ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:minLength 1 ;
+    sh:message "HFEvent requires rubric evidence." ;
+  ] .
+
+tf:CreditRecordShape
+  a sh:NodeShape ;
+  sh:targetClass tf:CreditRecord ;
+  sh:property [
+    sh:path tf:nonTransferable ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue true ;
+    sh:minCount 1 ;
+    sh:message "Credit records must be non-transferable." ;
+  ] ;
+  sh:property [
+    sh:path tf:economicObligation ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue false ;
+    sh:minCount 1 ;
+    sh:message "Credit records must not create economic obligations." ;
+  ] .
+
+tf:FrameworkCatalogEntryShape
+  a sh:NodeShape ;
+  sh:targetClass tf:FrameworkCatalogEntry ;
+  sh:property [
+    sh:path tf:adapterStatus ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "Framework catalog entries must declare adapterStatus." ;
+  ] ;
+  sh:property [
+    sh:path tf:adapterType ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "Framework catalog entries must declare adapterType." ;
+  ] ;
+  sh:property [
+    sh:path tf:claimBoundary ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:minLength 1 ;
+    sh:message "Framework catalog entries require claimBoundary." ;
+  ] .
+
+tf:ServeAutoscalerReadinessShape
+  a sh:NodeShape ;
+  sh:targetClass tf:ServeAutoscalerReadiness ;
+  sh:property [
+    sh:path tf:targetP95Ms ;
+    sh:datatype xsd:decimal ;
+    sh:minCount 1 ;
+    sh:message "Serve autoscaler readiness must declare targetP95Ms." ;
+  ] ;
+  sh:property [
+    sh:path tf:claimBoundary ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:minLength 1 ;
+    sh:message "Serve autoscaler readiness requires claimBoundary." ;
+  ] .

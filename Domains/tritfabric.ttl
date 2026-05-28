@@ -1,0 +1,167 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix tf: <https://socioprophet.github.io/ontogenesis/domains/tritfabric#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Domains/tritfabric.ttl> a owl:Ontology ;
+  dct:title "TritFabric vocabulary" ;
+  dct:description "Governed vocabulary for stable TritFabric contracts promoted from recovered Atlas/TritFabric/Community/Serve work." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core artifact classes
+
+tf:TritFabricArtifact a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "TritFabric artifact" .
+
+tf:ModelCard a owl:Class ;
+  rdfs:subClassOf tf:TritFabricArtifact ;
+  rdfs:label "Model card" .
+
+tf:PromotionDecision a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Promotion decision" .
+
+tf:TritStatus a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Trit status" .
+
+tf:CommunityEvent a owl:Class ;
+  rdfs:subClassOf tf:TritFabricArtifact ;
+  rdfs:label "Community event" .
+
+tf:HFEvent a owl:Class ;
+  rdfs:subClassOf tf:CommunityEvent ;
+  rdfs:label "Human feedback event" .
+
+tf:CurationRecord a owl:Class ;
+  rdfs:subClassOf tf:CommunityEvent ;
+  rdfs:label "Curation record" .
+
+tf:CreditRecord a owl:Class ;
+  rdfs:subClassOf tf:CommunityEvent ;
+  rdfs:label "Credit record" .
+
+tf:Curriculum a owl:Class ;
+  rdfs:subClassOf tf:TritFabricArtifact ;
+  rdfs:label "Curriculum" .
+
+tf:FrameworkCatalogEntry a owl:Class ;
+  rdfs:subClassOf tf:TritFabricArtifact ;
+  rdfs:label "Framework catalog entry" .
+
+tf:CapabilityDescriptor a owl:Class ;
+  rdfs:subClassOf tf:TritFabricArtifact ;
+  rdfs:label "Capability descriptor" .
+
+tf:ServeAutoscalerReadiness a owl:Class ;
+  rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Serve autoscaler readiness" .
+
+### Evidence and promotion properties
+
+tf:mathType a owl:DatatypeProperty ;
+  rdfs:domain tf:ModelCard ;
+  rdfs:range xsd:string ;
+  rdfs:label "math type" .
+
+tf:calcOps a owl:DatatypeProperty ;
+  rdfs:domain tf:ModelCard ;
+  rdfs:range xsd:string ;
+  rdfs:label "calculus operations" .
+
+tf:ledgerRef a owl:DatatypeProperty ;
+  rdfs:domain tf:ModelCard ;
+  rdfs:range xsd:string ;
+  rdfs:label "ledger reference" .
+
+tf:artifactRef a owl:DatatypeProperty ;
+  rdfs:domain tf:ModelCard ;
+  rdfs:range xsd:string ;
+  rdfs:label "artifact reference" .
+
+tf:tritCode a owl:DatatypeProperty ;
+  rdfs:domain tf:TritStatus ;
+  rdfs:range xsd:string ;
+  rdfs:label "Trit code" .
+
+tf:reason a owl:DatatypeProperty ;
+  rdfs:domain tf:TritStatus ;
+  rdfs:range xsd:string ;
+  rdfs:label "reason" .
+
+### Community learning properties
+
+tf:consent a owl:DatatypeProperty ;
+  rdfs:domain tf:CommunityEvent ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "consent" .
+
+tf:license a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "license" .
+
+tf:lineage a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "lineage" .
+
+tf:rubric a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "rubric" .
+
+tf:score a owl:DatatypeProperty ;
+  rdfs:domain tf:CommunityEvent ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "score" .
+
+tf:nonTransferable a owl:DatatypeProperty ;
+  rdfs:domain tf:CreditRecord ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "non-transferable" .
+
+tf:economicObligation a owl:DatatypeProperty ;
+  rdfs:domain tf:CreditRecord ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "economic obligation" .
+
+### Framework catalog properties
+
+tf:adapterStatus a owl:DatatypeProperty ;
+  rdfs:domain tf:FrameworkCatalogEntry ;
+  rdfs:range xsd:string ;
+  rdfs:label "adapter status" .
+
+tf:adapterType a owl:DatatypeProperty ;
+  rdfs:domain tf:FrameworkCatalogEntry ;
+  rdfs:range xsd:string ;
+  rdfs:label "adapter type" .
+
+tf:requiredGate a owl:DatatypeProperty ;
+  rdfs:domain tf:CapabilityDescriptor ;
+  rdfs:range xsd:string ;
+  rdfs:label "required gate" .
+
+### Serve properties
+
+tf:targetP95Ms a owl:DatatypeProperty ;
+  rdfs:domain tf:ServeAutoscalerReadiness ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "target p95 milliseconds" .
+
+tf:inflightWeight a owl:DatatypeProperty ;
+  rdfs:domain tf:ServeAutoscalerReadiness ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "inflight weight" .
+
+tf:claimBoundary a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "claim boundary" .

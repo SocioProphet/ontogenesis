@@ -1,0 +1,20 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/tritfabric.registry.ttl> a owl:Ontology ;
+  dct:title "TritFabric supplemental registry" ;
+  dct:description "Supplemental registry entry for the TritFabric domain vocabulary while the primary registry remains stable." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <catalog/registry.ttl> .
+
+og:DomainTritFabric a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/tritfabric.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/tritfabric#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "TritFabric domain" .

@@ -1,0 +1,38 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix tf: <https://socioprophet.github.io/ontogenesis/domains/tritfabric#> .
+@prefix ex: <https://socioprophet.github.io/ontogenesis/examples/tritfabric#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:model-card-001 a tf:ModelCard ;
+  rdfs:label "TritFabric model-card example" ;
+  tf:mathType "optimization" ;
+  tf:calcOps "softmax" ;
+  tf:ledgerRef "urn:ledger:example" ;
+  tf:artifactRef "urn:artifact:example" ;
+  tf:claimBoundary "Example only; no runtime promotion claim." .
+
+ex:hf-event-001 a tf:HFEvent ;
+  rdfs:label "Consented human feedback example" ;
+  tf:consent true ;
+  tf:license "CC-BY-4.0" ;
+  tf:lineage "urn:source:recovered-community-learning" ;
+  tf:rubric "provenance=1.0" ;
+  tf:score 0.95 .
+
+ex:credit-001 a tf:CreditRecord ;
+  rdfs:label "Non-economic credit example" ;
+  tf:nonTransferable true ;
+  tf:economicObligation false ;
+  tf:claimBoundary "Audit credit only; no token, payout, or economic obligation." .
+
+ex:framework-ray a tf:FrameworkCatalogEntry ;
+  rdfs:label "Ray framework catalog example" ;
+  tf:adapterStatus "stubbed" ;
+  tf:adapterType "native" ;
+  tf:claimBoundary "Catalog entry only; no full Ray feature-support claim." .
+
+ex:serve-readiness-001 a tf:ServeAutoscalerReadiness ;
+  rdfs:label "Serve autoscaler readiness example" ;
+  tf:targetP95Ms 100.0 ;
+  tf:inflightWeight 0.1 ;
+  tf:claimBoundary "Readiness assertion only; no production autoscaling claim." .
