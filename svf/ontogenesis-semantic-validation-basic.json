@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "svf:contract:ontogenesis.semantic-validation-basic",
+  "upstream_authority": {
+    "policy_fabric_repo": "SocioProphet/ProCybernetica",
+    "workspace_registry_repo": "SocioProphet/sociosphere",
+    "profile_ref": "svf:profile:ontogenesis.semantic-validation"
+  },
+  "capability_policy": {
+    "schema_version": "1.0",
+    "policy_id": "svf:policy:ontogenesis.semantic-readonly",
+    "version": "1.0.0",
+    "owner": {
+      "plane": "ontology",
+      "repo": "SocioProphet/ontogenesis"
+    },
+    "actor_classes": ["ci_runner", "workspace_runner"],
+    "allowed_backends": ["local"],
+    "max_side_effects": ["read_only", "write_temp", "write_workspace"],
+    "network_modes": ["network_none"],
+    "credential_modes": ["credential_none"],
+    "filesystem_roots": ["Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi", "shapes", "examples", "catalog", "dist", "audit", "svf", "scripts"],
+    "production_environment_allowed": false,
+    "human_approval_required": false,
+    "required_receipt_fields": ["run_digest", "plan_digest", "policy_digest", "input_digests", "output_digests"],
+    "non_claims": [
+      "Does not certify domain truth beyond declared ontology modules and SHACL shapes.",
+      "Does not certify downstream consumer correctness.",
+      "Does not authorize publication or release signing.",
+      "Does not authorize credential access."
+    ]
+  },
+  "actions": [
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.validate-rdf",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "validate", "args": []},
+      "capability": {"side_effects": ["read_only"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi", "catalog", "scripts"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["rdf-validation-output"], "digest_required": false},
+      "claim_scopes": ["schema_conformant"],
+      "non_claims": ["Does not certify semantic adequacy beyond parse and registry checks."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.shacl",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "shacl", "args": []},
+      "capability": {"side_effects": ["read_only"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["shapes", "examples", "scripts"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["shacl-validation-output"], "digest_required": false},
+      "claim_scopes": ["schema_conformant"],
+      "non_claims": ["Does not certify domain truth beyond SHACL gates."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.jsonld-roundtrip",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "jsonld", "args": []},
+      "capability": {"side_effects": ["read_only", "write_temp"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["examples", "scripts", "audit"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["jsonld-roundtrip-output"], "digest_required": false},
+      "claim_scopes": ["semantic_roundtrip_preserved"],
+      "non_claims": ["Does not certify downstream JSON-LD consumer behavior."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.build-dist",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "build", "args": []},
+      "capability": {"side_effects": ["read_only", "write_workspace"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["dist", "scripts", "Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["dist-build-output"], "digest_required": false},
+      "claim_scopes": ["artifact_integrity_verified"],
+      "non_claims": ["Does not certify published release artifacts."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.ledger-build",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "ledger", "args": []},
+      "capability": {"side_effects": ["read_only", "write_workspace"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["dist", "audit", "scripts"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["ledger-build-output"], "digest_required": false},
+      "claim_scopes": ["artifact_integrity_verified"],
+      "non_claims": ["Does not certify release signing."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.ledger-verify",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "verify", "args": []},
+      "capability": {"side_effects": ["read_only"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["dist", "audit", "scripts"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["ledger-verify-output"], "digest_required": false},
+      "claim_scopes": ["artifact_integrity_verified"],
+      "non_claims": ["Does not certify external artifact stores."]
+    },
+    {
+      "schema_version": "1.0",
+      "action_id": "svf:action:ontogenesis.sbom",
+      "version": "1.0.0",
+      "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+      "binding": {"kind": "make_target", "entrypoint": "sbom", "args": []},
+      "capability": {"side_effects": ["read_only", "write_workspace"], "network_mode": "network_none", "credential_mode": "credential_none", "filesystem_scope": ["dist", "audit", "scripts"], "backend": "local", "timeout_seconds": 300},
+      "artifact_contract": {"required_outputs": ["spdx-sbom-output"], "digest_required": false},
+      "claim_scopes": ["artifact_integrity_verified"],
+      "non_claims": ["Does not certify downstream supply-chain ingestion."]
+    }
+  ],
+  "plan": {
+    "schema_version": "1.0",
+    "plan_id": "svf:plan:ontogenesis.semantic-validation-basic",
+    "version": "1.0.0",
+    "owner": {"plane": "ontology", "repo": "SocioProphet/ontogenesis", "maintainer": "mdheller"},
+    "applicability": {"repos": ["SocioProphet/ontogenesis"], "planes": ["ontology"], "change_classes": ["schema", "ontology", "fixture", "documentation", "mixed"]},
+    "mode": "advisory",
+    "policy_ref": "svf:policy:ontogenesis.semantic-readonly",
+    "actions": [
+      {"step_id": "validate-rdf", "action_ref": "svf:action:ontogenesis.validate-rdf", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "shacl", "action_ref": "svf:action:ontogenesis.shacl", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "jsonld-roundtrip", "action_ref": "svf:action:ontogenesis.jsonld-roundtrip", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "build-dist", "action_ref": "svf:action:ontogenesis.build-dist", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "ledger-build", "action_ref": "svf:action:ontogenesis.ledger-build", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "ledger-verify", "action_ref": "svf:action:ontogenesis.ledger-verify", "required": true, "on_failure": "fail_plan"},
+      {"step_id": "sbom", "action_ref": "svf:action:ontogenesis.sbom", "required": true, "on_failure": "fail_plan"}
+    ],
+    "success_criteria": {"required_steps_pass": true, "receipt_required": true, "accepted_statuses": ["pass"]},
+    "failure_taxonomy": ["schema_failure", "fixture_failure", "action_failure", "artifact_digest_failure", "receipt_integrity_failure", "not_configured", "timeout", "inconclusive"],
+    "claim_scopes": ["schema_conformant", "semantic_roundtrip_preserved", "artifact_integrity_verified"],
+    "required_evidence": ["rdf-validation-output", "shacl-validation-output", "jsonld-roundtrip-output", "dist-build-output", "ledger-build-output", "ledger-verify-output", "spdx-sbom-output"],
+    "non_claims": [
+      "Does not certify domain truth beyond declared ontology modules and SHACL shapes.",
+      "Does not certify downstream consumer correctness.",
+      "Does not certify live platform behavior.",
+      "Does not authorize publication or release signing."
+    ]
+  }
+}
