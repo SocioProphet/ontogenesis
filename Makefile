@@ -1,4 +1,4 @@
-.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery shacl jsonld build ledger verify sbom all
+.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery shacl jsonld build ledger verify sbom svf all
 
 venv:
 	python -m venv .venv
@@ -33,4 +33,7 @@ verify:
 sbom:
 	.venv/bin/python scripts/spdx_emit.py
 
-all: validate shacl jsonld build ledger verify sbom
+svf:
+	.venv/bin/python scripts/validate_svf_contracts.py
+
+all: validate shacl jsonld build ledger verify sbom svf
