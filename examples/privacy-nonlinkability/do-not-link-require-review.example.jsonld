@@ -1,0 +1,78 @@
+{
+  "@context": "../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "@type": "PrivacyBoundary",
+      "privacyScope": "tenant=A|B;domain=fraud-intelligence|workroom-collaboration;default_join=require_review",
+      "sourceRef": "policy-fabric:privacy-boundary:tenant-domain-separation-v0",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:protected-signal:tenant-a-device-risk-001",
+      "@type": "ProtectedSignal",
+      "artifactRef": "fraud-decision-intelligence:device-risk-signal-001",
+      "selectorType": "generic_selector",
+      "selector": "tenant=A;signal=device-risk-001",
+      "sourceRef": "fraud-decision-intelligence:risk-signal:device-risk-001",
+      "hasPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "privacyScope": "tenant=A;domain=fraud-intelligence;link_out=require_review",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:protected-signal:tenant-b-workroom-actor-001",
+      "@type": "ProtectedSignal",
+      "artifactRef": "prophet-platform:workroom:tenant-b:actor-001",
+      "selectorType": "generic_selector",
+      "selector": "tenant=B;workroom=collaboration;actor=001",
+      "sourceRef": "prophet-platform:workroom-actor:tenant-b-actor-001",
+      "hasPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "privacyScope": "tenant=B;domain=workroom-collaboration;link_in=require_review",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:operation:join-device-risk-to-workroom-actor-001",
+      "@type": "LinkingOperation",
+      "operationScope": "join=tenant-a-device-risk-001->tenant-b-workroom-actor-001;purpose=entity-resolution-candidate;reuse=graph-edge",
+      "crossesPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "sourceRef": "sherlock-search:entity-resolution-candidate:join-device-risk-to-workroom-actor-001",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:constraint:do-not-link-cross-tenant-risk-workroom-001",
+      "@type": "NonLinkabilityConstraint",
+      "constrainsLinking": "urn:sp:operation:join-device-risk-to-workroom-actor-001",
+      "targetsProtectedSignal": "urn:sp:protected-signal:tenant-a-device-risk-001",
+      "crossesPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "sourceRef": "ontogenesis:privacy-nonlinkability-doctrine-v0#do-not-link",
+      "privacyScope": "cross_tenant_join=require_review;durable_graph_edge=false_without_admission",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:privacy-decision:join-device-risk-to-workroom-actor-001",
+      "@type": "PrivacyDecision",
+      "targets": "urn:sp:operation:join-device-risk-to-workroom-actor-001",
+      "targetsProtectedSignal": "urn:sp:protected-signal:tenant-a-device-risk-001",
+      "crossesPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "decision": "require_review",
+      "privacyBasis": "DoNotLink: proposed cross-tenant join would create a durable graph edge between fraud-risk and workroom-collaboration domains",
+      "sourceRef": "policy-fabric:privacy-decision:join-device-risk-to-workroom-actor-001",
+      "lifecycleStatus": "require_review"
+    },
+    {
+      "@id": "urn:sp:privacy-receipt:join-device-risk-to-workroom-actor-001",
+      "@type": "PrivacyReceipt",
+      "recordsPrivacyOperation": "urn:sp:operation:join-device-risk-to-workroom-actor-001",
+      "hasPrivacyDecision": "urn:sp:privacy-decision:join-device-risk-to-workroom-actor-001",
+      "crossesPrivacyBoundary": "urn:sp:privacy-boundary:tenant-domain-separation-v0",
+      "enforcementMode": "hold_graph_edge_pending_review",
+      "privacyDisposition": "require_review",
+      "inputHash": "sha256:cross-tenant-link-input-placeholder",
+      "outputHash": "sha256:no-admitted-graph-edge-placeholder",
+      "logRef": "sherlock-search:privacy-log:join-device-risk-to-workroom-actor-001",
+      "sourceRef": "model-governance-ledger:privacy-receipt:join-device-risk-to-workroom-actor-001",
+      "lifecycleStatus": "require_review",
+      "transactionTime": "2026-05-29T00:00:00Z"
+    }
+  ]
+}
