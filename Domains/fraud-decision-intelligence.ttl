@@ -1,0 +1,267 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/fraud-decision-intelligence.ttl> a owl:Ontology ;
+  dct:title "Domain — Fraud Decision Intelligence" ;
+  dct:description "Cross-industry fraud decision ontology for governed fraud events, entities, relationships, evidence bundles, decision receipts, label provenance, feature health, residual-fraud lift, scenario candidates, control actions, outcomes, false-positive clusters, and fraud-ring hypotheses. This module defines risk and decision semantics; it does not authorize enforcement, prove fraud, or implement runtime scoring." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core objects
+
+fraud:FraudEvent a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Fraud event" ;
+  rdfs:comment "A bounded activity being evaluated for fraud risk, such as an application, transaction, claim, login, refund, account opening, device activation, invoice, ad click, order, wire, credential change, or employee action." .
+
+fraud:FraudEntity a owl:Class ;
+  rdfs:subClassOf upper:Entity ;
+  rdfs:label "Fraud entity" ;
+  rdfs:comment "An actor, resource, instrument, or infrastructure element connected to fraud events, such as a customer, account, device, merchant, dealer, provider, employee, vendor, IP address, email, phone, address, payment instrument, identity document, wallet, or counterparty." .
+
+fraud:FraudRelationship a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Fraud relationship" ;
+  rdfs:comment "A typed link among fraud entities or events, such as shared device, shared address, common provider, common dealer, repeated counterparty, referral path, infrastructure reuse, or graph-neighborhood relation." .
+
+fraud:FraudEvidenceBundle a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Fraud evidence bundle" ;
+  rdfs:comment "A bounded evidence package supporting a risk assessment or decision recommendation. An evidence bundle may contain feature values, model scores, rules fired, graph paths, scenario references, analyst notes, source references, and provenance metadata." .
+
+fraud:FraudDecisionReceipt a owl:Class ;
+  rdfs:subClassOf upper:LedgerEntry ;
+  rdfs:label "Fraud decision receipt" ;
+  rdfs:comment "A replayable record of decision context, recommendation, authorized action, policy boundary, evidence references, and claim limits." .
+
+fraud:FraudLabelProvenance a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Fraud label provenance" ;
+  rdfs:comment "A record describing the origin, confidence, timing, reversibility, and evidence basis of a fraud or non-fraud label." .
+
+fraud:FraudFeatureHealth a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Fraud feature health" ;
+  rdfs:comment "A record describing feature availability, missingness, drift, leakage risk, operational availability at decision time, and recommended handling." .
+
+fraud:FraudScenarioCandidate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Fraud scenario candidate" ;
+  rdfs:comment "A bounded hypothesis about a repeatable fraud pattern or control weakness. A scenario candidate is not proof of fraud and must not become a rule, label, or enforcement action without validation." .
+
+fraud:FraudControlAction a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Fraud control action" ;
+  rdfs:comment "A policy-authorized control action such as allow, deny, hold, review, step-up verification, limit, suspend, monitor, investigate, report, reimburse, claw back, or escalate." .
+
+fraud:FraudOutcome a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Fraud outcome" ;
+  rdfs:comment "A recorded downstream disposition such as confirmed fraud, confirmed non-fraud, unresolved, prevented loss, actual loss, recovery, customer friction, analyst time, appeal, chargeback, claim denial, regulatory filing, or remediation." .
+
+fraud:ResidualFraudLift a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Residual fraud lift" ;
+  rdfs:comment "An evidence record distinguishing incumbent-control caught fraud, incumbent-control missed fraud, model-only catches, rule-only catches, both-caught fraud, neither-caught fraud, and false positives by control path." .
+
+fraud:FalsePositiveCluster a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "False positive cluster" ;
+  rdfs:comment "A cluster of legitimate or unresolved cases that share risk-signal patterns and require operational, data-quality, policy, or model review." .
+
+fraud:FraudRingHypothesis a owl:Class ;
+  rdfs:subClassOf fraud:FraudScenarioCandidate ;
+  rdfs:label "Fraud ring hypothesis" ;
+  rdfs:comment "A graph- or relationship-based hypothesis about coordinated fraud activity. It is not identity attribution, intent proof, or confirmed collusion without additional governed evidence." .
+
+### Claim-boundary markers
+
+fraud:RiskSignal a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Risk signal" ;
+  rdfs:comment "A signal that may contribute to a fraud-risk assessment but does not prove fraud." .
+
+fraud:FraudProofClaim a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Fraud proof claim" ;
+  rdfs:comment "A claim that an event, entity, or relationship is proven fraud. This requires governed evidence and must not be asserted from model score, graph path, or benchmark metric alone." .
+
+fraud:ProductionValidationClaim a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Production validation claim" ;
+  rdfs:comment "A claim that a fraud model, scenario, or control path is production-validated. Public benchmarks and Kaggle-style metrics are insufficient by themselves." .
+
+### Object properties
+
+fraud:evaluatesEvent a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range fraud:FraudEvent ;
+  rdfs:label "evaluates event" .
+
+fraud:involvesEntity a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range fraud:FraudEntity ;
+  rdfs:label "involves entity" .
+
+fraud:hasRelationship a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range fraud:FraudRelationship ;
+  rdfs:label "has relationship" .
+
+fraud:hasEvidenceBundle a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range fraud:FraudEvidenceBundle ;
+  rdfs:label "has evidence bundle" .
+
+fraud:hasLabelProvenance a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range fraud:FraudLabelProvenance ;
+  rdfs:label "has label provenance" .
+
+fraud:hasFeatureHealth a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range fraud:FraudFeatureHealth ;
+  rdfs:label "has feature health" .
+
+fraud:hasScenarioCandidate a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range fraud:FraudScenarioCandidate ;
+  rdfs:label "has scenario candidate" .
+
+fraud:recommendsAction a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range fraud:FraudControlAction ;
+  rdfs:label "recommends action" .
+
+fraud:authorizesAction a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range fraud:FraudControlAction ;
+  rdfs:label "authorizes action" .
+
+fraud:recordsOutcome a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range fraud:FraudOutcome ;
+  rdfs:label "records outcome" .
+
+fraud:hasResidualLift a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range fraud:ResidualFraudLift ;
+  rdfs:label "has residual lift" .
+
+fraud:hasFalsePositiveCluster a owl:ObjectProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range fraud:FalsePositiveCluster ;
+  rdfs:label "has false positive cluster" .
+
+fraud:assertsProofClaim a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range fraud:FraudProofClaim ;
+  rdfs:label "asserts proof claim" .
+
+fraud:assertsProductionValidationClaim a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range fraud:ProductionValidationClaim ;
+  rdfs:label "asserts production validation claim" .
+
+### Datatype properties
+
+fraud:eventType a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudEvent ;
+  rdfs:range xsd:string ;
+  rdfs:label "event type" .
+
+fraud:entityType a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudEntity ;
+  rdfs:range xsd:string ;
+  rdfs:label "entity type" .
+
+fraud:relationshipType a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudRelationship ;
+  rdfs:range xsd:string ;
+  rdfs:label "relationship type" .
+
+fraud:modelScore a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "model score" .
+
+fraud:benchmarkMetric a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudEvidenceBundle ;
+  rdfs:range xsd:string ;
+  rdfs:label "benchmark metric" .
+
+fraud:claimBoundary a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "claim boundary" .
+
+fraud:labelValue a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudLabelProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "label value" .
+
+fraud:labelSource a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudLabelProvenance ;
+  rdfs:range xsd:string ;
+  rdfs:label "label source" .
+
+fraud:labelConfidence a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudLabelProvenance ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "label confidence" .
+
+fraud:featureName a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudFeatureHealth ;
+  rdfs:range xsd:string ;
+  rdfs:label "feature name" .
+
+fraud:missingnessDelta a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudFeatureHealth ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "missingness delta" .
+
+fraud:leakageRisk a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudFeatureHealth ;
+  rdfs:range xsd:string ;
+  rdfs:label "leakage risk" .
+
+fraud:operationalAvailability a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudFeatureHealth ;
+  rdfs:range xsd:string ;
+  rdfs:label "operational availability" .
+
+fraud:recommendedHandling a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudFeatureHealth ;
+  rdfs:range xsd:string ;
+  rdfs:label "recommended handling" .
+
+fraud:scenarioStatus a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudScenarioCandidate ;
+  rdfs:range xsd:string ;
+  rdfs:label "scenario status" .
+
+fraud:actionKind a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudControlAction ;
+  rdfs:range xsd:string ;
+  rdfs:label "action kind" .
+
+fraud:isHumanImpacting a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudControlAction ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "is human impacting" .
+
+fraud:decisionId a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "decision ID" .
+
+fraud:authorizedByPolicyRef a owl:DatatypeProperty ;
+  rdfs:domain fraud:FraudDecisionReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "authorized by policy ref" .
