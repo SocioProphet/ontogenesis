@@ -1,0 +1,52 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rcg: <https://socioprophet.github.io/ontogenesis/middle/reciprocal-channel-governance#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<shapes/reciprocal-channel-governance.shacl.ttl> a owl:Ontology ;
+  dct:title "Reciprocal Channel Governance SHACL Shapes" ;
+  dct:description "Promotion-gate shapes for reciprocal channel governance semantic artifacts." ;
+  owl:versionInfo "0.1.0" .
+
+rcg:ChannelShape a sh:NodeShape ;
+  sh:targetClass rcg:Channel ;
+  sh:property [ sh:path rcg:channelId ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:channelClass ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:substrate ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:captureMethod ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:trustBoundary ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:knownConfusabilityMode ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+rcg:ChannelObservationShape a sh:NodeShape ;
+  sh:targetClass rcg:ChannelObservation ;
+  sh:property [ sh:path rcg:usesChannel ; sh:minCount 1 ; sh:class rcg:Channel ] ;
+  sh:property [ sh:path rcg:hasPercept ; sh:minCount 1 ; sh:class rcg:Percept ] ;
+  sh:property [ sh:path rcg:governedByEnvelope ; sh:minCount 1 ; sh:class rcg:ChannelAuthorityEnvelope ] ;
+  sh:property [ sh:path rcg:hasPromotionState ; sh:minCount 1 ; sh:class rcg:PromotionState ] ;
+  sh:property [ sh:path rcg:provenanceRef ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:confidenceType ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:confidenceLevel ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+rcg:InterpretantCandidateShape a sh:NodeShape ;
+  sh:targetClass rcg:InterpretantCandidate ;
+  sh:property [ sh:path rcg:confusableWith ; sh:class rcg:Confusable ] .
+
+rcg:ChannelAuthorityEnvelopeShape a sh:NodeShape ;
+  sh:targetClass rcg:ChannelAuthorityEnvelope ;
+  sh:property [ sh:path rcg:allowedSink ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:disallowedSink ; sh:datatype xsd:string ] .
+
+rcg:CollapseDecisionShape a sh:NodeShape ;
+  sh:targetClass rcg:CollapseDecision ;
+  sh:property [ sh:path rcg:sourceObservation ; sh:minCount 1 ; sh:class rcg:ChannelObservation ] ;
+  sh:property [ sh:path rcg:selectedInterpretant ; sh:minCount 1 ; sh:class rcg:InterpretantCandidate ] ;
+  sh:property [ sh:path rcg:hasRepairEvent ; sh:minCount 1 ; sh:class rcg:RepairEvent ] ;
+  sh:property [ sh:path rcg:residualUncertainty ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+rcg:ProjectionProfileShape a sh:NodeShape ;
+  sh:targetClass rcg:ProjectionProfile ;
+  sh:property [ sh:path rcg:lossProfile ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:allowedUse ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path rcg:disallowedUse ; sh:datatype xsd:string ] .
