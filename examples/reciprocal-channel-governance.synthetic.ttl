@@ -1,0 +1,56 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rcg: <https://socioprophet.github.io/ontogenesis/middle/reciprocal-channel-governance#> .
+@prefix ex: <https://socioprophet.github.io/ontogenesis/examples/reciprocal-channel-governance#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:ASRDictationChannel a rcg:MachineChannel ;
+  rcg:channelId "rcg:channel:asr.dictation" ;
+  rcg:channelClass "human_communication" ;
+  rcg:substrate "audio waveform" ;
+  rcg:captureMethod "speech-to-text" ;
+  rcg:trustBoundary "external_authenticated" ;
+  rcg:knownConfusabilityMode "homophone" , "near-homophone" , "domain-term-collapse" ;
+  rdfs:label "ASR dictation channel" .
+
+ex:ASRAdvisoryEnvelope a rcg:ChannelAuthorityEnvelope ;
+  rcg:allowedSink "display" , "suggest" , "candidate_memory" ;
+  rcg:disallowedSink "confirmed_memory" , "graph_edge" , "claim_promotion" , "policy_binding" , "high_risk_action" , "publish" , "delete" , "authorize_agent" ;
+  rdfs:label "ASR advisory authority envelope" .
+
+ex:PowerBabblePercept a rcg:Percept ;
+  rdfs:label "ASR transcript percept: power babble" .
+
+ex:PowerBabelConfusable a rcg:Confusable ;
+  rdfs:label "power Babel" .
+
+ex:PowerBabelInterpretant a rcg:InterpretantCandidate ;
+  rcg:confusableWith ex:PowerBabelConfusable ;
+  rdfs:label "Interpretant candidate: power Babel" .
+
+ex:PowerBabbleObservation a rcg:ChannelObservation ;
+  rcg:usesChannel ex:ASRDictationChannel ;
+  rcg:hasPercept ex:PowerBabblePercept ;
+  rcg:hasInterpretantCandidate ex:PowerBabelInterpretant ;
+  rcg:governedByEnvelope ex:ASRAdvisoryEnvelope ;
+  rcg:hasPromotionState rcg:Candidate ;
+  rcg:provenanceRef "synthetic:conversation:rcg-asr-example" ;
+  rcg:confidenceType "acoustic" ;
+  rcg:confidenceLevel "medium" ;
+  rcg:repairProtocol "preserve alternates" ;
+  rdfs:label "ASR power-babble channel observation" .
+
+ex:UserConfirmationRepair a rcg:RepairEvent ;
+  rdfs:label "User confirmation repair event" .
+
+ex:CandidateMemoryCollapse a rcg:CollapseDecision ;
+  rcg:sourceObservation ex:PowerBabbleObservation ;
+  rcg:selectedInterpretant ex:PowerBabelInterpretant ;
+  rcg:hasRepairEvent ex:UserConfirmationRepair ;
+  rcg:residualUncertainty "scope of term remains local to the current doctrine discussion" ;
+  rdfs:label "Candidate-memory collapse decision" .
+
+ex:DashboardProjectionProfile a rcg:ProjectionProfile ;
+  rcg:lossProfile "summary omission" ;
+  rcg:allowedUse "orientation" ;
+  rcg:disallowedUse "whole-estate completion claim" ;
+  rdfs:label "Dashboard projection profile" .
