@@ -21,6 +21,14 @@
     "Revocation": "gi:Revocation",
     "SlashTopicProfile": "gi:SlashTopicProfile",
     "VectorEncodingManifest": "gi:VectorEncodingManifest",
+    "ProtectedSignal": "gi:ProtectedSignal",
+    "LearningOperation": "gi:LearningOperation",
+    "LinkingOperation": "gi:LinkingOperation",
+    "PrivacyBoundary": "gi:PrivacyBoundary",
+    "NonLearningConstraint": "gi:NonLearningConstraint",
+    "NonLinkabilityConstraint": "gi:NonLinkabilityConstraint",
+    "PrivacyDecision": "gi:PrivacyDecision",
+    "PrivacyReceipt": "gi:PrivacyReceipt",
 
     "identifier": "gi:identifier",
     "entityType": "gi:entityType",
@@ -51,6 +59,11 @@
     "outputHash": "gi:outputHash",
     "logRef": "gi:logRef",
     "eventType": "gi:eventType",
+    "privacyScope": "gi:privacyScope",
+    "privacyBasis": "gi:privacyBasis",
+    "enforcementMode": "gi:enforcementMode",
+    "privacyDisposition": "gi:privacyDisposition",
+    "operationScope": "gi:operationScope",
     "validTime": {
       "@id": "gi:validTime",
       "@type": "xsd:dateTime"
@@ -118,6 +131,46 @@
     },
     "supersedes": {
       "@id": "gi:supersedes",
+      "@type": "@id"
+    },
+    "hasProtectedSignal": {
+      "@id": "gi:hasProtectedSignal",
+      "@type": "@id"
+    },
+    "hasPrivacyBoundary": {
+      "@id": "gi:hasPrivacyBoundary",
+      "@type": "@id"
+    },
+    "hasPrivacyConstraint": {
+      "@id": "gi:hasPrivacyConstraint",
+      "@type": "@id"
+    },
+    "constrainsLearning": {
+      "@id": "gi:constrainsLearning",
+      "@type": "@id"
+    },
+    "constrainsLinking": {
+      "@id": "gi:constrainsLinking",
+      "@type": "@id"
+    },
+    "targetsProtectedSignal": {
+      "@id": "gi:targetsProtectedSignal",
+      "@type": "@id"
+    },
+    "crossesPrivacyBoundary": {
+      "@id": "gi:crossesPrivacyBoundary",
+      "@type": "@id"
+    },
+    "hasPrivacyDecision": {
+      "@id": "gi:hasPrivacyDecision",
+      "@type": "@id"
+    },
+    "hasPrivacyReceipt": {
+      "@id": "gi:hasPrivacyReceipt",
+      "@type": "@id"
+    },
+    "recordsPrivacyOperation": {
+      "@id": "gi:recordsPrivacyOperation",
       "@type": "@id"
     }
   }
