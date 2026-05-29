@@ -1,0 +1,64 @@
+{
+  "@context": "../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:privacy-boundary:workroom-alpha-user-signal-v0",
+      "@type": "PrivacyBoundary",
+      "privacyScope": "workroom=alpha;tenant=example;reuse=ephemeral_only",
+      "sourceRef": "policy-fabric:privacy-boundary:workroom-alpha-user-signal-v0",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:protected-signal:workroom-alpha-private-note-001",
+      "@type": "ProtectedSignal",
+      "artifactRef": "workroom-alpha:note:private-note-001",
+      "selectorType": "text_span",
+      "selector": "span=private-note-001#body",
+      "sourceRef": "prophet-platform:workroom-alpha:private-note-001",
+      "hasPrivacyBoundary": "urn:sp:privacy-boundary:workroom-alpha-user-signal-v0",
+      "privacyScope": "workroom=alpha;allowed_use=ephemeral_answering;durable_memory=false;vector_index=false",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:operation:embed-private-note-001",
+      "@type": "LearningOperation",
+      "operationScope": "target=durable_memory;vector_index=prophet-workroom-memory;reuse=cross-session",
+      "sourceRef": "prophet-platform:memory-ingest-proposal:embed-private-note-001",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:constraint:do-not-learn-private-note-001",
+      "@type": "NonLearningConstraint",
+      "constrainsLearning": "urn:sp:operation:embed-private-note-001",
+      "targetsProtectedSignal": "urn:sp:protected-signal:workroom-alpha-private-note-001",
+      "sourceRef": "ontogenesis:privacy-nonlinkability-doctrine-v0#do-not-learn",
+      "privacyScope": "durable_memory=false;vector_index=false;profile_update=false",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:privacy-decision:embed-private-note-001",
+      "@type": "PrivacyDecision",
+      "targets": "urn:sp:operation:embed-private-note-001",
+      "targetsProtectedSignal": "urn:sp:protected-signal:workroom-alpha-private-note-001",
+      "decision": "deny",
+      "privacyBasis": "DoNotLearn: protected note admits ephemeral answering only; durable memory and vector-index insertion are outside scope",
+      "sourceRef": "policy-fabric:privacy-decision:embed-private-note-001",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:privacy-receipt:embed-private-note-001",
+      "@type": "PrivacyReceipt",
+      "recordsPrivacyOperation": "urn:sp:operation:embed-private-note-001",
+      "hasPrivacyDecision": "urn:sp:privacy-decision:embed-private-note-001",
+      "targetsProtectedSignal": "urn:sp:protected-signal:workroom-alpha-private-note-001",
+      "enforcementMode": "block_durable_representation",
+      "privacyDisposition": "blocked",
+      "inputHash": "sha256:private-note-input-placeholder",
+      "outputHash": "sha256:no-durable-output-placeholder",
+      "logRef": "prophet-platform:privacy-log:embed-private-note-001",
+      "sourceRef": "model-governance-ledger:privacy-receipt:embed-private-note-001",
+      "lifecycleStatus": "admitted",
+      "transactionTime": "2026-05-29T00:00:00Z"
+    }
+  ]
+}
