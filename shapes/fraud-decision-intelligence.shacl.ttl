@@ -1,0 +1,174 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<shapes/fraud-decision-intelligence.shacl.ttl> a owl:Ontology ;
+  dct:title "Fraud Decision Intelligence SHACL Shapes" ;
+  dct:description "Promotion-gate shapes for Fraud Decision Intelligence ontology terms. These gates enforce decision receipts, evidence bundles, label provenance, feature health, and claim-boundary distinctions. They intentionally do not authorize production scoring or enforcement." ;
+  owl:versionInfo "0.1.0" .
+
+fraud:FraudDecisionReceiptShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudDecisionReceipt ;
+  sh:property [
+    sh:path fraud:decisionId ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:evaluatesEvent ;
+    sh:minCount 1 ;
+    sh:class fraud:FraudEvent ;
+  ] ;
+  sh:property [
+    sh:path fraud:hasEvidenceBundle ;
+    sh:minCount 1 ;
+    sh:class fraud:FraudEvidenceBundle ;
+  ] ;
+  sh:property [
+    sh:path fraud:claimBoundary ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+fraud:FraudEvidenceBundleShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudEvidenceBundle ;
+  sh:property [
+    sh:path fraud:claimBoundary ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:modelScore ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+  ] .
+
+fraud:FraudLabelProvenanceShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudLabelProvenance ;
+  sh:property [
+    sh:path fraud:labelValue ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:labelSource ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:labelConfidence ;
+    sh:minCount 1 ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+  ] .
+
+fraud:FraudFeatureHealthShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudFeatureHealth ;
+  sh:property [
+    sh:path fraud:featureName ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:missingnessDelta ;
+    sh:datatype xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path fraud:operationalAvailability ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:recommendedHandling ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+fraud:FraudScenarioCandidateShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudScenarioCandidate ;
+  sh:property [
+    sh:path fraud:scenarioStatus ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:claimBoundary ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+fraud:FraudControlActionShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudControlAction ;
+  sh:property [
+    sh:path fraud:actionKind ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path fraud:isHumanImpacting ;
+    sh:minCount 1 ;
+    sh:datatype xsd:boolean ;
+  ] .
+
+fraud:HumanImpactingAuthorizedActionShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudDecisionReceipt ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A FraudDecisionReceipt that authorizes a human-impacting FraudControlAction must include fraud:authorizedByPolicyRef." ;
+    sh:select """
+      PREFIX fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#>
+      SELECT $this WHERE {
+        $this fraud:authorizesAction ?action .
+        ?action fraud:isHumanImpacting true .
+        FILTER NOT EXISTS { $this fraud:authorizedByPolicyRef ?policyRef . }
+      }
+    """ ;
+  ] .
+
+fraud:NoModelScoreAsFraudProofShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudEvidenceBundle ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A FraudEvidenceBundle with fraud:modelScore must not assert fraud:FraudProofClaim directly; model score is a risk signal, not proof." ;
+    sh:select """
+      PREFIX fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#>
+      SELECT $this WHERE {
+        $this fraud:modelScore ?score .
+        $this fraud:assertsProofClaim ?claim .
+      }
+    """ ;
+  ] .
+
+fraud:NoBenchmarkAsProductionValidationShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudEvidenceBundle ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A FraudEvidenceBundle with fraud:benchmarkMetric must not assert production validation directly; benchmark metrics alone do not prove production readiness." ;
+    sh:select """
+      PREFIX fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#>
+      SELECT $this WHERE {
+        $this fraud:benchmarkMetric ?metric .
+        $this fraud:assertsProductionValidationClaim ?claim .
+      }
+    """ ;
+  ] .
+
+fraud:ConfirmedFraudRequiresLabelProvenanceShape a sh:NodeShape ;
+  sh:targetClass fraud:FraudOutcome ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "A FraudOutcome with label value confirmed_fraud must have fraud:hasLabelProvenance." ;
+    sh:select """
+      PREFIX fraud: <https://socioprophet.github.io/ontogenesis/domains/fraud#>
+      SELECT $this WHERE {
+        $this fraud:labelValue "confirmed_fraud" .
+        FILTER NOT EXISTS { $this fraud:hasLabelProvenance ?provenance . }
+      }
+    """ ;
+  ] .
