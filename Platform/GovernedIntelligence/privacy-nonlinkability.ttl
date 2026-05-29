@@ -1,0 +1,158 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<Platform/GovernedIntelligence/privacy-nonlinkability.ttl> a owl:Ontology ;
+  dct:title "Privacy Non-Linkability Ontology Terms" ;
+  dct:description "Draft vocabulary for DoNotLearn and DoNotLink constraints over governed-intelligence learning, linking, memory, vector, graph, evidence, claim, action, and receipt flows." ;
+  dct:source <docs/specs/privacy-nonlinkability-doctrine-v0.md> ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/GovernedIntelligence/governed-intelligence.ttl> .
+
+### Privacy constraint classes
+
+gi:ProtectedSignal a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Protected signal" ;
+  skos:definition "Source signal, observation, identifier, anchor, feature, embedding, graph relation, user-supplied artifact, workroom event, or derived representation that may not be learned from, linked, or reused outside its admitted policy scope." .
+
+gi:LearningOperation a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Learning operation" ;
+  skos:definition "Operation that updates or produces a reusable representation, including training, embedding, durable summarization, clustering, profile construction, topic-pack promotion, vector-index insertion, policy learning, and memory-mesh update." .
+
+gi:LinkingOperation a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Linking operation" ;
+  skos:definition "Operation that creates, preserves, exposes, infers, or operationalizes a relation across protected scopes, including entity resolution, join-key creation, cross-domain graph edges, latent-neighbor linkage, workroom bridging, and equivalence-class promotion." .
+
+gi:PrivacyBoundary a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Privacy boundary" ;
+  skos:definition "Policy scope separating domains that may not be co-learned, joined, projected, searched, clustered, or operationalized together without explicit admission." .
+
+gi:NonLearningConstraint a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Non-learning constraint" ;
+  skos:definition "Constraint prohibiting representation formation from a protected signal unless a policy decision explicitly allows the proposed learning operation." .
+
+gi:NonLinkabilityConstraint a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Non-linkability constraint" ;
+  skos:definition "Constraint prohibiting relation formation across protected scopes unless a policy decision explicitly allows the proposed linking operation." .
+
+gi:PrivacyDecision a owl:Class ;
+  rdfs:subClassOf gi:PolicyDecision ;
+  rdfs:label "Privacy decision" ;
+  skos:definition "Policy decision over a proposed learning or linking operation, reusing the governed-intelligence allow, deny, require_review, and provisional decision vocabulary." .
+
+gi:PrivacyReceipt a owl:Class ;
+  rdfs:subClassOf gi:RuntimeReceipt ;
+  rdfs:label "Privacy receipt" ;
+  skos:definition "Receipt recording the outcome of privacy enforcement over a learning or linking operation, including operation reference, target signal or relation, decision, enforcement mode, scope, timestamp, and disposition." .
+
+### Privacy object properties
+
+gi:hasProtectedSignal a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:ProtectedSignal ;
+  rdfs:label "has protected signal" .
+
+gi:hasPrivacyBoundary a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:PrivacyBoundary ;
+  rdfs:label "has privacy boundary" .
+
+gi:hasPrivacyConstraint a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range upper:Policy ;
+  rdfs:label "has privacy constraint" ;
+  skos:definition "Associates an information artifact, protected signal, proposal, claim, evidence object, vector candidate, topic profile, or receipt with a privacy constraint." .
+
+gi:constrainsLearning a owl:ObjectProperty ;
+  rdfs:domain gi:NonLearningConstraint ;
+  rdfs:range gi:LearningOperation ;
+  rdfs:label "constrains learning" .
+
+gi:constrainsLinking a owl:ObjectProperty ;
+  rdfs:domain gi:NonLinkabilityConstraint ;
+  rdfs:range gi:LinkingOperation ;
+  rdfs:label "constrains linking" .
+
+gi:targetsProtectedSignal a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:ProtectedSignal ;
+  rdfs:label "targets protected signal" .
+
+gi:crossesPrivacyBoundary a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:PrivacyBoundary ;
+  rdfs:label "crosses privacy boundary" .
+
+gi:hasPrivacyDecision a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:PrivacyDecision ;
+  rdfs:label "has privacy decision" .
+
+gi:hasPrivacyReceipt a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:PrivacyReceipt ;
+  rdfs:label "has privacy receipt" .
+
+gi:recordsPrivacyOperation a owl:ObjectProperty ;
+  rdfs:domain gi:PrivacyReceipt ;
+  rdfs:range upper:Process ;
+  rdfs:label "records privacy operation" .
+
+### Privacy datatype properties
+
+gi:privacyScope a owl:DatatypeProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range xsd:string ;
+  rdfs:label "privacy scope" .
+
+gi:privacyBasis a owl:DatatypeProperty ;
+  rdfs:domain gi:PrivacyDecision ;
+  rdfs:range xsd:string ;
+  rdfs:label "privacy basis" .
+
+gi:enforcementMode a owl:DatatypeProperty ;
+  rdfs:domain gi:PrivacyReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "enforcement mode" .
+
+gi:privacyDisposition a owl:DatatypeProperty ;
+  rdfs:domain gi:PrivacyReceipt ;
+  rdfs:range xsd:string ;
+  rdfs:label "privacy disposition" .
+
+gi:operationScope a owl:DatatypeProperty ;
+  rdfs:domain upper:Process ;
+  rdfs:range xsd:string ;
+  rdfs:label "operation scope" .
+
+### Controlled value individuals
+
+gi:DoNotLearn a skos:Concept ;
+  skos:prefLabel "do_not_learn" ;
+  skos:definition "Constraint requiring protected signals not to be incorporated into reusable representations without explicit policy admission." .
+
+gi:DoNotLink a skos:Concept ;
+  skos:prefLabel "do_not_link" ;
+  skos:definition "Constraint requiring protected scopes not to be joined, bridged, inferred, exposed, or operationalized together without explicit policy admission." .
+
+gi:Blocked a skos:Concept ; skos:prefLabel "blocked" .
+gi:Admitted a skos:Concept ; skos:prefLabel "admitted" .
+gi:Minimized a skos:Concept ; skos:prefLabel "minimized" .
+gi:Redacted a skos:Concept ; skos:prefLabel "redacted" .
+gi:Aggregated a skos:Concept ; skos:prefLabel "aggregated" .
+gi:Anonymized a skos:Concept ; skos:prefLabel "anonymized" .
+gi:EphemeralOnly a skos:Concept ; skos:prefLabel "ephemeral_only" .
+gi:Expired a skos:Concept ; skos:prefLabel "expired" .
