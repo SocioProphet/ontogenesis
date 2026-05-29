@@ -1,0 +1,269 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL gates for the privacy non-linkability doctrine.
+# These shapes intentionally enforce only structural invariants:
+# - protected signals declare source and privacy scope;
+# - learning/linking operations declare operation scope;
+# - non-learning/non-linkability constraints bind to the operation they constrain;
+# - privacy decisions use the governed-intelligence admission vocabulary;
+# - privacy receipts record the operation, decision, enforcement mode, disposition, and receipt hashes.
+#
+# These shapes do not attempt full non-linkability reasoning, identity reconstruction analysis,
+# graph reachability analysis, or privacy-law compliance verification.
+
+gi:ProtectedSignalShape
+  a sh:NodeShape ;
+  sh:targetClass gi:ProtectedSignal ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:privacyScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:PrivacyBoundaryShape
+  a sh:NodeShape ;
+  sh:targetClass gi:PrivacyBoundary ;
+  sh:property [
+    sh:path gi:privacyScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:LearningOperationShape
+  a sh:NodeShape ;
+  sh:targetClass gi:LearningOperation ;
+  sh:property [
+    sh:path gi:operationScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:LinkingOperationShape
+  a sh:NodeShape ;
+  sh:targetClass gi:LinkingOperation ;
+  sh:property [
+    sh:path gi:operationScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:NonLearningConstraintShape
+  a sh:NodeShape ;
+  sh:targetClass gi:NonLearningConstraint ;
+  sh:property [
+    sh:path gi:constrainsLearning ;
+    sh:minCount 1 ;
+    sh:class gi:LearningOperation ;
+  ] ;
+  sh:property [
+    sh:path gi:targetsProtectedSignal ;
+    sh:minCount 1 ;
+    sh:class gi:ProtectedSignal ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:privacyScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+gi:NonLinkabilityConstraintShape
+  a sh:NodeShape ;
+  sh:targetClass gi:NonLinkabilityConstraint ;
+  sh:property [
+    sh:path gi:constrainsLinking ;
+    sh:minCount 1 ;
+    sh:class gi:LinkingOperation ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:privacyScope ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+gi:PrivacyDecisionShape
+  a sh:NodeShape ;
+  sh:targetClass gi:PrivacyDecision ;
+  sh:property [
+    sh:path gi:decision ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "allow" "deny" "require_review" "provisional" ) ;
+  ] ;
+  sh:property [
+    sh:path gi:targets ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:privacyBasis ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:PrivacyReceiptShape
+  a sh:NodeShape ;
+  sh:targetClass gi:PrivacyReceipt ;
+  sh:property [
+    sh:path gi:recordsPrivacyOperation ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path gi:hasPrivacyDecision ;
+    sh:minCount 1 ;
+    sh:class gi:PrivacyDecision ;
+  ] ;
+  sh:property [
+    sh:path gi:enforcementMode ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:privacyDisposition ;
+    sh:minCount 1 ;
+    sh:in (
+      "blocked"
+      "admitted"
+      "minimized"
+      "redacted"
+      "aggregated"
+      "anonymized"
+      "ephemeral_only"
+      "expired"
+      "require_review"
+    ) ;
+  ] ;
+  sh:property [
+    sh:path gi:inputHash ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:outputHash ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:logRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
