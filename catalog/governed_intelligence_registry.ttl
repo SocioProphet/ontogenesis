@@ -9,7 +9,7 @@
 <catalog/governed_intelligence_registry.ttl> a owl:Ontology ;
   dct:title "Governed Intelligence Registry" ;
   dct:description "Supplemental registry tranche for the governed-intelligence object model, SHACL gates, JSON-LD context, and examples." ;
-  owl:versionInfo "0.1.1" ;
+  owl:versionInfo "0.1.2" ;
   owl:imports <catalog/registry.ttl> ;
   owl:imports <Platform/GovernedIntelligence/governed-intelligence.ttl> ;
   owl:imports <Platform/GovernedIntelligence/privacy-nonlinkability.ttl> .
@@ -37,6 +37,14 @@ og:GovernedIntelligenceShapes a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Governed intelligence SHACL gates" .
+
+og:GovernedIntelligencePrivacyNonlinkabilityShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/privacy_nonlinkability.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Privacy non-linkability SHACL gates" .
 
 og:GovernedIntelligenceContext a og:Module ;
   og:layer "Contexts" ;
@@ -69,3 +77,11 @@ og:GovernedIntelligenceExamples a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Governed intelligence examples" .
+
+og:GovernedIntelligencePrivacyNonlinkabilityExamples a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/privacy-nonlinkability/" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Privacy non-linkability examples" .
