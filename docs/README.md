@@ -14,6 +14,7 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 
 - [`specs/namespaces.md`](specs/namespaces.md) — canonical namespace prefixes and base IRI guidance
 - [`specs/governed-intelligence-object-model-v0.md`](specs/governed-intelligence-object-model-v0.md) — governed intelligence object model for claims, anchors, evidence, policy decisions, vector candidates, action proposals, runtime receipts, and learning events
+- [`specs/privacy-nonlinkability-doctrine-v0.md`](specs/privacy-nonlinkability-doctrine-v0.md) — DoNotLearn / DoNotLink doctrine for non-learning and non-linkability constraints over governed intelligence objects, memory, vectors, graphs, workrooms, and receipts
 - [`specs/shir-v0.1.md`](specs/shir-v0.1.md) — Semantic Hyperknowledge Intermediate Representation draft spec
 - [`specs/ontology-query-adapter.md`](specs/ontology-query-adapter.md) — ontology-query adapter contract for the Lattice FederatedQueryPlane
 - [`specs/semantic_enterprise_architecture.md`](specs/semantic_enterprise_architecture.md) — semantic enterprise lifecycle, mapping, named graph, SHACL, and implementation contracts
@@ -42,4 +43,3 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`cybernetic-self-tranche-note.md`](cybernetic-self-tranche-note.md)
 - [`product-service-tranche-note.md`](product-service-tranche-note.md)
 - [`socioprophet-ontology-v0.md`](socioprophet-ontology-v0.md)
-
