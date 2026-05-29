@@ -1,0 +1,20 @@
+{
+  "@context": "../../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:operation:invalid-embed-private-note-001",
+      "@type": "LearningOperation",
+      "operationScope": "target=durable_memory;vector_index=prophet-workroom-memory",
+      "sourceRef": "prophet-platform:memory-ingest-proposal:invalid-embed-private-note-001",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:privacy-decision:invalid-missing-basis-001",
+      "@type": "PrivacyDecision",
+      "targets": "urn:sp:operation:invalid-embed-private-note-001",
+      "decision": "deny",
+      "sourceRef": "policy-fabric:privacy-decision:invalid-missing-basis-001",
+      "lifecycleStatus": "admitted"
+    }
+  ]
+}
