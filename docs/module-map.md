@@ -138,6 +138,9 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 - `Domains/product-service.ttl` — product/service offerings, plans, SKUs, capabilities, entitlements, and service instances
 - `Domains/agentic-purple-team.ttl` — governed agentic purple-team loops/actions, evidence envelopes, safety boundaries, gates, atomic tests, countermeasure rules, run receipts/summaries, AI/MCP/agent-skill risk, graph robustness, and MITRE-compatible local technique model
+- `Domains/adversarial-scenario.ttl` — governed SCOPE-D adversarial scenario semantics for scenario composition, channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime receipts, and scenario non-claims
+  - SHACL: `shapes/adversarial-scenario.shacl.ttl`
+  - example: `examples/adversarial-scenario-scope-d-workspace-transduction.ttl`
 - `Domains/smart-home-privacy.ttl` — smart-home privacy governance for vendors, devices, capabilities, physical contexts, privacy claims, evidence, coverage findings, risk inferences, consent boundaries, GAIA bindings, and HDT impact bindings
 - `Domains/balance-sheet.ttl` — banking balance-sheet seed module for assets, liabilities, cashflows, and funding sources
 - `Domains/regulatory-reporting.ttl` — banking regulatory-reporting seed module for filing packs, line items, correction chains, and signoffs
@@ -172,7 +175,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `docs/specs/valueflows-governed-canonical-v0.4.md`
   - governed ValueFlows profile spec
 - `docs/specs/agentic-purple-team-and-mitre.md`
-  - SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
+  - SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, adversarial scenarios, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
 - `docs/specs/smart_home_privacy_gaia_hdt_bridge.md`
   - smart-home privacy bridge specification for Ontogenesis, GAIA, HolographMe/HDT, Sherlock, SourceOS, ProCybernetica, Sociosphere, and Policy Fabric
 - `docs/banking-reference-crosswalk.md`
@@ -187,6 +190,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `catalog/view_governance_registry.ttl` — supplemental View Governance registry tranche; transitional until #93 normalizes registry posture
 - `catalog/prophet_artifact_registry.ttl` — supplemental Prophet Artifact registry tranche; transitional until #93 normalizes registry posture
 - `catalog/banking_registry.ttl` — supplemental banking registry tranche; transitional until #93 normalizes registry posture
+- `catalog/adversarial_scenario_registry.ttl` — supplemental adversarial-scenario registry tranche; transitional until the primary registry posture is normalized
 - `contexts/main.context.jsonld` — main JSON-LD context
 - `contexts/semantic-enterprise.context.jsonld` — semantic-enterprise context
 - `contexts/governed-intelligence.context.jsonld` — governed-intelligence context
@@ -198,7 +202,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `contexts/banking.context.jsonld` — Banking context
 
 ## Gates and audits
-- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`, `shapes/view-governance.shacl.ttl`, `prophet/shapes/prophet_artifact.shacl.ttl`, `shapes/banking-core.shacl.ttl`
+- SHACL bundles: `shapes/core.shacl.ttl`, `shapes/ontogenesis.shacl.ttl`, `shapes/cybernetic-self.shacl.ttl`, `shapes/product-service.shacl.ttl`, `shapes/parsing-gates.ttl`, `shapes/ontology-query.shacl.ttl`, `shapes/valueflows-governed.shacl.ttl`, `shapes/michael-belief.shacl.ttl`, `shapes/human-digital-twin.shacl.ttl`, `shapes/kg_lifecycle.shacl.ttl`, `shapes/semantic_mapping.shacl.ttl`, `shapes/named_graph_governance.shacl.ttl`, `shapes/agentic-purple-team.shacl.ttl`, `shapes/adversarial-scenario.shacl.ttl`, `shapes/governed_intelligence.shacl.ttl`, `shapes/knowledge-context.shacl.ttl`, `shapes/reasoning_failure.shacl.ttl`, `shapes/smart-home-privacy.shacl.ttl`, `shapes/view-governance.shacl.ttl`, `prophet/shapes/prophet_artifact.shacl.ttl`, `shapes/banking-core.shacl.ttl`
 - Scripts:
   - parse validation, SHACL gates, JSON-LD roundtrip
   - dist build, ledger build/verify, detached signatures, SPDX SBOM
