@@ -1,0 +1,184 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix rcg: <https://socioprophet.github.io/ontogenesis/middle/reciprocal-channel-governance#> .
+@prefix middle: <https://socioprophet.github.io/ontogenesis/middle#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<Middle/reciprocal-channel-governance.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Middle — Reciprocal Channel Governance" ;
+  dct:description "Semantic mirror of ProCybernetica reciprocal channel governance: channel-conditioned signals, percepts, interpretants, confusables, collapse decisions, repair events, projection profiles, and authority envelopes." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### Core classes
+rcg:Channel a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Channel" ;
+  rdfs:comment "A governed path by which a human, machine, agent, or system receives, renders, transforms, or acts on information." .
+
+rcg:SenseChannel a owl:Class ;
+  rdfs:subClassOf rcg:Channel ;
+  rdfs:label "Sense Channel" ;
+  rdfs:comment "A channel with perceptual semantics that produces observations or percepts under substrate-specific limits." .
+
+rcg:HumanSenseChannel a owl:Class ;
+  rdfs:subClassOf rcg:SenseChannel ;
+  rdfs:label "Human Sense Channel" .
+
+rcg:MachineChannel a owl:Class ;
+  rdfs:subClassOf rcg:Channel ;
+  rdfs:label "Machine Channel" .
+
+rcg:Signal a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Signal" ;
+  rdfs:comment "The channel substrate before interpretation." .
+
+rcg:Percept a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Percept" ;
+  rdfs:comment "The received or extracted form produced by a channel or capture method. A percept is not a fact by default." .
+
+rcg:Interpretant a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Interpretant" ;
+  rdfs:comment "A meaning or actionable reading inferred from a percept." .
+
+rcg:InterpretantCandidate a owl:Class ;
+  rdfs:subClassOf rcg:Interpretant ;
+  rdfs:label "Interpretant Candidate" .
+
+rcg:Confusable a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Confusable" ;
+  rdfs:comment "A candidate interpretation that can be mistaken for another under a channel condition." .
+
+rcg:ChannelObservation a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Channel Observation" ;
+  rdfs:comment "A provenance-bearing record that binds a channel, percept, confidence type, authority envelope, and promotion state." .
+
+rcg:CollapseDecision a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Collapse Decision" ;
+  rdfs:comment "A governed choice to select one interpretation from a candidate set." .
+
+rcg:RepairEvent a owl:Class ;
+  rdfs:subClassOf upper:Process ;
+  rdfs:label "Repair Event" ;
+  rdfs:comment "An active sensing step used to reduce ambiguity or prevent unsafe collapse." .
+
+rcg:ProjectionProfile a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Projection Profile" ;
+  rdfs:comment "A source-basis and loss-profile record for a lossy rendering such as a dashboard, summary, graph slice, memory card, or agent handoff." .
+
+rcg:ChannelAuthorityEnvelope a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Channel Authority Envelope" ;
+  rdfs:comment "The allowed and disallowed effects of a channel." .
+
+rcg:PromotionState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Promotion State" .
+
+rcg:ObserverProfile a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Observer Profile" ;
+  rdfs:comment "Scoped, revisable, and auditable profile of channel-relevant observer context. It must not be used as an invasive identity claim." .
+
+rcg:ChannelCondition a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Channel Condition" .
+
+### Object properties
+rcg:usesChannel a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:Channel ;
+  rdfs:label "uses channel" .
+
+rcg:hasSignal a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:Signal ;
+  rdfs:label "has signal" .
+
+rcg:hasPercept a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:Percept ;
+  rdfs:label "has percept" .
+
+rcg:hasInterpretantCandidate a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:InterpretantCandidate ;
+  rdfs:label "has interpretant candidate" .
+
+rcg:selectedInterpretant a owl:ObjectProperty ;
+  rdfs:domain rcg:CollapseDecision ;
+  rdfs:range rcg:InterpretantCandidate ;
+  rdfs:label "selected interpretant" .
+
+rcg:sourceObservation a owl:ObjectProperty ;
+  rdfs:domain rcg:CollapseDecision ;
+  rdfs:range rcg:ChannelObservation ;
+  rdfs:label "source observation" .
+
+rcg:hasRepairEvent a owl:ObjectProperty ;
+  rdfs:domain rcg:CollapseDecision ;
+  rdfs:range rcg:RepairEvent ;
+  rdfs:label "has repair event" .
+
+rcg:governedByEnvelope a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:ChannelAuthorityEnvelope ;
+  rdfs:label "governed by envelope" .
+
+rcg:hasPromotionState a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:PromotionState ;
+  rdfs:label "has promotion state" .
+
+rcg:hasProjectionProfile a owl:ObjectProperty ;
+  rdfs:domain rcg:Percept ;
+  rdfs:range rcg:ProjectionProfile ;
+  rdfs:label "has projection profile" .
+
+rcg:hasChannelCondition a owl:ObjectProperty ;
+  rdfs:domain rcg:ChannelObservation ;
+  rdfs:range rcg:ChannelCondition ;
+  rdfs:label "has channel condition" .
+
+rcg:confusableWith a owl:ObjectProperty ;
+  rdfs:domain rcg:InterpretantCandidate ;
+  rdfs:range rcg:Confusable ;
+  rdfs:label "confusable with" .
+
+### Datatype properties
+rcg:channelId a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "channel id" .
+rcg:channelClass a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "channel class" .
+rcg:substrate a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "substrate" .
+rcg:captureMethod a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "capture method" .
+rcg:trustBoundary a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "trust boundary" .
+rcg:knownConfusabilityMode a owl:DatatypeProperty ; rdfs:domain rcg:Channel ; rdfs:range xsd:string ; rdfs:label "known confusability mode" .
+rcg:provenanceRef a owl:DatatypeProperty ; rdfs:domain rcg:ChannelObservation ; rdfs:range xsd:string ; rdfs:label "provenance ref" .
+rcg:confidenceType a owl:DatatypeProperty ; rdfs:domain rcg:ChannelObservation ; rdfs:range xsd:string ; rdfs:label "confidence type" .
+rcg:confidenceLevel a owl:DatatypeProperty ; rdfs:domain rcg:ChannelObservation ; rdfs:range xsd:string ; rdfs:label "confidence level" .
+rcg:allowedSink a owl:DatatypeProperty ; rdfs:domain rcg:ChannelAuthorityEnvelope ; rdfs:range xsd:string ; rdfs:label "allowed sink" .
+rcg:disallowedSink a owl:DatatypeProperty ; rdfs:domain rcg:ChannelAuthorityEnvelope ; rdfs:range xsd:string ; rdfs:label "disallowed sink" .
+rcg:repairProtocol a owl:DatatypeProperty ; rdfs:domain rcg:ChannelObservation ; rdfs:range xsd:string ; rdfs:label "repair protocol" .
+rcg:lossProfile a owl:DatatypeProperty ; rdfs:domain rcg:ProjectionProfile ; rdfs:range xsd:string ; rdfs:label "loss profile" .
+rcg:allowedUse a owl:DatatypeProperty ; rdfs:domain rcg:ProjectionProfile ; rdfs:range xsd:string ; rdfs:label "allowed use" .
+rcg:disallowedUse a owl:DatatypeProperty ; rdfs:domain rcg:ProjectionProfile ; rdfs:range xsd:string ; rdfs:label "disallowed use" .
+rcg:residualUncertainty a owl:DatatypeProperty ; rdfs:domain rcg:CollapseDecision ; rdfs:range xsd:string ; rdfs:label "residual uncertainty" .
+rcg:nonClaim a owl:DatatypeProperty ; rdfs:domain upper:InformationArtifact ; rdfs:range xsd:string ; rdfs:label "non-claim" .
+
+### Canonical promotion states
+rcg:RawObservation a rcg:PromotionState ; rdfs:label "raw observation" .
+rcg:Candidate a rcg:PromotionState ; rdfs:label "candidate" .
+rcg:Confirmed a rcg:PromotionState ; rdfs:label "confirmed" .
+rcg:Contested a rcg:PromotionState ; rdfs:label "contested" .
+rcg:Superseded a rcg:PromotionState ; rdfs:label "superseded" .
+rcg:Expired a rcg:PromotionState ; rdfs:label "expired" .
