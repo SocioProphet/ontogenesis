@@ -1,0 +1,26 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/reciprocal-channel-governance.registry.ttl> a owl:Ontology ;
+  dct:title "Reciprocal Channel Governance Supplemental Registry" ;
+  dct:description "Supplemental registry entry for the Ontogenesis semantic mirror of ProCybernetica reciprocal channel governance. This avoids destructive mutation of the main registry while making the module discoverable for review." ;
+  owl:versionInfo "0.1.0" .
+
+og:MiddleReciprocalChannelGovernance a og:Module ;
+  og:layer "Middle" ;
+  og:path "Middle/reciprocal-channel-governance.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/reciprocal-channel-governance#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reciprocal channel governance" .
+
+og:ReciprocalChannelGovernanceShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/reciprocal-channel-governance.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/middle/reciprocal-channel-governance#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Reciprocal channel governance SHACL shapes" .
