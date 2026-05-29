@@ -1,0 +1,34 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/adversarial_scenario_registry.ttl> a owl:Ontology ;
+  dct:title "Supplemental Registry — Adversarial Scenario" ;
+  dct:description "Supplemental registry for the adversarial scenario semantic tranche. Transitional registry surface for Domains/adversarial-scenario.ttl, SHACL gates, and SCOPE-D example projection until the primary registry posture is normalized." ;
+  owl:imports <catalog/registry.ttl> .
+
+og:DomainAdversarialScenario a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/adversarial-scenario.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/adversarial-scenario#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Adversarial scenario domain" .
+
+og:AdversarialScenarioSHACL a og:Module ;
+  og:layer "Gates" ;
+  og:path "shapes/adversarial-scenario.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/adversarial-scenario#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Adversarial scenario SHACL gates" .
+
+og:AdversarialScenarioScopeDExample a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/adversarial-scenario-scope-d-workspace-transduction.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/adversarial-scenario#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "SCOPE-D workspace transduction scenario example" .
