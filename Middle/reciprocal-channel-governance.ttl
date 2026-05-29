@@ -83,7 +83,7 @@ rcg:ChannelAuthorityEnvelope a owl:Class ;
   rdfs:comment "The allowed and disallowed effects of a channel." .
 
 rcg:PromotionState a owl:Class ;
-  rdfs:subClassOf upper:State ;
+  rdfs:subClassOf upper:InformationArtifact ;
   rdfs:label "Promotion State" .
 
 rcg:ObserverProfile a owl:Class ;
@@ -92,7 +92,7 @@ rcg:ObserverProfile a owl:Class ;
   rdfs:comment "Scoped, revisable, and auditable profile of channel-relevant observer context. It must not be used as an invasive identity claim." .
 
 rcg:ChannelCondition a owl:Class ;
-  rdfs:subClassOf upper:State ;
+  rdfs:subClassOf upper:InformationArtifact ;
   rdfs:label "Channel Condition" .
 
 ### Object properties
