@@ -1,0 +1,170 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<Platform/GovernedIntelligence/memory-representation-strata.ttl> a owl:Ontology ;
+  dct:title "Governed Memory Representation Strata" ;
+  dct:description "Draft vocabulary for separating raw signal, anchors, evidence, claims, graph relations, statistical features, vector candidates, learned latent state, policy, actions, receipts, and teaching objects." ;
+  dct:source <docs/specs/governed-memory-representation-strata-v0.md> ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Platform/GovernedIntelligence/governed-intelligence.ttl> ;
+  owl:imports <Platform/GovernedIntelligence/privacy-nonlinkability.ttl> .
+
+### Representation stratum classes
+
+gi:RepresentationStratum a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Representation stratum" ;
+  skos:definition "Governance category describing the authority, lifecycle, privacy, validation, and promotion semantics of a memory-bearing representation." .
+
+gi:RawSignalRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S0 raw signal representation" ;
+  skos:definition "Unnormalized input such as user text, uploaded files, logs, sensor data, event streams, model outputs, audio, images, telemetry, command output, source artifacts, or external observations." .
+
+gi:AnchorRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S1 anchor representation" ;
+  skos:definition "Selector into a source artifact that makes raw signal referencable without making it true, reusable, or learnable." .
+
+gi:EvidenceRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S2 evidence representation" ;
+  skos:definition "Source-backed support, opposition, qualification, or context for a claim or action." .
+
+gi:ClaimRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S3 claim representation" ;
+  skos:definition "Typed assertion over subject, predicate, object, context, evidence, uncertainty, and lifecycle state." .
+
+gi:SymbolicGraphRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S4 symbolic graph representation" ;
+  skos:definition "Graph, ontology assertion, edge, equivalence relation, topic membership, or semantic relation derived from claims, evidence, or curated ontology terms." .
+
+gi:StatisticalFeatureRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S5 statistical feature representation" ;
+  skos:definition "Aggregate, metric, score, feature vector, risk signal, distributional summary, calibration output, or analytic measurement derived from evidence or events." .
+
+gi:VectorCandidateRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S6 vector candidate representation" ;
+  skos:definition "Embedding, vector-symbolic recall result, nearest-neighbor result, cleanup-index result, or retrieval candidate that remains candidate-only." .
+
+gi:LearnedLatentRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S7 learned latent representation" ;
+  skos:definition "Reusable learned state such as model weights, adapters, memory summaries, durable embeddings, learned profiles, clustering state, policy-learning state, topic-pack state, or agent memory." .
+
+gi:PolicyGovernanceRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S8 policy and governance representation" ;
+  skos:definition "Policy decisions, action admissions, privacy decisions, doctrine, review gates, status vocabulary, lifecycle state, and authority surfaces." .
+
+gi:ActionRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S9 action representation" ;
+  skos:definition "Action proposals, tool grants, agent intents, expected effects, scopes, and admitted action plans." .
+
+gi:ReceiptRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S10 receipt representation" ;
+  skos:definition "Runtime receipts, privacy receipts, learning receipts, policy receipts, model-governance receipts, ledger entries, and audit artifacts recording what happened or what was adopted." .
+
+gi:TeachingRepresentation a owl:Class ;
+  rdfs:subClassOf gi:RepresentationStratum ;
+  rdfs:label "S11 teaching representation" ;
+  skos:definition "Workroom cards, Academy objects, examples, checklists, drills, operator notes, agent boot notes, and explanatory material derived from admitted doctrine or patterns." .
+
+### Promotion path classes
+
+gi:RepresentationPromotion a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Representation promotion" ;
+  skos:definition "Governed transition from a lower-authority representation into a higher-authority, more reusable, or more effectful representation." .
+
+gi:RepresentationPromotionGate a owl:Class ;
+  rdfs:subClassOf upper:Policy ;
+  rdfs:label "Representation promotion gate" ;
+  skos:definition "Policy, review, validator, fixture, or receipt requirement that must be satisfied before a representation can be promoted across strata." .
+
+### Object properties
+
+gi:hasRepresentationStratum a owl:ObjectProperty ;
+  rdfs:domain upper:InformationArtifact ;
+  rdfs:range gi:RepresentationStratum ;
+  rdfs:label "has representation stratum" .
+
+gi:fromRepresentationStratum a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:RepresentationStratum ;
+  rdfs:label "from representation stratum" .
+
+gi:toRepresentationStratum a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:RepresentationStratum ;
+  rdfs:label "to representation stratum" .
+
+gi:hasPromotionGate a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:RepresentationPromotionGate ;
+  rdfs:label "has promotion gate" .
+
+gi:promotesRepresentation a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range upper:InformationArtifact ;
+  rdfs:label "promotes representation" .
+
+gi:requiresPolicyDecision a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:PolicyDecision ;
+  rdfs:label "requires policy decision" .
+
+gi:requiresPrivacyDecision a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:PrivacyDecision ;
+  rdfs:label "requires privacy decision" .
+
+gi:hasPromotionReceipt a owl:ObjectProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range gi:RuntimeReceipt ;
+  rdfs:label "has promotion receipt" .
+
+### Datatype properties
+
+gi:stratumCode a owl:DatatypeProperty ;
+  rdfs:domain gi:RepresentationStratum ;
+  rdfs:range xsd:string ;
+  rdfs:label "stratum code" .
+
+gi:promotionRule a owl:DatatypeProperty ;
+  rdfs:domain gi:RepresentationPromotionGate ;
+  rdfs:range xsd:string ;
+  rdfs:label "promotion rule" .
+
+gi:authorityLadderNote a owl:DatatypeProperty ;
+  rdfs:domain gi:RepresentationPromotion ;
+  rdfs:range xsd:string ;
+  rdfs:label "authority ladder note" .
+
+### Controlled value individuals
+
+gi:S0RawSignal a skos:Concept ; skos:prefLabel "S0 raw signal" .
+gi:S1Anchor a skos:Concept ; skos:prefLabel "S1 anchor" .
+gi:S2Evidence a skos:Concept ; skos:prefLabel "S2 evidence" .
+gi:S3Claim a skos:Concept ; skos:prefLabel "S3 claim" .
+gi:S4SymbolicGraph a skos:Concept ; skos:prefLabel "S4 symbolic graph" .
+gi:S5StatisticalFeature a skos:Concept ; skos:prefLabel "S5 statistical feature" .
+gi:S6VectorCandidate a skos:Concept ; skos:prefLabel "S6 vector candidate" .
+gi:S7LearnedLatent a skos:Concept ; skos:prefLabel "S7 learned latent" .
+gi:S8PolicyGovernance a skos:Concept ; skos:prefLabel "S8 policy governance" .
+gi:S9Action a skos:Concept ; skos:prefLabel "S9 action" .
+gi:S10Receipt a skos:Concept ; skos:prefLabel "S10 receipt" .
+gi:S11Teaching a skos:Concept ; skos:prefLabel "S11 teaching" .
