@@ -138,8 +138,6 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `Domains/org-legal.ttl` — legal entities, jurisdictions, ownership, repository allocation
 - `Domains/product-service.ttl` — product/service offerings, plans, SKUs, capabilities, entitlements, and service instances
 - `Domains/agentic-purple-team.ttl` — governed agentic purple-team loops/actions, evidence envelopes, safety boundaries, gates, atomic tests, countermeasure rules, run receipts/summaries, AI/MCP/agent-skill risk, graph robustness, and MITRE-compatible local technique model
-- `Domains/adversarial-scenario.ttl` — governed SCOPE-D adversarial scenario semantics for scenario composition, channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime receipts, and scenario non-claims
-  - dedicated adversarial-scenario SHACL gates, examples, and supplemental registry entries are deferred to a follow-up validator tranche
 - `Domains/smart-home-privacy.ttl` — smart-home privacy governance for vendors, devices, capabilities, physical contexts, privacy claims, evidence, coverage findings, risk inferences, consent boundaries, GAIA bindings, and HDT impact bindings
 - `Domains/balance-sheet.ttl` — banking balance-sheet seed module for assets, liabilities, cashflows, and funding sources
 - `Domains/regulatory-reporting.ttl` — banking regulatory-reporting seed module for filing packs, line items, correction chains, and signoffs
@@ -162,7 +160,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - LC-VSM query and ChatOps semantic profile binding Matrix/WordOps surface events, Sherlock search packets, resolver plans, evidence bundles, semantic bindings, lifecycle cells, and DevSecOps audit events
   - Example trace: `examples/lc-vsm-query-chatops-sample.json`
 - `docs/specs/view-governance.md`
-  - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, view signatures, and cross-repo ownership boundaries
+  - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, and cross-repo ownership boundaries
 - `docs/specs/prophet_artifact_contract.md`
   - Prophet computational artifact contract for governed artifact kinds, actions, runtime substrates, provenance, policy, evidence, metrics, and registrations
 - `docs/specs/shir-v0.1.md`
