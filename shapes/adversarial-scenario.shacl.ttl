@@ -49,6 +49,12 @@ scen:AdversarialScenarioShape a sh:NodeShape ;
     sh:message "AdversarialScenario must carry explicit non-claims." ;
   ] ;
   sh:property [
+    sh:path scen:requiresAbstentionRule ;
+    sh:class scen:AbstentionRule ;
+    sh:minCount 1 ;
+    sh:message "AdversarialScenario must carry at least one abstention rule." ;
+  ] ;
+  sh:property [
     sh:path scen:runtimeAuthority ;
     sh:datatype xsd:boolean ;
     sh:minCount 1 ;
@@ -75,20 +81,6 @@ scen:AdversarialScenarioShape a sh:NodeShape ;
     sh:minCount 1 ;
     sh:hasValue false ;
     sh:message "AdversarialScenario examples must not activate downstream delivery." ;
-  ] .
-
-scen:TechniqueAnnotationBoundaryShape a sh:NodeShape ;
-  sh:targetClass scen:AdversarialScenario ;
-  sh:property [
-    sh:path scen:mapsToTechniqueAnnotation ;
-    sh:class apt:Technique ;
-    sh:message "Technique mappings are annotations only; authority/evidence/promotion must be represented separately." ;
-  ] ;
-  sh:property [
-    sh:path scen:requiresAbstentionRule ;
-    sh:class scen:AbstentionRule ;
-    sh:minCount 1 ;
-    sh:message "Technique-annotated scenarios require at least one abstention rule." ;
   ] .
 
 scen:MemoryEffectShape a sh:NodeShape ;
