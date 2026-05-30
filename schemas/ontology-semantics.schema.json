@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.org/schemas/ontogenesis/ontology-semantics.schema.json",
+  "title": "Ontology Semantics Promotion Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "promotion_id",
+    "service_id",
+    "source_vocabulary",
+    "target_vocabulary",
+    "validation_profile",
+    "evidence_refs"
+  ],
+  "properties": {
+    "promotion_id": {
+      "type": "string",
+      "pattern": "^ontopromote\\.[a-z0-9][a-z0-9.-]*$"
+    },
+    "service_id": {
+      "type": "string",
+      "const": "svc.platform.ontology-semantics"
+    },
+    "source_vocabulary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_vocabulary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_profile": {
+      "type": "string",
+      "enum": ["json-schema", "json-ld", "rdf", "owl", "shacl"]
+    },
+    "shape_refs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "default": []
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    },
+    "promotion_status": {
+      "type": "string",
+      "enum": ["draft", "candidate", "validated", "deprecated"],
+      "default": "draft"
+    }
+  }
+}
