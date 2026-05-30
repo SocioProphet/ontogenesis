@@ -4,6 +4,7 @@
 @prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
 @prefix mitre: <https://socioprophet.github.io/ontogenesis/alignments/mitre-attack#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
 ex:workspace-transduction-001 a scen:AdversarialScenario ;
   scen:scenarioId "adversarial-scenario:workspace-transduction-001" ;
@@ -26,10 +27,10 @@ ex:workspace-transduction-001 a scen:AdversarialScenario ;
   scen:hasCounterfactualBranch ex:dashboard-treated-as-authority ;
   scen:hasScenarioNonClaim ex:no-attack-execution , ex:no-engagement-authorization , ex:no-causal-attribution , ex:no-memory-writeback-claim ;
   scen:redactionState "redacted" ;
-  scen:runtimeAuthority false ;
-  scen:procedureExecutionAuthority false ;
-  scen:engagementAuthorizationAuthority false ;
-  scen:activationAllowed false ;
+  scen:runtimeAuthority "false"^^xsd:boolean ;
+  scen:procedureExecutionAuthority "false"^^xsd:boolean ;
+  scen:engagementAuthorizationAuthority "false"^^xsd:boolean ;
+  scen:activationAllowed "false"^^xsd:boolean ;
   rdfs:label "SCOPE-D workspace transduction adversarial scenario" .
 
 ex:objective-001 a scen:ScenarioObjective ;
@@ -69,15 +70,15 @@ ex:allow-validate-runtime-receipt a apt:RunReceipt ;
   rdfs:label "Allow-validate runtime decision receipt" .
 
 ex:learning-candidate-memory-effect a scen:MemoryEffect ;
-  scen:writebackAllowed false ;
-  scen:proposalRequired true ;
+  scen:writebackAllowed "false"^^xsd:boolean ;
+  scen:proposalRequired "true"^^xsd:boolean ;
   scen:reviewState "pending_review" ;
   rdfs:label "Learning candidate memory effect" .
 
 ex:triaged-claim-promotion-state a scen:ClaimPromotionState ;
   scen:promotionState "triaged" ;
-  scen:findingAllowed false ;
-  scen:memoryUpdateAllowed false ;
+  scen:findingAllowed "false"^^xsd:boolean ;
+  scen:memoryUpdateAllowed "false"^^xsd:boolean ;
   rdfs:label "Triaged claim promotion state" .
 
 ex:evidence-confusion-consequence a scen:ConsequenceModel ;
