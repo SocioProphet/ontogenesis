@@ -1,0 +1,49 @@
+{
+  "@context": "../../../contexts/governed-intelligence.context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sp:stratum:s2-evidence-invalid",
+      "@type": "EvidenceRepresentation",
+      "stratumCode": "S2",
+      "sourceRef": "ontogenesis:governed-memory-representation-strata-v0#s2-evidence",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:stratum:s3-claim-invalid",
+      "@type": "ClaimRepresentation",
+      "stratumCode": "S3",
+      "sourceRef": "ontogenesis:governed-memory-representation-strata-v0#s3-claim",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:promotion-gate:invalid-evidence-to-claim-001",
+      "@type": "RepresentationPromotionGate",
+      "promotionRule": "S2 evidence may promote to S3 claim only with evidence structure, lifecycle status, and policy decision.",
+      "sourceRef": "ontogenesis:governed-memory-representation-strata-v0#promotion-rules",
+      "lifecycleStatus": "admitted"
+    },
+    {
+      "@id": "urn:sp:claim:invalid-memory-strata-no-silent-climb-001",
+      "@type": "Claim",
+      "subjectRef": "representation-promotion",
+      "predicateRef": "requires",
+      "objectRef": "explicit-promotion-path",
+      "contextRef": "governed-memory-representation-strata-v0",
+      "hasEvidence": "urn:sp:evidence:missing-for-invalid-fixture",
+      "hasRepresentationStratum": "urn:sp:stratum:s3-claim-invalid",
+      "sourceRef": "SocioProphet/ontogenesis:docs/specs/governed-memory-representation-strata-v0.md",
+      "lifecycleStatus": "proposed"
+    },
+    {
+      "@id": "urn:sp:promotion:invalid-missing-policy-decision-001",
+      "@type": "RepresentationPromotion",
+      "fromRepresentationStratum": "urn:sp:stratum:s2-evidence-invalid",
+      "toRepresentationStratum": "urn:sp:stratum:s3-claim-invalid",
+      "promotesRepresentation": "urn:sp:claim:invalid-memory-strata-no-silent-climb-001",
+      "hasPromotionGate": "urn:sp:promotion-gate:invalid-evidence-to-claim-001",
+      "authorityLadderNote": "This fixture is invalid because it omits requiresPolicyDecision.",
+      "sourceRef": "ontogenesis:governed-memory-representation-strata-v0#evidence-to-claim",
+      "lifecycleStatus": "admitted"
+    }
+  ]
+}
