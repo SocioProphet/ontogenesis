@@ -4,7 +4,7 @@ Status: draft 0.1.0
 
 ## Purpose
 
-This specification defines how Ontogenesis represents agentic purple-team actions and how those actions align to MITRE ATT&CK, MITRE ATLAS, and SourceOS/SCOPE-D local technique equivalents.
+This specification defines how Ontogenesis represents agentic-purple-team actions and how those actions align to MITRE ATT&CK, MITRE ATLAS, and SourceOS/SCOPE-D local technique equivalents.
 
 The goal is to support SCOPE-D, PolicyFabric, AgentPlane, SocioSphere, and related security-control loops with ontology-native semantics for:
 
@@ -27,7 +27,6 @@ The goal is to support SCOPE-D, PolicyFabric, AgentPlane, SocioSphere, and relat
 - `Domains/adversarial-scenario.ttl` defines the scenario-level semantic composition layer for SCOPE-D adversarial scenarios: channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime-decision receipt references, and scenario non-claims.
 - `Alignments/mitre-attack.ttl` defines a governed alignment scaffold for MITRE ATT&CK and ATLAS. It does not vendor the full MITRE STIX corpus.
 - `shapes/agentic-purple-team.shacl.ttl` defines promotion gates for core run, action, atomic testcase, and technique semantics.
-- `shapes/adversarial-scenario.shacl.ttl` defines scenario-level gates: stable scenario ID, channel/evidence/runtime receipt references, explicit non-claims, no runtime/procedure/engagement authority, no downstream activation, no durable memory writeback, and blocked/triaged claim-promotion examples.
 - `examples/agentic-purple-team-scope-d-run.ttl` demonstrates a SCOPE-D synthetic run graph.
 - `examples/adversarial-scenario-scope-d-workspace-transduction.ttl` demonstrates the SCOPE-D workspace-transduction scenario projection.
 
@@ -85,7 +84,7 @@ A governed SCOPE-D adversarial scenario should be representable as:
 
 ## Required action semantics
 
-Every governed agentic purple-team action should declare:
+Every governed agentic-purple-team action should declare:
 
 - action class;
 - safety mode;
@@ -116,14 +115,7 @@ The initial agentic-purple-team SHACL gate requires:
 - `AtomicTestCase` maps to at least one technique and remains synthetic/read-only/dry-run in examples;
 - `Technique` has a technique ID.
 
-The adversarial-scenario SHACL gate requires:
-
-- `AdversarialScenario` has an `adversarial-scenario:*` ID;
-- `AdversarialScenario` declares a scenario class;
-- `AdversarialScenario` references objective, channel substrate, evidence envelope, runtime decision receipt, and explicit non-claims;
-- scenario examples do not claim runtime authority, procedure execution authority, engagement authorization authority, or downstream activation;
-- memory effects do not authorize durable writeback and must require proposal routing;
-- claim-promotion examples remain raw, hypothesis, triaged, or blocked.
+The adversarial-scenario vocabulary added in this tranche is ontology and example-projection only. A dedicated adversarial-scenario SHACL gate is intentionally deferred to a follow-up so it can be introduced with its own validator, negative fixtures, and failure-output visibility rather than being silently folded into the broad repo validator.
 
 ## Future import pipeline
 
