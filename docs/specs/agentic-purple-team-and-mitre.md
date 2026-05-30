@@ -24,11 +24,10 @@ The goal is to support SCOPE-D, PolicyFabric, AgentPlane, SocioSphere, and relat
 ## Modules
 
 - `Domains/agentic-purple-team.ttl` defines the local SocioProphet / SourceOS ontology for agentic purple-team loops and actions.
-- `Domains/adversarial-scenario.ttl` defines the scenario-level semantic composition layer for SCOPE-D adversarial scenarios: channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime-decision receipt references, and scenario non-claims.
+- `Domains/adversarial-scenario.ttl` defines the standalone scenario-level vocabulary for SCOPE-D adversarial scenarios: channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime-decision receipt references, and scenario non-claims.
 - `Alignments/mitre-attack.ttl` defines a governed alignment scaffold for MITRE ATT&CK and ATLAS. It does not vendor the full MITRE STIX corpus.
 - `shapes/agentic-purple-team.shacl.ttl` defines promotion gates for core run, action, atomic testcase, and technique semantics.
 - `examples/agentic-purple-team-scope-d-run.ttl` demonstrates a SCOPE-D synthetic run graph.
-- `examples/adversarial-scenario-scope-d-workspace-transduction.ttl` demonstrates the SCOPE-D workspace-transduction scenario projection.
 
 ## Import policy
 
@@ -75,9 +74,9 @@ A governed SCOPE-D adversarial scenario should be representable as:
 - one `scen:TargetTopology`;
 - one or more `scen:ChannelSubstrate` instances;
 - zero or more `scen:InterfaceCrossing` instances, required when the scenario depends on meaning/authority/evidence transfer across substrates;
-- one or more `apt:EvidenceEnvelope` instances;
-- one or more `apt:RunReceipt` / runtime-decision receipt instances;
-- zero or more `apt:Technique` annotations through `scen:mapsToTechniqueAnnotation`;
+- one or more evidence-envelope references;
+- one or more run-receipt / runtime-decision receipt references;
+- zero or more technique annotations;
 - one or more `scen:AbstentionRule` instances;
 - explicit `scen:ScenarioNonClaim` instances;
 - fail-closed authority flags.
@@ -115,7 +114,7 @@ The initial agentic-purple-team SHACL gate requires:
 - `AtomicTestCase` maps to at least one technique and remains synthetic/read-only/dry-run in examples;
 - `Technique` has a technique ID.
 
-The adversarial-scenario vocabulary added in this tranche is ontology and example-projection only. A dedicated adversarial-scenario SHACL gate is intentionally deferred to a follow-up so it can be introduced with its own validator, negative fixtures, and failure-output visibility rather than being silently folded into the broad repo validator.
+The adversarial-scenario vocabulary added in this tranche is ontology-only. Dedicated adversarial-scenario SHACL gates, examples, supplemental registry projection, and cross-module subclassing/range constraints are intentionally deferred to follow-up validator tranches so they can be introduced with negative fixtures and failure-output visibility.
 
 ## Future import pipeline
 
