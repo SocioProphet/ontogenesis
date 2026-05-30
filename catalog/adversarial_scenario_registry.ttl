@@ -6,7 +6,7 @@
 
 <catalog/adversarial_scenario_registry.ttl> a owl:Ontology ;
   dct:title "Supplemental Registry — Adversarial Scenario" ;
-  dct:description "Supplemental registry for the adversarial scenario semantic tranche. Transitional registry surface for Domains/adversarial-scenario.ttl and the SCOPE-D example projection until the primary registry posture is normalized. Dedicated adversarial-scenario SHACL gates are deferred to a follow-up validator tranche." ;
+  dct:description "Supplemental registry for the adversarial scenario semantic tranche. Transitional registry surface for Domains/adversarial-scenario.ttl until the primary registry posture is normalized. Dedicated adversarial-scenario SHACL gates and example projections are deferred to a follow-up validator tranche." ;
   owl:imports <catalog/registry.ttl> .
 
 og:DomainAdversarialScenario a og:Module ;
@@ -16,11 +16,3 @@ og:DomainAdversarialScenario a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Adversarial scenario domain" .
-
-og:AdversarialScenarioScopeDExample a og:Module ;
-  og:layer "Examples" ;
-  og:path "examples/adversarial-scenario-scope-d-workspace-transduction.ttl" ;
-  og:baseIRI "https://socioprophet.github.io/ontogenesis/examples/adversarial-scenario#" ;
-  og:semver "0.1.0" ;
-  og:status "draft" ;
-  rdfs:label "SCOPE-D workspace transduction scenario example" .
