@@ -29,6 +29,21 @@
     "NonLinkabilityConstraint": "gi:NonLinkabilityConstraint",
     "PrivacyDecision": "gi:PrivacyDecision",
     "PrivacyReceipt": "gi:PrivacyReceipt",
+    "RepresentationStratum": "gi:RepresentationStratum",
+    "RawSignalRepresentation": "gi:RawSignalRepresentation",
+    "AnchorRepresentation": "gi:AnchorRepresentation",
+    "EvidenceRepresentation": "gi:EvidenceRepresentation",
+    "ClaimRepresentation": "gi:ClaimRepresentation",
+    "SymbolicGraphRepresentation": "gi:SymbolicGraphRepresentation",
+    "StatisticalFeatureRepresentation": "gi:StatisticalFeatureRepresentation",
+    "VectorCandidateRepresentation": "gi:VectorCandidateRepresentation",
+    "LearnedLatentRepresentation": "gi:LearnedLatentRepresentation",
+    "PolicyGovernanceRepresentation": "gi:PolicyGovernanceRepresentation",
+    "ActionRepresentation": "gi:ActionRepresentation",
+    "ReceiptRepresentation": "gi:ReceiptRepresentation",
+    "TeachingRepresentation": "gi:TeachingRepresentation",
+    "RepresentationPromotion": "gi:RepresentationPromotion",
+    "RepresentationPromotionGate": "gi:RepresentationPromotionGate",
 
     "identifier": "gi:identifier",
     "entityType": "gi:entityType",
@@ -64,6 +79,9 @@
     "enforcementMode": "gi:enforcementMode",
     "privacyDisposition": "gi:privacyDisposition",
     "operationScope": "gi:operationScope",
+    "stratumCode": "gi:stratumCode",
+    "promotionRule": "gi:promotionRule",
+    "authorityLadderNote": "gi:authorityLadderNote",
     "validTime": {
       "@id": "gi:validTime",
       "@type": "xsd:dateTime"
@@ -171,6 +189,38 @@
     },
     "recordsPrivacyOperation": {
       "@id": "gi:recordsPrivacyOperation",
+      "@type": "@id"
+    },
+    "hasRepresentationStratum": {
+      "@id": "gi:hasRepresentationStratum",
+      "@type": "@id"
+    },
+    "fromRepresentationStratum": {
+      "@id": "gi:fromRepresentationStratum",
+      "@type": "@id"
+    },
+    "toRepresentationStratum": {
+      "@id": "gi:toRepresentationStratum",
+      "@type": "@id"
+    },
+    "hasPromotionGate": {
+      "@id": "gi:hasPromotionGate",
+      "@type": "@id"
+    },
+    "promotesRepresentation": {
+      "@id": "gi:promotesRepresentation",
+      "@type": "@id"
+    },
+    "requiresPolicyDecision": {
+      "@id": "gi:requiresPolicyDecision",
+      "@type": "@id"
+    },
+    "requiresPrivacyDecision": {
+      "@id": "gi:requiresPrivacyDecision",
+      "@type": "@id"
+    },
+    "hasPromotionReceipt": {
+      "@id": "gi:hasPromotionReceipt",
       "@type": "@id"
     }
   }
