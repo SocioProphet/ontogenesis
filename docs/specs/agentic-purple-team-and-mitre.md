@@ -4,11 +4,12 @@ Status: draft 0.1.0
 
 ## Purpose
 
-This specification defines how Ontogenesis represents agentic purple-team actions and how those actions align to MITRE ATT&CK, MITRE ATLAS, and SourceOS/SCOPE-D local technique equivalents.
+This specification defines how Ontogenesis represents agentic-purple-team actions and how those actions align to MITRE ATT&CK, MITRE ATLAS, and SourceOS/SCOPE-D local technique equivalents.
 
 The goal is to support SCOPE-D, PolicyFabric, AgentPlane, SocioSphere, and related security-control loops with ontology-native semantics for:
 
 - governed purple-team loops;
+- governed adversarial scenarios;
 - agentic security actions;
 - evidence envelopes;
 - safety boundaries and control gates;
@@ -23,6 +24,7 @@ The goal is to support SCOPE-D, PolicyFabric, AgentPlane, SocioSphere, and relat
 ## Modules
 
 - `Domains/agentic-purple-team.ttl` defines the local SocioProphet / SourceOS ontology for agentic purple-team loops and actions.
+- `Domains/adversarial-scenario.ttl` defines the standalone scenario-level vocabulary for SCOPE-D adversarial scenarios: channel substrates, interface crossings, memory effects, claim-promotion state, consequence models, abstention rules, runtime-decision receipt references, and scenario non-claims.
 - `Alignments/mitre-attack.ttl` defines a governed alignment scaffold for MITRE ATT&CK and ATLAS. It does not vendor the full MITRE STIX corpus.
 - `shapes/agentic-purple-team.shacl.ttl` defines promotion gates for core run, action, atomic testcase, and technique semantics.
 - `examples/agentic-purple-team-scope-d-run.ttl` demonstrates a SCOPE-D synthetic run graph.
@@ -61,9 +63,27 @@ The MITRE alignment module seeds SourceOS-local equivalents for concepts that ma
 
 These can map to MITRE ATT&CK, ATLAS, OWASP LLM Top 10, MCP-specific taxonomies, and internal SourceOS safety policy classes over time.
 
+## Scenario boundary
+
+Technique mappings are annotations on a scenario. They are not authority, evidence sufficiency, attribution, execution permission, engagement authorization, claim promotion, memory writeback, or downstream activation.
+
+A governed SCOPE-D adversarial scenario should be representable as:
+
+- `scen:AdversarialScenario`;
+- one `scen:ScenarioObjective`;
+- one `scen:TargetTopology`;
+- one or more `scen:ChannelSubstrate` instances;
+- zero or more `scen:InterfaceCrossing` instances, required when the scenario depends on meaning/authority/evidence transfer across substrates;
+- one or more evidence-envelope references;
+- one or more run-receipt / runtime-decision receipt references;
+- zero or more technique annotations;
+- one or more `scen:AbstentionRule` instances;
+- explicit `scen:ScenarioNonClaim` instances;
+- fail-closed authority flags.
+
 ## Required action semantics
 
-Every governed agentic purple-team action should declare:
+Every governed agentic-purple-team action should declare:
 
 - action class;
 - safety mode;
@@ -85,7 +105,7 @@ Every SCOPE-D / SourceOS purple-team control-loop run should be representable as
 
 ## SHACL gates
 
-The initial SHACL gate requires:
+The initial agentic-purple-team SHACL gate requires:
 
 - `ControlLoopRun` has a `scope-d-*` run ID;
 - `ControlLoopRun` references a `SafetyBoundary`;
@@ -93,6 +113,8 @@ The initial SHACL gate requires:
 - `AgenticPurpleTeamAction` declares action class and safety mode;
 - `AtomicTestCase` maps to at least one technique and remains synthetic/read-only/dry-run in examples;
 - `Technique` has a technique ID.
+
+The adversarial-scenario vocabulary added in this tranche is ontology-only. Dedicated adversarial-scenario SHACL gates, examples, supplemental registry projection, and cross-module subclassing/range constraints are intentionally deferred to follow-up validator tranches so they can be introduced with negative fixtures and failure-output visibility.
 
 ## Future import pipeline
 
@@ -129,6 +151,13 @@ SCOPE-D JSON contracts should map into this ontology as follows:
 | `AgentSkillRisk` | `apt:AgentSkillRisk` |
 | `RunReceipt` | `apt:RunReceipt` |
 | `RunSummary` | `apt:RunSummary` |
+| `WargamesAdversarialScenario` | `scen:AdversarialScenario` |
+| `ChannelSubstrate` | `scen:ChannelSubstrate` |
+| `InterfaceCrossing` | `scen:InterfaceCrossing` |
+| `MemoryEffect` | `scen:MemoryEffect` |
+| `ClaimPromotion` | `scen:ClaimPromotionState` |
+| `ConsequenceModel` | `scen:ConsequenceModel` |
+| `AbstentionRule` | `scen:AbstentionRule` |
 
 ## Non-goals
 
@@ -136,3 +165,4 @@ SCOPE-D JSON contracts should map into this ontology as follows:
 - No import of offensive payloads or C2 code.
 - No modeling of destructive action as executable authorization.
 - No persistent memory semantics without explicit tenant scope and redaction gates.
+- No treatment of scenario technique annotation as sufficient evidence, attribution, claim promotion, or runtime authority.
