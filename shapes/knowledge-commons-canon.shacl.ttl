@@ -1,0 +1,92 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix kcc: <https://socioprophet.github.io/ontogenesis/domains/knowledge-commons-canon#> .
+@prefix kc:  <https://socioprophet.github.io/ontogenesis/platform/knowledge-context#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix skos:<http://www.w3.org/2004/02/skos/core#> .
+@prefix math:<https://socioprophet.github.io/ontogenesis/domains/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<shapes/knowledge-commons-canon.shacl.ttl> a owl:Ontology ;
+  dct:title "Knowledge Commons Canon SHACL Shapes" ;
+  dct:description "Promotion-gate shapes for the Knowledge Commons Canon domain module." ;
+  owl:versionInfo "0.1.0" .
+
+# Every canon concept must carry a preferred label and live in the canon context.
+kcc:KnowledgeConceptShape a sh:NodeShape ;
+  sh:targetClass kcc:KnowledgeConcept ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A canon concept must declare exactly one preferred label." ;
+  ] ;
+  sh:property [
+    sh:path kcc:inKnowledgeContext ;
+    sh:minCount 1 ;
+    sh:class kc:KnowledgeContext ;
+    sh:message "A canon concept must be bound to a governed Knowledge Context." ;
+  ] .
+
+# Topics must record a level.
+kcc:TopicShape a sh:NodeShape ;
+  sh:targetClass kcc:Topic ;
+  sh:property [
+    sh:path kcc:level ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A canon topic must declare exactly one level." ;
+  ] .
+
+# Glossary terms must carry a definition.
+kcc:GlossaryTermShape a sh:NodeShape ;
+  sh:targetClass kcc:GlossaryTerm ;
+  sh:property [
+    sh:path skos:definition ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A glossary term must declare a definition." ;
+  ] .
+
+# Formulas must carry a statement and the topic they belong to.
+kcc:FormulaShape a sh:NodeShape ;
+  sh:targetClass kcc:Formula ;
+  sh:property [
+    sh:path math:hasStatement ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A canon formula must declare its statement (form)." ;
+  ] ;
+  sh:property [
+    sh:path dct:subject ;
+    sh:minCount 1 ;
+    sh:class kcc:Topic ;
+    sh:message "A canon formula must be attached to a topic." ;
+  ] .
+
+# Alignment edges must preserve the cosine and both endpoints (eval-anchoring gate).
+kcc:AlignmentEdgeShape a sh:NodeShape ;
+  sh:targetClass kcc:AlignmentEdge ;
+  sh:property [
+    sh:path kcc:cosine ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0.0 ;
+    sh:maxInclusive 1.0 ;
+    sh:message "An alignment edge must preserve a normalized cosine in [0,1]." ;
+  ] ;
+  sh:property [
+    sh:path kcc:alignsTopic ;
+    sh:minCount 1 ;
+    sh:class kcc:Topic ;
+    sh:message "An alignment edge must reference its canon topic." ;
+  ] ;
+  sh:property [
+    sh:path kcc:alignsSubject ;
+    sh:minCount 1 ;
+    sh:class kcc:TestSubject ;
+    sh:message "An alignment edge must reference its test subject." ;
+  ] .
