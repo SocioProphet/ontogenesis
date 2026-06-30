@@ -90,3 +90,40 @@ kcc:AlignmentEdgeShape a sh:NodeShape ;
     sh:class kcc:TestSubject ;
     sh:message "An alignment edge must reference its test subject." ;
   ] .
+
+# Derived assertions must carry a relation, both endpoints, provenance, and a VALID epistemic mode — so no
+# derived fact enters the governed graph without declaring whether it was deduced, induced, or abduced.
+kcc:DerivedAssertionShape a sh:NodeShape ;
+  sh:targetClass kcc:DerivedAssertion ;
+  sh:property [
+    sh:path kcc:epistemicMode ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:in ( "induced" "deduced" "abduced" ) ;
+    sh:message "A derived assertion must declare exactly one epistemic mode: induced | deduced | abduced." ;
+  ] ;
+  sh:property [
+    sh:path kcc:inducedRelation ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A derived assertion must declare exactly one relation." ;
+  ] ;
+  sh:property [
+    sh:path kcc:inducedSubjectLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A derived assertion must name its subject." ;
+  ] ;
+  sh:property [
+    sh:path kcc:inducedObjectLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A derived assertion must name its object." ;
+  ] ;
+  sh:property [
+    sh:path dct:source ;
+    sh:minCount 1 ;
+    sh:message "A derived assertion must declare its provenance (dct:source)." ;
+  ] .
