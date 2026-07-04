@@ -1,0 +1,101 @@
+@prefix srcos: <https://schemas.srcos.ai/v2/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+srcos:WorkspaceScopeShape a sh:NodeShape ;
+  sh:targetClass srcos:WorkspaceScope ;
+  sh:property [
+    sh:path srcos:workspaceKind ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string
+  ] ;
+  sh:property [
+    sh:path srcos:mountMode ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string
+  ] .
+
+srcos:TrustModeShape a sh:NodeShape ;
+  sh:targetClass srcos:TrustMode ;
+  sh:property [
+    sh:path srcos:riskLevel ;
+    sh:minCount 1 ;
+    sh:in ( "low" "medium" "high" "critical" )
+  ] .
+
+srcos:CapabilityPackShape a sh:NodeShape ;
+  sh:targetClass srcos:CapabilityPack ;
+  sh:property [
+    sh:path srcos:skillRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "CapabilityPack must reference at least one SkillManifest URN."
+  ] ;
+  sh:property [
+    sh:path srcos:receiptRequired ;
+    sh:minCount 1 ;
+    sh:datatype xsd:boolean
+  ] .
+
+srcos:ConnectorActionScopeShape a sh:NodeShape ;
+  sh:targetClass srcos:ConnectorActionScope ;
+  sh:property [
+    sh:path srcos:connectorKind ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string
+  ] ;
+  sh:property [
+    sh:path srcos:action ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "ConnectorActionScope must distinguish exact allowed connector verbs."
+  ] ;
+  sh:property [
+    sh:path srcos:accessLevel ;
+    sh:minCount 1 ;
+    sh:in ( "none" "readOnly" "draftOnly" "commentOnly" "scopedWrite" "send" "publish" "merge" "destructive" "control" )
+  ] ;
+  sh:sparql [
+    sh:message "High-risk or critical connector action scopes require explicit approval." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this srcos:riskLevel ?risk .
+        FILTER(?risk IN ("high", "critical"))
+        FILTER NOT EXISTS { $this srcos:requiresExplicitApproval true }
+      }
+    """
+  ] .
+
+srcos:AutomationTemplateShape a sh:NodeShape ;
+  sh:targetClass srcos:AutomationTemplate ;
+  sh:property [
+    sh:path srcos:receiptRequired ;
+    sh:minCount 1 ;
+    sh:hasValue true ;
+    sh:message "AutomationTemplate must require receipts."
+  ] .
+
+srcos:OnboardingReceiptShape a sh:NodeShape ;
+  sh:targetClass srcos:OnboardingReceipt ;
+  sh:property [
+    sh:path srcos:workspaceScopeRef ;
+    sh:minCount 1 ;
+    sh:class srcos:WorkspaceScope
+  ] ;
+  sh:property [
+    sh:path srcos:trustModeRef ;
+    sh:minCount 1 ;
+    sh:class srcos:TrustMode
+  ] ;
+  sh:property [
+    sh:path srcos:enabledCapabilityPack ;
+    sh:class srcos:CapabilityPack
+  ] ;
+  sh:property [
+    sh:path srcos:enabledConnectorActionScope ;
+    sh:class srcos:ConnectorActionScope
+  ] ;
+  sh:property [
+    sh:path srcos:enabledAutomationTemplate ;
+    sh:class srcos:AutomationTemplate
+  ] .
