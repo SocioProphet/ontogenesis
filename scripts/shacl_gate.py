@@ -25,6 +25,11 @@ def load_all_ttl(dirs: list[str]) -> Graph:
         if not p.exists():
             continue
         for f in sorted(p.rglob("*.ttl")):
+            # Skip negative fixtures: files under an invalid/ directory are
+            # deliberately non-conformant and are checked by their own lane
+            # validators, not by this global "everything conforms" gate.
+            if "invalid" in f.parts:
+                continue
             g.parse(f, format="turtle")
     return g
 
