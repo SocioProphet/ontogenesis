@@ -1,0 +1,46 @@
+@prefix pb: <https://socioprophet.github.io/ontogenesis/platform/path-b#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+pb:PathBKernel a owl:Ontology ;
+  dct:title "Path B Synergetic Kernel" ;
+  dct:description "Seed ontology for synergetic pattern semantics across the SocioProphet estate." ;
+  owl:versionInfo "0.1.0" .
+
+pb:SynergeticPattern a owl:Class ;
+  rdfs:label "Synergetic Pattern" ;
+  rdfs:comment "A recurrent relation recognized across geometry, force, information, evidence, and operation." .
+
+pb:PatternDictionary a owl:Class ;
+  rdfs:label "Pattern Dictionary" .
+
+pb:FrequencySubdivision a owl:Class ;
+  rdfs:label "Frequency Subdivision" .
+
+pb:SphericalTriangle a owl:Class ;
+  rdfs:label "Spherical Triangle" .
+
+pb:ProjectionBasis a owl:Class ;
+  rdfs:label "Projection Basis" .
+
+pb:JitterbugTransition a owl:Class ;
+  rdfs:label "Jitterbug Transition" .
+
+pb:TensegrityRelation a owl:Class ;
+  rdfs:label "Tensegrity Relation" .
+
+pb:DymaxionAccounting a owl:Class ;
+  rdfs:label "Dymaxion Accounting" .
+
+pb:WorldGameScenario a owl:Class ;
+  rdfs:label "World Game Scenario" .
+
+pb:DesignScienceManual a owl:Class ;
+  rdfs:label "Design Science Manual" .
+
+pb:mapsToRepo a owl:ObjectProperty ;
+  rdfs:label "maps to repo" .
+
+pb:hasValidationBoundary a owl:DatatypeProperty ;
+  rdfs:label "has validation boundary" .

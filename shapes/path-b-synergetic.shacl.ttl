@@ -1,0 +1,14 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix pb: <https://socioprophet.github.io/ontogenesis/platform/path-b#> .
+
+pb:SynergeticPatternShape
+  a sh:NodeShape ;
+  sh:targetClass pb:SynergeticPattern ;
+  sh:property [
+    sh:path pb:hasValidationBoundary ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path pb:mapsToRepo ;
+    sh:minCount 1 ;
+  ] .
