@@ -66,3 +66,11 @@ og:BankingReferenceCrosswalk a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Banking FIBO BIAN reference crosswalk" .
+
+og:DomainLifeFirstValue a og:Module ;
+  og:layer "Domains" ;
+  og:path "Domains/life-first-value.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/domains/banking#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Life-first value domain" .

@@ -141,6 +141,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `Domains/smart-home-privacy.ttl` — smart-home privacy governance for vendors, devices, capabilities, physical contexts, privacy claims, evidence, coverage findings, risk inferences, consent boundaries, GAIA bindings, and HDT impact bindings
 - `Domains/balance-sheet.ttl` — banking balance-sheet seed module for assets, liabilities, cashflows, and funding sources
 - `Domains/regulatory-reporting.ttl` — banking regulatory-reporting seed module for filing packs, line items, correction chains, and signoffs
+- `Domains/life-first-value.ttl` — banking life-first value model (life value functional, life contribution flows, and life-first value accounting)
 
 ## Bindings / governed profiles
 - `bindings/valueflows_governed/`
