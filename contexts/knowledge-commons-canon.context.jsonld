@@ -1,0 +1,63 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "kcc": "https://socioprophet.github.io/ontogenesis/domains/knowledge-commons-canon#",
+    "kc": "https://socioprophet.github.io/ontogenesis/platform/knowledge-context#",
+    "math": "https://socioprophet.github.io/ontogenesis/domains/math#",
+    "upper": "https://socioprophet.github.io/ontogenesis/upper#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dct": "http://purl.org/dc/terms/",
+    "id": "@id",
+    "type": "@type",
+    "prefLabel": "skos:prefLabel",
+    "definition": "skos:definition",
+    "scopeNote": "skos:scopeNote",
+    "notation": "skos:notation",
+    "broader": {
+      "@id": "skos:broader",
+      "@type": "@id"
+    },
+    "narrower": {
+      "@id": "skos:narrower",
+      "@type": "@id"
+    },
+    "closeMatch": {
+      "@id": "skos:closeMatch",
+      "@type": "@id"
+    },
+    "relatedMatch": {
+      "@id": "skos:relatedMatch",
+      "@type": "@id"
+    },
+    "inScheme": {
+      "@id": "skos:inScheme",
+      "@type": "@id"
+    },
+    "level": "kcc:level",
+    "mmluProCategory": "kcc:mmluProCategory",
+    "canonType": "kcc:canonType",
+    "hasStatement": "math:hasStatement",
+    "subject": {
+      "@id": "dct:subject",
+      "@type": "@id"
+    },
+    "cosine": {
+      "@id": "kcc:cosine",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "alignsTopic": {
+      "@id": "kcc:alignsTopic",
+      "@type": "@id"
+    },
+    "alignsSubject": {
+      "@id": "kcc:alignsSubject",
+      "@type": "@id"
+    },
+    "inKnowledgeContext": {
+      "@id": "kcc:inKnowledgeContext",
+      "@type": "@id"
+    },
+    "schemaLabel": "kc:schemaLabel",
+    "contextLabel": "kc:contextLabel"
+  }
+}
