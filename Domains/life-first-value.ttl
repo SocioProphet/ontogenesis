@@ -1,0 +1,210 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix banking: <https://socioprophet.github.io/ontogenesis/domains/banking#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/life-first-value.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Life-First Value" ;
+  dct:description "Seed life-first value ontology module for viability, agency, attention, skill, understanding, life-flow, proxy registry, governance gates, and counterfactual life economic profit semantics." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Middle/banking-core.ttl> .
+
+banking:LifeFirstValueModel a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Life-First Value Model" .
+
+banking:LifeValueFunctional a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Life Value Functional" .
+
+banking:LifeContributionFlow a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Life Contribution Flow" .
+
+banking:LifeEPMeasure a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Life Economic Profit Measure" .
+
+banking:LifeEPMappingModel a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Life Economic Profit Mapping Model" .
+
+banking:Intervention a owl:Class ;
+  rdfs:subClassOf upper:Event ;
+  rdfs:label "Intervention" .
+
+banking:CounterfactualBaseline a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Counterfactual Baseline" .
+
+banking:Cohort a owl:Class ;
+  rdfs:subClassOf upper:Agent ;
+  rdfs:label "Cohort" .
+
+banking:ProtectedCohort a owl:Class ;
+  rdfs:subClassOf banking:Cohort ;
+  rdfs:label "Protected Cohort" .
+
+banking:ViabilityState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Viability State" .
+
+banking:AgencyState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Agency State" .
+
+banking:AttentionState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Attention State" .
+
+banking:SkillState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Skill State" .
+
+banking:UnderstandingState a owl:Class ;
+  rdfs:subClassOf upper:State ;
+  rdfs:label "Understanding State" .
+
+banking:ProxyRegistry a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Proxy Registry" .
+
+banking:ProxyMeasure a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Proxy Measure" .
+
+banking:EvidenceGrade a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Evidence Grade" .
+
+banking:GovernanceGate a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Governance Gate" .
+
+banking:ProtectedCohortFloor a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Protected Cohort Floor" .
+
+banking:OverrideRecord a owl:Class ;
+  rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Override Record" .
+
+banking:hasLifeValueFunctional a owl:ObjectProperty ;
+  rdfs:domain banking:LifeFirstValueModel ;
+  rdfs:range banking:LifeValueFunctional ;
+  rdfs:label "has life value functional" .
+
+banking:hasLifeContributionFlow a owl:ObjectProperty ;
+  rdfs:range banking:LifeContributionFlow ;
+  rdfs:label "has life contribution flow" .
+
+banking:hasLifeEPMeasure a owl:ObjectProperty ;
+  rdfs:range banking:LifeEPMeasure ;
+  rdfs:label "has life economic profit measure" .
+
+banking:hasMappingModel a owl:ObjectProperty ;
+  rdfs:range banking:LifeEPMappingModel ;
+  rdfs:label "has mapping model" .
+
+banking:hasIntervention a owl:ObjectProperty ;
+  rdfs:range banking:Intervention ;
+  rdfs:label "has intervention" .
+
+banking:hasCounterfactualBaseline a owl:ObjectProperty ;
+  rdfs:range banking:CounterfactualBaseline ;
+  rdfs:label "has counterfactual baseline" .
+
+banking:hasCohort a owl:ObjectProperty ;
+  rdfs:range banking:Cohort ;
+  rdfs:label "has cohort" .
+
+banking:hasProtectedCohortFloor a owl:ObjectProperty ;
+  rdfs:range banking:ProtectedCohortFloor ;
+  rdfs:label "has protected cohort floor" .
+
+banking:hasProxyRegistry a owl:ObjectProperty ;
+  rdfs:range banking:ProxyRegistry ;
+  rdfs:label "has proxy registry" .
+
+banking:hasProxyMeasure a owl:ObjectProperty ;
+  rdfs:domain banking:ProxyRegistry ;
+  rdfs:range banking:ProxyMeasure ;
+  rdfs:label "has proxy measure" .
+
+banking:hasGovernanceGate a owl:ObjectProperty ;
+  rdfs:range banking:GovernanceGate ;
+  rdfs:label "has governance gate" .
+
+banking:hasOverrideRecord a owl:ObjectProperty ;
+  rdfs:range banking:OverrideRecord ;
+  rdfs:label "has override record" .
+
+banking:viabilityScore a owl:DatatypeProperty ;
+  rdfs:domain banking:ViabilityState ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "viability score" .
+
+banking:agencyScore a owl:DatatypeProperty ;
+  rdfs:domain banking:AgencyState ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "agency score" .
+
+banking:attentionScore a owl:DatatypeProperty ;
+  rdfs:domain banking:AttentionState ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "attention score" .
+
+banking:skillScore a owl:DatatypeProperty ;
+  rdfs:domain banking:SkillState ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "skill score" .
+
+banking:understandingScore a owl:DatatypeProperty ;
+  rdfs:domain banking:UnderstandingState ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "understanding score" .
+
+banking:lifeContributionValue a owl:DatatypeProperty ;
+  rdfs:domain banking:LifeContributionFlow ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "life contribution value" .
+
+banking:lifeEPValue a owl:DatatypeProperty ;
+  rdfs:domain banking:LifeEPMeasure ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "life economic profit value" .
+
+banking:signRisk a owl:DatatypeProperty ;
+  rdfs:domain banking:LifeEPMeasure ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "sign risk" .
+
+banking:evidenceGrade a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "evidence grade" .
+
+banking:decisionClass a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "decision class" .
+
+banking:decisionStatus a owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "decision status" .
+
+banking:hardConstraintBreach a owl:DatatypeProperty ;
+  rdfs:range xsd:boolean ;
+  rdfs:label "hard constraint breach" .
+
+banking:minViabilityDelta a owl:DatatypeProperty ;
+  rdfs:domain banking:ProtectedCohortFloor ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "minimum viability delta" .
+
+banking:minAgencyDelta a owl:DatatypeProperty ;
+  rdfs:domain banking:ProtectedCohortFloor ;
+  rdfs:range xsd:decimal ;
+  rdfs:label "minimum agency delta" .
