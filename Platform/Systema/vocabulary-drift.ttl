@@ -1,0 +1,100 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix systema: <https://socioprophet.github.io/ontogenesis/systema#> .
+
+<https://socioprophet.github.io/ontogenesis/platform/vocabulary-drift>
+    a owl:Ontology ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:label "Systema Vocabulary Drift ontology" ;
+    rdfs:comment "Vocabulary drift model for terms, aliases, labels, schemas, policies, and agent instructions that diverge from governed concepts." .
+
+systema:TermUsage
+    a owl:Class ;
+    rdfs:label "Term Usage" ;
+    rdfs:comment "A repository- or artifact-specific usage of a term, alias, label, field, or instruction." .
+
+systema:VocabularyDriftReport
+    a owl:Class ;
+    rdfs:label "Vocabulary Drift Report" ;
+    rdfs:comment "A report that term usages conflict, diverge, stale out, or require governance." .
+
+systema:DriftResolution
+    a owl:Class ;
+    rdfs:label "Drift Resolution" ;
+    rdfs:comment "A proposed or accepted resolution path for vocabulary drift." .
+
+systema:term
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "term" .
+
+systema:termUsage
+    a owl:ObjectProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range systema:TermUsage ;
+    rdfs:label "term usage" .
+
+systema:conceptRef
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:TermUsage ;
+    rdfs:range xsd:string ;
+    rdfs:label "concept reference" .
+
+systema:ownerRepo
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "owner repository" .
+
+systema:surfacePath
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "surface path" .
+
+systema:meaningText
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:TermUsage ;
+    rdfs:range xsd:string ;
+    rdfs:label "meaning text" .
+
+systema:driftKind
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "drift kind" .
+
+systema:severity
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "severity" .
+
+systema:evidenceRef
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "evidence reference" .
+
+systema:resolutionPath
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "resolution path" .
+
+systema:reviewState
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "review state" .
+
+systema:acceptedResolution
+    a owl:ObjectProperty ;
+    rdfs:domain systema:VocabularyDriftReport ;
+    rdfs:range systema:DriftResolution ;
+    rdfs:label "accepted resolution" .
+
+systema:resolutionNote
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:DriftResolution ;
+    rdfs:range xsd:string ;
+    rdfs:label "resolution note" .
