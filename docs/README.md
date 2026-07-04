@@ -17,6 +17,8 @@ Use this index to quickly find architecture docs, specs, and contributor workflo
 - [`specs/privacy-nonlinkability-doctrine-v0.md`](specs/privacy-nonlinkability-doctrine-v0.md) — DoNotLearn / DoNotLink doctrine for non-learning and non-linkability constraints over governed intelligence objects, memory, vectors, graphs, workrooms, and receipts
 - [`specs/governed-memory-representation-strata-v0.md`](specs/governed-memory-representation-strata-v0.md) — governed memory representation strata for separating raw signal, anchors, evidence, claims, graphs, statistics, vectors, learned latent state, policy, actions, receipts, and teaching objects
 - [`specs/shir-v0.1.md`](specs/shir-v0.1.md) — Semantic Hyperknowledge Intermediate Representation draft spec
+- [`specs/candidate-link-intelligence-plane.md`](specs/candidate-link-intelligence-plane.md) — governed candidate-link, link-prediction, scoring, and promotion contract
+- [`specs/candidate-link-to-shir.md`](specs/candidate-link-to-shir.md) — mapping from candidate links, hyperedges, alignments, evidence, and prediction traces into SHIR
 - [`specs/ontology-query-adapter.md`](specs/ontology-query-adapter.md) — ontology-query adapter contract for the Lattice FederatedQueryPlane
 - [`specs/semantic_enterprise_architecture.md`](specs/semantic_enterprise_architecture.md) — semantic enterprise lifecycle, mapping, named graph, SHACL, and implementation contracts
 - [`specs/agentic-purple-team-and-mitre.md`](specs/agentic-purple-team-and-mitre.md) — SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, MITRE ATT&CK/ATLAS alignment, SourceOS-local technique equivalents, and future governed STIX/TAXII import
