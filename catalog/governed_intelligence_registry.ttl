@@ -9,10 +9,11 @@
 <catalog/governed_intelligence_registry.ttl> a owl:Ontology ;
   dct:title "Governed Intelligence Registry" ;
   dct:description "Supplemental registry tranche for the governed-intelligence object model, SHACL gates, JSON-LD context, and examples." ;
-  owl:versionInfo "0.1.2" ;
+  owl:versionInfo "0.1.4" ;
   owl:imports <catalog/registry.ttl> ;
   owl:imports <Platform/GovernedIntelligence/governed-intelligence.ttl> ;
-  owl:imports <Platform/GovernedIntelligence/privacy-nonlinkability.ttl> .
+  owl:imports <Platform/GovernedIntelligence/privacy-nonlinkability.ttl> ;
+  owl:imports <Platform/GovernedIntelligence/memory-representation-strata.ttl> .
 
 og:GovernedIntelligence a og:Module ;
   og:layer "Platform" ;
@@ -30,6 +31,14 @@ og:GovernedIntelligencePrivacyNonlinkability a og:Module ;
   og:status "draft" ;
   rdfs:label "Governed intelligence privacy non-linkability ontology terms" .
 
+og:GovernedIntelligenceMemoryRepresentationStrata a og:Module ;
+  og:layer "Platform" ;
+  og:path "Platform/GovernedIntelligence/memory-representation-strata.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed memory representation strata ontology terms" .
+
 og:GovernedIntelligenceShapes a og:Module ;
   og:layer "Shapes" ;
   og:path "shapes/governed_intelligence.shacl.ttl" ;
@@ -45,6 +54,14 @@ og:GovernedIntelligencePrivacyNonlinkabilityShapes a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Privacy non-linkability SHACL gates" .
+
+og:GovernedIntelligenceMemoryRepresentationStrataShapes a og:Module ;
+  og:layer "Shapes" ;
+  og:path "shapes/memory_representation_strata.shacl.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed memory representation strata SHACL gates" .
 
 og:GovernedIntelligenceContext a og:Module ;
   og:layer "Contexts" ;
@@ -70,6 +87,14 @@ og:GovernedIntelligencePrivacyNonlinkabilitySpec a og:Module ;
   og:status "draft" ;
   rdfs:label "Privacy non-linkability doctrine specification" .
 
+og:GovernedIntelligenceMemoryRepresentationStrataSpec a og:Module ;
+  og:layer "Specifications" ;
+  og:path "docs/specs/governed-memory-representation-strata-v0.md" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed memory representation strata specification" .
+
 og:GovernedIntelligenceExamples a og:Module ;
   og:layer "Examples" ;
   og:path "examples/governed-intelligence/" ;
@@ -85,3 +110,11 @@ og:GovernedIntelligencePrivacyNonlinkabilityExamples a og:Module ;
   og:semver "0.1.0" ;
   og:status "draft" ;
   rdfs:label "Privacy non-linkability examples" .
+
+og:GovernedIntelligenceMemoryRepresentationStrataExamples a og:Module ;
+  og:layer "Examples" ;
+  og:path "examples/memory-representation-strata/" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Governed memory representation strata examples" .

@@ -1,0 +1,14 @@
+{
+  "promotion_id": "ontopromote.fixture",
+  "service_id": "svc.platform.ontology-semantics",
+  "source_vocabulary": "sandbox/example-source",
+  "target_vocabulary": "canon/example-target",
+  "validation_profile": "shacl",
+  "shape_refs": [
+    "schemas/ontology-semantics.schema.json"
+  ],
+  "evidence_refs": [
+    "evidence://fixture/ontology-semantics"
+  ],
+  "promotion_status": "candidate"
+}

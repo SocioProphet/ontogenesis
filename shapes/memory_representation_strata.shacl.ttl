@@ -1,0 +1,120 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix gi: <https://socioprophet.github.io/ontogenesis/platform/governed-intelligence#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL gates for governed memory representation strata.
+# These shapes intentionally enforce only structural promotion invariants:
+# - representation strata declare a stratum code;
+# - promotion gates declare a promotion rule;
+# - representation promotions declare from/to strata, promoted representation, gate, policy decision, and lifecycle status.
+#
+# These shapes do not attempt semantic authority reasoning, privacy-law compliance,
+# latent leakage analysis, or proof that a promotion is epistemically correct.
+
+gi:RepresentationStratumShape
+  a sh:NodeShape ;
+  sh:targetClass gi:RepresentationStratum ;
+  sh:property [
+    sh:path gi:stratumCode ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:RepresentationPromotionGateShape
+  a sh:NodeShape ;
+  sh:targetClass gi:RepresentationPromotionGate ;
+  sh:property [
+    sh:path gi:promotionRule ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .
+
+gi:RepresentationPromotionShape
+  a sh:NodeShape ;
+  sh:targetClass gi:RepresentationPromotion ;
+  sh:property [
+    sh:path gi:fromRepresentationStratum ;
+    sh:minCount 1 ;
+    sh:class gi:RepresentationStratum ;
+  ] ;
+  sh:property [
+    sh:path gi:toRepresentationStratum ;
+    sh:minCount 1 ;
+    sh:class gi:RepresentationStratum ;
+  ] ;
+  sh:property [
+    sh:path gi:promotesRepresentation ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path gi:hasPromotionGate ;
+    sh:minCount 1 ;
+    sh:class gi:RepresentationPromotionGate ;
+  ] ;
+  sh:property [
+    sh:path gi:requiresPolicyDecision ;
+    sh:minCount 1 ;
+    sh:class gi:PolicyDecision ;
+  ] ;
+  sh:property [
+    sh:path gi:authorityLadderNote ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:sourceRef ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path gi:lifecycleStatus ;
+    sh:minCount 1 ;
+    sh:in (
+      "proposed"
+      "provisional"
+      "admitted"
+      "denied"
+      "require_review"
+      "superseded"
+      "revoked"
+      "expired"
+    ) ;
+  ] .

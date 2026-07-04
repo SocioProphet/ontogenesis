@@ -160,11 +160,15 @@ These are governed alignment scaffolds. They are not full vendored external onto
   - LC-VSM query and ChatOps semantic profile binding Matrix/WordOps surface events, Sherlock search packets, resolver plans, evidence bundles, semantic bindings, lifecycle cells, and DevSecOps audit events
   - Example trace: `examples/lc-vsm-query-chatops-sample.json`
 - `docs/specs/view-governance.md`
-  - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, view signatures, and cross-repo ownership boundaries
+  - ViewContract governance profile for authority-bound graph/analysis views, typed absence, disclosure modes, revocation epochs, and cross-repo ownership boundaries
 - `docs/specs/prophet_artifact_contract.md`
   - Prophet computational artifact contract for governed artifact kinds, actions, runtime substrates, provenance, policy, evidence, metrics, and registrations
 - `docs/specs/shir-v0.1.md`
   - Semantic Hyperknowledge Intermediate Representation draft: preserves n-ary relations, role bindings, context, evidence, temporal scope, policy scope, induction traces, projection loss reports, and receipts before downstream lowering
+- `docs/specs/candidate-link-intelligence-plane.md`
+  - governed candidate-link, link-prediction, scoring, evidence, curation, and promotion contract
+- `docs/specs/candidate-link-to-shir.md`
+  - mapping from binary links, hyperedges, alignments, evidence bundles, prediction traces, counterexamples, and receipts into SHIR
 - `docs/specs/ontology-query-adapter.md`
   - governed ontology-query adapter contract for OWL/SHACL/schema-alignment/reasoning queries in the Lattice FederatedQueryPlane
 - `docs/specs/semantic_enterprise_architecture.md`
@@ -172,7 +176,7 @@ These are governed alignment scaffolds. They are not full vendored external onto
 - `docs/specs/valueflows-governed-canonical-v0.4.md`
   - governed ValueFlows profile spec
 - `docs/specs/agentic-purple-team-and-mitre.md`
-  - SCOPE-D/Ontogenesis semantic bridge for agentic purple-team actions, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
+  - SCOPE-D/Ontogenesis semantic bridge for agentic-purple-team actions, adversarial scenarios, ATT&CK/ATLAS alignment, local SourceOS technique equivalents, SHACL gates, and future governed MITRE STIX/TAXII import pipeline
 - `docs/specs/smart_home_privacy_gaia_hdt_bridge.md`
   - smart-home privacy bridge specification for Ontogenesis, GAIA, HolographMe/HDT, Sherlock, SourceOS, ProCybernetica, Sociosphere, and Policy Fabric
 - `docs/banking-reference-crosswalk.md`

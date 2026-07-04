@@ -1,4 +1,4 @@
-.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability shacl jsonld build ledger verify sbom svf all
+.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata shacl jsonld build ledger verify sbom svf all
 
 venv:
 	python -m venv .venv
@@ -6,7 +6,7 @@ venv:
 deps:
 	.venv/bin/pip install -r requirements-dev.txt
 
-validate: validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability
+validate: validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata
 	.venv/bin/python scripts/validate_rdf.py
 
 validate-corpus-event-semantics:
@@ -17,6 +17,9 @@ validate-registry-discovery:
 
 validate-privacy-nonlinkability:
 	.venv/bin/python scripts/validate_privacy_nonlinkability_examples.py
+
+validate-memory-representation-strata:
+	.venv/bin/python scripts/validate_memory_representation_strata_examples.py
 
 shacl:
 	.venv/bin/python scripts/shacl_gate.py
