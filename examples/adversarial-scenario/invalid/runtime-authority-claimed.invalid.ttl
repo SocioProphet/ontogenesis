@@ -1,0 +1,34 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/adversarial-scenario/invalid#> .
+@prefix scen:  <https://socioprophet.github.io/ontogenesis/domains/adversarial-scenario#> .
+@prefix apt:   <https://socioprophet.github.io/ontogenesis/domains/agentic-purple-team#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# INVALID: this scenario is otherwise well-formed but asserts runtime authority.
+# The AdversarialScenario gate must reject any SCOPE-D scenario that claims
+# scen:runtimeAuthority true (failure-output visibility for the deferred gate).
+ex:runtime-authority-claimed a scen:AdversarialScenario ;
+  scen:scenarioId "adversarial-scenario:invalid-runtime-authority-001" ;
+  scen:scenarioClass "workspace_transduction" ;
+  scen:hasObjective ex:objective ;
+  scen:usesChannelSubstrate ex:channel ;
+  scen:hasEvidenceEnvelope ex:evidence ;
+  scen:hasRuntimeDecisionReceipt ex:receipt ;
+  scen:requiresAbstentionRule ex:abstention ;
+  scen:hasScenarioNonClaim ex:nc1 , ex:nc2 , ex:nc3 ;
+  scen:runtimeAuthority true ;
+  scen:procedureExecutionAuthority false ;
+  scen:engagementAuthorizationAuthority false ;
+  scen:activationAllowed false ;
+  rdfs:label "INVALID: scenario claiming runtime authority" .
+
+ex:objective a scen:ScenarioObjective ; rdfs:label "objective" .
+ex:channel a scen:ChannelSubstrate ; scen:channelType "network" ; rdfs:label "channel" .
+ex:evidence a apt:EvidenceEnvelope ; rdfs:label "evidence envelope" .
+ex:receipt a apt:RunReceipt ;
+  apt:receiptHash "2222222222222222222222222222222222222222222222222222222222222222" ;
+  rdfs:label "runtime decision receipt" .
+ex:abstention a scen:AbstentionRule ; scen:requiredOutcome "do_not_promote" ; rdfs:label "abstention" .
+ex:nc1 a scen:ScenarioNonClaim ; rdfs:label "does not execute attack procedure" .
+ex:nc2 a scen:ScenarioNonClaim ; rdfs:label "does not authorize engagement" .
+ex:nc3 a scen:ScenarioNonClaim ; rdfs:label "does not claim causal attribution" .

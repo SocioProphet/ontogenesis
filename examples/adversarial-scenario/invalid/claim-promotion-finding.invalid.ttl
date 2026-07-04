@@ -1,0 +1,13 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/adversarial-scenario/invalid#> .
+@prefix scen:  <https://socioprophet.github.io/ontogenesis/domains/adversarial-scenario#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# INVALID: a claim-promotion state that promotes to a finding and allows the
+# finding. The ClaimPromotionState gate must keep example promotion within
+# raw / hypothesis / triaged / blocked and reject scen:findingAllowed true.
+ex:finding-promotion a scen:ClaimPromotionState ;
+  scen:promotionState "finding" ;
+  scen:findingAllowed true ;
+  scen:memoryUpdateAllowed false ;
+  rdfs:label "INVALID: claim promoted to finding" .

@@ -1,0 +1,13 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/adversarial-scenario/invalid#> .
+@prefix scen:  <https://socioprophet.github.io/ontogenesis/domains/adversarial-scenario#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# INVALID: a memory effect that authorizes durable writeback. The MemoryEffect
+# gate must reject scen:writebackAllowed true — SCOPE-D scenarios may never
+# authorize durable memory writeback without proposal routing.
+ex:writeback-memory-effect a scen:MemoryEffect ;
+  scen:writebackAllowed true ;
+  scen:proposalRequired true ;
+  scen:reviewState "pending_review" ;
+  rdfs:label "INVALID: memory effect allowing durable writeback" .
