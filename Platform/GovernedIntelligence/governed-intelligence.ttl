@@ -154,9 +154,15 @@ gi:admitsAction a owl:ObjectProperty ;
   rdfs:range gi:ActionProposal ;
   rdfs:label "admits action" .
 
+# A runtime receipt records the governed information artifact it enforced over:
+# an action proposal, a representation promotion, etc. The range is the shared
+# upper:InformationArtifact rather than gi:ActionProposal so that recording a
+# non-proposal artifact does not spuriously RDFS-infer it to be an ActionProposal
+# (which would wrongly subject it to gi:ActionProposalShape). Each recorded node
+# is validated by its own class shape.
 gi:recordsAction a owl:ObjectProperty ;
   rdfs:domain gi:RuntimeReceipt ;
-  rdfs:range gi:ActionProposal ;
+  rdfs:range upper:InformationArtifact ;
   rdfs:label "records action" .
 
 gi:usesEncodingManifest a owl:ObjectProperty ;
