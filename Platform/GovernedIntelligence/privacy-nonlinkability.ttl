@@ -97,6 +97,7 @@ gi:crossesPrivacyBoundary a owl:ObjectProperty ;
   rdfs:label "crosses privacy boundary" .
 
 gi:hasPrivacyDecision a owl:ObjectProperty ;
+  rdfs:subPropertyOf gi:hasPolicyDecision ;
   rdfs:domain upper:InformationArtifact ;
   rdfs:range gi:PrivacyDecision ;
   rdfs:label "has privacy decision" .

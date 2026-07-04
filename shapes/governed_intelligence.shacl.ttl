@@ -184,11 +184,23 @@ gi:ActionProposalShape
 gi:RuntimeReceiptShape
   a sh:NodeShape ;
   sh:targetClass gi:RuntimeReceipt ;
-  sh:property [
-    sh:path gi:recordsAction ;
-    sh:minCount 1 ;
-    sh:class gi:ActionProposal ;
-  ] ;
+  # A runtime receipt records what it enforced over: an information artifact via
+  # recordsAction (an action proposal, a representation promotion, ...), or (for
+  # privacy receipts) a learning/linking operation via recordsPrivacyOperation.
+  # recordsPrivacyOperation is not a subproperty of recordsAction because their
+  # ranges are disjoint (upper:Process vs upper:InformationArtifact), so the two
+  # recording predicates are accepted here as alternatives. Each recorded node is
+  # validated by its own class shape.
+  sh:or (
+    [
+      sh:path gi:recordsAction ;
+      sh:minCount 1 ;
+    ]
+    [
+      sh:path gi:recordsPrivacyOperation ;
+      sh:minCount 1 ;
+    ]
+  ) ;
   sh:property [
     sh:path gi:hasPolicyDecision ;
     sh:minCount 1 ;
