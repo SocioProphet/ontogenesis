@@ -27,6 +27,7 @@ Current platform-family prefixes:
 - `michael:` `https://socioprophet.github.io/ontogenesis/Platform/Epistemics/michael-core#`
 - `hdt:` `https://socioprophet.github.io/ontogenesis/Platform/Twins/human-digital-twin#`
 - `vf:` `https://socioprophet.github.io/ontogenesis/bindings/valueflows-governed#`
+- `health:` `https://socioprophet.md/ont/health#` — Health, anatomy & correspondence (the HDT medical surface). Hosted on `socioprophet.md` (not github.io); the IRI is an identifier — runtime reads go through same-origin APIs / vendored contexts, and when the domain dereferences the ontology it serves permissive CORS. Aligns into the `hdt:` HDT core via `owl:imports`. NOTE: `hdt:` currently denotes three different IRIs across the estate (`socioprophet.dev/ont/ontogenesis#`, `socioprophet.org/ont/twin#`, and the github.io twin above) — resolve that collision in a separate canonicalization pass.
 
 Guideline:
 - Use stable, lowercase file names.

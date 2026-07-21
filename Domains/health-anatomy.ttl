@@ -1,0 +1,132 @@
+@prefix health: <https://socioprophet.md/ont/health#> .
+@prefix hdt:    <https://socioprophet.dev/ont/ontogenesis#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+
+health: a owl:Ontology ;
+  owl:versionIRI <https://socioprophet.md/ont/health#v0.1.0> ;
+  owl:imports <https://socioprophet.dev/ont/ontogenesis#> ;
+  rdfs:label "Ontogenesis — Health, Anatomy & Correspondence" ;
+  rdfs:comment "The health/anatomy layer of the Human Digital Twin: organ systems and organs, the spinal-nerve/autonomic map, and a CORRESPONDENCE LATTICE that holds modern neuroanatomy (verified), attributed traditional systems (chiropractic/TCM/reflexology/Ayurveda), and bridge claims between them — every correspondence carrying its epistemic status + provenance so evidence, not assertion, decides what is trusted. Non-diagnostic: organises + correlates, never diagnoses. Namespace hosted at socioprophet.md (the medical surface); aligns into the hdt: HDT core." .
+
+# ── epistemic ramp (aligned to the estate's HDT epistemic ladder + a 'traditional' rung) ──────────
+health:EpistemicStatus a owl:Class ; rdfs:label "Epistemic status" ;
+  rdfs:comment "How much warrant a correspondence carries. Mirrors the estate epistemic ramp; 'traditional' marks attributed cultural knowledge that is neither asserted as fact nor dismissed." .
+health:Hypothesis  a health:EpistemicStatus ; rdfs:label "hypothesis" .
+health:Observed    a health:EpistemicStatus ; rdfs:label "observed" .
+health:Derived     a health:EpistemicStatus ; rdfs:label "derived" .
+health:Verified    a health:EpistemicStatus ; rdfs:label "verified" .
+health:Attested    a health:EpistemicStatus ; rdfs:label "attested" .
+health:Traditional a health:EpistemicStatus ; rdfs:label "traditional (attributed)" .
+
+# ── anatomy backbone (the verified layer) ─────────────────────────────────────────────────────────
+health:AnatomicalStructure a owl:Class ; rdfs:label "Anatomical structure" .
+health:OrganSystem a owl:Class ; rdfs:subClassOf health:AnatomicalStructure ; rdfs:label "Organ system" .
+health:Organ a owl:Class ; rdfs:subClassOf health:AnatomicalStructure ; rdfs:label "Organ" .
+health:SpinalSegment a owl:Class ; rdfs:subClassOf health:AnatomicalStructure ; rdfs:label "Spinal cord segment" .
+
+health:partOf a owl:ObjectProperty ; rdfs:domain health:AnatomicalStructure ; rdfs:range health:AnatomicalStructure ; rdfs:label "part of" .
+# innervates: a spinal segment's autonomic/somatic supply to a structure (evidence-based)
+health:innervates a owl:ObjectProperty ; rdfs:domain health:SpinalSegment ; rdfs:range health:AnatomicalStructure ; rdfs:label "innervates" .
+health:dermatome a owl:DatatypeProperty ; rdfs:domain health:SpinalSegment ; rdfs:range xsd:string ; rdfs:label "dermatome region" .
+# join key back to the app: health-twin SYSTEMS id + anatomyAtlas key + body-state compartment
+health:systemKey a owl:DatatypeProperty ; rdfs:domain health:OrganSystem ; rdfs:range xsd:string ; rdfs:label "system key" .
+health:compartment a owl:DatatypeProperty ; rdfs:domain health:OrganSystem ; rdfs:range xsd:string ; rdfs:label "body-state compartment" .
+
+# organ systems (individuals) — keys match apps/health-twin data.ts + anatomyAtlas.ts
+health:NervousSystem        a health:OrganSystem ; rdfs:label "Nervous system" ; health:systemKey "nervous" ; health:compartment "neuro" .
+health:CardiovascularSystem a health:OrganSystem ; rdfs:label "Cardiovascular system" ; health:systemKey "cardiovascular" ; health:compartment "cardio" .
+health:RespiratorySystem    a health:OrganSystem ; rdfs:label "Respiratory system" ; health:systemKey "respiratory" ; health:compartment "respiratory" .
+health:DigestiveSystem      a health:OrganSystem ; rdfs:label "Digestive system" ; health:systemKey "hepatic" ; health:compartment "hepatic" .
+health:UrinarySystem        a health:OrganSystem ; rdfs:label "Urinary system" ; health:systemKey "urinary" ; health:compartment "renal" .
+
+# organs
+health:Brain      a health:Organ ; rdfs:label "Brain" ; health:partOf health:NervousSystem .
+health:Heart      a health:Organ ; rdfs:label "Heart" ; health:partOf health:CardiovascularSystem .
+health:Lungs      a health:Organ ; rdfs:label "Lungs" ; health:partOf health:RespiratorySystem .
+health:Liver      a health:Organ ; rdfs:label "Liver" ; health:partOf health:DigestiveSystem .
+health:Stomach    a health:Organ ; rdfs:label "Stomach" ; health:partOf health:DigestiveSystem .
+health:Pancreas   a health:Organ ; rdfs:label "Pancreas" ; health:partOf health:DigestiveSystem .
+health:Intestines a health:Organ ; rdfs:label "Intestines" ; health:partOf health:DigestiveSystem .
+health:Kidneys    a health:Organ ; rdfs:label "Kidneys" ; health:partOf health:UrinarySystem .
+health:Bladder    a health:Organ ; rdfs:label "Bladder" ; health:partOf health:UrinarySystem .
+
+# spinal segments (the backbone the chiropractic chart sits on) + evidence-based autonomic/somatic supply
+health:C3 a health:SpinalSegment ; rdfs:label "C3" ; health:innervates health:Lungs .
+health:C4 a health:SpinalSegment ; rdfs:label "C4" ; health:dermatome "clavicle / diaphragm (phrenic C3–C5)" .
+health:C5 a health:SpinalSegment ; rdfs:label "C5" .
+health:T1 a health:SpinalSegment ; rdfs:label "T1" ; health:innervates health:Heart .
+health:T2 a health:SpinalSegment ; rdfs:label "T2" ; health:innervates health:Heart .
+health:T3 a health:SpinalSegment ; rdfs:label "T3" ; health:innervates health:Lungs .
+health:T4 a health:SpinalSegment ; rdfs:label "T4" ; health:innervates health:Lungs .
+health:T5 a health:SpinalSegment ; rdfs:label "T5" ; health:innervates health:Stomach .
+health:T6 a health:SpinalSegment ; rdfs:label "T6" ; health:innervates health:Stomach .
+health:T7 a health:SpinalSegment ; rdfs:label "T7" ; health:innervates health:Pancreas .
+health:T8 a health:SpinalSegment ; rdfs:label "T8" ; health:innervates health:Liver .
+health:T9 a health:SpinalSegment ; rdfs:label "T9" ; health:innervates health:Liver .
+health:T10 a health:SpinalSegment ; rdfs:label "T10" ; health:innervates health:Kidneys .
+health:T11 a health:SpinalSegment ; rdfs:label "T11" ; health:innervates health:Kidneys .
+health:T12 a health:SpinalSegment ; rdfs:label "T12" ; health:innervates health:Intestines .
+health:L1 a health:SpinalSegment ; rdfs:label "L1" ; health:innervates health:Intestines .
+health:S2 a health:SpinalSegment ; rdfs:label "S2" ; health:innervates health:Bladder .
+health:S3 a health:SpinalSegment ; rdfs:label "S3" ; health:innervates health:Bladder .
+health:S4 a health:SpinalSegment ; rdfs:label "S4" ; health:innervates health:Bladder .
+
+# ── records bridge (fills the FHIR gaps the twin needs; aligns to hdt: core) ──────────────────────
+# hdt:Observation already exists (⊑ hdt:FHIRResource). Condition does not — add it, SNOMED-coded.
+health:Condition a owl:Class ; rdfs:subClassOf hdt:FHIRResource ; rdfs:label "Condition" .
+health:code a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "code" .
+health:codeSystem a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "code system (LOINC / SNOMED / RxNorm)" .
+# an observation/condition localises to an anatomical structure — this is what paints data on the twin
+health:localizedTo a owl:ObjectProperty ; rdfs:range health:AnatomicalStructure ; rdfs:label "localized to" .
+hdt:Observation rdfs:subClassOf [ a owl:Restriction ; owl:onProperty health:localizedTo ; owl:someValuesFrom health:AnatomicalStructure ] .
+
+# ── the correspondence lattice (the differentiator: hold every lens, labelled honestly) ───────────
+health:CorrespondenceSystem a owl:Class ; rdfs:label "Correspondence system" ;
+  rdfs:comment "A named system of mappings onto the body, with its own provenance and default epistemic tier." .
+health:Correspondence a owl:Class ; rdfs:label "Correspondence" ;
+  rdfs:comment "A single mapping from an anatomical structure to an element of some system, carrying epistemic status + provenance." .
+health:TraditionalCorrespondence a owl:Class ; rdfs:subClassOf health:Correspondence ; rdfs:label "Traditional correspondence" ;
+  rdfs:comment "An attributed mapping from a traditional system (chiropractic meric, TCM meridian, reflexology, chakra). NOT asserted as medical fact." .
+health:BridgeClaim a owl:Class ; rdfs:subClassOf health:Correspondence ; rdfs:label "Bridge claim" ;
+  rdfs:comment "A proposed link between a traditional element and a modern structure/mechanism; sits on the epistemic ramp and carries supporting/refuting evidence." .
+
+health:inSystem a owl:ObjectProperty ; rdfs:domain health:Correspondence ; rdfs:range health:CorrespondenceSystem ; rdfs:label "in system" .
+health:correspondsTo a owl:ObjectProperty ; rdfs:domain health:Correspondence ; rdfs:range health:AnatomicalStructure ; rdfs:label "corresponds to" .
+health:atSegment a owl:ObjectProperty ; rdfs:domain health:Correspondence ; rdfs:range health:SpinalSegment ; rdfs:label "at spinal segment" .
+health:epistemicStatus a owl:ObjectProperty ; rdfs:domain health:Correspondence ; rdfs:range health:EpistemicStatus ; rdfs:label "epistemic status" .
+health:element a owl:DatatypeProperty ; rdfs:domain health:Correspondence ; rdfs:range xsd:string ; rdfs:label "element (meridian / point / zone)" .
+health:hasProvenance a owl:ObjectProperty ; rdfs:domain health:Correspondence ; rdfs:range prov:Entity ; rdfs:label "provenance" .
+health:supportedBy a owl:ObjectProperty ; rdfs:domain health:BridgeClaim ; rdfs:range prov:Entity ; rdfs:label "supported by evidence" .
+health:refutedBy a owl:ObjectProperty ; rdfs:domain health:BridgeClaim ; rdfs:range prov:Entity ; rdfs:label "refuted by evidence" .
+
+# correspondence systems (each an attributed lens)
+health:ModernNeuroanatomy a health:CorrespondenceSystem ; rdfs:label "Modern neuroanatomy" ;
+  rdfs:comment "Evidence-based segmental innervation, dermatomes, viscerosomatic reflexes." .
+health:ChiropracticMeric a health:CorrespondenceSystem ; rdfs:label "Chiropractic meric chart" ;
+  rdfs:comment "Historical spinal-nerve → organ chart. Segmental level tracks real innervation; specific disease-causation claims are contested." .
+health:TCMMeridian a health:CorrespondenceSystem ; rdfs:label "TCM meridian system" .
+health:Reflexology a health:CorrespondenceSystem ; rdfs:label "Reflexology zones" .
+health:AyurvedicChakra a health:CorrespondenceSystem ; rdfs:label "Ayurvedic chakra system" .
+
+# ── worked exemplar at T5/stomach: the SAME body point, three honestly-separated lenses ────────────
+# 1) modern neuroanatomy — verified
+health:Corr_T5_Stomach_Modern a health:Correspondence ;
+  rdfs:label "T5 sympathetic supply → stomach" ;
+  health:inSystem health:ModernNeuroanatomy ; health:atSegment health:T5 ; health:correspondsTo health:Stomach ;
+  health:epistemicStatus health:Verified .
+# 2) chiropractic meric overlay — attributed tradition (level agrees; the disease claim is NOT asserted here)
+health:Corr_T5_Stomach_Meric a health:TraditionalCorrespondence ;
+  rdfs:label "Meric chart: T5 → stomach" ;
+  health:inSystem health:ChiropracticMeric ; health:atSegment health:T5 ; health:correspondsTo health:Stomach ;
+  health:epistemicStatus health:Traditional .
+# 3) a bridge claim — hypothesis, carrying its evidence pointers (illustrative)
+health:Corr_Stomach_Meridian_Bridge a health:BridgeClaim ;
+  rdfs:label "TCM Stomach meridian ↔ segmental/fascial substrate" ;
+  health:inSystem health:TCMMeridian ; health:correspondsTo health:Stomach ; health:element "Stomach meridian (ST)" ;
+  health:epistemicStatus health:Hypothesis .
