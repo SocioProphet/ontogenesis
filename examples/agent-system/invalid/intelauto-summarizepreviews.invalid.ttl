@@ -1,0 +1,6 @@
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/agent-system/examples#> .
+ex:badIA a agentsys:IntelligenceAutomationAgent ;
+  agentsys:bundleId "com.apple.badpredict" ; agentsys:agentClass "intelligence_automation" ; agentsys:interruptLevel "time_sensitive" ;
+  agentsys:dndIntelligentManagementPermitted false ; agentsys:autonomousActionPermitted false ;
+  agentsys:summarizePreviewsPermitted true .

@@ -1,0 +1,43 @@
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+
+agentsys:AgentPassportShape a sh:NodeShape ;
+  sh:targetClass agentsys:HostAgent ;
+  sh:property [ sh:path agentsys:bundleId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "HostAgent must have exactly one bundleId." ] ;
+  sh:property [ sh:path agentsys:agentClass ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "HostAgent must declare exactly one agentClass." ] ;
+  sh:property [ sh:path agentsys:interruptLevel ; sh:datatype xsd:string ; sh:minCount 1 ;
+    sh:message "HostAgent must declare an interruptLevel." ] .
+
+agentsys:SystemCoreShape a sh:NodeShape ;
+  sh:targetClass agentsys:SystemCoreAgent ;
+  sh:property [ sh:path agentsys:suppressUserAuthorizationPrompt ; sh:hasValue true ;
+    sh:message "system_core must suppress the user authorization prompt (value true)." ] ;
+  sh:property [ sh:path agentsys:isAppleSigned ; sh:hasValue true ;
+    sh:message "system_core must be apple-signed (isAppleSigned true)." ] ;
+  sh:property [ sh:path agentsys:isDaemon ; sh:hasValue true ;
+    sh:message "system_core must be a daemon (isDaemon true)." ] .
+
+agentsys:ThirdPartyShape a sh:NodeShape ;
+  sh:targetClass agentsys:ThirdPartyAgent ;
+  sh:property [ sh:path agentsys:systemBundle ; sh:maxCount 0 ;
+    sh:message "third_party must not set system_bundle (class elevation forbidden)." ] ;
+  sh:property [ sh:path agentsys:suppressUserAuthorizationPrompt ; sh:hasValue false ;
+    sh:message "third_party must not suppress the user authorization prompt (SEAM-002)." ] .
+
+agentsys:IntelligenceAutomationShape a sh:NodeShape ;
+  sh:targetClass agentsys:IntelligenceAutomationAgent ;
+  sh:property [ sh:path agentsys:summarizePreviewsPermitted ; sh:hasValue false ;
+    sh:message "intelligence_automation must not permit summarize_previews (SEAM-009)." ] ;
+  sh:property [ sh:path agentsys:dndIntelligentManagementPermitted ; sh:hasValue false ;
+    sh:message "intelligence_automation must not permit dnd_intelligent_management (SEAM-009)." ] ;
+  sh:property [ sh:path agentsys:autonomousActionPermitted ; sh:minCount 1 ;
+    sh:message "intelligence_automation must explicitly declare autonomous_action_permitted (SEAM-009)." ] .
+
+agentsys:CapabilityExceptionShape a sh:NodeShape ;
+  sh:targetClass agentsys:CapabilityException ;
+  sh:property [ sh:path agentsys:grantedBy ; sh:minCount 1 ; sh:message "CapabilityException must declare grantedBy." ] ;
+  sh:property [ sh:path agentsys:grantedAt ; sh:datatype xsd:dateTime ; sh:minCount 1 ; sh:message "CapabilityException must declare grantedAt (dateTime)." ] ;
+  sh:property [ sh:path agentsys:scope ; sh:minCount 1 ; sh:message "CapabilityException must declare scope." ] .

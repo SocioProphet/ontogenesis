@@ -1,0 +1,18 @@
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/agent-system/examples#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:sharingd a agentsys:SystemCoreAgent ;
+  agentsys:bundleId "com.apple.sharingd" ; agentsys:agentClass "system_core" ; agentsys:interruptLevel "critical" ;
+  agentsys:suppressUserAuthorizationPrompt true ; agentsys:isAppleSigned true ; agentsys:isDaemon true .
+
+ex:claude a agentsys:ThirdPartyAgent ;
+  agentsys:bundleId "com.anthropic.claudefordesktop" ; agentsys:agentClass "third_party" ; agentsys:interruptLevel "standard" ;
+  agentsys:suppressUserAuthorizationPrompt false .
+
+ex:siri a agentsys:IntelligenceAutomationAgent ;
+  agentsys:bundleId "com.apple.Siri.ActionPredictionNotifications" ; agentsys:agentClass "intelligence_automation" ; agentsys:interruptLevel "time_sensitive" ;
+  agentsys:summarizePreviewsPermitted false ; agentsys:dndIntelligentManagementPermitted false ; agentsys:autonomousActionPermitted false .
+
+ex:weatherGrant a agentsys:CapabilityException ;
+  agentsys:grantedBy "urn:srcos:agent-machine:governance" ; agentsys:grantedAt "2026-07-31T04:00:00Z"^^xsd:dateTime ; agentsys:scope "severe-weather-alerts" .

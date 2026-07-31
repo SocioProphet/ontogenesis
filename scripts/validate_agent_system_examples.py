@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Validate the agent-system SHACL gate examples (T1-4).
+
+Keeps the agent-system lane self-contained and gives the gate failure-output
+visibility:
+- the positive example must conform to the agent-class constraints;
+- each invalid fixture under examples/agent-system/invalid/*.invalid.ttl must be
+  rejected, tripping the specific class-elevation / intelligence-constraint /
+  attestation invariant it violates.
+
+A control never observed refusing is indistinguishable from no control, so the
+negatives are asserted here rather than merely documented.
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+from pyshacl import validate
+from rdflib import Graph
+
+ROOT = Path(__file__).resolve().parents[1]
+ONTOLOGIES = [
+    ROOT / "Upper" / "upper-core.ttl",
+    ROOT / "Domains" / "agent-system" / "agent-class.ttl",
+    ROOT / "Domains" / "agent-system" / "permission-flags.ttl",
+    ROOT / "Domains" / "agent-system" / "managed-space.ttl",
+]
+SHAPES = ROOT / "shapes" / "agent-system" / "agent-class-constraints.shacl.ttl"
+POSITIVE = ROOT / "examples" / "agent-system" / "agent-system-passport.ttl"
+INVALID_DIR = ROOT / "examples" / "agent-system" / "invalid"
+
+# Each invalid fixture must trip a recognisable agent-system safety signal.
+EXPECTED_SIGNALS = {
+    "thirdparty-systembundle": "system_bundle",
+    "intelauto-summarizepreviews": "summarize_previews",
+    "systemcore-not-applesigned": "apple-signed",
+}
+
+
+def _base() -> Graph:
+    g = Graph()
+    for f in ONTOLOGIES:
+        g.parse(f, format="turtle")
+    return g
+
+
+def _shapes() -> Graph:
+    g = Graph()
+    g.parse(SHAPES, format="turtle")
+    return g
+
+
+def _validate(data_file: Path) -> tuple[bool, str]:
+    data = _base()
+    data.parse(data_file, format="turtle")
+    conforms, _report, text = validate(
+        data_graph=data, shacl_graph=_shapes(), inference="rdfs", abort_on_first=False
+    )
+    return conforms, text
+
+
+def fail(msg: str) -> None:
+    print(f"FAIL: {msg}")
+    sys.exit(1)
+
+
+def main() -> int:
+    conforms, text = _validate(POSITIVE)
+    if not conforms:
+        fail(f"positive example must conform but did not:\n{text}")
+
+    stems = sorted(p for p in INVALID_DIR.glob("*.invalid.ttl"))
+    if len(stems) < 3:
+        fail(f"expected >=3 invalid fixtures, found {len(stems)}")
+
+    for path in stems:
+        key = path.name.replace(".invalid.ttl", "")
+        conforms, text = _validate(path)
+        if conforms:
+            fail(f"invalid fixture was ACCEPTED but must be rejected: {path.name}")
+        signal = EXPECTED_SIGNALS.get(key)
+        if signal is None:
+            fail(f"no expected signal registered for fixture {key}")
+        if signal not in text:
+            fail(f"{path.name}: rejected but did not trip expected signal {signal!r}")
+
+    print(
+        f"OK: agent-system SHACL gate — positive conforms; "
+        f"{len(stems)} invalid fixtures each rejected on the expected invariant"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
