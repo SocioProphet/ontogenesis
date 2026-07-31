@@ -1,0 +1,80 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/agent-system/agent-class.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Agent System: Agent Class" ;
+  dct:description "OWL realization of the AgentPassport five-class host-agent model (sourceos-spec T0-1). Same namespace as the JSON-LD vocabulary seed (T0-3): https://spec.sourceos.dev/vocab/agent-system#." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+# --- Root ---
+agentsys:HostAgent a owl:Class ;
+  rdfs:subClassOf upper:Agent ;
+  rdfs:label "Host Agent" ;
+  rdfs:comment "An agent or service observed on a SourceOS-managed host, classified into exactly one of the five agent classes." .
+
+# --- Identity properties ---
+agentsys:bundleId a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain agentsys:HostAgent ; rdfs:range xsd:string ;
+  rdfs:label "bundle id" ;
+  rdfs:comment "Stable process identity (functional). Slug basis for urn:srcos:agent-passport:<bundle_id_slug>." .
+
+agentsys:pid a owl:DatatypeProperty ;
+  rdfs:domain agentsys:HostAgent ; rdfs:range xsd:integer ;
+  rdfs:label "pid" ;
+  rdfs:comment "SESSION-SCOPED process id. NOT a stable identifier: reused across processes and reboots; must not be used for cross-session correlation." .
+
+agentsys:agentClass a owl:DatatypeProperty ;
+  rdfs:domain agentsys:HostAgent ; rdfs:range xsd:string ;
+  rdfs:label "agent class" ;
+  rdfs:comment "String discriminator mirroring rdf:type, matching the AgentPassport agent_class enum." .
+
+agentsys:interruptLevel a owl:DatatypeProperty ;
+  rdfs:domain agentsys:HostAgent ; rdfs:range xsd:string ;
+  rdfs:label "interrupt level" ;
+  rdfs:comment "critical | time_sensitive | high | standard | passive." .
+
+# --- Capability exception ---
+agentsys:CapabilityException a owl:Class ;
+  rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Capability Exception" ;
+  rdfs:comment "An explicit, scoped, attributable capability grant deviating from a class default." .
+
+agentsys:grantedBy a owl:DatatypeProperty ; rdfs:domain agentsys:CapabilityException ; rdfs:range xsd:string ; rdfs:label "granted by" .
+agentsys:grantedAt a owl:DatatypeProperty ; rdfs:domain agentsys:CapabilityException ; rdfs:range xsd:dateTime ; rdfs:label "granted at" .
+agentsys:scope a owl:DatatypeProperty ; rdfs:domain agentsys:CapabilityException ; rdfs:range xsd:string ; rdfs:label "scope" .
+
+# --- The five classes ---
+agentsys:SystemCoreAgent a owl:Class ;
+  rdfs:subClassOf agentsys:HostAgent ,
+    [ a owl:Restriction ; owl:onProperty agentsys:suppressUserAuthorizationPrompt ; owl:hasValue true ] ,
+    [ a owl:Restriction ; owl:onProperty agentsys:isAppleSigned ; owl:hasValue true ] ,
+    [ a owl:Restriction ; owl:onProperty agentsys:isDaemon ; owl:hasValue true ] ;
+  rdfs:label "System Core Agent" ;
+  rdfs:comment "System-center daemons; highest privilege." .
+
+agentsys:IntelligenceAutomationAgent a owl:Class ;
+  rdfs:subClassOf agentsys:HostAgent ;
+  rdfs:label "Intelligence Automation Agent" ;
+  rdfs:comment "Proactive/prediction agents; triple-constrained output." .
+
+agentsys:AppHelperAgent a owl:Class ;
+  rdfs:subClassOf agentsys:HostAgent ;
+  rdfs:label "App Helper Agent" ;
+  rdfs:comment "Application background daemons; standard user auth." .
+
+agentsys:LegacyBridgeAgent a owl:Class ;
+  rdfs:subClassOf agentsys:HostAgent ;
+  rdfs:label "Legacy Bridge Agent" ;
+  rdfs:comment "Legacy/modern connection bridge services." .
+
+agentsys:ThirdPartyAgent a owl:Class ;
+  rdfs:subClassOf agentsys:HostAgent ;
+  rdfs:label "Third Party Agent" ;
+  rdfs:comment "Unsigned external applications. Has no systemBundle restriction; the ban on system_bundle:true is enforced by SHACL (ThirdPartyShape)." .

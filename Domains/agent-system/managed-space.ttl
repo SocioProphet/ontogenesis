@@ -1,0 +1,34 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/agent-system/managed-space.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Agent System: Managed Space" ;
+  dct:description "Spatial authorization model: managed spaces, windows, dock bindings, and the authorization object properties. SEAM-008 (displayUUID instability) is modeled explicitly." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Domains/agent-system/agent-class.ttl> .
+
+agentsys:ManagedSpace a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Managed Space" ;
+  rdfs:comment "A CGSSpace spatial authorization context." .
+agentsys:spaceId a owl:DatatypeProperty ; rdfs:domain agentsys:ManagedSpace ; rdfs:range xsd:integer ; rdfs:label "space id" .
+agentsys:displayUuid a owl:DatatypeProperty ; rdfs:domain agentsys:ManagedSpace ; rdfs:range xsd:string ; rdfs:label "display uuid" .
+agentsys:displayUuidStable a owl:DatatypeProperty ; rdfs:domain agentsys:ManagedSpace ; rdfs:range xsd:boolean ;
+  rdfs:label "display uuid stable" ;
+  rdfs:comment "SEAM-008: displayUUID instability from firmware manipulation can corrupt spatial authorization; an attestation timestamp is required when spatial authorization is asserted." .
+
+agentsys:WAWindow a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "WA Window" .
+agentsys:windowId a owl:DatatypeProperty ; rdfs:domain agentsys:WAWindow ; rdfs:range xsd:string ; rdfs:label "window id" .
+agentsys:windowRole a owl:DatatypeProperty ; rdfs:domain agentsys:WAWindow ; rdfs:range xsd:string ; rdfs:label "window role" ;
+  rdfs:comment "spotlight | terminal | user_app | system." .
+
+agentsys:DockBinding a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Dock Binding" .
+agentsys:appTrustedForBinding a owl:DatatypeProperty ; rdfs:domain agentsys:DockBinding ; rdfs:range xsd:boolean ; rdfs:label "app trusted for binding" .
+agentsys:boundBundleId a owl:DatatypeProperty ; rdfs:domain agentsys:DockBinding ; rdfs:range xsd:string ; rdfs:label "bound bundle id" .
+
+agentsys:authorizedForSpace a owl:ObjectProperty ; rdfs:domain agentsys:HostAgent ; rdfs:range agentsys:ManagedSpace ; rdfs:label "authorized for space" .
+agentsys:authorizedForWindow a owl:ObjectProperty ; rdfs:domain agentsys:HostAgent ; rdfs:range agentsys:WAWindow ; rdfs:label "authorized for window" .

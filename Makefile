@@ -1,4 +1,4 @@
-.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario shacl jsonld build ledger verify sbom svf all
+.PHONY: venv deps validate validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system shacl jsonld build ledger verify sbom svf all
 
 venv:
 	python -m venv .venv
@@ -6,8 +6,11 @@ venv:
 deps:
 	.venv/bin/pip install -r requirements-dev.txt
 
-validate: validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario
+validate: validate-corpus-event-semantics validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system
 	.venv/bin/python scripts/validate_rdf.py
+
+validate-agent-system:
+	.venv/bin/python scripts/validate_agent_system_examples.py
 
 validate-corpus-event-semantics:
 	.venv/bin/python scripts/validate_corpus_event_semantics.py
