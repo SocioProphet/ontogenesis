@@ -1,0 +1,49 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/examples/symbolic-regression#> .
+@prefix sr:  <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix mf:  <https://socioprophet.github.io/ontogenesis/method-family#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:dataset-evidence-invalid-mf a sr:DatasetEvidenceRef ;
+  rdfs:label "Synthetic dataset evidence reference" .
+
+ex:fit-metric-invalid-mf a sr:FitMetric ;
+  sr:metricName "r_squared" ;
+  sr:metricValue "0.88"^^xsd:decimal .
+
+ex:complexity-metric-invalid-mf a sr:ComplexityMetric ;
+  sr:metricName "node_count" ;
+  sr:metricValue "6"^^xsd:decimal .
+
+ex:dimensional-analysis-invalid-mf a sr:DimensionalAnalysisResult ;
+  sr:hasUnitsStatus sr:UnitsConsistent .
+
+ex:evidence-replay-invalid-mf a sr:EvidenceReplayRef ;
+  rdfs:label "Synthetic evidence replay reference" .
+
+ex:discovery-method-invalid-mf a sr:DiscoveryMethodRef ;
+  rdfs:label "dILP-style differentiable rule-learning discovery method" .
+
+# Invalid per SocioProphet/ontogenesis#126: this proposal declares a
+# neuro-symbolic mf:hasMethodFamily (dILP-style rule-guided) but omits every
+# other doctrine-required carrier-boundary field (mf:groundingStatus,
+# mf:validationStatus, mf:methodOutputType, mf:explanationTraceRef,
+# mf:owningAuthorityPlane). This is exactly the concrete gap the issue named:
+# a candidate produced by a neuro-symbolic method must be distinguishable from
+# an ordinary one via the full carrier-boundary field set, not merely the
+# method-family label alone.
+ex:sr-assertion-proposal-method-family-missing-carrier-fields a sr:SRAssertionProposal ;
+  rdfs:label "Invalid proposal: method family declared without carrier-boundary fields" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-invalid-mf ;
+  sr:hasFitMetric ex:fit-metric-invalid-mf ;
+  sr:hasComplexityMetric ex:complexity-metric-invalid-mf ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-invalid-mf ;
+  sr:hasEvidenceReplay ex:evidence-replay-invalid-mf ;
+  sr:hasDiscoveryMethod ex:discovery-method-invalid-mf ;
+  sr:hasPromotionStatus sr:ProposalCandidate ;
+  sr:hasAdmissionState sr:AdmissionPendingReview ;
+  sr:vocabVersion "0.2.0" ;
+  sr:vocabularyPromotionState sr:VocabularyDraftState ;
+  sr:nonAuthorityDeclaration "This learned rule is a candidate only." ;
+  mf:hasMethodFamily mf:RuleGuided .

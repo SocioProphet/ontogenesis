@@ -1,0 +1,39 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/examples/symbolic-regression#> .
+@prefix sr:  <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:dataset-evidence-invalid-nonauth a sr:DatasetEvidenceRef ;
+  rdfs:label "Synthetic dataset evidence reference" .
+
+ex:fit-metric-invalid-nonauth a sr:FitMetric ;
+  sr:metricName "r_squared" ;
+  sr:metricValue "0.90"^^xsd:decimal .
+
+ex:complexity-metric-invalid-nonauth a sr:ComplexityMetric ;
+  sr:metricName "node_count" ;
+  sr:metricValue "5"^^xsd:decimal .
+
+ex:dimensional-analysis-invalid-nonauth a sr:DimensionalAnalysisResult ;
+  sr:hasUnitsStatus sr:UnitsConsistent .
+
+ex:evidence-replay-invalid-nonauth a sr:EvidenceReplayRef ;
+  rdfs:label "Synthetic evidence replay reference" .
+
+ex:discovery-method-invalid-nonauth a sr:DiscoveryMethodRef ;
+  rdfs:label "Ordinary symbolic-regression discovery method" .
+
+# Invalid: SRAssertionProposal missing the required sr:nonAuthorityDeclaration.
+ex:sr-assertion-proposal-missing-nonauthority a sr:SRAssertionProposal ;
+  rdfs:label "Invalid proposal missing non-authority declaration" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-invalid-nonauth ;
+  sr:hasFitMetric ex:fit-metric-invalid-nonauth ;
+  sr:hasComplexityMetric ex:complexity-metric-invalid-nonauth ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-invalid-nonauth ;
+  sr:hasEvidenceReplay ex:evidence-replay-invalid-nonauth ;
+  sr:hasDiscoveryMethod ex:discovery-method-invalid-nonauth ;
+  sr:hasPromotionStatus sr:ProposalProposed ;
+  sr:hasAdmissionState sr:AdmissionPendingReview ;
+  sr:vocabVersion "0.2.0" ;
+  sr:vocabularyPromotionState sr:VocabularyDraftState .

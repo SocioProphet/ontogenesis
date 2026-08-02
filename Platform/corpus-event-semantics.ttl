@@ -1,6 +1,7 @@
 @base <https://socioprophet.github.io/ontogenesis/> .
 @prefix ces:   <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
 @prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix mf:    <https://socioprophet.github.io/ontogenesis/method-family#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -9,8 +10,8 @@
 
 <Platform/corpus-event-semantics.ttl> a owl:Ontology ;
   dct:title "Corpus Event Semantics" ;
-  dct:description "Semantic carriers for corpus-derived provenance, events, causal candidates, semantic table annotations, and diagnostic findings." ;
-  owl:versionInfo "0.1.0" ;
+  dct:description "Semantic carriers for corpus-derived provenance, events, causal candidates, semantic table annotations, and diagnostic findings. ces:CausalRelationCandidate and ces:KGSubgraphFinding may additionally carry mf:hasMethodFamily and the mf: carrier-boundary fields (vocab/method-family/method-family.ttl), cross-referencing sociosphere/docs/integration/neurosymbolic-chronos-alignment.md's Kautz/NSR method-family taxonomy per SocioProphet/ontogenesis#126: a causal candidate produced by a NeurASP/dILP-style method, or a KG subgraph finding produced by a Deep-Ontological-Network/RRN-style method, can now declare which method family produced it." ;
+  owl:versionInfo "0.1.1" ;
   owl:imports <Upper/upper-core.ttl> .
 
 ces:CorpusEvidenceBundle a owl:Class ;

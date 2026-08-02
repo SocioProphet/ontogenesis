@@ -1,0 +1,116 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/examples/symbolic-regression#> .
+@prefix sr:  <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix mf:  <https://socioprophet.github.io/ontogenesis/method-family#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# --- shared supporting instances ---
+
+ex:dataset-evidence-001 a sr:DatasetEvidenceRef ;
+  rdfs:label "Synthetic PROMETHEUS dataset evidence reference" ;
+  sr:datasetUri <https://example.org/datasets/prometheus-synthetic-001> .
+
+ex:fit-metric-r2-001 a sr:FitMetric ;
+  rdfs:label "R-squared fit metric" ;
+  sr:metricName "r_squared" ;
+  sr:metricValue "0.94"^^xsd:decimal .
+
+ex:complexity-metric-001 a sr:ComplexityMetric ;
+  rdfs:label "Expression node-count complexity metric" ;
+  sr:metricName "node_count" ;
+  sr:metricValue "7"^^xsd:decimal .
+
+ex:dimensional-analysis-consistent-001 a sr:DimensionalAnalysisResult ;
+  rdfs:label "Consistent dimensional analysis result" ;
+  sr:hasUnitsStatus sr:UnitsConsistent .
+
+ex:evidence-replay-001 a sr:EvidenceReplayRef ;
+  rdfs:label "Synthetic evidence replay reference" ;
+  sr:datasetUri <https://example.org/replays/prometheus-synthetic-001> .
+
+ex:discovery-method-pysr-001 a sr:DiscoveryMethodRef ;
+  rdfs:label "Ordinary symbolic-regression discovery method (PySR-style)" .
+
+ex:discovery-method-dilp-001 a sr:DiscoveryMethodRef ;
+  rdfs:label "dILP-style differentiable rule-learning discovery method" .
+
+# --- EquationCandidate / ProgramCandidate standalone shape coverage ---
+
+ex:equation-candidate-001 a sr:EquationCandidate ;
+  rdfs:label "Synthetic ordinary symbolic-regression equation candidate" ;
+  sr:hasEquation "y = a * x^2 + b" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-001 ;
+  sr:hasFeatureSet [ a sr:FeatureSetRef ; rdfs:label "single-feature x" ] ;
+  sr:hasOperatorLibrary [ a sr:OperatorLibraryRef ; rdfs:label "arithmetic + power" ] ;
+  sr:hasFitMetric ex:fit-metric-r2-001 ;
+  sr:hasComplexityMetric ex:complexity-metric-001 ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-consistent-001 ;
+  sr:hasPromotionStatus sr:ProposalCandidate ;
+  sr:nonAuthorityDeclaration "This equation candidate is not a law, ontology assertion, policy, or controller." .
+
+ex:equation-candidate-dilp-001 a sr:EquationCandidate ;
+  rdfs:label "Synthetic dILP-style rule-guided equation candidate (ontogenesis#126)" ;
+  sr:hasEquation "rule: high_pressure(x) :- temperature(x, t), t > threshold" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-001 ;
+  sr:hasFeatureSet [ a sr:FeatureSetRef ; rdfs:label "temperature/pressure feature set" ] ;
+  sr:hasOperatorLibrary [ a sr:OperatorLibraryRef ; rdfs:label "dILP template rule library" ] ;
+  sr:hasFitMetric ex:fit-metric-r2-001 ;
+  sr:hasComplexityMetric ex:complexity-metric-001 ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-consistent-001 ;
+  sr:hasPromotionStatus sr:ProposalCandidate ;
+  sr:nonAuthorityDeclaration "This learned rule is a candidate only; it is not promoted to canonical schema or ontology without owning-plane review." ;
+  mf:hasMethodFamily mf:RuleGuided .
+
+ex:program-candidate-001 a sr:ProgramCandidate ;
+  rdfs:label "Synthetic program-search program candidate" ;
+  sr:hasProgramText "def f(x): return a * x ** 2 + b" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-001 ;
+  sr:hasFitMetric ex:fit-metric-r2-001 ;
+  sr:hasComplexityMetric ex:complexity-metric-001 ;
+  sr:hasPromotionStatus sr:ProposalCandidate ;
+  sr:nonAuthorityDeclaration "This program candidate is not a law, ontology assertion, policy, or controller." .
+
+# --- SRAssertionProposal: baseline plain symbolic-regression case (no method
+# family declared -- this is the existing, unaffected, backward-compatible path). ---
+
+ex:sr-assertion-proposal-baseline-001 a sr:SRAssertionProposal ;
+  rdfs:label "Synthetic ordinary symbolic-regression assertion proposal" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-001 ;
+  sr:hasFitMetric ex:fit-metric-r2-001 ;
+  sr:hasComplexityMetric ex:complexity-metric-001 ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-consistent-001 ;
+  sr:hasEvidenceReplay ex:evidence-replay-001 ;
+  sr:hasDiscoveryMethod ex:discovery-method-pysr-001 ;
+  sr:hasPromotionStatus sr:ProposalProposed ;
+  sr:hasAdmissionState sr:AdmissionPendingReview ;
+  sr:vocabVersion "0.2.0" ;
+  sr:vocabularyPromotionState sr:VocabularyDraftState ;
+  sr:nonAuthorityDeclaration "This proposal is not a law, ontology assertion, policy, or controller until admitted." .
+
+# --- SRAssertionProposal: dILP-style rule-guided proposal WITH method-family and
+# the full carrier-boundary field set (ontogenesis#126's named concrete gap: an
+# EquationCandidate produced by dILP vs. ordinary symbolic regression can now be
+# told apart, and downstream consumers can apply the doctrine's per-method-family
+# admissible/forbidden-use rules -- e.g. this rule must not be promoted to
+# canonical schema/ontology without owning-plane review). ---
+
+ex:sr-assertion-proposal-dilp-001 a sr:SRAssertionProposal ;
+  rdfs:label "Synthetic dILP-style rule-guided assertion proposal with method-family cross-reference (ontogenesis#126)" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-001 ;
+  sr:hasFitMetric ex:fit-metric-r2-001 ;
+  sr:hasComplexityMetric ex:complexity-metric-001 ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-consistent-001 ;
+  sr:hasEvidenceReplay ex:evidence-replay-001 ;
+  sr:hasDiscoveryMethod ex:discovery-method-dilp-001 ;
+  sr:hasPromotionStatus sr:ProposalProposed ;
+  sr:hasAdmissionState sr:AdmissionPendingReview ;
+  sr:vocabVersion "0.2.0" ;
+  sr:vocabularyPromotionState sr:VocabularyDraftState ;
+  sr:nonAuthorityDeclaration "This learned rule is a candidate only; it is not promoted to canonical schema or ontology without owning-plane review." ;
+  mf:hasMethodFamily mf:RuleGuided ;
+  mf:groundingStatus mf:Grounded ;
+  mf:validationStatus mf:ValidationPending ;
+  mf:methodOutputType "learned-rule" ;
+  mf:explanationTraceRef "dilp-template-derivation-trace://synthetic/001" ;
+  mf:owningAuthorityPlane "SocioProphet/ontogenesis" .

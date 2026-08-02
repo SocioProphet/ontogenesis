@@ -1,0 +1,121 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix mf:   <https://socioprophet.github.io/ontogenesis/method-family#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<vocab/method-family/method-family.ttl> a owl:Ontology ;
+  dct:title "Neuro-Symbolic Method-Family Vocabulary" ;
+  dct:description "Shared, cross-module vocabulary for classifying which neuro-symbolic reasoning or learning method family produced a candidate carrier, plus the CHRONOS carrier-boundary fields (grounding status, validation status, method output type, explanation trace reference, owning authority plane) required when a carrier references neuro-symbolic reasoning. This is Ontogenesis's semantic-vocabulary-draft cross-reference of the Kautz/NSR method-family taxonomy and carrier-boundary field list defined in sociosphere's doctrine document `sociosphere/docs/integration/neurosymbolic-chronos-alignment.md` (SocioProphet/socioprophet#498, SocioProphet/ontogenesis#126). Ontogenesis does not own or redefine the CHRONOS carrier model itself; this module only makes Ontogenesis's own carrier vocabularies (corpus-event-semantics, symbolic-regression) able to express which method family produced a candidate and the carrier-boundary metadata the doctrine requires." ;
+  dct:source "sociosphere/docs/integration/neurosymbolic-chronos-alignment.md" ;
+  owl:versionInfo "0.1.0" .
+
+# --- Method family (Kautz / NSR taxonomy classification lens) ---
+#
+# Doctrine quote (neurosymbolic-chronos-alignment.md, "Method families and CHRONOS
+# roles" table): "Kautz / NSR taxonomy | classification lens | label a capability as
+# neural-to-symbolic, symbolic-to-neural, hybrid, rule-guided, embedded-symbolic, or
+# System-1/System-2 | treat taxonomy labels as maturity or authority grades".
+#
+# Per that doctrine's admissible/forbidden-use column, a mf:MethodFamily value is a
+# classification label only. It carries no maturity, authority, or promotion grade of
+# its own -- promotion is governed exclusively by each consuming vocabulary's own
+# promotion/admission state (e.g. sr:hasPromotionStatus, sr:hasAdmissionState,
+# ces:claimStatus).
+
+mf:MethodFamily a rdfs:Class ;
+  rdfs:label "Method family" ;
+  rdfs:comment "Kautz/NSR neuro-symbolic method-family classification lens. Enumeration is closed to the six labels named in neurosymbolic-chronos-alignment.md; it is a classification tag, never a maturity or authority grade." .
+
+mf:NeuralToSymbolic a mf:MethodFamily ;
+  rdfs:label "Neural-to-symbolic" ;
+  rdfs:comment "Neural outputs feed a symbolic layer (e.g. NeurASP-style neural-to-ASP interfaces: neural outputs propose atoms, symbolic constraints adjudicate candidate worlds)." .
+
+mf:SymbolicToNeural a mf:MethodFamily ;
+  rdfs:label "Symbolic-to-neural" ;
+  rdfs:comment "Symbolic structure is compiled into or guides a neural computation (e.g. SATNet-style differentiable constraint layers)." .
+
+mf:Hybrid a mf:MethodFamily ;
+  rdfs:label "Hybrid" ;
+  rdfs:comment "Neither purely neural-to-symbolic nor symbolic-to-neural; combines both directions (e.g. LTN-style differentiable fuzzy logic, LNN-style truth-bound propagation)." .
+
+mf:RuleGuided a mf:MethodFamily ;
+  rdfs:label "Rule-guided" ;
+  rdfs:comment "Candidate rules are proposed and constrained by templates or priors (e.g. dILP-style differentiable rule learning). Doctrine forbidden-use: a learned rule must never be promoted to canonical schema or ontology without owning-plane review." .
+
+mf:EmbeddedSymbolic a mf:MethodFamily ;
+  rdfs:label "Embedded-symbolic" ;
+  rdfs:comment "Symbolic structure (ontology relations, schema deltas) is proposed from learned embeddings (e.g. Deep Ontological Networks / RRN). Doctrine forbidden-use: an embedding must never be treated as ontology authority or explanation-complete reasoning." .
+
+mf:System1Reasoning a mf:MethodFamily ;
+  rdfs:label "System-1 reasoning" ;
+  rdfs:comment "Fast, pattern-matching / associative reasoning half of the Kautz/NSR System-1/System-2 lens." .
+
+mf:System2Reasoning a mf:MethodFamily ;
+  rdfs:label "System-2 reasoning" ;
+  rdfs:comment "Slow, deliberate, symbolic-verification reasoning half of the Kautz/NSR System-1/System-2 lens." .
+
+# --- Carrier-boundary fields ---
+#
+# Doctrine quote ("Neuro-symbolic carrier boundary"): "A CHRONOS carrier that
+# references neuro-symbolic reasoning must include at least: source evidence
+# reference; method family; method output type; grounding status; validation
+# status; explanation trace reference; owning authority plane; non-authority
+# declaration; replay reference; governance decision or pending decision."
+#
+# Ontogenesis's existing vocabularies already carry several of these fields under
+# their own names (source evidence reference, non-authority declaration, replay
+# reference, and governance decision/pending are already modeled -- see
+# docs/symbolic-regression-vocabulary.md and docs/corpus-event-semantics.md). This
+# module adds the remaining fields as shared, reusable properties: method family
+# (above), method output type, grounding status, validation status, and
+# explanation trace reference. It also adds owning authority plane, cross-
+# referencing the doctrine's distributed-authority table.
+
+mf:GroundingStatus a rdfs:Class ;
+  rdfs:label "Grounding status" ;
+  rdfs:comment "Whether a neuro-symbolic carrier's symbols are anchored to source evidence (Doctrine required negative rule #8: apparent grounding must not be accepted without leakage/transduction tests)." .
+
+mf:Grounded a mf:GroundingStatus ; rdfs:label "Grounded" .
+mf:PartiallyGrounded a mf:GroundingStatus ; rdfs:label "Partially grounded" .
+mf:Ungrounded a mf:GroundingStatus ; rdfs:label "Ungrounded" .
+mf:GroundingUnknown a mf:GroundingStatus ; rdfs:label "Grounding unknown" .
+
+mf:ValidationStatus a rdfs:Class ;
+  rdfs:label "Validation status" ;
+  rdfs:comment "Whether a neuro-symbolic carrier has passed the owning plane's validation step. This is distinct from a consuming vocabulary's own promotion/admission state; it records validation of the neuro-symbolic method output specifically." .
+
+mf:ValidationPending a mf:ValidationStatus ; rdfs:label "Validation pending" .
+mf:Validated a mf:ValidationStatus ; rdfs:label "Validated" .
+mf:ValidationFailed a mf:ValidationStatus ; rdfs:label "Validation failed" .
+mf:ValidationNotApplicable a mf:ValidationStatus ; rdfs:label "Validation not applicable" .
+
+mf:hasMethodFamily a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range mf:MethodFamily ;
+  rdfs:label "has method family" ;
+  rdfs:comment "Kautz/NSR method-family classification of the neuro-symbolic method that produced this carrier. Domain is intentionally unconstrained so any Ontogenesis vocabulary's candidate/carrier class may adopt it." .
+
+mf:methodOutputType a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "method output type" ;
+  rdfs:comment "Free-text description of the kind of artifact the neuro-symbolic method produced (e.g. equation, program, learned-rule, ontology-delta, causal-candidate, kg-subgraph-finding). Left as an open string, not a closed enum, because output shapes vary across consuming vocabularies and method families." .
+
+mf:groundingStatus a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range mf:GroundingStatus ;
+  rdfs:label "grounding status" .
+
+mf:validationStatus a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range mf:ValidationStatus ;
+  rdfs:label "validation status" .
+
+mf:explanationTraceRef a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "explanation trace reference" ;
+  rdfs:comment "Reference (URI, hash, or path) to the explanation trace supporting this carrier, e.g. an LNN formula-structure trace or a NeurASP stable-model trace." .
+
+mf:owningAuthorityPlane a rdf:Property, owl:FunctionalProperty ;
+  rdfs:range xsd:string ;
+  rdfs:label "owning authority plane" ;
+  rdfs:comment "Which estate authority plane owns admission of this carrier, cross-referencing neurosymbolic-chronos-alignment.md's distributed-authority table (e.g. SocioProphet/sociosphere, SocioProphet/agentplane, SocioProphet/ontogenesis, SourceOS-Linux/sourceos-spec, SocioProphet/policy-fabric, SocioProphet/model-governance-ledger, SocioProphet/model-router, SocioProphet/superconscious, SocioProphet/alexandrian-academy, SocioProphet/gaia-world-model). Declaring this field never itself grants authority; it only records which plane must admit the carrier." .

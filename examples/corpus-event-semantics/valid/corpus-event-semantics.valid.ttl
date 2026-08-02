@@ -1,6 +1,7 @@
 @base <https://socioprophet.github.io/ontogenesis/> .
 @prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/corpus-event#> .
 @prefix ces:   <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix mf:    <https://socioprophet.github.io/ontogenesis/method-family#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
@@ -54,3 +55,31 @@ ex:diagnostic-finding-001 a ces:DiagnosticFinding ;
   ces:claimStatus "candidate" ;
   ces:hasEvidence ex:evidence-bundle-001 ;
   ces:hasProvenance ex:source-provenance-001 .
+
+ex:causal-candidate-neurosymbolic-001 a ces:CausalRelationCandidate ;
+  rdfs:label "Synthetic NeurASP-style causal candidate with method-family cross-reference (ontogenesis#126)" ;
+  ces:causeText "neural extractor proposes candidate atoms from corpus text" ;
+  ces:effectText "ASP constraints adjudicate the candidate causal edge" ;
+  ces:confidence "0.65"^^xsd:decimal ;
+  ces:claimStatus "candidate" ;
+  ces:hasProvenance ex:source-provenance-001 ;
+  mf:hasMethodFamily mf:NeuralToSymbolic ;
+  mf:groundingStatus mf:PartiallyGrounded ;
+  mf:validationStatus mf:ValidationPending ;
+  mf:methodOutputType "causal-candidate" ;
+  mf:explanationTraceRef "neurasp-stable-model-trace://synthetic/001" ;
+  mf:owningAuthorityPlane "SocioProphet/sociosphere" .
+
+ex:kg-subgraph-finding-001 a ces:KGSubgraphFinding ;
+  rdfs:label "Synthetic Deep-Ontological-Network-style KG subgraph finding with method-family cross-reference (ontogenesis#126)" ;
+  ces:diagnosticCode "kg-subgraph-relation-inference" ;
+  ces:findingSeverity "low" ;
+  ces:claimStatus "candidate" ;
+  ces:hasEvidence ex:evidence-bundle-001 ;
+  ces:hasProvenance ex:source-provenance-001 ;
+  mf:hasMethodFamily mf:EmbeddedSymbolic ;
+  mf:groundingStatus mf:GroundingUnknown ;
+  mf:validationStatus mf:ValidationPending ;
+  mf:methodOutputType "kg-subgraph-finding" ;
+  mf:explanationTraceRef "don-rrn-embedding-trace://synthetic/001" ;
+  mf:owningAuthorityPlane "SocioProphet/ontogenesis" .

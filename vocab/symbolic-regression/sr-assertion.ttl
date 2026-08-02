@@ -1,12 +1,27 @@
 @base <https://socioprophet.github.io/ontogenesis/> .
 @prefix sr: <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix mf: <https://socioprophet.github.io/ontogenesis/method-family#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<symbolic-regression/sr-assertion.ttl> a sr:VocabularyDraft ; sr:vocabVersion "0.1.0" ; sr:vocabularyPromotionState sr:VocabularyDraftState .
+# sr:EquationCandidate, sr:ProgramCandidate, and sr:SRAssertionProposal may carry
+# mf:hasMethodFamily (Kautz/NSR method-family classification lens) and the mf:
+# carrier-boundary fields (mf:groundingStatus, mf:validationStatus,
+# mf:methodOutputType, mf:explanationTraceRef, mf:owningAuthorityPlane) defined in
+# vocab/method-family/method-family.ttl. That shared module cross-references
+# sociosphere/docs/integration/neurosymbolic-chronos-alignment.md per
+# SocioProphet/ontogenesis#126: it lets this vocabulary declare which neuro-symbolic
+# method family (e.g. dILP-style rule-guided learning) produced a given
+# EquationCandidate/ProgramCandidate, so downstream consumers can apply the
+# doctrine's per-method-family admissible/forbidden-use rules. See
+# shapes/symbolic-regression/sr-assertion.shacl.ttl for the conditional constraint:
+# once mf:hasMethodFamily is present, the doctrine's carrier-boundary fields become
+# required on that proposal.
+
+<symbolic-regression/sr-assertion.ttl> a sr:VocabularyDraft ; sr:vocabVersion "0.2.0" ; sr:vocabularyPromotionState sr:VocabularyDraftState .
 
 sr:VocabularyDraft a rdfs:Class .
 sr:EquationCandidate a rdfs:Class .
@@ -68,7 +83,8 @@ sr:reviewSurfaceType a rdf:Property, owl:FunctionalProperty ; rdfs:range xsd:str
 sr:webProtegeProjectRef a rdf:Property ; rdfs:range xsd:string .
 sr:metricName a rdf:Property ; rdfs:range xsd:string .
 sr:metricValue a rdf:Property ; rdfs:range xsd:decimal .
-sr:methodFamily a rdf:Property ; rdfs:range xsd:string .
+sr:methodFamily a rdf:Property ; rdfs:range xsd:string ;
+  rdfs:comment "Legacy free-text method-family label, unused by any current fixture. For the Kautz/NSR closed-enum method-family classification (neural-to-symbolic, symbolic-to-neural, hybrid, rule-guided, embedded-symbolic, System-1/System-2), use mf:hasMethodFamily from vocab/method-family/method-family.ttl instead; that field is cross-referenced against sociosphere's neurosymbolic-chronos-alignment.md doctrine and constrained by SHACL sh:in." .
 sr:datasetUri a rdf:Property ; rdfs:range xsd:anyURI .
 sr:nonAuthorityDeclaration a rdf:Property ; rdfs:range xsd:string .
 sr:discoveredAt a rdf:Property ; rdfs:range xsd:dateTime .

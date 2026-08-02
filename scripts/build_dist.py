@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 AUDIT = ROOT / "audit"
 
-INCLUDE_DIRS = ["Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi", "catalog", "shapes", "contexts", "imports", "docs"]
+INCLUDE_DIRS = ["Upper", "Middle", "Lower", "Domains", "Platform", "prophet", "epi", "catalog", "shapes", "contexts", "imports", "docs", "vocab"]
 
 def sha256_file(p: Path) -> str:
     h = hashlib.sha256()

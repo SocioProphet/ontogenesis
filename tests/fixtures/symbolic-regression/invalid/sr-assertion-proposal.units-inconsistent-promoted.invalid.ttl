@@ -1,0 +1,46 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/examples/symbolic-regression#> .
+@prefix sr:  <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:dataset-evidence-invalid-units a sr:DatasetEvidenceRef ;
+  rdfs:label "Synthetic dataset evidence reference" .
+
+ex:fit-metric-invalid-units a sr:FitMetric ;
+  sr:metricName "r_squared" ;
+  sr:metricValue "0.97"^^xsd:decimal .
+
+ex:complexity-metric-invalid-units a sr:ComplexityMetric ;
+  sr:metricName "node_count" ;
+  sr:metricValue "9"^^xsd:decimal .
+
+ex:dimensional-analysis-inconsistent a sr:DimensionalAnalysisResult ;
+  rdfs:label "Inconsistent dimensional analysis result" ;
+  sr:hasUnitsStatus sr:UnitsInconsistent .
+
+ex:evidence-replay-invalid-units a sr:EvidenceReplayRef ;
+  rdfs:label "Synthetic evidence replay reference" .
+
+ex:discovery-method-invalid-units a sr:DiscoveryMethodRef ;
+  rdfs:label "Ordinary symbolic-regression discovery method" .
+
+# Invalid per docs/symbolic-regression-vocabulary.md: "A proposal with
+# hasUnitsStatus set to sr:UnitsInconsistent must be blocked from proposed or
+# admitted status by SHACL." This proposal is dimensionally inconsistent but
+# still claims sr:ProposalProposed / sr:AdmissionPendingReview, which the two
+# pre-existing sh:not clauses on sr:SRAssertionProposalShape must reject. No
+# fixture previously exercised this rule in this repo.
+ex:sr-assertion-proposal-units-inconsistent-promoted a sr:SRAssertionProposal ;
+  rdfs:label "Invalid proposal: dimensionally inconsistent equation promoted to proposed status" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-invalid-units ;
+  sr:hasFitMetric ex:fit-metric-invalid-units ;
+  sr:hasComplexityMetric ex:complexity-metric-invalid-units ;
+  sr:hasDimensionalAnalysis ex:dimensional-analysis-inconsistent ;
+  sr:hasEvidenceReplay ex:evidence-replay-invalid-units ;
+  sr:hasDiscoveryMethod ex:discovery-method-invalid-units ;
+  sr:hasPromotionStatus sr:ProposalProposed ;
+  sr:hasAdmissionState sr:AdmissionPendingReview ;
+  sr:vocabVersion "0.2.0" ;
+  sr:vocabularyPromotionState sr:VocabularyDraftState ;
+  sr:nonAuthorityDeclaration "This proposal is not a law, ontology assertion, policy, or controller until admitted." .

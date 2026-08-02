@@ -1,5 +1,6 @@
 @base <https://socioprophet.github.io/ontogenesis/> .
 @prefix sr: <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix mf: <https://socioprophet.github.io/ontogenesis/method-family#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -15,7 +16,8 @@ sr:EquationCandidateShape a sh:NodeShape ;
   sh:property [ sh:path sr:hasComplexityMetric ; sh:minCount 1 ] ;
   sh:property [ sh:path sr:hasDimensionalAnalysis ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path sr:hasPromotionStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in (sr:ProposalCandidate sr:ProposalProposed sr:ProposalAdmitted sr:ProposalRejected sr:ProposalFailureCorpus) ] ;
-  sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] .
+  sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] .
 
 sr:ProgramCandidateShape a sh:NodeShape ;
   sh:targetClass sr:ProgramCandidate ;
@@ -24,8 +26,19 @@ sr:ProgramCandidateShape a sh:NodeShape ;
   sh:property [ sh:path sr:hasFitMetric ; sh:minCount 1 ] ;
   sh:property [ sh:path sr:hasComplexityMetric ; sh:minCount 1 ] ;
   sh:property [ sh:path sr:hasPromotionStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in (sr:ProposalCandidate sr:ProposalProposed sr:ProposalAdmitted sr:ProposalRejected sr:ProposalFailureCorpus) ] ;
-  sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] .
+  sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] .
 
+# sr:SRAssertionProposalShape: mf:hasMethodFamily is optional (backward compatible
+# with every existing plain-symbolic-regression proposal that carries no
+# neuro-symbolic method-family classification at all). Once a proposal *does*
+# declare mf:hasMethodFamily, the five sh:not clauses below require the doctrine's
+# remaining carrier-boundary fields (mf:groundingStatus, mf:validationStatus,
+# mf:methodOutputType, mf:explanationTraceRef, mf:owningAuthorityPlane) -- the
+# other carrier-boundary fields (source evidence reference, non-authority
+# declaration, replay reference, governance decision/pending) are already
+# required on every SRAssertionProposal via sr:hasDatasetEvidence,
+# sr:nonAuthorityDeclaration, sr:hasEvidenceReplay, and sr:hasAdmissionState above.
 sr:SRAssertionProposalShape a sh:NodeShape ;
   sh:targetClass sr:SRAssertionProposal ;
   sh:property [ sh:path sr:hasDatasetEvidence ; sh:minCount 1 ; sh:maxCount 1 ] ;
@@ -39,8 +52,19 @@ sr:SRAssertionProposalShape a sh:NodeShape ;
   sh:property [ sh:path sr:vocabVersion ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
   sh:property [ sh:path sr:vocabularyPromotionState ; sh:minCount 1 ; sh:maxCount 1 ; sh:in (sr:VocabularyDraftState sr:VocabularyStabilizingState sr:VocabularyCanonicalState) ] ;
   sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] ;
+  sh:property [ sh:path mf:groundingStatus ; sh:maxCount 1 ; sh:in (mf:Grounded mf:PartiallyGrounded mf:Ungrounded mf:GroundingUnknown) ] ;
+  sh:property [ sh:path mf:validationStatus ; sh:maxCount 1 ; sh:in (mf:ValidationPending mf:Validated mf:ValidationFailed mf:ValidationNotApplicable) ] ;
+  sh:property [ sh:path mf:methodOutputType ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
   sh:not [ sh:property [ sh:path sr:hasDimensionalAnalysis ; sh:qualifiedValueShape [ sh:property [ sh:path sr:hasUnitsStatus ; sh:hasValue sr:UnitsInconsistent ] ] ; sh:qualifiedMinCount 1 ] ; sh:property [ sh:path sr:hasPromotionStatus ; sh:in (sr:ProposalProposed sr:ProposalAdmitted) ] ] ;
-  sh:not [ sh:property [ sh:path sr:hasDimensionalAnalysis ; sh:qualifiedValueShape [ sh:property [ sh:path sr:hasUnitsStatus ; sh:hasValue sr:UnitsInconsistent ] ] ; sh:qualifiedMinCount 1 ] ; sh:property [ sh:path sr:hasAdmissionState ; sh:in (sr:AdmissionPendingReview sr:AdmissionAdmitted) ] ] .
+  sh:not [ sh:property [ sh:path sr:hasDimensionalAnalysis ; sh:qualifiedValueShape [ sh:property [ sh:path sr:hasUnitsStatus ; sh:hasValue sr:UnitsInconsistent ] ] ; sh:qualifiedMinCount 1 ] ; sh:property [ sh:path sr:hasAdmissionState ; sh:in (sr:AdmissionPendingReview sr:AdmissionAdmitted) ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:groundingStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:validationStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:methodOutputType ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 0 ] ] .
 
 sr:DimensionalAnalysisResultShape a sh:NodeShape ;
   sh:targetClass sr:DimensionalAnalysisResult ;

@@ -1,0 +1,19 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix og: <https://socioprophet.github.io/ontogenesis/og#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<catalog/method-family-registry.ttl> a owl:Ontology ;
+  dct:title "Method-Family Vocabulary Supplemental Registry" ;
+  dct:description "Supplemental registry entry for the shared method-family cross-reference module (SocioProphet/ontogenesis#126). This avoids broad central-registry mutation while the module stabilizes." ;
+  dct:source "sociosphere/docs/integration/neurosymbolic-chronos-alignment.md" ;
+  owl:versionInfo "0.1.0" .
+
+og:MethodFamily a og:Module ;
+  og:layer "vocab" ;
+  og:path "vocab/method-family/method-family.ttl" ;
+  og:baseIRI "https://socioprophet.github.io/ontogenesis/method-family#" ;
+  og:semver "0.1.0" ;
+  og:status "draft" ;
+  rdfs:label "Neuro-symbolic method-family vocabulary" .

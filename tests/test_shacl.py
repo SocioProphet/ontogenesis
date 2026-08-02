@@ -14,7 +14,7 @@ def load_all(dirs):
     return g
 
 def test_shacl_conforms():
-    data = load_all(["Upper","Middle","Lower","Domains","Platform","prophet","epi","catalog"])
+    data = load_all(["Upper","Middle","Lower","Domains","Platform","prophet","epi","catalog","vocab"])
     shapes = load_all(["shapes","prophet/shapes","epi/shapes"])
     conforms, _, _ = validate(data_graph=data, shacl_graph=shapes, inference="rdfs", advanced=True)
     assert conforms
