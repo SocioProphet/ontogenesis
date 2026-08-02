@@ -1,0 +1,40 @@
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix mp:  <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mp:InferenceProviderShape a sh:NodeShape ;
+  sh:targetClass mp:InferenceProvider ;
+  sh:property [ sh:path mp:dataResidencyClass ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ( "on_device_only" "sovereign_cluster" "external_permitted" ) ;
+    sh:message "InferenceProvider must declare exactly one dataResidencyClass in {on_device_only, sovereign_cluster, external_permitted}." ] ;
+  sh:property [ sh:path mp:emitsInferenceReceipt ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:hasValue true ;
+    sh:message "InferenceProvider must emit inference receipts (emitsInferenceReceipt true) — a provider that does not emit receipts is not a valid provider (Model Plane §VIII)." ] ;
+  sh:sparql [ a sh:SPARQLConstraint ;
+    sh:message "on_device_only provider must have networkCapability false — no network egress across an on-device boundary (SEAM-015)." ;
+    sh:select """
+      PREFIX mp: <https://spec.sourceos.dev/vocab/model-plane#>
+      SELECT $this WHERE {
+        $this mp:dataResidencyClass "on_device_only" .
+        $this mp:networkCapability true .
+      }
+    """ ] ;
+  sh:sparql [ a sh:SPARQLConstraint ;
+    sh:message "escalationPermitted requires a non-on_device_only dataResidencyClass — an on-device provider cannot escalate off-device (SEAM-015)." ;
+    sh:select """
+      PREFIX mp: <https://spec.sourceos.dev/vocab/model-plane#>
+      SELECT $this WHERE {
+        $this mp:escalationPermitted true .
+        $this mp:dataResidencyClass "on_device_only" .
+      }
+    """ ] ;
+  sh:sparql [ a sh:SPARQLConstraint ;
+    sh:message "biometric provider must be on_device_only with escalation forbidden — face/speaker embeddings never cross a tier boundary under any grant (biometric hard boundary)." ;
+    sh:select """
+      PREFIX mp: <https://spec.sourceos.dev/vocab/model-plane#>
+      SELECT $this WHERE {
+        $this mp:handlesBiometric true .
+        { $this mp:dataResidencyClass ?r . FILTER(?r != "on_device_only") }
+        UNION
+        { $this mp:escalationPermitted true . }
+      }
+    """ ] .

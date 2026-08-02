@@ -1,0 +1,11 @@
+@prefix mp: <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+
+# INVALID: on_device_only provider with network egress (SEAM-015 residency boundary).
+ex:badOnDeviceNetwork a mp:InferenceProvider ;
+  mp:dataResidencyClass "on_device_only" ;
+  mp:networkCapability true ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T0" .

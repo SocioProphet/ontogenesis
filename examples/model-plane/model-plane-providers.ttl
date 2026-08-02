@@ -1,0 +1,23 @@
+@prefix mp:  <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex:  <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# On-device biometric vision provider (visiond): on_device_only, no network, no escalation.
+ex:visiond a mp:InferenceProvider ;
+  mp:dataResidencyClass "on_device_only" ;
+  mp:networkCapability false ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric true ;
+  mp:permittedTier "T0" ;
+  mp:passportRef "urn:srcos:agent-passport:dev.sourceos.visiond" .
+
+# Sovereign-cluster teacher provider (T3): off-device residency, networked, non-biometric.
+ex:clusterTeacher a mp:InferenceProvider ;
+  mp:dataResidencyClass "sovereign_cluster" ;
+  mp:networkCapability true ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T3" ;
+  mp:passportRef "urn:srcos:agent-passport:dev.sourceos.inferenced" .
