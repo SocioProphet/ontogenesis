@@ -1,0 +1,7 @@
+@prefix cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/domains/estate-catalog/examples#> .
+
+# INVALID: a catalog entry with no owner (unowned = ungoverned).
+ex:badEntry a cat:CatalogEntry ;
+  cat:catalogId "ds.orphan" ;
+  cat:status "active" .
