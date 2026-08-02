@@ -36,6 +36,7 @@ EXPECTED_SIGNALS = {
     "biometric-offdevice": "biometric",
     "no-receipt": "receipt",
     "missing-network-declaration": "networkCapability",
+    "dual-receipt-flag": "receipt",
 }
 
 
@@ -76,6 +77,11 @@ def main() -> int:
         fail(f"positive example must conform but did not:\n{text}")
 
     stems = sorted(p for p in INVALID_DIR.glob("*.invalid.ttl"))
+    found_keys = {p.name.replace(".invalid.ttl", "") for p in stems}
+    expected_keys = set(EXPECTED_SIGNALS)
+    missing = expected_keys - found_keys
+    if missing:
+        fail(f"expected invalid fixtures are missing: {sorted(missing)}")
     if len(stems) < 3:
         fail(f"expected >=3 invalid fixtures, found {len(stems)}")
 

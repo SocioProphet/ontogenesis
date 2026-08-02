@@ -1,0 +1,12 @@
+@prefix mp: <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+
+# INVALID: contradictory emitsInferenceReceipt (both true and false) — hasValue true
+# alone would be satisfied by the true value; maxCount 1 closes the multi-value dodge.
+ex:badDualReceipt a mp:InferenceProvider ;
+  mp:dataResidencyClass "on_device_only" ;
+  mp:networkCapability false ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true , false ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T0" .
