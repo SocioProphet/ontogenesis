@@ -1,0 +1,8 @@
+{
+  "id": "urn:srcos:glossary:operational-dag",
+  "type": "GlossaryTerm",
+  "specVersion": "2.0.0",
+  "name": "operational DAG",
+  "definition": "The operational task graph carrying identity and dependency; it must be acyclic \u2014 a cycle is refused (a loop where a DAG belongs is unsatisfiable).",
+  "status": "approved"
+}

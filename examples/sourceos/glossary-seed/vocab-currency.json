@@ -1,0 +1,8 @@
+{
+  "id": "urn:srcos:glossary:vocab-currency",
+  "type": "GlossaryTerm",
+  "specVersion": "2.0.0",
+  "name": "vocabulary currency",
+  "definition": "The property that the approved glossary names what the estate actually does; measured as divergence between the fixed glossary (LSA) and the open corpus (LDA).",
+  "status": "draft"
+}
