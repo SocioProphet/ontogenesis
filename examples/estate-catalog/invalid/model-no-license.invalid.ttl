@@ -1,0 +1,6 @@
+@prefix cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/domains/estate-catalog/examples#> .
+
+# INVALID: a model with a digest but no SPDX license (MIT/Apache-only not reasoned).
+ex:badModel a cat:Model ;
+  cat:modelDigest "sha256:2222222222222222222222222222222222222222222222222222222222222222" .

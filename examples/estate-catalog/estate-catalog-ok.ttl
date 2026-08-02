@@ -1,0 +1,32 @@
+@prefix cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#> .
+@prefix mp:  <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/domains/estate-catalog/examples#> .
+
+# A cross-catalog mini-estate: an app uses a model, served by a Model Plane provider,
+# both running on infrastructure; the model is catalogued by a governed entry.
+
+ex:providerA a mp:InferenceProvider ;
+  mp:dataResidencyClass "sovereign_cluster" ;
+  mp:networkCapability true ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T3" .
+
+ex:clusterA a cat:Infrastructure .
+
+ex:model1 a cat:Model ;
+  cat:modelDigest "sha256:1111111111111111111111111111111111111111111111111111111111111111" ;
+  cat:license "Apache-2.0" ;
+  cat:servedBy ex:providerA ;
+  cat:runsOn ex:clusterA .
+
+ex:app1 a cat:EstateResource ;
+  cat:usesModel ex:model1 ;
+  cat:runsOn ex:clusterA .
+
+ex:model1Entry a cat:CatalogEntry ;
+  cat:catalogId "ds.model.example" ;
+  cat:owner "SocioProphet/platform" ;
+  cat:status "active" ;
+  cat:describes ex:model1 .
