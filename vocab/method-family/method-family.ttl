@@ -27,7 +27,7 @@
 
 mf:MethodFamily a rdfs:Class ;
   rdfs:label "Method family" ;
-  rdfs:comment "Kautz/NSR neuro-symbolic method-family classification lens. Enumeration is closed to the six labels named in neurosymbolic-chronos-alignment.md; it is a classification tag, never a maturity or authority grade." .
+  rdfs:comment "Kautz/NSR neuro-symbolic method-family classification lens. Enumeration is closed to the seven labels named in neurosymbolic-chronos-alignment.md (neural-to-symbolic, symbolic-to-neural, hybrid, rule-guided, embedded-symbolic, System-1 reasoning, System-2 reasoning -- the System-1/System-2 lens contributes two labels); it is a classification tag, never a maturity or authority grade." .
 
 mf:NeuralToSymbolic a mf:MethodFamily ;
   rdfs:label "Neural-to-symbolic" ;

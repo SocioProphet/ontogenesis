@@ -17,7 +17,20 @@ sr:EquationCandidateShape a sh:NodeShape ;
   sh:property [ sh:path sr:hasDimensionalAnalysis ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path sr:hasPromotionStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in (sr:ProposalCandidate sr:ProposalProposed sr:ProposalAdmitted sr:ProposalRejected sr:ProposalFailureCorpus) ] ;
   sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] .
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] ;
+  sh:property [ sh:path mf:groundingStatus ; sh:maxCount 1 ; sh:in (mf:Grounded mf:PartiallyGrounded mf:Ungrounded mf:GroundingUnknown) ] ;
+  sh:property [ sh:path mf:validationStatus ; sh:maxCount 1 ; sh:in (mf:ValidationPending mf:Validated mf:ValidationFailed mf:ValidationNotApplicable) ] ;
+  sh:property [ sh:path mf:methodOutputType ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  # Same conditional carrier-boundary pattern as sr:SRAssertionProposalShape
+  # below: mf:hasMethodFamily is optional, but once declared, the doctrine's
+  # remaining carrier-boundary fields become required.
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:groundingStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:validationStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:methodOutputType ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 0 ] ] .
 
 sr:ProgramCandidateShape a sh:NodeShape ;
   sh:targetClass sr:ProgramCandidate ;
@@ -27,7 +40,20 @@ sr:ProgramCandidateShape a sh:NodeShape ;
   sh:property [ sh:path sr:hasComplexityMetric ; sh:minCount 1 ] ;
   sh:property [ sh:path sr:hasPromotionStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in (sr:ProposalCandidate sr:ProposalProposed sr:ProposalAdmitted sr:ProposalRejected sr:ProposalFailureCorpus) ] ;
   sh:property [ sh:path sr:nonAuthorityDeclaration ; sh:minCount 1 ; sh:datatype xsd:string ] ;
-  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] .
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] ;
+  sh:property [ sh:path mf:groundingStatus ; sh:maxCount 1 ; sh:in (mf:Grounded mf:PartiallyGrounded mf:Ungrounded mf:GroundingUnknown) ] ;
+  sh:property [ sh:path mf:validationStatus ; sh:maxCount 1 ; sh:in (mf:ValidationPending mf:Validated mf:ValidationFailed mf:ValidationNotApplicable) ] ;
+  sh:property [ sh:path mf:methodOutputType ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  # Same conditional carrier-boundary pattern as sr:SRAssertionProposalShape
+  # below: mf:hasMethodFamily is optional, but once declared, the doctrine's
+  # remaining carrier-boundary fields become required.
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:groundingStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:validationStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:methodOutputType ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 0 ] ] .
 
 # sr:SRAssertionProposalShape: mf:hasMethodFamily is optional (backward compatible
 # with every existing plain-symbolic-regression proposal that carries no

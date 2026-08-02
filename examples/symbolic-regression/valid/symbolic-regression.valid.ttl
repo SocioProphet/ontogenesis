@@ -60,7 +60,12 @@ ex:equation-candidate-dilp-001 a sr:EquationCandidate ;
   sr:hasDimensionalAnalysis ex:dimensional-analysis-consistent-001 ;
   sr:hasPromotionStatus sr:ProposalCandidate ;
   sr:nonAuthorityDeclaration "This learned rule is a candidate only; it is not promoted to canonical schema or ontology without owning-plane review." ;
-  mf:hasMethodFamily mf:RuleGuided .
+  mf:hasMethodFamily mf:RuleGuided ;
+  mf:groundingStatus mf:Grounded ;
+  mf:validationStatus mf:ValidationPending ;
+  mf:methodOutputType "learned-rule" ;
+  mf:explanationTraceRef "dilp-template-derivation-trace://synthetic/equation-candidate-001" ;
+  mf:owningAuthorityPlane "SocioProphet/ontogenesis" .
 
 ex:program-candidate-001 a sr:ProgramCandidate ;
   rdfs:label "Synthetic program-search program candidate" ;
