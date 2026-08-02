@@ -1,0 +1,11 @@
+@prefix mp: <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+
+# INVALID: provider that omits networkCapability — an unspecified network posture
+# cannot be residency-checked (absence-dodge of the on_device_only boundary).
+ex:badMissingNetwork a mp:InferenceProvider ;
+  mp:dataResidencyClass "on_device_only" ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T0" .

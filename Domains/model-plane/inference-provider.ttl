@@ -1,0 +1,56 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix mp:    <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/model-plane/inference-provider.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Model Plane: Inference Provider" ;
+  dct:description "OWL realization of the SourceOS Model Plane inference-provider concept (Tranche 7, sourceos-spec InferenceProvider). A model-serving provider is a first-class System, NOT a sixth AgentPassport agent class (ADR-0017): a serving daemon is an agentsys:HostAgent (typically system_core) AND an mp:InferenceProvider, linked via mp:passportRef. Namespace: https://spec.sourceos.dev/vocab/model-plane#." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+# --- Root ---
+mp:InferenceProvider a owl:Class ;
+  rdfs:subClassOf upper:System ;
+  rdfs:label "Inference Provider" ;
+  rdfs:comment "A local, clustered, or governed-remote model-serving system in the Model Plane. It mediates a data-residency boundary and emits an inference receipt per completion. Composed with (not a subtype of) the AgentPassport host-process classification via mp:passportRef — not a sixth agent class (ADR-0017)." .
+
+# --- Residency / capability properties ---
+mp:dataResidencyClass a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:string ;
+  rdfs:label "data residency class" ;
+  rdfs:comment "The data boundary the provider serves under: on_device_only | sovereign_cluster | external_permitted. A tier boundary is a data boundary (Model Plane §II)." .
+
+mp:networkCapability a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:boolean ;
+  rdfs:label "network capability" ;
+  rdfs:comment "Whether the provider has network egress beyond loopback/local IPC. Must be false for an on_device_only provider (residency-constraints SHACL; SEAM-015)." .
+
+mp:escalationPermitted a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:boolean ;
+  rdfs:label "escalation permitted" ;
+  rdfs:comment "Whether the provider may escalate to a higher tier. Requires a non-on_device_only residency class (residency-constraints SHACL)." .
+
+mp:emitsInferenceReceipt a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:boolean ;
+  rdfs:label "emits inference receipt" ;
+  rdfs:comment "Whether the provider emits an InferenceReceipt per completion. Must be true — a provider that does not emit receipts is not a valid provider (Model Plane §VIII)." .
+
+mp:handlesBiometric a owl:DatatypeProperty , owl:FunctionalProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:boolean ;
+  rdfs:label "handles biometric" ;
+  rdfs:comment "Whether the provider processes biometric embeddings (face/speaker). A biometric provider must be on_device_only with escalation forbidden — a hard boundary (residency-constraints SHACL)." .
+
+mp:permittedTier a owl:DatatypeProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:string ;
+  rdfs:label "permitted tier" ;
+  rdfs:comment "A tier the provider may serve: T0 | T1 | T2 | T3 | T4. Repeatable." .
+
+mp:passportRef a owl:DatatypeProperty ;
+  rdfs:domain mp:InferenceProvider ; rdfs:range xsd:string ;
+  rdfs:label "passport ref" ;
+  rdfs:comment "The urn:srcos:agent-passport: URN of the host process that runs this provider daemon. Expresses the provider↔passport composition (ADR-0017) rather than a distinct agent class." .

@@ -1,0 +1,11 @@
+@prefix mp: <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+
+# INVALID: on_device_only provider that also permits escalation off-device (SEAM-015).
+ex:badEscalateOnDevice a mp:InferenceProvider ;
+  mp:dataResidencyClass "on_device_only" ;
+  mp:networkCapability false ;
+  mp:escalationPermitted true ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric false ;
+  mp:permittedTier "T1" .

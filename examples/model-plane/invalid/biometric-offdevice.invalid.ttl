@@ -1,0 +1,11 @@
+@prefix mp: <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix ex: <https://spec.sourceos.dev/vocab/model-plane/examples#> .
+
+# INVALID: biometric provider that is not on_device_only (biometric hard boundary).
+ex:badBiometricOffDevice a mp:InferenceProvider ;
+  mp:dataResidencyClass "sovereign_cluster" ;
+  mp:networkCapability true ;
+  mp:escalationPermitted false ;
+  mp:emitsInferenceReceipt true ;
+  mp:handlesBiometric true ;
+  mp:permittedTier "T3" .
