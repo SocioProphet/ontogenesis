@@ -13,13 +13,15 @@ srcos:GlossaryTermShape a sh:NodeShape ;
     sh:path skos:prefLabel ;
     sh:minCount 1 ;
     sh:datatype xsd:string ;
-    sh:message "A glossary term must carry a skos:prefLabel (the captured name)."
+    sh:minLength 1 ;
+    sh:message "A glossary term must carry a non-empty skos:prefLabel (the captured name)."
   ] ;
   sh:property [
     sh:path skos:definition ;
     sh:minCount 1 ;
     sh:datatype xsd:string ;
-    sh:message "A glossary term must carry a skos:definition — an unnamed/undefined term regulates nothing."
+    sh:minLength 1 ;
+    sh:message "A glossary term must carry a non-empty skos:definition — an unnamed/undefined term regulates nothing."
   ] ;
   sh:property [
     sh:path srcos:glossaryStatus ;

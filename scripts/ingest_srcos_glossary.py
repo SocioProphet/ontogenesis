@@ -81,12 +81,20 @@ def esc(s: str) -> str:
 
 
 def load_terms(input_dir: Path) -> list[dict]:
-    terms = {}
+    """Load draft GlossaryTerm JSON. Fail-closed: a term with an empty/missing name or definition
+    regulates nothing, so it is REFUSED at ingestion rather than emitted as a blank triple (which
+    the SHACL minLength gate would also reject — defense in depth)."""
+    terms, bad = {}, []
     for f in sorted(glob.glob(str(input_dir / "*.json"))):
         doc = json.loads(Path(f).read_text(encoding="utf-8"))
         if doc.get("type") != "GlossaryTerm" or not str(doc.get("id", "")).startswith("urn:srcos:glossary:"):
             continue
+        if not str(doc.get("name", "")).strip() or not str(doc.get("definition", "")).strip():
+            bad.append(f"{doc.get('id')} ({Path(f).name})")
+            continue
         terms[doc["id"]] = doc  # dedup by urn
+    if bad:
+        raise SystemExit(f"REFUSED {len(bad)} term(s) with empty name/definition: {bad}")
     return list(terms.values())
 
 
