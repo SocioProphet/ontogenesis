@@ -6,7 +6,7 @@ it is a control never observed refusing. Asserts:
   * the positive mini-estate conforms;
   * each invalid fixture under examples/estate-catalog/invalid/*.invalid.ttl is
     rejected on the specific binding invariant it violates (unowned entry,
-    unlicensed model, runsOn pointing at a non-Infrastructure resource).
+    unlicensed model, status outside the closed lifecycle set).
 """
 
 from __future__ import annotations

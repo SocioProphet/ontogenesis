@@ -19,7 +19,14 @@
   dct:title "Ontogenesis Domain — Estate Catalog (binding layer)" ;
   dct:description "The estate binding vocabulary: one roof over the estate's already-fragmented catalog classes so agents reason over the graph instead of reading every repo. Does NOT re-mint Catalog/Dataset/Service/Infrastructure — it BINDS the existing ontogenesis fragments (dom:Dataset, drm:Dataset, srm:Service, enrm:CriticalInfrastructure, legal:RepositoryAsset) and the model-plane provider (mp:InferenceProvider) under cat:EstateResource, adds the genuinely-new Model catalog, and supplies the cross-catalog object properties that are the reasoning fabric. Grounded in KBpedia/KKO (http://kbpedia.org/ontologies/kko#) — the same upper language HellGraph uses — so estate and graph share one binding language. The instance/population layer is SocioProphet/prophet-core-catalog (Source/Dataset/App/Receipt manifests + per-repo extractors); this module is the TBox those instances are typed by." ;
   owl:versionInfo "0.1.0" ;
-  owl:imports <Upper/upper-core.ttl> , <Domains/metadata.ttl> , <Domains/model-plane/inference-provider.ttl> , <http://kbpedia.org/ontologies/kko> .
+  owl:imports <Upper/upper-core.ttl> ,
+    <Domains/metadata.ttl> ,
+    <Domains/data-reference.ttl> ,
+    <Domains/service-reference.ttl> ,
+    <Domains/environment-reference.ttl> ,
+    <Domains/org-legal.ttl> ,
+    <Domains/model-plane/inference-provider.ttl> ,
+    <http://kbpedia.org/ontologies/kko> .
 
 # ------------------------------------------------------------------
 # Roots
@@ -122,7 +129,8 @@ cat:consumesData a owl:ObjectProperty ;
 
 cat:producesData a owl:ObjectProperty ;
   rdfs:domain cat:EstateResource ; rdfs:range dom:Dataset ;
-  rdfs:label "produces data" ; rdfs:comment "Writes/derives a dataset (lineage)." .
+  rdfs:label "produces data" ;
+  rdfs:comment "Writes/derives a dataset (lineage/output). Deliberately NOT a subPropertyOf cat:dependsOn: a producer does not depend on its output — the dependency runs the other way (the dataset depends on its producer). Keeping it out of the dependsOn closure keeps blast-radius/dependency traversals correct." .
 
 cat:usesModel a owl:ObjectProperty ;
   rdfs:subPropertyOf cat:dependsOn ;
