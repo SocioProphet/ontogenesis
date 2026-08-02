@@ -1,0 +1,37 @@
+@prefix srcos: <https://schemas.srcos.ai/v2/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Gate for SourceOS glossary terms ingested from the upstream vocab-currency loop
+# (sourceos-spec tools/vocab_currency_loop.py). A term that reaches the governed graph must be
+# captured (prefLabel + definition) and carry a governed status — the same "captured + current"
+# discipline the upstream loop enforces, now enforced on the ontology side too.
+srcos:GlossaryTermShape a sh:NodeShape ;
+  sh:targetClass srcos:GlossaryTerm ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A glossary term must carry a skos:prefLabel (the captured name)."
+  ] ;
+  sh:property [
+    sh:path skos:definition ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "A glossary term must carry a skos:definition — an unnamed/undefined term regulates nothing."
+  ] ;
+  sh:property [
+    sh:path srcos:glossaryStatus ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:in ( "draft" "approved" "deprecated" ) ;
+    sh:message "glossaryStatus must be one of draft|approved|deprecated (matches the upstream GlossaryTerm.status enum)."
+  ] ;
+  sh:property [
+    sh:path srcos:sourceUrn ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^urn:srcos:glossary:" ;
+    sh:message "A glossary term must record its upstream urn:srcos:glossary: identifier (provenance)."
+  ] .
