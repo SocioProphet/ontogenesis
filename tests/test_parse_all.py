@@ -2,7 +2,7 @@ from pathlib import Path
 from rdflib import Graph
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRS = ["Upper","Middle","Lower","Domains","Platform","prophet","epi","catalog","shapes"]
+DIRS = ["Upper","Middle","Lower","Domains","Platform","prophet","epi","catalog","shapes","vocab"]
 
 def test_all_ttl_parse():
     ttl_files = []

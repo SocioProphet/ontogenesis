@@ -1,6 +1,8 @@
 # Symbolic Regression Vocabulary Draft
 
-Status: v0.2 Ontogenesis vocabulary draft.
+Status: v0.2 Ontogenesis vocabulary draft. Cross-referenced against the Kautz/NSR
+method-family taxonomy per `SocioProphet/ontogenesis#126` (see "Neuro-symbolic
+method-family cross-reference" below).
 
 This document records the Ontogenesis side of PROMETHEUS / symbolic-regression law discovery. Ontogenesis owns vocabulary draft and SHACL semantics. It does not own runtime execution, agent replay, policy admission, memory promotion, or canonical sourceos-spec schema promotion.
 
@@ -77,6 +79,28 @@ An SRAssertionProposal must include dataset evidence, fit metric, complexity met
 A proposal with `hasUnitsStatus` set to `sr:UnitsInconsistent` must be blocked from proposed or admitted status by SHACL.
 
 A proposal must carry `hasEvidenceReplay` before the automated SHACL gate can validate it.
+
+## Neuro-symbolic method-family cross-reference
+
+`SocioProphet/ontogenesis#126` tracks the follow-on from `sociosphere/docs/integration/neurosymbolic-chronos-alignment.md`'s authority-plane table, which assigns Ontogenesis the "Semantic vocabulary draft" role for the ASU/Kautz neuro-symbolic method-family taxonomy. This is that follow-on, applied additively to this vocabulary.
+
+Before this extension, an `EquationCandidate` produced by a dILP-style rule-learning method and one produced by ordinary symbolic regression looked identical in this vocabulary: nothing carried which method family produced a candidate, so downstream consumers could not apply the alignment doctrine's per-method-family admissible/forbidden-use rules.
+
+`EquationCandidate`, `ProgramCandidate`, and `SRAssertionProposal` may now carry `mf:hasMethodFamily` from the shared `vocab/method-family/method-family.ttl` module. Its enumeration is the closed Kautz/NSR classification lens: `mf:NeuralToSymbolic`, `mf:SymbolicToNeural`, `mf:Hybrid`, `mf:RuleGuided`, `mf:EmbeddedSymbolic`, `mf:System1Reasoning`, `mf:System2Reasoning`. Per the doctrine, this label is a classification tag only -- it carries no maturity or authority grade of its own; promotion is still governed exclusively by `hasPromotionStatus` / `hasAdmissionState` as described above.
+
+`mf:hasMethodFamily` is optional and fully backward compatible: an ordinary symbolic-regression proposal that declares no method family at all is unaffected. Once a proposal *does* declare `mf:hasMethodFamily`, SHACL requires it to also carry the alignment doctrine's remaining carrier-boundary fields: `mf:groundingStatus`, `mf:validationStatus`, `mf:methodOutputType`, `mf:explanationTraceRef`, and `mf:owningAuthorityPlane`. The doctrine's other carrier-boundary fields -- source evidence reference, non-authority declaration, replay reference, and governance decision/pending -- were already covered by this vocabulary's pre-existing `hasDatasetEvidence`, `nonAuthorityDeclaration`, `hasEvidenceReplay`, and `hasAdmissionState` fields, so this extension only adds what was missing rather than duplicating what already existed.
+
+The legacy `sr:methodFamily` free-text property (present since v0.1, never used by any fixture) is unchanged but now documented as superseded by `mf:hasMethodFamily` for the closed Kautz/NSR taxonomy specifically; it remains available for any other free-text labeling need.
+
+This extension does not redefine or take ownership of CHRONOS's canonical carrier model; it only makes this vocabulary's own carrier classes able to express which neuro-symbolic method family (if any) produced a given candidate or proposal, which is exactly Ontogenesis's stated "semantic vocabulary draft" role.
+
+Prior to this change, this vocabulary tranche (unlike `corpus-event-semantics`) had no dedicated validator, no example fixtures, and no invalid fixtures, so its SHACL shapes were never exercised in this repo. `scripts/validate_symbolic_regression.py`, `examples/symbolic-regression/valid/symbolic-regression.valid.ttl`, `tests/fixtures/symbolic-regression/invalid/*.ttl`, and `catalog/symbolic-regression-vocabulary-registry.ttl` close that gap and additionally prove the method-family extension. Run:
+
+```bash
+make validate-symbolic-regression
+```
+
+The target is also included in `make validate`.
 
 ## Authority boundary
 

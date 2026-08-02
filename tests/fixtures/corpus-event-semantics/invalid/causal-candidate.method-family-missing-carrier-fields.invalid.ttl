@@ -1,0 +1,27 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:    <https://socioprophet.github.io/ontogenesis/examples/corpus-event#> .
+@prefix ces:   <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix mf:    <https://socioprophet.github.io/ontogenesis/method-family#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ex:source-provenance-invalid-method-family a ces:SourceProvenance ;
+  rdfs:label "Confirmed bibliographic provenance" ;
+  ces:sourceQuality "confirmed_bibliographic" ;
+  ces:evidenceRef "SocioProphet/sociosphere#334:papers/index.jsonl" .
+
+# Invalid per SocioProphet/ontogenesis#126: this causal candidate declares a
+# neuro-symbolic mf:hasMethodFamily but omits every other doctrine-required
+# carrier-boundary field (mf:groundingStatus, mf:validationStatus,
+# mf:methodOutputType, mf:explanationTraceRef, mf:owningAuthorityPlane). Per
+# neurosymbolic-chronos-alignment.md, a carrier that references neuro-symbolic
+# reasoning must include the full carrier-boundary field set, not just the
+# method-family label.
+ex:causal-candidate-method-family-missing-carrier-fields a ces:CausalRelationCandidate ;
+  rdfs:label "Invalid causal candidate: method family declared without carrier-boundary fields" ;
+  ces:causeText "neural extractor proposes candidate atoms from corpus text" ;
+  ces:effectText "ASP constraints adjudicate the candidate causal edge" ;
+  ces:confidence "0.65"^^xsd:decimal ;
+  ces:claimStatus "candidate" ;
+  ces:hasProvenance ex:source-provenance-invalid-method-family ;
+  mf:hasMethodFamily mf:NeuralToSymbolic .

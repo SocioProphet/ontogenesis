@@ -1,0 +1,35 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix ex:  <https://socioprophet.github.io/ontogenesis/examples/symbolic-regression#> .
+@prefix sr:  <https://socioprophet.github.io/ontogenesis/symbolic-regression#> .
+@prefix mf:  <https://socioprophet.github.io/ontogenesis/method-family#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:dataset-evidence-invalid-prog-mf a sr:DatasetEvidenceRef ;
+  rdfs:label "Synthetic dataset evidence reference" .
+
+ex:fit-metric-invalid-prog-mf a sr:FitMetric ;
+  sr:metricName "r_squared" ;
+  sr:metricValue "0.88"^^xsd:decimal .
+
+ex:complexity-metric-invalid-prog-mf a sr:ComplexityMetric ;
+  sr:metricName "node_count" ;
+  sr:metricValue "6"^^xsd:decimal .
+
+# Invalid per SocioProphet/ontogenesis#128 Copilot review: this ProgramCandidate
+# declares a neuro-symbolic mf:hasMethodFamily (dILP-style rule-guided) but omits
+# every other doctrine-required carrier-boundary field (mf:groundingStatus,
+# mf:validationStatus, mf:methodOutputType, mf:explanationTraceRef,
+# mf:owningAuthorityPlane). All other sr:ProgramCandidateShape-required fields
+# are present so this fixture fails SHACL validation specifically on the
+# carrier-boundary sh:not clauses, mirroring
+# sr-assertion-proposal.method-family-missing-carrier-fields.invalid.ttl.
+ex:program-candidate-method-family-missing-carrier-fields a sr:ProgramCandidate ;
+  rdfs:label "Invalid program candidate: method family declared without carrier-boundary fields" ;
+  sr:hasProgramText "def high_pressure(x, t): return t > threshold" ;
+  sr:hasDatasetEvidence ex:dataset-evidence-invalid-prog-mf ;
+  sr:hasFitMetric ex:fit-metric-invalid-prog-mf ;
+  sr:hasComplexityMetric ex:complexity-metric-invalid-prog-mf ;
+  sr:hasPromotionStatus sr:ProposalCandidate ;
+  sr:nonAuthorityDeclaration "This learned rule is a candidate only." ;
+  mf:hasMethodFamily mf:RuleGuided .

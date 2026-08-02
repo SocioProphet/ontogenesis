@@ -1,5 +1,6 @@
 @base <https://socioprophet.github.io/ontogenesis/> .
 @prefix ces: <https://socioprophet.github.io/ontogenesis/platform/corpus-event#> .
+@prefix mf:  <https://socioprophet.github.io/ontogenesis/method-family#> .
 @prefix sh:  <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -8,7 +9,7 @@
 <shapes/corpus-event-semantics.shacl.ttl> a owl:Ontology ;
   dct:title "Corpus Event Semantics SHACL Shapes" ;
   dct:description "Promotion-gate shapes for provenance-bearing corpus event, causal candidate, semantic table, and diagnostic finding records." ;
-  owl:versionInfo "0.1.0" .
+  owl:versionInfo "0.1.1" .
 
 ces:SourceProvenanceShape a sh:NodeShape ;
   sh:targetClass ces:SourceProvenance ;
@@ -39,7 +40,41 @@ ces:CausalRelationCandidateShape a sh:NodeShape ;
   sh:property [ sh:path ces:effectText ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
   sh:property [ sh:path ces:confidence ; sh:minCount 1 ; sh:datatype xsd:decimal ; ] ;
   sh:property [ sh:path ces:claimStatus ; sh:minCount 1 ; sh:datatype xsd:string ; ] ;
-  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] .
+  sh:property [ sh:path ces:hasProvenance ; sh:minCount 1 ; sh:class ces:SourceProvenance ; ] ;
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] ;
+  sh:property [ sh:path mf:groundingStatus ; sh:maxCount 1 ; sh:in (mf:Grounded mf:PartiallyGrounded mf:Ungrounded mf:GroundingUnknown) ] ;
+  sh:property [ sh:path mf:validationStatus ; sh:maxCount 1 ; sh:in (mf:ValidationPending mf:Validated mf:ValidationFailed mf:ValidationNotApplicable) ] ;
+  sh:property [ sh:path mf:methodOutputType ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  # A causal candidate produced by a NeurASP/dILP-style neuro-symbolic method must
+  # declare the doctrine's carrier-boundary fields once it declares which method
+  # family produced it. Plain (non-neuro-symbolic) causal candidates -- the
+  # existing case -- carry no mf:hasMethodFamily and are unaffected.
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:groundingStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:validationStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:methodOutputType ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 0 ] ] .
+
+# ces:KGSubgraphFinding is a subclass of ces:DiagnosticFinding (rdfs inference
+# applies ces:DiagnosticFindingShape to it too) and additionally may carry
+# mf:hasMethodFamily for Deep-Ontological-Network / RRN-style ontology-inference
+# candidates, with the same conditional carrier-boundary requirement pattern as
+# ces:CausalRelationCandidateShape above.
+ces:KGSubgraphFindingShape a sh:NodeShape ;
+  sh:targetClass ces:KGSubgraphFinding ;
+  sh:property [ sh:path mf:hasMethodFamily ; sh:maxCount 1 ; sh:in (mf:NeuralToSymbolic mf:SymbolicToNeural mf:Hybrid mf:RuleGuided mf:EmbeddedSymbolic mf:System1Reasoning mf:System2Reasoning) ] ;
+  sh:property [ sh:path mf:groundingStatus ; sh:maxCount 1 ; sh:in (mf:Grounded mf:PartiallyGrounded mf:Ungrounded mf:GroundingUnknown) ] ;
+  sh:property [ sh:path mf:validationStatus ; sh:maxCount 1 ; sh:in (mf:ValidationPending mf:Validated mf:ValidationFailed mf:ValidationNotApplicable) ] ;
+  sh:property [ sh:path mf:methodOutputType ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:groundingStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:validationStatus ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:methodOutputType ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:explanationTraceRef ; sh:maxCount 0 ] ] ;
+  sh:not [ sh:property [ sh:path mf:hasMethodFamily ; sh:minCount 1 ] ; sh:property [ sh:path mf:owningAuthorityPlane ; sh:maxCount 0 ] ] .
 
 ces:SemanticTableAnnotationTaskShape a sh:NodeShape ;
   sh:targetClass ces:SemanticTableAnnotationTask ;

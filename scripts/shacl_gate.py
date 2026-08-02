@@ -15,7 +15,7 @@ from pyshacl import validate
 
 ROOT = Path(__file__).resolve().parents[1]
 
-DATA_DIRS = ["Upper", "Middle", "Lower", "Domains", "Alignments", "Platform", "prophet", "epi", "catalog", "examples"]
+DATA_DIRS = ["Upper", "Middle", "Lower", "Domains", "Alignments", "Platform", "prophet", "epi", "catalog", "examples", "vocab"]
 SHAPES_DIRS = ["shapes", "prophet/shapes", "epi/shapes"]
 
 def load_all_ttl(dirs: list[str]) -> Graph:

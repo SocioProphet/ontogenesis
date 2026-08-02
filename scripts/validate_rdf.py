@@ -11,7 +11,7 @@ from rdflib import Graph
 
 ROOT = Path(__file__).resolve().parents[1]
 
-SEARCH_DIRS = ["Upper", "Middle", "Lower", "Domains", "Alignments", "Platform", "prophet", "epi", "catalog", "shapes", "examples"]
+SEARCH_DIRS = ["Upper", "Middle", "Lower", "Domains", "Alignments", "Platform", "prophet", "epi", "catalog", "shapes", "examples", "vocab"]
 
 def main() -> int:
     ttl_files = []
