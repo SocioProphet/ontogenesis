@@ -35,6 +35,7 @@ EXPECTED_SIGNALS = {
     "escalation-on-device": "escalationPermitted",
     "biometric-offdevice": "biometric",
     "no-receipt": "receipt",
+    "missing-network-declaration": "networkCapability",
 }
 
 

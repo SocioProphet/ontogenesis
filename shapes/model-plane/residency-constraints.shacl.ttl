@@ -9,6 +9,10 @@ mp:InferenceProviderShape a sh:NodeShape ;
     sh:message "InferenceProvider must declare exactly one dataResidencyClass in {on_device_only, sovereign_cluster, external_permitted}." ] ;
   sh:property [ sh:path mp:emitsInferenceReceipt ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:hasValue true ;
     sh:message "InferenceProvider must emit inference receipts (emitsInferenceReceipt true) — a provider that does not emit receipts is not a valid provider (Model Plane §VIII)." ] ;
+  sh:property [ sh:path mp:networkCapability ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "InferenceProvider must explicitly declare networkCapability (boolean) — an unspecified network capability cannot be residency-checked." ] ;
+  sh:property [ sh:path mp:escalationPermitted ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "InferenceProvider must explicitly declare escalationPermitted (boolean) — an unspecified escalation posture cannot be residency-checked." ] ;
   sh:sparql [ a sh:SPARQLConstraint ;
     sh:message "on_device_only provider must have networkCapability false — no network egress across an on-device boundary (SEAM-015)." ;
     sh:select """
