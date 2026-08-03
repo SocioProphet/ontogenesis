@@ -36,6 +36,7 @@ ROOT = Path(__file__).resolve().parents[1]
 POSITIVES = [
     ROOT / "examples" / "systema" / "finance-arc-concepts.example.jsonld",
     ROOT / "examples" / "systema" / "gaia-value-flow-vocabulary.example.jsonld",
+    ROOT / "examples" / "systema" / "hygiene-runtime-concepts.example.jsonld",
 ]
 INVALID_DIR = ROOT / "examples" / "systema" / "invalid"
 

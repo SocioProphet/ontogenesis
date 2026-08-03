@@ -1,0 +1,337 @@
+{
+  "@context": "../../contexts/systema-concept.context.jsonld",
+  "@graph": [
+    {
+      "@id": "systema:concept:bias-passport",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:bias-passport",
+      "skos:prefLabel": "Bias Passport",
+      "skos:altLabel": [
+        "COGBIAS passport",
+        "reasoning-calibration projection (bias)"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:bias-passport:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/agentplane#331:tools/hygiene_runtime.py",
+          "sourceKind": "open_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Introduced by the epistemic-hygiene runtime; produce_bias_passport() emits it. Anchored to the open PR, not yet merged."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:bias-passport:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A sealed HygieneRunArtifact (hygiene_profile=bias-passport) whose findings each carry a governed COGBIAS/LOGFALL detector id in the reconciled namespace.",
+          "claimLevel": "conformance_rule"
+        }
+      ],
+      "operationalDefinition": "The credential a Truth Record consumes for the per-participant bias state; each detection names a governed id or is rejected before emission.",
+      "allowedUse": [
+        "governed bias credential feeding a Truth Record",
+        "hygiene-layer bias reporting"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:bias-passport",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/agentplane",
+          "surfacePath": "tools/hygiene_runtime.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:bias-passport",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Every bias finding must carry a governed detector id; the artifact must be schema-conformant and sealed with a proof-artifact-spine receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:bias-passport:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored registration of the Hygiene-runtime concept, anchored to its introducing PR.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:c8852be6c220c0feaaf1050079da2318c111f9ffe9a4b02ca1c9a7e12e905e6e"
+    },
+    {
+      "@id": "systema:concept:calibration-passport",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:calibration-passport",
+      "skos:prefLabel": "Calibration Passport",
+      "skos:altLabel": [
+        "reasoning-calibration projection (drift)"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:calibration-passport:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/agentplane#331:tools/hygiene_runtime.py",
+          "sourceKind": "open_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Introduced by the epistemic-hygiene runtime; produce_calibration_passport() emits it. Anchored to the open PR."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:calibration-passport:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A sealed HygieneRunArtifact (hygiene_profile=calibration-passport) carrying calibration/drift state (e.g. Brier score, drift verdict).",
+          "claimLevel": "conformance_rule"
+        }
+      ],
+      "operationalDefinition": "The per-participant calibration credential a Truth Record consumes; carries a calibration_state object and is sealed.",
+      "allowedUse": [
+        "governed calibration credential feeding a Truth Record",
+        "drift monitoring for reasoning calibration"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:calibration-passport",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/agentplane",
+          "surfacePath": "tools/hygiene_runtime.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:calibration-passport",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Must carry a calibration_state object, be schema-conformant, and be sealed with a proof-artifact-spine receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:calibration-passport:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored registration of the Hygiene-runtime concept, anchored to its introducing PR.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:63d7b4cd572080298df03000f8aac41682badcb469ec9b9436204e7f2893f761"
+    },
+    {
+      "@id": "systema:concept:ctest-run",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:ctest-run",
+      "skos:prefLabel": "Counter-Test Run",
+      "skos:altLabel": [
+        "CTEST run",
+        "Test-Obligation run"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:ctest-run:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/agentplane#331:tools/hygiene_runtime.py",
+          "sourceKind": "open_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Introduced by the CTEST runner; run_ctest() emits a CountertestRunArtifact. Anchored to the open PR."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:ctest-run:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A CountertestRunArtifact recording, per claim, whether a declared counter-test admits, refutes, or finds the claim epistemically_void.",
+          "claimLevel": "conformance_rule"
+        }
+      ],
+      "operationalDefinition": "The runtime realization of the Truth Engine's Test-Obligation (Crown T1): a claim with no counter-test is epistemically_void; affirming-the-consequent is rejected (Crown D1).",
+      "allowedUse": [
+        "realizing the Test-Obligation for a claim",
+        "admitting or voiding a claim under counter-test"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:ctest-run",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/agentplane",
+          "surfacePath": "tools/hygiene_runtime.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:ctest-run",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Must be schema-conformant; an unfalsifiable claim must be marked epistemically_void; affirming-the-consequent must carry REJECTED_AFFIRMING_THE_CONSEQUENT."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:ctest-run:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored registration of the Hygiene-runtime concept, anchored to its introducing PR.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:b545bd5a5ee2517be3ef7539de94f32f2842c5e3e8d507b7380cd2e310e1cd5f"
+    },
+    {
+      "@id": "systema:concept:hygiene-profile",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:hygiene-profile",
+      "skos:prefLabel": "Hygiene Profile",
+      "skos:altLabel": [
+        "reasoning calibration projection"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:hygiene-profile:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/sociosphere#554:standards/epistemic-governance/detector-countertest-map.yaml",
+          "sourceKind": "open_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "The user-facing profile the epistemic-governance ruleset names (Reasoning Calibration Projection). Anchored to the standard."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:hygiene-profile:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A named projection selecting which hygiene surface a run emits: hygiene, bias-passport, or calibration-passport.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "Selects the passport a hygiene run projects; carried as hygiene_profile on a HygieneRunArtifact.",
+      "allowedUse": [
+        "selecting a hygiene projection for a run",
+        "governed profile naming"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:hygiene-profile",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/agentplane",
+          "surfacePath": "schemas/hygiene-run-artifact.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:hygiene-profile",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "The profile value must be one of the governed enum values on the hygiene-run-artifact schema."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:hygiene-profile:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored registration of the Hygiene-runtime concept, anchored to its introducing PR.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:aaa0c75a9b707f37267bf84a9d2360c16f81d4bd42035234c7b987bdfad7d93a"
+    },
+    {
+      "@id": "systema:concept:detector-id-map",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:detector-id-map",
+      "skos:prefLabel": "Detector Id Map",
+      "skos:altLabel": [
+        "detector-id reconciliation map"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:detector-id-map:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/sociosphere#554:standards/epistemic-governance/detector-id-map.yaml",
+          "sourceKind": "open_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Introduced as the governed reconciliation between emitted runtime ids and canonical standard ids. Anchored to the open PR."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:detector-id-map:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A governed bijection binding each detector id the runtime emits (Noetica 0.1.0) to its canonical standard id, with a succeeds_into migration ladder.",
+          "claimLevel": "conformance_rule"
+        }
+      ],
+      "operationalDefinition": "The allow-list a producer enforces: an emitted id absent from the map is rejected; standard_id is emitted, never the V2 successor.",
+      "allowedUse": [
+        "reconciling emitted ids to governed standard ids",
+        "rejecting drifted/ungoverned detector ids"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:detector-id-map",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/sociosphere",
+          "surfacePath": "standards/epistemic-governance/detector-id-map.yaml"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:detector-id-map",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Every standard_id must exist and be shipped-maturity; the map must round-trip against the ruleset's shipped surface (validate_detector_id_map.py)."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:detector-id-map:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored registration of the Hygiene-runtime concept, anchored to its introducing PR.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:0075d7220d69765b1f3c6df6f2da9093f72042a28d5a54f90e438634c583318c"
+    }
+  ]
+}
