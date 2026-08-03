@@ -1,5 +1,5 @@
 {
-  "@context": "https://socioprophet.github.io/ontogenesis/contexts/smart-home-privacy.context.jsonld",
+  "@context": "../contexts/smart-home-privacy.context.jsonld",
   "@graph": [
     {
       "id": "https://example.socioprophet.org/vendor/example-babycare",

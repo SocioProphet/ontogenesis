@@ -1,5 +1,5 @@
 {
-  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
+  "@context": "../contexts/main.context.jsonld",
   "id": "https://socioprophet.github.io/ontogenesis/catalog/civic-stack-registry",
   "type": "upper:InformationArtifact",
   "label": "Civic Stack Registry (JSON-LD)",

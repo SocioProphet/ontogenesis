@@ -1,5 +1,5 @@
 {
-  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
+  "@context": "../contexts/main.context.jsonld",
   "id": "https://socioprophet.github.io/ontogenesis/catalog/registry",
   "type": "upper:InformationArtifact",
   "label": "Ontogenesis Module Registry (JSON-LD)",

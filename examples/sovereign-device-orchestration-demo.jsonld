@@ -1,5 +1,5 @@
 {
-  "@context": "https://socioprophet.github.io/ontogenesis/contexts/main.context.jsonld",
+  "@context": "../contexts/main.context.jsonld",
   "id": "https://socioprophet.github.io/ontogenesis/examples/sovereign-device-orchestration-demo",
   "type": "upper:InformationArtifact",
   "label": "Sovereign Device Orchestration Demo Graph",
