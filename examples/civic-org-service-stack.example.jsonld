@@ -1,5 +1,5 @@
 {
-  "@context": "https://socioprophet.github.io/ontogenesis/contexts/civic-stack.context.jsonld",
+  "@context": "../contexts/civic-stack.context.jsonld",
   "id": "urn:org:socioprophet:civic-stack-demo",
   "type": "org:FormalOrganization",
   "label": "SocioProphet civic-stack demo organization",

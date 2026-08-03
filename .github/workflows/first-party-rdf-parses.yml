@@ -1,0 +1,45 @@
+name: first-party-rdf-parses
+
+# Fail-closed guard (ontogenesis#132): every first-party *.ttl / *.jsonld graph
+# must parse with rdflib entirely offline. Catches dead-remote `@context` URLs
+# and any re-introduced unparseable graph.
+
+on:
+  pull_request:
+    paths:
+      - '**/*.jsonld'
+      - '**/*.ttl'
+      - 'tools/check_first_party_rdf_parses.py'
+      - 'requirements.txt'
+      - '.github/workflows/first-party-rdf-parses.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.jsonld'
+      - '**/*.ttl'
+      - 'tools/check_first_party_rdf_parses.py'
+      - 'requirements.txt'
+      - '.github/workflows/first-party-rdf-parses.yml'
+
+jobs:
+  first-party-rdf-parses:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install rdflib
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Parse every first-party RDF graph (offline, fail-closed)
+        run: python tools/check_first_party_rdf_parses.py
