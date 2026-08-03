@@ -26,7 +26,8 @@ cplane:kernelSpace  a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "
 cplane:systemSpace  a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "system"  ; skos:definition "OS services and daemons." .
 cplane:userSpace    a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "user"    ; skos:definition "Interactive user session and apps." .
 cplane:agentSpace   a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "agent"   ; skos:definition "Sandbox the local agent runs in; default tenancy for autonomous acts." .
-cplane:dataNamespace a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "data-namespace" ; skos:definition "A named data domain; crossing it requires an explicit toleration (prevents cross-tenant data bleed)." .
+cplane:dataNamespace a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "data-namespace" ;
+  skos:definition "A named data domain; crossing it requires BOTH a per-tenant toleration (prevents cross-tenant data bleed) AND a geographic-residency toleration (toleratesKey \"region\") asserting the data may be processed in the operation's jurisdiction (GDPR Ch. V cross-border transfer). Both are request-scoped, revocable consent tokens." .
 
 ## ---- Taints & tolerations (k8s-style boundary gates) ----
 cplane:Taint a owl:Class ; rdfs:subClassOf upper:Policy ;
@@ -40,7 +41,8 @@ cplane:appliesToSpace a owl:ObjectProperty ; rdfs:domain cplane:Taint ; rdfs:ran
 cplane:Toleration a owl:Class ; rdfs:subClassOf upper:Assertion ;
   rdfs:label "Toleration" ;
   rdfs:comment "An explicit, purpose-scoped grant for one invocation to cross a taint. A toleration without a matching taint is inert; a taint without a toleration blocks — the asymmetry is the fail-closed default." .
-cplane:toleratesKey a owl:DatatypeProperty ; rdfs:domain cplane:Toleration ; rdfs:range xsd:string ; rdfs:label "tolerates key" .
+cplane:toleratesKey a owl:DatatypeProperty ; rdfs:domain cplane:Toleration ; rdfs:range xsd:string ; rdfs:label "tolerates key" ;
+  rdfs:comment "The taint key this toleration crosses: ring (privilege), tenant (per-tenant data), or region (geographic/jurisdictional residency, GDPR Ch. V). The data-namespace taints both tenant and region, so a crossing must carry one toleration for each." .
 cplane:tolerationFor a owl:ObjectProperty ; rdfs:domain cplane:Toleration ; rdfs:range cplane:Purpose ; rdfs:label "toleration for" ;
   rdfs:comment "A toleration is valid only for the purpose it was issued under; it does not generalize to other purposes." .
 
