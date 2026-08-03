@@ -1,0 +1,16 @@
+@prefix nary: <https://socioprophet.github.io/ontogenesis/domains/nary-diagnosis#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# The n-ary type system: a Diagnosis is valid only if ALL four roles are present exactly once —
+# an incomplete n-ary relation (missing patient/disease/doctor/date) is refused.
+nary:DiagnosisShape a sh:NodeShape ;
+  sh:targetClass nary:Diagnosis ;
+  sh:property [ sh:path nary:patient ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a Diagnosis must name exactly one patient" ] ;
+  sh:property [ sh:path nary:disease ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a Diagnosis must name exactly one disease" ] ;
+  sh:property [ sh:path nary:doctor ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a Diagnosis must name exactly one doctor" ] ;
+  sh:property [ sh:path nary:diagnosedOn ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ;
+                sh:message "a Diagnosis must carry exactly one xsd:date" ] .
