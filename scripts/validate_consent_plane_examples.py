@@ -28,5 +28,7 @@ def check(name, example, expect):
 r = [
   check("conformant-invocation", "examples/consent-plane/conformant-invocation.ttl", True),
   check("violating-invocation",  "examples/consent-plane/invalid/violating-invocation.ttl", False),
+  check("conformant-data-namespace", "examples/consent-plane/conformant-data-namespace.ttl", True),
+  check("data-namespace-no-region",  "examples/consent-plane/invalid/data-namespace-no-region.ttl", False),
 ]
 sys.exit(0 if all(r) else 1)

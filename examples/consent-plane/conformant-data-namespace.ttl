@@ -1,0 +1,16 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+# A conformant data-namespace crossing: operate purpose, carrying BOTH a tenant
+# toleration AND a geographic-residency (region) toleration.
+cplane:ops-console a cplane:Surface ;
+  cplane:declaresSeam cplane:consentSeam, cplane:spaceSeam, cplane:surfaceSeam .
+cplane:a-oc-consent a cplane:SeamAssurance ; cplane:assuresSurface cplane:ops-console ; cplane:assuresSeam cplane:consentSeam ; cplane:purpleTeamTested true .
+cplane:a-oc-space   a cplane:SeamAssurance ; cplane:assuresSurface cplane:ops-console ; cplane:assuresSeam cplane:spaceSeam ;   cplane:purpleTeamTested true .
+cplane:a-oc-surface a cplane:SeamAssurance ; cplane:assuresSurface cplane:ops-console ; cplane:assuresSeam cplane:surfaceSeam ; cplane:purpleTeamTested true .
+cplane:grant-operate a cplane:ConsentGrant ; cplane:lawfulBasis "consent" ; cplane:grantedAt "2026-08-02T00:00:00Z"^^xsd:dateTime ; cplane:grantsPurpose cplane:operate .
+cplane:tol-tenant a cplane:Toleration ; cplane:toleratesKey "tenant" ; cplane:tolerationFor cplane:operate .
+cplane:tol-region a cplane:Toleration ; cplane:toleratesKey "region" ; cplane:tolerationFor cplane:operate .
+cplane:inv-dn-good a cplane:ToolInvocation ; cplane:admissiblePurpose cplane:operate ; cplane:underConsent cplane:grant-operate ;
+  cplane:executesIn cplane:dataNamespace ; cplane:actsOnSurface cplane:ops-console ;
+  cplane:carriesToleration cplane:tol-tenant, cplane:tol-region .

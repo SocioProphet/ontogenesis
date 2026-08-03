@@ -30,6 +30,19 @@ cplane:ToolInvocationShape a sh:NodeShape ;
         $this <https://spec.sourceos.dev/vocab/consent-plane#executesIn> <https://spec.sourceos.dev/vocab/consent-plane#dataNamespace> .
         FILTER NOT EXISTS { $this <https://spec.sourceos.dev/vocab/consent-plane#carriesToleration> ?t . }
       }""" ] ;
+  # Fail-closed residency rule: the data-namespace also taints `region`, so a crossing must
+  # carry a geographic-residency toleration (toleratesKey "region") — GDPR Ch. V cross-border transfer.
+  sh:sparql [
+    sh:message "Invocation executes in the data-namespace but carries no geographic-residency (region) toleration — cross-border transfer refused fail-closed (GDPR Ch. V)." ;
+    sh:prefixes <shapes/consent_plane.shacl.ttl> ;
+    sh:select """
+      SELECT $this WHERE {
+        $this <https://spec.sourceos.dev/vocab/consent-plane#executesIn> <https://spec.sourceos.dev/vocab/consent-plane#dataNamespace> .
+        FILTER NOT EXISTS {
+          $this <https://spec.sourceos.dev/vocab/consent-plane#carriesToleration> ?t .
+          ?t <https://spec.sourceos.dev/vocab/consent-plane#toleratesKey> "region" .
+        }
+      }""" ] ;
   # An egress or administer invocation must emit a receipt (irreversible / highest-sensitivity acts are warranted).
   sh:sparql [
     sh:message "An egress/administer invocation must emit a hash-sealed receipt (E4)." ;
