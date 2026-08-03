@@ -1,0 +1,30 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix nary:  <https://socioprophet.github.io/ontogenesis/domains/nary-diagnosis#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/nary-diagnosis.ttl> a owl:Ontology ;
+  dct:title "N-ary Diagnosis (promotion test vector)" ;
+  dct:description "The AtomSpace-hyperedge -> RDF promotion, made concrete: a Patient x Disease x Doctor x Date relation reified as ONE intermediate node (W3C n-ary relations pattern), so the n-ary atom is SPARQL-queryable and round-trippable. The diagnosis test vector the Symbolic-AI/KG integration doc asks for." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Upper/upper-core.ttl> .
+
+### TBox — an n-ary Diagnosis reifies the 4-role relation as one node.
+nary:Diagnosis a owl:Class ; rdfs:subClassOf upper:InformationArtifact ; rdfs:label "Diagnosis (n-ary)" .
+nary:patient a owl:ObjectProperty ; rdfs:domain nary:Diagnosis ; rdfs:label "patient" .
+nary:disease a owl:ObjectProperty ; rdfs:domain nary:Diagnosis ; rdfs:label "disease" .
+nary:doctor  a owl:ObjectProperty ; rdfs:domain nary:Diagnosis ; rdfs:label "doctor" .
+nary:diagnosedOn a owl:DatatypeProperty ; rdfs:domain nary:Diagnosis ; rdfs:range xsd:date ; rdfs:label "diagnosed on" .
+
+### ABox — one complete diagnosis (the round-trippable 4-tuple).
+nary:diagnosis-001 a nary:Diagnosis ;
+  nary:patient nary:patient-alice ;
+  nary:disease nary:disease-influenza ;
+  nary:doctor  nary:doctor-bob ;
+  nary:diagnosedOn "2026-08-03"^^xsd:date .
+nary:patient-alice a upper:Agent .
+nary:disease-influenza a upper:Entity .
+nary:doctor-bob a upper:Agent .
