@@ -1,0 +1,103 @@
+# Estate-catalog query fixture — a tiny cross-catalog mini-estate (ABox).
+#
+# Purpose: give the P3 query surface (examples/queries/estate-catalog/*.rq) a small,
+# deterministic graph to answer over so the queries have teeth both ways — the right
+# rows come back and the wrong ones do not. This is a TEST fixture, not estate
+# population; the real ABox is SocioProphet/prophet-core-catalog.
+#
+# It lives under tests/ (not examples/) on purpose: it uses the REAL bound-fragment
+# classes (srm:Service, dom:Dataset, legal:RepositoryAsset, mp:InferenceProvider),
+# which carry their own domains' SHACL obligations (civic-org, provisioning, model-
+# plane) that are irrelevant to P3 — so it is kept out of the estate-wide shacl_gate.
+# It IS still SHACL-checked, scoped to the estate-catalog shapes only, by
+# scripts/validate_estate_catalog_queries.py before any query runs (every CatalogEntry
+# carries catalogId/owner/status; every cat:Model carries modelDigest + license).
+#
+# Dependency shape (edges that reduce to cat:dependsOn via rdfs:subPropertyOf —
+# runsOn, usesModel, consumesData — plus one explicit cat:dependsOn):
+#
+#   appPortal ──dependsOn──▶ svcGateway ──runsOn──────▶ clusterCore
+#                               │  └─usesModel──▶ modelGood ──runsOn──▶ clusterCore
+#                               └─consumesData─▶ datasetCorpus
+#   svcAnalytics ─runsOn──────▶ clusterCore
+#        └─usesModel──▶ modelBad ──runsOn──▶ clusterCore
+#
+# => clusterCore is the highest-blast-radius node; appPortal is a leaf (nothing
+#    depends on it). modelGood is Apache-2.0 (compliant); modelBad is GPL-3.0-only
+#    (the MIT/Apache-only rule must flag it).
+
+@prefix cat:  <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#> .
+@prefix mp:   <https://spec.sourceos.dev/vocab/model-plane#> .
+@prefix dom:  <https://socioprophet.github.io/ontogenesis/domains/metadata#> .
+@prefix srm:  <https://socioprophet.github.io/ontogenesis/domains/service-reference#> .
+@prefix legal: <https://socioprophet.github.io/ontogenesis/domains/legal#> .
+@prefix ex:   <https://socioprophet.github.io/ontogenesis/domains/estate-catalog/examples#> .
+
+# --- Infrastructure ---------------------------------------------------------
+ex:clusterCore    a cat:Infrastructure .
+ex:bucketArtifacts a cat:Infrastructure .
+
+# --- Model Plane providers --------------------------------------------------
+ex:providerSov a mp:InferenceProvider ;
+  mp:dataResidencyClass "sovereign_cluster" ;
+  mp:escalationPermitted false ;
+  mp:networkCapability false .
+
+ex:providerCloud a mp:InferenceProvider ;
+  mp:dataResidencyClass "off_device" ;
+  mp:escalationPermitted true ;
+  mp:networkCapability true .
+
+# --- Models (Model catalog) -------------------------------------------------
+ex:modelGood a cat:Model ;
+  cat:modelDigest "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ;
+  cat:license "Apache-2.0" ;
+  cat:servedBy ex:providerSov ;
+  cat:runsOn ex:clusterCore .
+
+ex:modelBad a cat:Model ;
+  cat:modelDigest "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" ;
+  cat:license "GPL-3.0-only" ;
+  cat:servedBy ex:providerCloud ;
+  cat:runsOn ex:clusterCore .
+
+# --- Data catalog -----------------------------------------------------------
+ex:datasetCorpus a dom:Dataset .
+
+# --- Application & Service catalog ------------------------------------------
+ex:svcGateway a srm:Service ;
+  cat:runsOn ex:clusterCore ;
+  cat:usesModel ex:modelGood ;
+  cat:consumesData ex:datasetCorpus .
+
+ex:svcAnalytics a srm:Service ;
+  cat:runsOn ex:clusterCore ;
+  cat:usesModel ex:modelBad .
+
+ex:appPortal a cat:EstateResource ;
+  cat:dependsOn ex:svcGateway .
+
+# --- Asset catalog ----------------------------------------------------------
+ex:repoMonorepo a legal:RepositoryAsset ;
+  cat:storedIn ex:bucketArtifacts .
+
+# --- Governed catalog records (the CatalogEntry roof over the resources) ----
+ex:entryGateway a cat:CatalogEntry ;
+  cat:catalogId "src.svc.gateway" ; cat:owner "SocioProphet/platform" ; cat:status "active" ;
+  cat:describes ex:svcGateway .
+
+ex:entryModelGood a cat:CatalogEntry ;
+  cat:catalogId "ds.model.good" ; cat:owner "SocioProphet/platform" ; cat:status "active" ;
+  cat:describes ex:modelGood .
+
+ex:entryModelBad a cat:CatalogEntry ;
+  cat:catalogId "ds.model.bad" ; cat:owner "SocioProphet/platform" ; cat:status "deprecated" ;
+  cat:describes ex:modelBad .
+
+ex:entryCluster a cat:CatalogEntry ;
+  cat:catalogId "inf.cluster.core" ; cat:owner "SocioProphet/platform" ; cat:status "active" ;
+  cat:describes ex:clusterCore .
+
+ex:entryCorpus a cat:CatalogEntry ;
+  cat:catalogId "ds.data.corpus" ; cat:owner "SocioProphet/platform" ; cat:status "active" ;
+  cat:describes ex:datasetCorpus .

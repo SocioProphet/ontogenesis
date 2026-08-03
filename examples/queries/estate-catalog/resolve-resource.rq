@@ -1,0 +1,18 @@
+# queryId:    ecq:resolve-resource
+# version:    0.1.0
+# surface:    estate-catalog P3 (reason over the estate, don't read every repo)
+# intent:     Resolve one estate resource from its catalog id — the governed record
+#             plus the resource it describes, its owner and lifecycle status.
+# parameters: ?catalogId  (bind via initBindings; string, e.g. "inf.cluster.core")
+# returns:    ?entry ?resource ?owner ?status
+# access:     read-only. No mutation; safe for agents to run unattended.
+PREFIX cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#>
+
+SELECT ?entry ?resource ?owner ?status
+WHERE {
+  ?entry a cat:CatalogEntry ;
+         cat:catalogId ?catalogId ;
+         cat:owner     ?owner ;
+         cat:status    ?status ;
+         cat:describes ?resource .
+}

@@ -1,0 +1,25 @@
+# queryId:    ecq:license-compliance
+# version:    0.1.0
+# surface:    estate-catalog P3
+# intent:     Reason the MIT/Apache-only rule OVER THE GRAPH: every catalogued model
+#             whose declared SPDX license is not on the estate's allow-list. Because
+#             cat:license is on the model in the graph, this is one query, not a repo
+#             sweep — and it joins to blast-radius (how many depend on the offender).
+# parameters: none.
+# returns:    ?model ?license
+# policy:     allow-list = { Apache-2.0, MIT }. See feedback_mit_apache_licensing_only
+#             (BSD only if explicitly cataloged); tighten/loosen the VALUES block to
+#             change the policy in one governed place.
+# access:     read-only.
+PREFIX cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#>
+
+SELECT ?model ?license
+WHERE {
+  ?model a cat:Model ;
+         cat:license ?license .
+  FILTER NOT EXISTS {
+    VALUES ?allowed { "Apache-2.0" "MIT" }
+    FILTER (?license = ?allowed)
+  }
+}
+ORDER BY ?model

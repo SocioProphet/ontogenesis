@@ -1,0 +1,20 @@
+# queryId:    ecq:by-catalog-family
+# version:    0.1.0
+# surface:    estate-catalog P3
+# intent:     List every resource in a given catalog family (Model, Infrastructure,
+#             Dataset, Service, ...). "Family" = a subclass of cat:EstateResource,
+#             so this works for both the new Model catalog and the bound fragments
+#             (dom:Dataset, srm:Service, enrm:CriticalInfrastructure, ...).
+# parameters: ?family  (bind via initBindings; a class IRI, e.g. cat:Model)
+# returns:    ?resource
+# note:       run over the rdfs-inferred graph so bound-fragment classes and their
+#             instances are recognised as their catalog family; do NOT bind
+#             ?family = cat:EstateResource unless you want the whole estate.
+# access:     read-only.
+PREFIX cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#>
+
+SELECT DISTINCT ?resource
+WHERE {
+  ?resource a ?family .
+}
+ORDER BY ?resource

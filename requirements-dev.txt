@@ -1,6 +1,7 @@
 rdflib>=7.0.0
 rdflib-jsonld>=0.6.2
 pyshacl>=0.22.6
+owlrl>=6.0.2
 pyld>=2.0.4
 cose>=0.9.dev8
 cryptography>=42.0.0

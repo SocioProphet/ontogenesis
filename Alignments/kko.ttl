@@ -1,0 +1,71 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix align: <https://socioprophet.github.io/ontogenesis/alignments#> .
+@prefix smap:  <https://socioprophet.github.io/ontogenesis/middle/semantic-mapping#> .
+@prefix cat:   <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#> .
+@prefix kko:   <http://kbpedia.org/ontologies/kko#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Alignments/kko.ttl> a owl:Ontology ;
+  dct:title "Alignment — KBpedia Knowledge Ontology (KKO)" ;
+  dct:description "Governed alignment of the estate-catalog binding vocabulary (cat:) to the KBpedia upper ontology (KKO) — the same Peircean-grounded upper language HellGraph loads into its TypeLattice. Promotes the inline skos:closeMatch grounding already carried by the estate-catalog TBox into first-class, reviewable smap:MappingAssertion records so estate and graph share one binding language, checked by scripts/validate_estate_catalog_queries.py (every cat: class that grounds into KKO has a governed, resolvable assertion here — and vice versa). KKO is CC-BY-4.0 (c) Michael K. Bergman and Fred Giasson; this module asserts alignments only and does not vendor or modify KKO content." ;
+  owl:versionInfo "0.1.0" ;
+  owl:imports <Domains/estate-catalog/estate-catalog.ttl>, <Middle/semantic-mapping.ttl> .
+
+align:kkoExternalOntology a smap:ExternalOntology ;
+  smap:standardName "KBpedia Knowledge Ontology (KKO)" ;
+  smap:standardVersion "2.10 / kko v200" ;
+  smap:standardUrl "https://kbpedia.org/" ;
+  rdfs:label "KKO" ;
+  # Pinned to the estate's sovereign fork, byte-identical to hellgraph's vendored copy
+  # (ontology/kko/kko-2.10.n3, sha256 d907919f...cb7b07): SocioProphet/kbpedia
+  # @ 3f888b397255b69d1439fd95823e97011ed9440b, versions/2.10/kko-demo.n3.
+  dct:source "https://raw.githubusercontent.com/SocioProphet/kbpedia/3f888b397255b69d1439fd95823e97011ed9440b/versions/2.10/kko-demo.n3" .
+
+# EstateResource — every actual estate existent (dataset, model, asset, service,
+# infra). KKO Particulars = discrete existents with their own identity (events and
+# entities alike). Close, not exact: cat:EstateResource is the estate's tracked
+# subset of particulars, not all particulars.
+align:EstateResourceToKkoParticulars a smap:MappingAssertion ;
+  smap:mapsFrom cat:EstateResource ;
+  smap:mapsTo kko:Particulars ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:kkoExternalOntology ;
+  smap:confidence 0.80 ;
+  smap:status "draft" ;
+  smap:rationale "Estate resources are actual existents with their own identity; aligns to KKO's Particulars branch. Close (not exact) because the estate tracks a governed subset, not all particulars." .
+
+# CatalogEntry — the governed RECORD about a resource. KKO Methodeutic is the
+# Thirdness branch of methods/representations/knowledge-organization; a catalog
+# record is a representamen that organises and points at its subject.
+align:CatalogEntryToKkoMethodeutic a smap:MappingAssertion ;
+  smap:mapsFrom cat:CatalogEntry ;
+  smap:mapsTo kko:Methodeutic ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:kkoExternalOntology ;
+  smap:confidence 0.62 ;
+  smap:status "draft" ;
+  smap:rationale "A catalog entry is a governance representamen about a resource (owner/status/provenance), not the resource itself; aligns to KKO's Methodeutic (methods/representation). Lower confidence — the fit is structural, not definitional." .
+
+# Model — a catalogued model. KKO Forms is the Firstness branch of forms/qualities/
+# possibilities; a model is a learned form/function instantiable across providers.
+align:ModelToKkoForms a smap:MappingAssertion ;
+  smap:mapsFrom cat:Model ;
+  smap:mapsTo kko:Forms ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:kkoExternalOntology ;
+  smap:confidence 0.55 ;
+  smap:status "draft" ;
+  smap:rationale "A model is a reusable learned form realised by many deployments; aligns to KKO's Forms branch. Low confidence — a model instance is also a particular; retained as the estate-catalog TBox's own grounding choice." .
+
+# Infrastructure — cluster/registry/runner/bucket/compute. KKO Systems is the branch
+# of organised, interacting wholes; infrastructure is a system of interacting parts.
+align:InfrastructureToKkoSystems a smap:MappingAssertion ;
+  smap:mapsFrom cat:Infrastructure ;
+  smap:mapsTo kko:Systems ;
+  smap:usesMappingPredicate smap:SkosCloseMatch ;
+  smap:targetOntology align:kkoExternalOntology ;
+  smap:confidence 0.78 ;
+  smap:status "draft" ;
+  smap:rationale "Estate infrastructure (clusters, registries, runners, storage) is an organised system of interacting components; aligns to KKO's Systems branch." .
