@@ -1,0 +1,20 @@
+@prefix as:   <https://socioprophet.github.io/ontogenesis/domains/atomspace-rdf#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# The TruthValue type system: a promoted statement's TruthValue annotation is valid only if it
+# reifies exactly one triple (subject/predicate/object each once) AND carries BOTH a strength and
+# a confidence as xsd:decimal. A lossy promotion (e.g. strength kept, confidence dropped) is refused.
+as:TruthValueStatementShape a sh:NodeShape ;
+  sh:targetClass as:TruthValueStatement ;
+  sh:property [ sh:path rdf:subject   ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a TruthValue statement must reify exactly one subject" ] ;
+  sh:property [ sh:path rdf:predicate ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a TruthValue statement must reify exactly one predicate" ] ;
+  sh:property [ sh:path rdf:object    ; sh:minCount 1 ; sh:maxCount 1 ;
+                sh:message "a TruthValue statement must reify exactly one object" ] ;
+  sh:property [ sh:path as:strength   ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ;
+                sh:message "a TruthValue must carry exactly one decimal strength" ] ;
+  sh:property [ sh:path as:confidence ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ;
+                sh:message "a TruthValue must carry exactly one decimal confidence" ] .

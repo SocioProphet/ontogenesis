@@ -1,0 +1,35 @@
+name: atomspace-rdf
+
+on:
+  pull_request:
+    paths:
+      - "Domains/atomspace-rdf.ttl"
+      - "shapes/atomspace-rdf.shacl.ttl"
+      - "scripts/verify_atomspace_rdf.py"
+      - "tests/fixtures/atomspace-rdf/**"
+      - ".github/workflows/atomspace-rdf.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "Domains/atomspace-rdf.ttl"
+      - "shapes/atomspace-rdf.shacl.ttl"
+      - "scripts/verify_atomspace_rdf.py"
+      - "tests/fixtures/atomspace-rdf/**"
+      - ".github/workflows/atomspace-rdf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: pip install rdflib pyshacl
+      - name: Verify AtomSpace <-> RDF round-trip
+        run: python scripts/verify_atomspace_rdf.py

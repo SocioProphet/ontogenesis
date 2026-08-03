@@ -1,0 +1,33 @@
+{
+  "_comment": "Small AtomSpace hypergraph fixture (the source of truth for the round-trip test vector). Nodes: ConceptNode/PredicateNode -> RDF resources; NumberNode -> typed literal. Links: InheritanceLink -> a triple; EvaluationLink(Pred, ListLink(a,b)) -> a triple. TruthValue(strength, confidence) -> an RDF reified annotation on the statement.",
+  "atoms": [
+    { "type": "ConceptNode", "name": "Alice" },
+    { "type": "ConceptNode", "name": "Human" },
+    { "type": "ConceptNode", "name": "Mammal" },
+    { "type": "ConceptNode", "name": "Bob" },
+    { "type": "PredicateNode", "name": "likes" },
+    { "type": "PredicateNode", "name": "age" },
+
+    { "type": "InheritanceLink",
+      "outgoing": [ { "type": "ConceptNode", "name": "Alice" }, { "type": "ConceptNode", "name": "Human" } ],
+      "tv": { "strength": 0.9, "confidence": 0.8 } },
+
+    { "type": "InheritanceLink",
+      "outgoing": [ { "type": "ConceptNode", "name": "Human" }, { "type": "ConceptNode", "name": "Mammal" } ],
+      "tv": { "strength": 1.0, "confidence": 0.99 } },
+
+    { "type": "EvaluationLink",
+      "outgoing": [
+        { "type": "PredicateNode", "name": "likes" },
+        { "type": "ListLink", "outgoing": [ { "type": "ConceptNode", "name": "Alice" }, { "type": "ConceptNode", "name": "Bob" } ] }
+      ],
+      "tv": { "strength": 0.8, "confidence": 0.7 } },
+
+    { "type": "EvaluationLink",
+      "outgoing": [
+        { "type": "PredicateNode", "name": "age" },
+        { "type": "ListLink", "outgoing": [ { "type": "ConceptNode", "name": "Alice" }, { "type": "NumberNode", "value": 30 } ] }
+      ],
+      "tv": { "strength": 1.0, "confidence": 1.0 } }
+  ]
+}
