@@ -1,0 +1,21 @@
+# queryId:    ecq:blast-radius
+# version:    0.1.0
+# surface:    estate-catalog P3
+# intent:     "If this resource breaks / is retired, what breaks?" — the transitive
+#             set of resources that depend on ?root, directly or indirectly. This is
+#             the blast-radius traversal the epic calls for: cat:dependsOn+ over the
+#             rdfs-inferred graph, so its subproperties (runsOn, usesModel,
+#             consumesData, storedIn, deployedTo) all count as dependencies.
+# parameters: ?root  (bind via initBindings; an cat:EstateResource IRI)
+# returns:    ?dependent  (everything whose failure is entailed by ?root's failure)
+# note:       requires the rdfs-inferred graph so cat:runsOn/usesModel/... edges are
+#             seen as cat:dependsOn. cat:producesData is deliberately NOT a
+#             subproperty of dependsOn, so producers of a dataset are not swept in.
+# access:     read-only.
+PREFIX cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#>
+
+SELECT DISTINCT ?dependent
+WHERE {
+  ?dependent cat:dependsOn+ ?root .
+}
+ORDER BY ?dependent

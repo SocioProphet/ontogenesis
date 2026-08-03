@@ -36,8 +36,35 @@ over the graph). Range enforcement (runsOn→Infrastructure etc.) is expressed a
 which coerces a ranged object to the range type rather than rejecting it, so an
 `sh:class` range check cannot fire. SHACL enforces what inference cannot mask.
 
+## P3 — query surface + governed KKO alignment (this increment)
+The agent-facing "reason, don't read" API, as spec-as-code:
+
+- **Versioned SPARQL query surface** — `examples/queries/estate-catalog/*.rq`, each with
+  a governed header (queryId, version, parameters, returns, access):
+  `resolve-resource` (id → record + resource + owner/status),
+  `by-catalog-family` (list a family, incl. bound fragments like `srm:Service`),
+  `cross-catalog-lineage` (service → model → provider(+residency/escalation) → infra —
+  the join the #130 governance questions are asked over),
+  `blast-radius` (transitive `cat:dependsOn+` — "if this breaks, what breaks"),
+  `license-compliance` (MIT/Apache-only reasoned over the graph).
+- **Runnable test with teeth both ways** — `scripts/validate_estate_catalog_queries.py`
+  runs every query against the TBox + a tiny ABox fixture
+  (`tests/estate-catalog/mini-estate.ttl`) and asserts the **exact** rows, so a query
+  that drops a real dependent or sweeps in a wrong one both fail. Two checks are
+  deliberately negative (a leaf has an empty blast radius; the Apache model is absent
+  from the licence result). Wired into `make validate`
+  (`validate-estate-catalog-queries`).
+- **Governed `Alignments/kko.ttl`** — the inline `skos:closeMatch kko:…` grounding
+  carried by the TBox, promoted to reviewable `smap:MappingAssertion` records (same
+  convention as `Alignments/fibo.ttl`), pinned to the estate's sovereign KBpedia fork
+  (byte-identical to HellGraph's vendored `kko-2.10.n3`). The same validator checks the
+  alignment **resolves**: every cat: class that grounds into KKO has a matching governed
+  assertion (and vice versa — no orphans), each `mapsFrom` resolves to a declared TBox
+  class, each `mapsTo` is a KKO IRI. KKO is CC-BY-4.0 — this asserts alignments only and
+  vendors no KKO content.
+
 ## Not in scope (later increments of #130)
-Deeper per-catalog modelling; a governed `Alignments/kko.ttl` of `smap:MappingAssertion`
-records; population (prophet-core-catalog extractors → typed instances); and the P3
-SPARQL/ShapeQuery agent surface (a real cross-catalog query over real instances = the
-"live" proof).
+Deeper per-catalog modelling; wiring the query surface into the Lattice
+`oq:ShapeQuery`/FederatedQueryPlane envelope; running these queries over the **real**
+prophet-core-catalog estate graph (P2/P3 population, already live there) in CI rather
+than the illustrative fixture; and full KBpedia (not just KKO-upper) alignment.

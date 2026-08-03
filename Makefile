@@ -1,4 +1,4 @@
-.PHONY: venv deps validate validate-corpus-event-semantics validate-symbolic-regression validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system validate-model-plane validate-estate-catalog shacl jsonld build ledger verify sbom svf all validate-srcos-glossary
+.PHONY: venv deps validate validate-corpus-event-semantics validate-symbolic-regression validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system validate-model-plane validate-estate-catalog validate-estate-catalog-queries shacl jsonld build ledger verify sbom svf all validate-srcos-glossary
 
 venv:
 	python -m venv .venv
@@ -6,7 +6,7 @@ venv:
 deps:
 	.venv/bin/pip install -r requirements-dev.txt
 
-validate: validate-srcos-glossary validate-corpus-event-semantics validate-symbolic-regression validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system validate-model-plane validate-estate-catalog
+validate: validate-srcos-glossary validate-corpus-event-semantics validate-symbolic-regression validate-registry-discovery validate-privacy-nonlinkability validate-memory-representation-strata validate-adversarial-scenario validate-agent-system validate-model-plane validate-estate-catalog validate-estate-catalog-queries
 	.venv/bin/python scripts/validate_rdf.py
 
 validate-agent-system:
@@ -17,6 +17,11 @@ validate-model-plane:
 
 validate-estate-catalog:
 	.venv/bin/python scripts/validate_estate_catalog_examples.py
+
+# P3: run the agent-facing SPARQL query surface against the TBox + a tiny ABox
+# fixture (exact rows, both ways) and check the governed KKO alignment resolves.
+validate-estate-catalog-queries:
+	.venv/bin/python scripts/validate_estate_catalog_queries.py
 
 # Drift-guard: the generated SourceOS glossary Turtle must match its upstream seed
 # (edit the generator/seed, not the .ttl). Same 'declared == live' discipline as the loop.

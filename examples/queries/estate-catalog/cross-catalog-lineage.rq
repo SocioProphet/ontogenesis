@@ -1,0 +1,25 @@
+# queryId:    ecq:cross-catalog-lineage
+# version:    0.1.0
+# surface:    estate-catalog P3
+# intent:     Walk a cross-catalog lineage chain — the join that makes the estate a
+#             graph rather than five disconnected registries: a service uses a model,
+#             the model is served by a Model Plane provider (carrying its residency /
+#             escalation posture) and runs on infrastructure. This is the shape the
+#             #130 governance questions ("which apps use a model served by a provider
+#             that can escalate off-device?") are asked over.
+# parameters: none (returns every service->model->provider->infra chain).
+# returns:    ?service ?model ?provider ?residency ?escalation ?infra ?license
+# access:     read-only.
+PREFIX cat: <https://socioprophet.github.io/ontogenesis/domains/estate-catalog#>
+PREFIX mp:  <https://spec.sourceos.dev/vocab/model-plane#>
+
+SELECT ?service ?model ?provider ?residency ?escalation ?infra ?license
+WHERE {
+  ?service   cat:usesModel ?model ;
+             cat:runsOn    ?infra .
+  ?model     cat:servedBy  ?provider ;
+             cat:license   ?license .
+  ?provider  mp:dataResidencyClass ?residency ;
+             mp:escalationPermitted ?escalation .
+}
+ORDER BY ?service
