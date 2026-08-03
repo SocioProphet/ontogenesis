@@ -1,0 +1,49 @@
+{
+  "@context": "../../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:bare-term-no-anchor",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:bare-term-no-anchor",
+  "skos:prefLabel": "Bare Term (no source anchor)",
+  "definition": [
+    {
+      "@id": "systema:definition:bare-term:v0-1",
+      "@type": "ConceptDefinition",
+      "definitionText": "A term asserted with no introducing PR/contract behind it.",
+      "claimLevel": "operational_definition"
+    }
+  ],
+  "operationalDefinition": "Must be rejected: learn-don't-match forbids admitting a word without evidence.",
+  "allowedUse": [
+    "(none — should not be admitted)"
+  ],
+  "forbiddenUse": [
+    "registration without a source anchor"
+  ],
+  "implementationSurface": [
+    {
+      "@id": "systema:surface:bare-term:x",
+      "@type": "ImplementationSurface",
+      "ownerRepo": "SocioProphet/economic-prophet",
+      "surfacePath": "n/a"
+    }
+  ],
+  "evidenceRequirement": [
+    {
+      "@id": "systema:evidence-requirement:bare-term",
+      "@type": "EvidenceRequirement",
+      "evidenceRequirementText": "Requires a source anchor."
+    }
+  ],
+  "promotionState": "source_anchored",
+  "provenanceClass": "learned",
+  "conceptVersion": "0.1.0",
+  "revision": [
+    {
+      "@id": "systema:revision:bare-term:v0-1",
+      "@type": "ConceptRevision",
+      "revisionNote": "Negative fixture: no source anchor.",
+      "revisionDate": "2026-08-03"
+    }
+  ],
+  "receipt": "sha256:40c7c9e1ff4bffb5de9f89a5fe98db3fd14b1969215677792830a106d2a2dec3"
+}

@@ -1,0 +1,1608 @@
+{
+  "@context": "../../contexts/systema-concept.context.jsonld",
+  "@graph": [
+    {
+      "@id": "systema:concept:risk-measure-family",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:risk-measure-family",
+      "skos:prefLabel": "Risk-Measure Family",
+      "skos:altLabel": [
+        "risk(F, kernel, reference, horizon)",
+        "Sharpe/Sortino/Kappa/LPM/VaR/ES/spectral"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:risk-measure-family:v0-2",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#43:src/open_ep_framework/risk_measures.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "manually_reviewed",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "RM-1/RAP-1/TC-1 kernel merged in economic-prophet #43. Concept record human-reviewed at v0.2, superseding the learned v0.1 extraction; prior revision retained."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:risk-measure-family:v0-2",
+          "@type": "ConceptDefinition",
+          "definitionText": "One risk(F, kernel, reference, horizon) interface over a loss distribution F that unifies Sharpe, Sortino, Kappa, lower-partial-moment (LPM), Value-at-Risk, Expected Shortfall, and spectral risk measures.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A single risk interface parameterised by a kernel over a loss distribution F, with a declared reference and horizon, so all family members are one contract rather than parallel re-implementations.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:risk-measure-family:ep-43",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/risk_measures.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:risk-measure-family",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "reviewed_definition",
+      "provenanceClass": "human_authored",
+      "conceptVersion": "0.2.0",
+      "revision": [
+        {
+          "@id": "systema:revision:risk-measure-family:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #43 risk_measures kernel (superseded, retained).",
+          "revisionDate": "2026-08-03"
+        },
+        {
+          "@id": "systema:revision:risk-measure-family:v0-2",
+          "@type": "ConceptRevision",
+          "revisionNote": "Human-authored override: reviewed the definition and promoted to reviewed_definition on a manually_reviewed anchor. Supersedes v0.1 (learned); prior revision retained.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:a57fbb1786fdf986eee8e0d84c0f442dc270ac4ff41ac09a4203f08b40700fe6"
+    },
+    {
+      "@id": "systema:concept:economic-capital",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:economic-capital",
+      "skos:prefLabel": "Economic Capital",
+      "skos:altLabel": [
+        "E-Cap",
+        "unexpected-loss capital"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:economic-capital:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#42:src/open_ep_framework/regulatory_capital.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Basel IRB-Advanced + AMA + reg-vs-economic merged in economic-prophet #42. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:economic-capital:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Unexpected-loss capital an institution holds on its own internal risk model, distinct from regulatory (Basel IRB/AMA) capital.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The capital an institution allocates against unexpected loss under its own model, reconciled against regulatory capital rather than replacing it.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:economic-capital:ep-42",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/regulatory_capital.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:economic-capital",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:economic-capital:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #42 regulatory-capital contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:238e44ab52c845c938a7ff5290fa620cc681cd3fad8cb87d0178b0059c3b622b"
+    },
+    {
+      "@id": "systema:concept:raroc",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:raroc",
+      "skos:prefLabel": "RAROC (Risk-Adjusted Return on Capital)",
+      "skos:altLabel": [
+        "risk-adjusted profit",
+        "RAP-1"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:raroc:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#43:src/open_ep_framework/risk_adjusted_profit.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "RAP-1 merged in economic-prophet #43. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:raroc:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Risk-adjusted profit over allocated capital, reconciling economic versus epistemic capital.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A profit-per-unit-risk-capital measure whose numerator is risk-adjusted profit and whose denominator is allocated (economic) capital, with an economic/epistemic reconciliation tooth.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:raroc:ep-43",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/risk_adjusted_profit.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:raroc",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:raroc:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #43 risk-adjusted-profit contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:b2fc4c134b5e544426b9ae0511eabdd0a8eba7e8494061ffe8203103aed3807f"
+    },
+    {
+      "@id": "systema:concept:ep-identity",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:ep-identity",
+      "skos:prefLabel": "Economic-Prophet Identity",
+      "skos:altLabel": [
+        "EP identity",
+        "value-risk-capital reconciliation"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:ep-identity:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#43:schemas/risk_adjusted_profit.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "EP accounting identity surfaced by the RAP-1/RM-1 unification in economic-prophet #43. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:ep-identity:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The Economic-Prophet accounting identity binding value produced, risk consumed, and capital allocated into one reconciled output.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The reconciliation identity that every EP output must satisfy: risk-adjusted value produced equals value net of risk consumed and capital allocated.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:ep-identity:ep-43",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/risk_adjusted_profit.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:ep-identity",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:ep-identity:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #43 RAP/RM unification.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:66a85e6eadcac8bdf4c4bfa8b6329bf937482133ac3cbeb998d1959d51fc5bc6"
+    },
+    {
+      "@id": "systema:concept:ftp-matched-maturity",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:ftp-matched-maturity",
+      "skos:prefLabel": "Matched-Maturity FTP Rate",
+      "skos:altLabel": [
+        "funds transfer pricing",
+        "matched-maturity transfer rate",
+        "FTP-1"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:ftp-matched-maturity:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#44:src/open_ep_framework/ftp_curve.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "FTP-1 merged in economic-prophet #44. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:ftp-matched-maturity:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The funds-transfer-pricing rate assigned to a position by matching its maturity to the funding curve, separating business margin from funding and liquidity cost.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "Each cashflow is priced at the funding-curve rate for its own maturity, so the transfer rate carries funding/liquidity and the residual is business margin.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:ftp-matched-maturity:ep-44",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/ftp_curve.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:ftp-matched-maturity",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:ftp-matched-maturity:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #44 FTP curve contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:6549b209c9d79c4cae30cc38c32604b95721af828f817ff4ed8f60e38600023d"
+    },
+    {
+      "@id": "systema:concept:separation-theorem",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:separation-theorem",
+      "skos:prefLabel": "FTP Separation Theorem",
+      "skos:altLabel": [
+        "margin/funding separation",
+        "cross-subsidy prohibition"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:separation-theorem:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#44:schemas/ftp_separation.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "FTP-1 separation schema merged in economic-prophet #44. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:separation-theorem:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Business-unit margin is separable from funding and interest-rate risk once each cashflow is priced at its matched-maturity transfer rate; a cross-subsidy is a contract violation.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A conformance rule: after matched-maturity transfer pricing, funding/rate risk and business margin do not leak into each other; the ftp_separation_cross_subsidy fixture is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:separation-theorem:ep-44",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/ftp_separation.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:separation-theorem",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:separation-theorem:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #44 FTP separation schema.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:6285e18c7108622d38f355c50311d495f8ad330339cd4e934e40408a0528696e"
+    },
+    {
+      "@id": "systema:concept:structural-transform",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:structural-transform",
+      "skos:prefLabel": "Structural (Tranche) Transform",
+      "skos:altLabel": [
+        "term calculus",
+        "TC-1",
+        "tranche transform"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:structural-transform:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#43:src/open_ep_framework/term_calculus.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "TC-1 merged in economic-prophet #43. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:structural-transform:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A structure-preserving transform mapping a loss distribution through a tranche/term structure so risk measures compose across the capital stack.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The term-calculus transform under which a loss distribution F is re-expressed by tranche/term so that risk(F,...) composes consistently up the structure.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:structural-transform:ep-43",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/term_calculus.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:structural-transform",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:structural-transform:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #43 term-calculus contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:75ff1bb6148fdf6b3620631da9c9e02b66b2163e4987f566c13f2b35bbf538ce"
+    },
+    {
+      "@id": "systema:concept:euler-marginal-capital",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:euler-marginal-capital",
+      "skos:prefLabel": "Euler / Marginal Capital Allocation",
+      "skos:altLabel": [
+        "Euler allocation",
+        "marginal risk contribution"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:euler-marginal-capital:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#43:src/open_ep_framework/risk_measures.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Euler allocation over the coherent kernel merged in economic-prophet #43. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:euler-marginal-capital:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Additive allocation of coherent portfolio capital to sub-positions via Euler's theorem on homogeneous risk measures (marginal contribution).",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "Given a positively-homogeneous coherent risk measure, capital is allocated to each sub-position by its marginal (Euler) contribution, and the allocations sum to the total.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:euler-marginal-capital:ep-43",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/risk_measures.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:euler-marginal-capital",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:euler-marginal-capital:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #43 risk_measures Euler allocation.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:aeef3058ff464c208e2a0bff028ac62b446048722c8a2dae431e72afb2ee3756"
+    },
+    {
+      "@id": "systema:concept:rcap-vs-ecap",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:rcap-vs-ecap",
+      "skos:prefLabel": "R-Cap vs E-Cap",
+      "skos:altLabel": [
+        "regulatory vs economic capital",
+        "capital floor",
+        "RFL-1"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:rcap-vs-ecap:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#50:src/open_ep_framework/capital_floor.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "RFL-1 capital-floor merged in economic-prophet #50; regulatory-vs-economic distinction from #42. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:rcap-vs-ecap:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The distinction and floor relationship between regulatory capital (R-Cap) and economic capital (E-Cap); the binding requirement is a floor, not a substitution.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A conformance rule: held capital must satisfy the regulatory floor and the economic estimate simultaneously; a sub-floor fixture is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:rcap-vs-ecap:ep-50",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/capital_floor.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:rcap-vs-ecap",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:rcap-vs-ecap:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #50 capital-floor contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:b1fb5c86fda75c2b1489c306f62b4a9627ae2c307ade3a45afb08eb42c939e93"
+    },
+    {
+      "@id": "systema:concept:concern-ladder",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:concern-ladder",
+      "skos:prefLabel": "Going/Gone-Concern Capital Ladder",
+      "skos:altLabel": [
+        "concern ladder",
+        "CLD-1",
+        "loss-absorbing hierarchy"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:concern-ladder:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#50:src/open_ep_framework/concern_ladder.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "CLD-1 merged in economic-prophet #50. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:concern-ladder:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A monotone, ordered ladder of capital layers from going-concern (loss-absorbing while solvent) to gone-concern (resolution/bail-in).",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "An ordered hierarchy whose layers must be monotone and correctly ordered; out-of-order, non-monotone, or gone-to-soft transitions are rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:concern-ladder:ep-50",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/concern_ladder.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:concern-ladder",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:concern-ladder:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #50 concern-ladder contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:0e78ce436f047f0db7456e912e5217d9fe49f25775f49193c23ae642c022b7f9"
+    },
+    {
+      "@id": "systema:concept:aggregation-method-taxonomy",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:aggregation-method-taxonomy",
+      "skos:prefLabel": "Risk-Aggregation Method Taxonomy",
+      "skos:altLabel": [
+        "aggregation method",
+        "AGG-1",
+        "var-covar/copula/simulation"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:aggregation-method-taxonomy:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#50:src/open_ep_framework/aggregation_method.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "AGG-1 merged in economic-prophet #50. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:aggregation-method-taxonomy:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A governed taxonomy of risk-aggregation methods (variance-covariance, copula, simulation) each carrying its dependence assumption.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "Each aggregation must declare its dependence assumption; assumption-free or superadditive aggregation is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:aggregation-method-taxonomy:ep-50",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/aggregation_method.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:aggregation-method-taxonomy",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:aggregation-method-taxonomy:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #50 aggregation-method contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:8e890179c09b1851bdbf52c3973666ce5b8006c4bfc95573355196a0721db70e"
+    },
+    {
+      "@id": "systema:concept:memory-regime-taxonomy",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:memory-regime-taxonomy",
+      "skos:prefLabel": "Memory-Regime Taxonomy",
+      "skos:altLabel": [
+        "memoryless/short_decaying/long_memory/chaotic",
+        "MemoryRegimeCharacterization"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:memory-regime-taxonomy:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/memory-mesh#50:schemas/memory-regime-characterization.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Canonical producer is memory-mesh #50 (MemoryRegimeCharacterization v0.1), consumed by economic-prophet #46 (order flow) and #54 (trinomial). Cited to the producer per the financial-spine anti-fragmentation index; consume-not-fork."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:memory-regime-taxonomy:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Classification of a series' memory regime as memoryless, short_decaying, long_memory, or chaotic.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The regime label a memory-regime characterizer emits on a series; it binds the risk_distribution_F descriptor the risk kernel consumes.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:memory-regime-taxonomy:mm-50",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/memory-mesh",
+          "surfacePath": "schemas/memory-regime-characterization.schema.json"
+        },
+        {
+          "@id": "systema:surface:memory-regime-taxonomy:ep-46",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "microstructure/schemas/order-flow-process.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:memory-regime-taxonomy",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:memory-regime-taxonomy:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from memory-mesh #50 characterization contract; consumers economic-prophet #46/#54.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:b91504b0c8f0cefd7300ab8b6e36ad568af19c1d4263e3f444ca9fa181e445c4"
+    },
+    {
+      "@id": "systema:concept:hurst-lyapunov-fractal",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:hurst-lyapunov-fractal",
+      "skos:prefLabel": "Hurst / Lyapunov / Fractal-Dimension Estimators",
+      "skos:altLabel": [
+        "Hurst exponent",
+        "DFA",
+        "maximal Lyapunov exponent",
+        "fractal dimension"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:hurst-lyapunov-fractal:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/memory-mesh#50:scripts/memory_regime_estimators.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Estimators grounding the memory-regime taxonomy, memory-mesh #50. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:hurst-lyapunov-fractal:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The estimators that ground the memory-regime taxonomy: Hurst/DFA exponent (long memory), maximal Lyapunov exponent (chaos), and fractal dimension.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The measured quantities a memory-regime characterizer computes to assign a regime label; the estimator values are the evidence behind the regime.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:hurst-lyapunov-fractal:mm-50",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/memory-mesh",
+          "surfacePath": "scripts/memory_regime_estimators.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:hurst-lyapunov-fractal",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:hurst-lyapunov-fractal:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from memory-mesh #50 regime estimators.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:fa9f9efd4f72dd716a31787abac1bb552c98a0c59d023b034f2a3d01da97ba53"
+    },
+    {
+      "@id": "systema:concept:ou-process-crosswalk",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:ou-process-crosswalk",
+      "skos:prefLabel": "OU / Process-Family Crosswalk",
+      "skos:altLabel": [
+        "Ornstein-Uhlenbeck",
+        "mean reversion",
+        "process-family crosswalk"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:ou-process-crosswalk:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#54:schemas/trinomial_option.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "OU mean-reverting regime surfaced by the trinomial-option contract merged in economic-prophet #54. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:ou-process-crosswalk:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A crosswalk mapping memory regimes to generating process families (e.g. short_decaying to Ornstein-Uhlenbeck/AR(1), memoryless to the Black-Scholes limit).",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The mapping that tells which stochastic process family instantiates a given memory regime, used to select an option/pricing model that is not regime-blind.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:ou-process-crosswalk:ep-54",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/trinomial_option.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:ou-process-crosswalk",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:ou-process-crosswalk:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #54 trinomial-option contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:1f5cd619b45e120000bea06d5ec89c1b1e002691915cbf26917b6d3f52fd1e10"
+    },
+    {
+      "@id": "systema:concept:hawkes-self-exciting",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:hawkes-self-exciting",
+      "skos:prefLabel": "Hawkes / Self-Exciting Process",
+      "skos:altLabel": [
+        "marked point process",
+        "order-flow intensity",
+        "branching ratio"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:hawkes-self-exciting:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#46:microstructure/schemas/order-flow-process.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Marked-point-process order-flow contract merged in economic-prophet #46. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:hawkes-self-exciting:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Order flow modelled as a marked, self-exciting (Hawkes) point process whose intensity is raised by its own recent events.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A conformance rule: a Poisson/memoryless claim is rejected when the branching ratio is >= 1 without override; intensity must be non-negative and fill probability <= 1.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:hawkes-self-exciting:ep-46",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "microstructure/schemas/order-flow-process.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:hawkes-self-exciting",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:hawkes-self-exciting:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #46 order-flow marked-point-process contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:b58c1c14da3f0db6f31320879f0c2aa7b73774bd8d061aafe624b32a20cb3136"
+    },
+    {
+      "@id": "systema:concept:flow-regime-lens",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:flow-regime-lens",
+      "skos:prefLabel": "Laminar/Turbulent Flow-Regime Lens",
+      "skos:altLabel": [
+        "FRL-1",
+        "laminar",
+        "turbulent",
+        "low-dimensional turbulence lens"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:flow-regime-lens:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#54:schemas/flow_regime_lens.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "analogy",
+          "uncertaintyNote": "FRL-1 lens merged in economic-prophet #54. Governed as an analogy lens by construction; claim boundary is design_analogy, not a Navier-Stokes solution."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:flow-regime-lens:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A governed lens classifying a low-dimensional dynamical regime as laminar or turbulent.",
+          "claimLevel": "design_analogy"
+        }
+      ],
+      "operationalDefinition": "A lens that maps a low-dimensional system (e.g. Lorenz) to a laminar/turbulent label; a fixture claiming it solves Navier-Stokes or with a sign mismatch is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "regime-lens design analogy with declared boundary",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "using the fluid-dynamics analogy as a physical claim",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:flow-regime-lens:ep-54",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/flow_regime_lens.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:flow-regime-lens",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:flow-regime-lens:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #54 flow-regime lens contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:895e0fd1b1c8838cb02ecbf72cee3f9f0e6d2abc3268169666a6dc0fcf23c9e6"
+    },
+    {
+      "@id": "systema:concept:jacobs-ladder-rungs",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:jacobs-ladder-rungs",
+      "skos:prefLabel": "Jacob's Ladder of Assets (rungs)",
+      "skos:altLabel": [
+        "asset-class ladder",
+        "ALC-1",
+        "natural_capital to digital_service"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:jacobs-ladder-rungs:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#52:schemas/asset_class_ladder.schema.json",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "ALC-1 asset-ladder merged in economic-prophet #52. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:jacobs-ladder-rungs:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The ordered rungs of asset classes from natural_capital up through digital_service, each a governed asset-class node.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A monotone-ordered asset-class ontology; the rung order must not be permuted and each rung binds its classification axes.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:jacobs-ladder-rungs:ep-52",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/asset_class_ladder.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:jacobs-ladder-rungs",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:jacobs-ladder-rungs:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #52 asset-class ladder contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:ffba27fcb9dd343dd4598ab04d97fbfcea4fa0958269ba527c40f3cc6975f6ea"
+    },
+    {
+      "@id": "systema:concept:asset-axes",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:asset-axes",
+      "skos:prefLabel": "Asset Tangibility/Rivalry/Renewability Axes",
+      "skos:altLabel": [
+        "asset classification axes",
+        "tangibility",
+        "rivalry",
+        "renewability"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:asset-axes:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#52:src/open_ep_framework/asset_ladder/ladder.py",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "ALC-1 axes merged in economic-prophet #52. Learned extraction, candidate until concept-record review."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:asset-axes:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The three governed classification axes for an asset class: tangibility, rivalry, and renewability.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "Each asset rung must declare all three axes; a missing axis, or a non-renewable asset with no Hotelling depletion path, is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the financial spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:asset-axes:ep-52",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/asset_ladder/ladder.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:asset-axes",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:asset-axes:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from economic-prophet #52 asset-ladder axes.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:abbbca6a320d7e31d254f1d9ad4a0c8bd16294d582555ccc504f2c8b08228a47"
+    },
+    {
+      "@id": "systema:concept:value-energy",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:value-energy",
+      "skos:prefLabel": "Value-Energy",
+      "skos:altLabel": [
+        "value as energy",
+        "conserved value quantity"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:value-energy:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:schemas/welfare_annealing.schema.json",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "WEA-1 welfare-annealing contract is in-flight on branch feat/welfare-annealing (not yet on main). Anchored to the branch contract; stays source_anchored/candidate until the PR merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:value-energy:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "Value treated as a conserved, energy-like quantity in exchange; a pure exchange must conserve it.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The conserved quantity in the IC-1 settlement shape reused by WEA-1; an exchange that creates value out of nothing is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the welfare/value spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:value-energy:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/welfare_annealing/energy.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:value-energy",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt. Merge of WEA-1 required to advance review state."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:value-energy:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from in-flight WEA-1 welfare-annealing contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:e45b6883c8370cd8a4628bbca3a5e3e5f069e70f8051a46f0e917fc6c7559fad"
+    },
+    {
+      "@id": "systema:concept:welfare-annealing",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:welfare-annealing",
+      "skos:prefLabel": "Welfare-Annealing",
+      "skos:altLabel": [
+        "WEA-1",
+        "free-energy welfare descent",
+        "constructive inverse of silent weapons"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:welfare-annealing:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:src/open_ep_framework/welfare_annealing/anneal.py",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "WEA-1 anneal contract in-flight on branch feat/welfare-annealing. Stays source_anchored/candidate until merge."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:welfare-annealing:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A welfare anneal over allocations that verifies monotone free-energy descent to a laminar attractor with conserved value-energy; the constructive inverse of an elite-control objective.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "An annealing schedule over group allocations under a free-energy potential; it must descend monotonically to a laminar attractor while conserving value-energy.",
+      "allowedUse": [
+        "governed vocabulary reference for the welfare/value spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:welfare-annealing:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/welfare_annealing/anneal.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:welfare-annealing",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt. Merge of WEA-1 required to advance review state."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:welfare-annealing:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from in-flight WEA-1 anneal contract.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:29b0dbaa6cc90074f97e0b874c018d139776d67240548c3808f2dc953f0157f9"
+    },
+    {
+      "@id": "systema:concept:carrying-capacity-discount",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:carrying-capacity-discount",
+      "skos:prefLabel": "Carrying-Capacity Discount",
+      "skos:altLabel": [
+        "biosphere discount",
+        "world-state discount read"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:carrying-capacity-discount:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:schemas/welfare_annealing.schema.json#discount",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "WEA-1 discount record kind in-flight; its world-model binding (carrying_capacity as a biosphere read) is defined by the sibling gaia value_flow_binding.v1. Stays source_anchored/candidate until both merge."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:carrying-capacity-discount:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "A discount factor that must be a read of the world-model biosphere/resource carrying capacity, not a free parameter.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The discount applied to future welfare must resolve against the GAIA WorldModelSubstrate carrying-capacity state; a hard-coded free-parameter discount is a smell rejected by the value_flow_binding.",
+      "allowedUse": [
+        "governed vocabulary reference for the welfare/value spine",
+        "world-model binding evidence anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "treating the discount as a free parameter instead of a world-state read",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:carrying-capacity-discount:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/welfare_annealing.schema.json"
+        },
+        {
+          "@id": "systema:surface:carrying-capacity-discount:gaia-vfb",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:carrying-capacity-discount",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a world-model carrying-capacity read binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:carrying-capacity-discount:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from in-flight WEA-1 discount + gaia value_flow_binding.v1.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:13bbd0b10a6c00af8100b3171c7831827837aace9aa8c3a438a0c2d54d62bed0"
+    },
+    {
+      "@id": "systema:concept:renewable-delta",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:renewable-delta",
+      "skos:prefLabel": "Renewable Delta",
+      "skos:altLabel": [
+        "regeneration margin",
+        "sustainable growth delta"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:renewable-delta:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:examples/welfare_annealing/growth_path.renewable_sustainable.valid.json",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "WEA-1 growth_path renewable fixtures in-flight. Stays source_anchored/candidate until merge."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:renewable-delta:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The sustainability margin of a growth path: production drawn against a renewable base must stay within its regeneration delta.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "A conformance rule on growth paths: renewable draw must not exceed regeneration; a nonrenewable draw with no Hotelling depletion path, or a false-growth drawdown, is rejected.",
+      "allowedUse": [
+        "governed vocabulary reference for the welfare/value spine",
+        "downstream contract conformance and cross-consumption checks",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:renewable-delta:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "examples/welfare_annealing/growth_path.renewable_sustainable.valid.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:renewable-delta",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt. Merge of WEA-1 required to advance review state."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:renewable-delta:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from in-flight WEA-1 renewable growth-path fixtures.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:cf1c7d675279ba451de85cf2baff224e0e0cb1e302aecd24a2095f2f7fba23d6"
+    },
+    {
+      "@id": "systema:concept:global-qol-index",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:global-qol-index",
+      "skos:prefLabel": "Global QoL Index",
+      "skos:altLabel": [
+        "quality-of-life welfare index",
+        "welfare objective"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:global-qol-index:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:src/open_ep_framework/welfare_annealing/qol.py",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "WEA-1 QoL objective in-flight; its dimensions aggregate from human-digital-twin state per the sibling gaia value_flow_binding.v1. Stays source_anchored/candidate until both merge."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:global-qol-index:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The welfare objective: a global quality-of-life index whose dimensions aggregate from human-digital-twin state (population = sum of twins).",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The objective the welfare anneal maximises; its dimensions must aggregate from twin-hierarchy state rather than being asserted, per value_flow_binding.qol_index.",
+      "allowedUse": [
+        "governed vocabulary reference for the welfare/value spine",
+        "world-model / twin binding evidence anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "asserting QoL dimensions instead of aggregating from twin state",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:global-qol-index:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/welfare_annealing/qol.py"
+        },
+        {
+          "@id": "systema:surface:global-qol-index:gaia-vfb",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:global-qol-index",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a twin-state aggregation binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:global-qol-index:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction from in-flight WEA-1 QoL objective + gaia value_flow_binding.v1.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:07fd2f29f1961ee1f30644e1d85c23b8432c46e555fb84a1102046be2371ea35"
+    }
+  ]
+}

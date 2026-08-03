@@ -68,6 +68,28 @@ systema:SystemaConceptEntryShape
         sh:path systema:evidenceRequirement ;
         sh:minCount 1 ;
         sh:class systema:EvidenceRequirement ;
+    ] ;
+    sh:property [
+        sh:path systema:provenanceClass ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "learned" "human_authored" "imported" ) ;
+        sh:message "A registered concept must declare a provenance class (learned|human_authored|imported)." ;
+    ] ;
+    sh:property [
+        sh:path systema:conceptVersion ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A registered concept must carry a version." ;
+    ] ;
+    sh:property [
+        sh:path systema:receipt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^sha256:[0-9a-f]{64}$" ;
+        sh:message "A registered concept must carry a content-hash registration receipt (sha256:<hex>)." ;
     ] .
 
 systema:SourceAnchorShape

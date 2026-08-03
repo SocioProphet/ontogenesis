@@ -46,6 +46,9 @@
     },
     "evidenceRequirementText": "systema:evidenceRequirementText",
     "promotionState": "systema:promotionState",
+    "provenanceClass": "systema:provenanceClass",
+    "conceptVersion": "systema:conceptVersion",
+    "receipt": "systema:receipt",
     "revision": {
       "@id": "systema:revision",
       "@type": "@id"

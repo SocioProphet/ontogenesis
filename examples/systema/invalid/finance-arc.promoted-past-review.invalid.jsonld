@@ -1,0 +1,61 @@
+{
+  "@context": "../../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:overpromoted-raroc",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:overpromoted-raroc",
+  "skos:prefLabel": "Over-promoted concept (unreviewed anchor)",
+  "sourceAnchor": [
+    {
+      "@id": "systema:source-anchor:overpromoted:v0-1",
+      "@type": "SourceAnchor",
+      "sourceRef": "SocioProphet/economic-prophet#43:src/open_ep_framework/risk_adjusted_profit.py",
+      "sourceKind": "merged_pr_contract",
+      "extractionConfidence": "B",
+      "reviewState": "candidate",
+      "quoteBoundary": "operational_translation",
+      "uncertaintyNote": "Anchor is only candidate-reviewed."
+    }
+  ],
+  "definition": [
+    {
+      "@id": "systema:definition:overpromoted:v0-1",
+      "@type": "ConceptDefinition",
+      "definitionText": "A concept pushed to operational_definition without any manually_reviewed anchor.",
+      "claimLevel": "operational_definition"
+    }
+  ],
+  "operationalDefinition": "Must be rejected: promotion may not outrun the source anchor's review state.",
+  "allowedUse": [
+    "(none — should not be admitted at this state)"
+  ],
+  "forbiddenUse": [
+    "promoting past reviewed_definition on an unreviewed anchor"
+  ],
+  "implementationSurface": [
+    {
+      "@id": "systema:surface:overpromoted:x",
+      "@type": "ImplementationSurface",
+      "ownerRepo": "SocioProphet/economic-prophet",
+      "surfacePath": "src/open_ep_framework/risk_adjusted_profit.py"
+    }
+  ],
+  "evidenceRequirement": [
+    {
+      "@id": "systema:evidence-requirement:overpromoted",
+      "@type": "EvidenceRequirement",
+      "evidenceRequirementText": "Requires a reviewed anchor to reach operational_definition."
+    }
+  ],
+  "promotionState": "operational_definition",
+  "provenanceClass": "learned",
+  "conceptVersion": "0.1.0",
+  "revision": [
+    {
+      "@id": "systema:revision:overpromoted:v0-1",
+      "@type": "ConceptRevision",
+      "revisionNote": "Negative fixture: promoted past reviewed state.",
+      "revisionDate": "2026-08-03"
+    }
+  ],
+  "receipt": "sha256:82b6600e0bdeec043237c2b1664c860d844ebb2a98ee80bc76130d4cd54fbcb2"
+}

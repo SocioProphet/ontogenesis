@@ -1,0 +1,19 @@
+{
+  "@context": "../../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:tampered-receipt-ladder",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:tampered-receipt-ladder",
+  "skos:prefLabel": "Registration with a tampered receipt",
+  "sourceAnchor": [{"@id": "systema:source-anchor:tampered:v0-1", "@type": "SourceAnchor", "sourceRef": "SocioProphet/economic-prophet#52:schemas/asset_class_ladder.schema.json", "sourceKind": "merged_pr_contract", "extractionConfidence": "B", "reviewState": "candidate", "quoteBoundary": "operational_translation", "uncertaintyNote": "Receipt does not match the entry content."}],
+  "definition": [{"@id": "systema:definition:tampered:v0-1", "@type": "ConceptDefinition", "definitionText": "A concept whose stored receipt no longer matches its content.", "claimLevel": "operational_definition"}],
+  "operationalDefinition": "Must be rejected: the content-hash receipt is tamper-evident.",
+  "allowedUse": ["(none — should not be admitted)"],
+  "forbiddenUse": ["editing an entry without re-minting its receipt"],
+  "implementationSurface": [{"@id": "systema:surface:tampered:x", "@type": "ImplementationSurface", "ownerRepo": "SocioProphet/economic-prophet", "surfacePath": "schemas/asset_class_ladder.schema.json"}],
+  "evidenceRequirement": [{"@id": "systema:evidence-requirement:tampered", "@type": "EvidenceRequirement", "evidenceRequirementText": "Receipt must recompute over the canonical entry."}],
+  "promotionState": "source_anchored",
+  "provenanceClass": "learned",
+  "conceptVersion": "0.1.0",
+  "revision": [{"@id": "systema:revision:tampered:v0-1", "@type": "ConceptRevision", "revisionNote": "Negative fixture: tampered receipt.", "revisionDate": "2026-08-03"}],
+  "receipt": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}
