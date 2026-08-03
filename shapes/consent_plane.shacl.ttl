@@ -1,0 +1,102 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+
+<shapes/consent_plane.shacl.ttl> a owl:Ontology ;
+  dct:title "SHACL — Consent Plane (fail-closed projection)" ;
+  dct:description "The runtime teeth for the consent-plane ontology. These shapes are the fail-closed contract: an invocation, consent grant, surface, seam, or app profile that violates a shape is REFUSED, not warned. This is what makes E1 real at runtime rather than declared-unenforced." ;
+  owl:versionInfo "1.0.0" .
+
+## A governed invocation must bind exactly one admissible purpose, a consent grant, a space, and a surface.
+cplane:ToolInvocationShape a sh:NodeShape ;
+  sh:targetClass cplane:ToolInvocation ;
+  sh:property [ sh:path cplane:admissiblePurpose ; sh:class cplane:Purpose ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "A tool invocation must bind exactly one admissible Purpose (GDPR Art 5(1)(b) purpose-limitation)." ] ;
+  sh:property [ sh:path cplane:underConsent ; sh:class cplane:ConsentGrant ; sh:minCount 1 ;
+    sh:message "A tool invocation must cite a ConsentGrant (lawful basis)." ] ;
+  sh:property [ sh:path cplane:executesIn ; sh:class cplane:IsolationSpace ; sh:minCount 1 ;
+    sh:message "A tool invocation must declare the isolation space it executes in." ] ;
+  sh:property [ sh:path cplane:actsOnSurface ; sh:class cplane:Surface ; sh:minCount 1 ;
+    sh:message "A tool invocation must name the surface it acts on." ] ;
+  # Fail-closed cross-boundary rule: entering the data-namespace requires a matching toleration.
+  sh:sparql [
+    sh:message "Invocation executes in the data-namespace but carries no Toleration — cross-tenant entry is refused fail-closed." ;
+    sh:prefixes <shapes/consent_plane.shacl.ttl> ;
+    sh:select """
+      SELECT $this WHERE {
+        $this <https://spec.sourceos.dev/vocab/consent-plane#executesIn> <https://spec.sourceos.dev/vocab/consent-plane#dataNamespace> .
+        FILTER NOT EXISTS { $this <https://spec.sourceos.dev/vocab/consent-plane#carriesToleration> ?t . }
+      }""" ] ;
+  # An egress or administer invocation must emit a receipt (irreversible / highest-sensitivity acts are warranted).
+  sh:sparql [
+    sh:message "An egress/administer invocation must emit a hash-sealed receipt (E4)." ;
+    sh:prefixes <shapes/consent_plane.shacl.ttl> ;
+    sh:select """
+      SELECT $this WHERE {
+        $this <https://spec.sourceos.dev/vocab/consent-plane#admissiblePurpose> ?p .
+        FILTER( ?p IN (<https://spec.sourceos.dev/vocab/consent-plane#egress>,
+                       <https://spec.sourceos.dev/vocab/consent-plane#administer>) )
+        FILTER NOT EXISTS { $this <https://spec.sourceos.dev/vocab/consent-plane#emitsReceipt> ?r . }
+      }""" ] .
+
+## A consent grant must carry a lawful basis and, when basis=consent, the time it was granted.
+cplane:ConsentGrantShape a sh:NodeShape ;
+  sh:targetClass cplane:ConsentGrant ;
+  sh:property [ sh:path cplane:lawfulBasis ; sh:datatype xsd:string ; sh:minCount 1 ;
+    sh:in ( "consent" "contract" "legal_obligation" "vital_interest" "public_task" "legitimate_interest" ) ;
+    sh:message "A ConsentGrant must declare a GDPR Art 6(1) lawful basis." ] ;
+  sh:property [ sh:path cplane:grantsPurpose ; sh:class cplane:Purpose ; sh:minCount 1 ;
+    sh:message "A ConsentGrant must name at least one Purpose it authorizes." ] ;
+  sh:sparql [
+    sh:message "lawfulBasis=consent requires a grantedAt timestamp (Art 7 conditions for consent)." ;
+    sh:prefixes <shapes/consent_plane.shacl.ttl> ;
+    sh:select """
+      SELECT $this WHERE {
+        $this <https://spec.sourceos.dev/vocab/consent-plane#lawfulBasis> "consent" .
+        FILTER NOT EXISTS { $this <https://spec.sourceos.dev/vocab/consent-plane#grantedAt> ?t . }
+      }""" ] .
+
+## Every governed surface must declare (at minimum) the consent, space, and surface seams,
+## AND every seam it declares must have a passing purple-team SeamAssurance for THIS surface.
+cplane:SurfaceShape a sh:NodeShape ;
+  sh:targetClass cplane:Surface ;
+  sh:property [ sh:path cplane:declaresSeam ; sh:minCount 3 ; sh:class cplane:SecuritySeam ;
+    sh:qualifiedValueShape [ sh:in ( cplane:consentSeam cplane:spaceSeam cplane:surfaceSeam ) ] ;
+    sh:qualifiedMinCount 3 ;
+    sh:message "A Surface must declare at least the consent, space, and surface seams." ] ;
+  sh:sparql [
+    sh:message "Surface declares a seam with no passing purple-team SeamAssurance — an unaudited failure path is refused fail-closed." ;
+    sh:prefixes <shapes/consent_plane.shacl.ttl> ;
+    sh:select """
+      SELECT $this WHERE {
+        $this <https://spec.sourceos.dev/vocab/consent-plane#declaresSeam> ?seam .
+        FILTER NOT EXISTS {
+          ?a <https://spec.sourceos.dev/vocab/consent-plane#assuresSurface> $this ;
+             <https://spec.sourceos.dev/vocab/consent-plane#assuresSeam> ?seam ;
+             <https://spec.sourceos.dev/vocab/consent-plane#purpleTeamTested> true .
+        }
+      }""" ] .
+
+## A SeamAssurance is evidence: it must record a boolean purple-team outcome and what it assures.
+cplane:SeamAssuranceShape a sh:NodeShape ;
+  sh:targetClass cplane:SeamAssurance ;
+  sh:property [ sh:path cplane:purpleTeamTested ; sh:datatype xsd:boolean ; sh:minCount 1 ;
+    sh:message "A SeamAssurance must record a purple-team test outcome (true/false)." ] ;
+  sh:property [ sh:path cplane:assuresSeam ; sh:class cplane:SecuritySeam ; sh:minCount 1 ;
+    sh:message "A SeamAssurance must name the seam it assures." ] ;
+  sh:property [ sh:path cplane:assuresSurface ; sh:class cplane:Surface ; sh:minCount 1 ;
+    sh:message "A SeamAssurance must name the surface it assures." ] .
+
+## An app profile must bind to exactly one surface, publish at least one intent, and declare a default consent posture.
+cplane:AppProfileShape a sh:NodeShape ;
+  sh:targetClass cplane:AppProfile ;
+  sh:property [ sh:path cplane:profileFor ; sh:class cplane:Surface ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:message "An AppProfile governs exactly one Surface." ] ;
+  sh:property [ sh:path cplane:publishesIntent ; sh:class cplane:Intent ; sh:minCount 1 ;
+    sh:message "An AppProfile must publish at least one Intent (or the app exposes nothing governable)." ] ;
+  sh:property [ sh:path cplane:defaultConsentPosture ; sh:minCount 1 ;
+    sh:in ( "ask" "allow_once" "allow_session" "deny" ) ;
+    sh:message "An AppProfile must declare a default consent posture; egress/administer intents default to deny." ] .

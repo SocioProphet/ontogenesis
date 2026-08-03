@@ -1,0 +1,37 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/consent-plane/accessibility-binding.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Consent Plane: Accessibility Bindings" ;
+  dct:description "The accessibility-binding ontology. Accessibility is a first-class DEFAULT surface, not an add-on: the same typed, consented, receipted AssistiveAction that a human uses via an AT is exactly what the agent uses to drive a Surface. This unifies human assistive tech and agent automation on one auditable seam (surfaceSeam), so nothing the agent can do is invisible to accessibility and nothing accessibility exposes is un-governed." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Domains/consent-plane/isolation-spaces.ttl> .
+
+cplane:AccessibilityRole a owl:Class ; rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Accessibility Role" ;
+  rdfs:comment "The semantic role of a UI element (button, field, heading, landmark ...), mirroring WAI-ARIA / AX API roles. Every governable UI element carries a role; an element the agent can act on but that exposes no role is an accessibility defect AND an ungoverned surface." .
+cplane:roleName a owl:DatatypeProperty ; rdfs:domain cplane:AccessibilityRole ; rdfs:range xsd:string ; rdfs:label "role name" .
+cplane:accessibleName a owl:DatatypeProperty ; rdfs:domain cplane:AccessibilityRole ; rdfs:range xsd:string ;
+  rdfs:label "accessible name" ; rdfs:comment "Human-legible name; required so an assistive action is describable in a receipt and to a screen reader alike." .
+
+cplane:AssistiveAction a owl:Class ; rdfs:subClassOf cplane:ToolInvocation ;
+  rdfs:label "Assistive Action" ;
+  rdfs:comment "A ToolInvocation that operates a UI element on behalf of a user OR an agent — the SAME typed act on the SAME seam. Because it is a ToolInvocation it inherits the purpose+consent+space+receipt obligations; there is no un-governed accessibility back door." .
+cplane:targetsRole a owl:ObjectProperty ; rdfs:domain cplane:AssistiveAction ; rdfs:range cplane:AccessibilityRole ; rdfs:label "targets role" .
+cplane:actorKind a owl:DatatypeProperty ; rdfs:domain cplane:AssistiveAction ; rdfs:range xsd:string ;
+  rdfs:label "actor kind" ; rdfs:comment "human_via_at | agent — recorded so a receipt distinguishes assistive use from autonomous use, without changing the enforcement path." .
+
+cplane:AccessibilityDefault a owl:Class ; rdfs:subClassOf upper:Policy ;
+  rdfs:label "Accessibility Default" ;
+  rdfs:comment "An accommodation that is ON by default (reduced-motion honoring, contrast floors, screen-reader labels, keyboard-first) with an explicit opt-IN for agent-driven assistance. Defaults-on / assistance-opt-in is the inverse of the macOS defaults-off posture and is required per the integrated-agent-native-stack contract." .
+cplane:defaultOn a owl:DatatypeProperty ; rdfs:domain cplane:AccessibilityDefault ; rdfs:range xsd:boolean ; rdfs:label "default on" .
+cplane:agentAssistOptIn a owl:DatatypeProperty ; rdfs:domain cplane:AccessibilityDefault ; rdfs:range xsd:boolean ;
+  rdfs:label "agent assist opt in" ; rdfs:comment "Agent-driven assistance requires explicit opt-in even though the human-facing accommodation is default-on." .
+cplane:appliesToSurface a owl:ObjectProperty ; rdfs:domain cplane:AccessibilityDefault ; rdfs:range cplane:Surface ; rdfs:label "applies to surface" .

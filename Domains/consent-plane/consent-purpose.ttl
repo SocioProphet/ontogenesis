@@ -1,0 +1,59 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix act:   <https://socioprophet.github.io/ontogenesis/middle/action#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/consent-plane/consent-purpose.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Consent Plane: Purpose Limitation" ;
+  dct:description "GDPR Art 5(1)(b) purpose-limitation as an ontology: every governed tool invocation binds exactly one admissible Purpose under a recorded ConsentGrant. This is the semantic ground for the SourceOS consent plane (E1) and the source-os integrated-agent-native-stack contract. Purposes are the reason-for-processing vocabulary shared by role x surface x space x tool." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Domains/agent-system/agent-class.ttl> .
+
+## ---- Purpose (the reason-for-processing vocabulary) ----
+cplane:Purpose a owl:Class ; rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Purpose" ;
+  rdfs:comment "A declared, bounded reason-for-processing under which a tool may act (GDPR Art 5(1)(b)). The purpose set is closed and enumerated; an invocation carrying an undeclared purpose is refused fail-closed." ;
+  skos:closeMatch <https://spec.sourceos.dev/vocab/agent-system#Purpose> .
+
+cplane:admissiblePurpose a owl:ObjectProperty ;
+  rdfs:domain cplane:ToolInvocation ; rdfs:range cplane:Purpose ;
+  rdfs:label "admissible purpose" ;
+  rdfs:comment "The single purpose this invocation is authorized for. Purpose creep (acting beyond the bound purpose) is the violation this property exists to make detectable." .
+
+# The closed purpose set (role x surface x space x tool bind one of these).
+cplane:discover  a cplane:Purpose , owl:NamedIndividual ; rdfs:label "discover"  ; skos:definition "Read/observe estate state; no mutation, no egress." .
+cplane:implement a cplane:Purpose , owl:NamedIndividual ; rdfs:label "implement" ; skos:definition "Author or modify artifacts within an authorized space." .
+cplane:verify    a cplane:Purpose , owl:NamedIndividual ; rdfs:label "verify"    ; skos:definition "Execute tests/gates/evidence checks; produce attestations." .
+cplane:ship      a cplane:Purpose , owl:NamedIndividual ; rdfs:label "ship"      ; skos:definition "Merge/release/promote across a governed boundary." .
+cplane:operate   a cplane:Purpose , owl:NamedIndividual ; rdfs:label "operate"   ; skos:definition "Run/observe a live system within its runtime space." .
+cplane:egress    a cplane:Purpose , owl:NamedIndividual ; rdfs:label "egress"    ; skos:definition "Send data to an external service (publication is irreversible)." .
+cplane:administer a cplane:Purpose , owl:NamedIndividual ; rdfs:label "administer" ; skos:definition "Change policy, identity, or the consent plane itself; highest sensitivity." .
+
+## ---- Consent (the lawful basis record) ----
+cplane:ConsentGrant a owl:Class ; rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Consent Grant" ;
+  rdfs:comment "A recorded lawful basis (GDPR Art 6) with, where basis=consent, the Art 7 conditions: who granted, for which purpose, when, and whether withdrawn (Art 7(3) — withdrawal must be as easy as grant)." .
+cplane:grantsPurpose a owl:ObjectProperty ; rdfs:domain cplane:ConsentGrant ; rdfs:range cplane:Purpose ; rdfs:label "grants purpose" .
+cplane:lawfulBasis a owl:DatatypeProperty ; rdfs:domain cplane:ConsentGrant ; rdfs:range xsd:string ;
+  rdfs:label "lawful basis" ; rdfs:comment "consent | contract | legal_obligation | vital_interest | public_task | legitimate_interest (GDPR Art 6(1))." .
+cplane:grantedAt a owl:DatatypeProperty ; rdfs:domain cplane:ConsentGrant ; rdfs:range xsd:dateTime ; rdfs:label "granted at" .
+cplane:withdrawn a owl:DatatypeProperty ; rdfs:domain cplane:ConsentGrant ; rdfs:range xsd:boolean ; rdfs:label "withdrawn" ;
+  rdfs:comment "Art 7(3): once true the grant no longer authorizes; in-flight invocations under it must stop fail-closed." .
+
+## ---- Tool invocation (the governed act — the join point) ----
+cplane:ToolInvocation a owl:Class ; rdfs:subClassOf upper:Process ;
+  rdfs:label "Tool Invocation" ;
+  rdfs:comment "A single governed use of a tool: the join of role x surface x space x tool x purpose + consent. This is the runtime object the consent plane authorizes or refuses. Aligned to the Action Ontology (agent-plane/001): every invocation is an Action that emits a trace and a receipt." ;
+  skos:closeMatch act:Action .
+cplane:underConsent a owl:ObjectProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range cplane:ConsentGrant ; rdfs:label "under consent" .
+cplane:invokedBy a owl:ObjectProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range agentsys:HostAgent ; rdfs:label "invoked by" ;
+  rdfs:comment "Binds the invocation to the agent-system actor (reuses agent-system, does not redefine the agent)." .
+cplane:emitsReceipt a owl:DatatypeProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range xsd:string ;
+  rdfs:label "emits receipt" ; rdfs:comment "Hash-sealed warrant of the authorized act (E4 receipts). Absence of a receipt for a mutating/egress invocation is itself an auditable defect." .
