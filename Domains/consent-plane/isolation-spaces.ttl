@@ -1,0 +1,77 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/consent-plane/isolation-spaces.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Consent Plane: Isolation Spaces, Surfaces & Seams" ;
+  dct:description "The OS-layer ontology: isolation spaces (kernel/system/user/agent/data-namespace), k8s-style taints and tolerations that gate a ToolInvocation crossing a space boundary, the surfaces a tool acts on, and the six security seams every surface must declare. Aligns the abstract isolation model with the concrete spatial-authorization model already in agent-system (ManagedSpace/SEAM-008)." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Domains/consent-plane/consent-purpose.ttl> ,
+              <Domains/agent-system/managed-space.ttl> .
+
+## ---- Isolation spaces ----
+cplane:IsolationSpace a owl:Class ; rdfs:subClassOf upper:System ;
+  rdfs:label "Isolation Space" ;
+  rdfs:comment "A tenancy/trust boundary a tool executes within. The concrete macOS-style spatial context (agentsys:ManagedSpace) is one realization of an IsolationSpace at the user/agent layer." .
+agentsys:ManagedSpace rdfs:subClassOf cplane:IsolationSpace .   # tie the existing concrete model to the abstract one
+
+cplane:kernelSpace  a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "kernel"  ; skos:definition "Ring-0 / driver surface; no agent tenancy without administer purpose." .
+cplane:systemSpace  a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "system"  ; skos:definition "OS services and daemons." .
+cplane:userSpace    a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "user"    ; skos:definition "Interactive user session and apps." .
+cplane:agentSpace   a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "agent"   ; skos:definition "Sandbox the local agent runs in; default tenancy for autonomous acts." .
+cplane:dataNamespace a cplane:IsolationSpace , owl:NamedIndividual ; rdfs:label "data-namespace" ; skos:definition "A named data domain; crossing it requires an explicit toleration (prevents cross-tenant data bleed)." .
+
+## ---- Taints & tolerations (k8s-style boundary gates) ----
+cplane:Taint a owl:Class ; rdfs:subClassOf upper:Policy ;
+  rdfs:label "Taint" ;
+  rdfs:comment "A repellent asserted on a space. An invocation may enter/execute only if it carries a matching Toleration; otherwise it is refused fail-closed." .
+cplane:taintEffect a owl:DatatypeProperty ; rdfs:domain cplane:Taint ; rdfs:range xsd:string ;
+  rdfs:label "taint effect" ; rdfs:comment "NoEntry | NoExecute | PreferNoEntry (k8s NoSchedule/NoExecute/PreferNoSchedule analog)." .
+cplane:taintKey a owl:DatatypeProperty ; rdfs:domain cplane:Taint ; rdfs:range xsd:string ; rdfs:label "taint key" .
+cplane:appliesToSpace a owl:ObjectProperty ; rdfs:domain cplane:Taint ; rdfs:range cplane:IsolationSpace ; rdfs:label "applies to space" .
+
+cplane:Toleration a owl:Class ; rdfs:subClassOf upper:Assertion ;
+  rdfs:label "Toleration" ;
+  rdfs:comment "An explicit, purpose-scoped grant for one invocation to cross a taint. A toleration without a matching taint is inert; a taint without a toleration blocks — the asymmetry is the fail-closed default." .
+cplane:toleratesKey a owl:DatatypeProperty ; rdfs:domain cplane:Toleration ; rdfs:range xsd:string ; rdfs:label "tolerates key" .
+cplane:tolerationFor a owl:ObjectProperty ; rdfs:domain cplane:Toleration ; rdfs:range cplane:Purpose ; rdfs:label "toleration for" ;
+  rdfs:comment "A toleration is valid only for the purpose it was issued under; it does not generalize to other purposes." .
+
+cplane:executesIn a owl:ObjectProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range cplane:IsolationSpace ; rdfs:label "executes in" .
+cplane:carriesToleration a owl:ObjectProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range cplane:Toleration ; rdfs:label "carries toleration" .
+
+## ---- Surfaces (the app/host a tool acts on) ----
+cplane:Surface a owl:Class ; rdfs:subClassOf upper:System ;
+  rdfs:label "Surface" ;
+  rdfs:comment "An app or host the consent plane governs (goose-notes, BearBrowser, TurtleTerm, sourceos-shell, ...). Every Surface must declare the seams it exposes." .
+cplane:actsOnSurface a owl:ObjectProperty ; rdfs:domain cplane:ToolInvocation ; rdfs:range cplane:Surface ; rdfs:label "acts on surface" .
+cplane:surfaceInSpace a owl:ObjectProperty ; rdfs:domain cplane:Surface ; rdfs:range cplane:IsolationSpace ; rdfs:label "surface in space" .
+cplane:declaresSeam a owl:ObjectProperty ; rdfs:domain cplane:Surface ; rdfs:range cplane:SecuritySeam ; rdfs:label "declares seam" .
+
+## ---- Security seams (the six mandatory boundaries) ----
+cplane:SecuritySeam a owl:Class ; rdfs:subClassOf upper:Policy ;
+  rdfs:label "Security Seam" ;
+  rdfs:comment "A named trust-boundary KIND that must be declared, tested (purple-team), and enforced per surface. The seam kinds below are a closed controlled vocabulary; whether a given surface has actually tested a seam is per-surface EVIDENCE (cplane:SeamAssurance), not an axiom on the kind — keeping vocabulary and evidence separate, as the Angel of the Lord regime requires (claims need artifacts)." .
+
+## Per-surface evidence that a declared seam was purple-team tested (Evidence, not vocabulary).
+cplane:SeamAssurance a owl:Class ; rdfs:subClassOf upper:Evidence ;
+  rdfs:label "Seam Assurance" ;
+  rdfs:comment "Evidence that one Surface has purple-team tested one SecuritySeam. A Surface that declares a seam without a passing SeamAssurance for it has an unaudited failure path — the exact defect class the Angel of the Lord regime hunts." .
+cplane:assuresSeam a owl:ObjectProperty ; rdfs:domain cplane:SeamAssurance ; rdfs:range cplane:SecuritySeam ; rdfs:label "assures seam" .
+cplane:assuresSurface a owl:ObjectProperty ; rdfs:domain cplane:SeamAssurance ; rdfs:range cplane:Surface ; rdfs:label "assures surface" .
+cplane:purpleTeamTested a owl:DatatypeProperty ; rdfs:domain cplane:SeamAssurance ; rdfs:range xsd:boolean ;
+  rdfs:label "purple team tested" ; rdfs:comment "true = the adversarial (purple-team) test passed; false/absent = an unaudited failure path." .
+
+cplane:consentSeam     a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "consent seam"      ; skos:definition "purpose+consent binding at the tool boundary." .
+cplane:spaceSeam       a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "space seam"        ; skos:definition "taint/toleration boundary between isolation spaces." .
+cplane:surfaceSeam     a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "surface seam"      ; skos:definition "app UI/automation boundary (accessibility + injection surface)." .
+cplane:supplyChainSeam a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "supply-chain seam" ; skos:definition "package/build provenance (Guix + zot + signing, E5)." .
+cplane:meshSeam        a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "mesh seam"         ; skos:definition "cross-device federation boundary (E3)." .
+cplane:identitySeam    a cplane:SecuritySeam , owl:NamedIndividual ; rdfs:label "identity seam"     ; skos:definition "identity/twin/key boundary (E9)." .

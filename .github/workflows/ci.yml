@@ -29,6 +29,12 @@ jobs:
       - name: SHACL gates
         run: python scripts/shacl_gate.py
 
+      - name: Lane conformance (positive + negative fixtures)
+        run: |
+          for s in scripts/validate_*_examples.py; do
+            echo "== $s =="; python "$s"
+          done
+
       - name: JSON-LD roundtrip
         run: python scripts/jsonld_roundtrip.py
 

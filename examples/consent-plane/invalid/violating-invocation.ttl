@@ -1,0 +1,11 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+# Three intended violations: egress with NO receipt; consent with NO grantedAt; data-namespace with NO toleration.
+# The surface is fully assured so ONLY the invocation-level teeth fire.
+cplane:goose-notes a cplane:Surface ; cplane:declaresSeam cplane:consentSeam, cplane:spaceSeam, cplane:surfaceSeam .
+cplane:a-consent a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:consentSeam ; cplane:purpleTeamTested true .
+cplane:a-space   a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:spaceSeam ;   cplane:purpleTeamTested true .
+cplane:a-surface a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:surfaceSeam ; cplane:purpleTeamTested true .
+cplane:grant-bad a cplane:ConsentGrant ; cplane:lawfulBasis "consent" ; cplane:grantsPurpose cplane:egress .
+cplane:inv-bad a cplane:ToolInvocation ; cplane:admissiblePurpose cplane:egress ; cplane:underConsent cplane:grant-bad ;
+  cplane:executesIn cplane:dataNamespace ; cplane:actsOnSurface cplane:goose-notes .

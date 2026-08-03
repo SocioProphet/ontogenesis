@@ -1,0 +1,13 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+# A fully-conformant governed egress: purpose+consent(+grantedAt)+space+surface+receipt,
+# on a Surface whose declared seams each have a passing purple-team SeamAssurance.
+cplane:goose-notes a cplane:Surface ;
+  cplane:declaresSeam cplane:consentSeam, cplane:spaceSeam, cplane:surfaceSeam .
+cplane:a-consent a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:consentSeam ; cplane:purpleTeamTested true .
+cplane:a-space   a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:spaceSeam ;   cplane:purpleTeamTested true .
+cplane:a-surface a cplane:SeamAssurance ; cplane:assuresSurface cplane:goose-notes ; cplane:assuresSeam cplane:surfaceSeam ; cplane:purpleTeamTested true .
+cplane:grant-egress a cplane:ConsentGrant ; cplane:lawfulBasis "consent" ; cplane:grantedAt "2026-08-02T00:00:00Z"^^xsd:dateTime ; cplane:grantsPurpose cplane:egress .
+cplane:inv-good a cplane:ToolInvocation ; cplane:admissiblePurpose cplane:egress ; cplane:underConsent cplane:grant-egress ;
+  cplane:executesIn cplane:userSpace ; cplane:actsOnSurface cplane:goose-notes ; cplane:emitsReceipt "sha256:deadbeef" .

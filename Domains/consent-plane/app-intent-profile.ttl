@@ -1,0 +1,35 @@
+@base <https://socioprophet.github.io/ontogenesis/> .
+@prefix cplane: <https://spec.sourceos.dev/vocab/consent-plane#> .
+@prefix agentsys: <https://spec.sourceos.dev/vocab/agent-system#> .
+@prefix upper: <https://socioprophet.github.io/ontogenesis/upper#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+
+<Domains/consent-plane/app-intent-profile.ttl> a owl:Ontology ;
+  dct:title "Ontogenesis Domain — Consent Plane: App Intents & Profiles" ;
+  dct:description "The per-app intent+profile ontology. Each Surface publishes a closed set of Intents (what the app can be asked to do, grounded in the 23x6 intent grid), and an AppProfile that binds each intent to the purposes, spaces, seams, and default consents it is allowed under. This is the app-native analog of Apple App Intents, but every intent is purpose-bound and consent-gated rather than capability-only." ;
+  owl:versionInfo "1.0.0" ;
+  owl:imports <Domains/consent-plane/isolation-spaces.ttl> .
+
+cplane:Intent a owl:Class ; rdfs:subClassOf upper:InformationArtifact ;
+  rdfs:label "Intent" ;
+  rdfs:comment "A named capability a Surface exposes to the agent/user, grounded in the estate intent grid (23 intents x 6 modalities). An Intent is invocable only through a ToolInvocation that binds an admissible purpose — the intent names WHAT, the purpose authorizes WHY." .
+cplane:intentGridCell a owl:DatatypeProperty ; rdfs:domain cplane:Intent ; rdfs:range xsd:string ;
+  rdfs:label "intent grid cell" ; rdfs:comment "Coordinate in the 23x6 grid, e.g. 'sense/text', so per-app intents are traceable to the estate-wide grid (surfacing coverage gaps such as sense=3/23)." .
+cplane:defaultPurpose a owl:ObjectProperty ; rdfs:domain cplane:Intent ; rdfs:range cplane:Purpose ; rdfs:label "default purpose" .
+cplane:allowedInSpace a owl:ObjectProperty ; rdfs:domain cplane:Intent ; rdfs:range cplane:IsolationSpace ; rdfs:label "allowed in space" .
+cplane:touchesSeam a owl:ObjectProperty ; rdfs:domain cplane:Intent ; rdfs:range cplane:SecuritySeam ; rdfs:label "touches seam" .
+
+cplane:AppProfile a owl:Class ; rdfs:subClassOf upper:Policy ;
+  rdfs:label "App Profile" ;
+  rdfs:comment "The governed manifest for one Surface: which intents it publishes, the default consent posture per intent, and the seams it declares. The profile is the unit an operator reviews and the runtime projects fail-closed; an intent absent from the profile is not invocable." .
+cplane:profileFor a owl:ObjectProperty ; rdfs:domain cplane:AppProfile ; rdfs:range cplane:Surface ; rdfs:label "profile for" .
+cplane:publishesIntent a owl:ObjectProperty ; rdfs:domain cplane:AppProfile ; rdfs:range cplane:Intent ; rdfs:label "publishes intent" .
+cplane:defaultConsentPosture a owl:DatatypeProperty ; rdfs:domain cplane:AppProfile ; rdfs:range xsd:string ;
+  rdfs:label "default consent posture" ; rdfs:comment "ask | allow_once | allow_session | deny — the fail-closed default is deny for any egress/administer intent." .
+cplane:featureModifiable a owl:DatatypeProperty ; rdfs:domain cplane:AppProfile ; rdfs:range xsd:boolean ;
+  rdfs:label "feature modifiable" ; rdfs:comment "Whether the user may modify the app's features (Apple-style deep integration, agent-native). Modification is itself an administer-purpose act and is receipted." .
