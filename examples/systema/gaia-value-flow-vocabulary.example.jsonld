@@ -1,0 +1,821 @@
+{
+  "@context": "../../contexts/systema-concept.context.jsonld",
+  "@graph": [
+    {
+      "@id": "systema:concept:carrying-capacity",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:carrying-capacity",
+      "skos:prefLabel": "Carrying Capacity",
+      "skos:altLabel": [
+        "carrying_capacity",
+        "biosphere carrying capacity",
+        "WorldModelSubstrate W read"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:carrying-capacity:v0-1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#carrying_capacity",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Governed replacement for the bare enum/field 'carrying_capacity' in gaia-world-model PR #41 (value-flow subsystem, OPEN). It MUST resolve as a read of the GAIA WorldModelSubstrate W biosphere/resource state, not a free parameter. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:carrying-capacity:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The world-model biosphere/resource carrying capacity that bounds sustainable value flow; a world-state quantity read from WorldModelSubstrate W.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The value_flow_binding.carrying_capacity field must be a pinned read of the gaia world-model substrate, grounding renewable base and the carrying-capacity discount.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "world-model binding evidence anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "using carrying_capacity as a free parameter instead of a world-state read",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:carrying-capacity:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:carrying-capacity",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a WorldModelSubstrate carrying-capacity read binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:carrying-capacity:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of the value-flow-subsystem vocabulary token from gaia-world-model #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:af6c821505df203781bdd658dd392f4d01a4f3d4162479daa6386012f6490cac"
+    },
+    {
+      "@id": "systema:concept:natural-capital",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:natural-capital",
+      "skos:prefLabel": "Natural Capital",
+      "skos:altLabel": [
+        "natural_capital",
+        "biosphere asset",
+        "Jacob's-ladder base rung"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:natural-capital:ep52",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#52:schemas/asset_class_ladder.schema.json#natural_capital",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "The natural_capital rung is defined by ALC-1 (economic-prophet #52, merged) and consumed as a value-flow ecosystem-asset token by gaia-world-model #41."
+        },
+        {
+          "@id": "systema:source-anchor:natural-capital:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#ecosystem_assets",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Consumer binding: value_flow_binding.ecosystem_assets references natural_capital as a world-model biosphere read. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:natural-capital:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The base rung of the asset ladder: the biosphere/resource stock (natural capital), tangible, rival, and renewability-typed.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The asset-ladder rung 'natural_capital'; as a value-flow ecosystem asset it must bind to the world-model biosphere state rather than be asserted.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "asset-ladder rung reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:natural-capital:ep-52",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/asset_class_ladder.schema.json"
+        },
+        {
+          "@id": "systema:surface:natural-capital:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:natural-capital",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:natural-capital:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of asset-ladder rung token; consumer binding gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:c1db0d8f33c493dd6f55787e947c9cf85081430fc9d48061a5872c01f64a8b3d"
+    },
+    {
+      "@id": "systema:concept:extractive-nonrenewable",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:extractive-nonrenewable",
+      "skos:prefLabel": "Extractive Non-Renewable",
+      "skos:altLabel": [
+        "extractive_nonrenewable",
+        "depleting asset",
+        "Hotelling asset"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:extractive-nonrenewable:ep52",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#52:schemas/asset_class_ladder.schema.json#extractive_nonrenewable",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "The extractive_nonrenewable rung is defined by ALC-1 (economic-prophet #52, merged); a non-renewable asset requires a Hotelling depletion path."
+        },
+        {
+          "@id": "systema:source-anchor:extractive-nonrenewable:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#ecosystem_assets",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Consumer binding: value_flow_binding.ecosystem_assets references extractive_nonrenewable against world-model resource state. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:extractive-nonrenewable:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "An asset-ladder rung for non-renewable extractive stocks whose draw must follow a Hotelling depletion path.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The rung 'extractive_nonrenewable'; a fixture drawing it down with no Hotelling path is rejected by ALC-1 and its value-flow binding.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "asset-ladder rung reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:extractive-nonrenewable:ep-52",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/asset_class_ladder.schema.json"
+        },
+        {
+          "@id": "systema:surface:extractive-nonrenewable:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:extractive-nonrenewable",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:extractive-nonrenewable:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of asset-ladder rung token; consumer binding gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:2cb005905ace2c73e7184bb671ee73c5e5dc8b61343d5b549aa2e9275470b67f"
+    },
+    {
+      "@id": "systema:concept:renewable-harvest",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:renewable-harvest",
+      "skos:prefLabel": "Renewable Harvest",
+      "skos:altLabel": [
+        "renewable_harvest",
+        "sustainable-yield asset"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:renewable-harvest:ep52",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet#52:schemas/asset_class_ladder.schema.json#renewable_harvest",
+          "sourceKind": "merged_pr_contract",
+          "extractionConfidence": "B",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "The renewable_harvest rung is defined by ALC-1 (economic-prophet #52, merged); harvest must stay within the regeneration (renewable-delta) margin."
+        },
+        {
+          "@id": "systema:source-anchor:renewable-harvest:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#ecosystem_assets",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Consumer binding: value_flow_binding.ecosystem_assets references renewable_harvest against world-model regeneration state. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:renewable-harvest:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "An asset-ladder rung for renewable stocks harvested within their regeneration margin.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The rung 'renewable_harvest'; a mining-style regenerating fixture or a farming-depleting fixture is rejected.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "asset-ladder rung reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:renewable-harvest:ep-52",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "schemas/asset_class_ladder.schema.json"
+        },
+        {
+          "@id": "systema:surface:renewable-harvest:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:renewable-harvest",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:renewable-harvest:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of asset-ladder rung token; consumer binding gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:81e53a13bb37aca95d597a303d88beec2925bba8f78ea806bdcc0970a0db365c"
+    },
+    {
+      "@id": "systema:concept:qol-index",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:qol-index",
+      "skos:prefLabel": "QoL Index (value-flow binding field)",
+      "skos:altLabel": [
+        "qol_index",
+        "quality-of-life index field"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:qol-index:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#qol_index",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Governed replacement for the bare 'qol_index' field in gaia-world-model PR #41; its dimensions MUST aggregate from human-digital-twin state. Broader welfare objective is systema:concept:global-qol-index. Candidate until PR #41 merges."
+        },
+        {
+          "@id": "systema:source-anchor:qol-index:wea1",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/economic-prophet@feat/welfare-annealing:src/open_ep_framework/welfare_annealing/qol.py",
+          "sourceKind": "in_flight_branch_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "The QoL computation lives in the in-flight WEA-1 welfare-annealing contract."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:qol-index:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The value-flow binding's quality-of-life index field, whose dimensions (life_length, health, education) aggregate from human-digital-twin state.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The value_flow_binding.qol_index object; its dimensions must be reads/aggregations of twin-hierarchy state (population = sum of human digital twins), not asserted constants.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-state aggregation binding anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "asserting QoL dimensions instead of aggregating from twin state",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:qol-index:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        },
+        {
+          "@id": "systema:surface:qol-index:wea-1",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/economic-prophet",
+          "surfacePath": "src/open_ep_framework/welfare_annealing/qol.py"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:qol-index",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a twin-state aggregation binding for every dimension."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:qol-index:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of the value-flow qol_index field token; dimensions registered separately.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:97c401bf47394931cf0310fb0d51af249b6f2c117b852f71ce0ef24766744947"
+    },
+    {
+      "@id": "systema:concept:qol-dim-life-length",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:qol-dim-life-length",
+      "skos:prefLabel": "QoL Dimension: Life Length",
+      "skos:altLabel": [
+        "life_length",
+        "longevity dimension"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:qol-dim-life-length:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#qol_index/life_length",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "One of the three qol_index dimensions in gaia-world-model PR #41; must aggregate from human-digital-twin lifespan state. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:qol-dim-life-length:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The life-length (longevity) dimension of the global QoL index, aggregated from human-digital-twin state.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The qol_index.life_length dimension; a twin-state read, not an asserted constant.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-state aggregation binding anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "asserting the dimension instead of aggregating from twin state",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:qol-dim-life-length:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:qol-dim-life-length",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a twin-state aggregation binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:qol-dim-life-length:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of qol_index dimension token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:636328590b746e5cd5761d0f83ce233f44233c9f4de8ce1366348cc23bc690b6"
+    },
+    {
+      "@id": "systema:concept:qol-dim-health",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:qol-dim-health",
+      "skos:prefLabel": "QoL Dimension: Health",
+      "skos:altLabel": [
+        "health",
+        "health dimension"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:qol-dim-health:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#qol_index/health",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "One of the three qol_index dimensions in gaia-world-model PR #41; must aggregate from human-digital-twin health state (see project_digital_health_twin). Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:qol-dim-health:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The health dimension of the global QoL index, aggregated from human-digital-twin health state.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The qol_index.health dimension; a twin-state read, not an asserted constant.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-state aggregation binding anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "asserting the dimension instead of aggregating from twin state",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:qol-dim-health:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:qol-dim-health",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a twin-state aggregation binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:qol-dim-health:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of qol_index dimension token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:00086feaf190c7acefae471364b1a9a187a7854e3091af246ee360b409e6d064"
+    },
+    {
+      "@id": "systema:concept:qol-dim-education",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:qol-dim-education",
+      "skos:prefLabel": "QoL Dimension: Education",
+      "skos:altLabel": [
+        "education",
+        "education dimension"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:qol-dim-education:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#qol_index/education",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "One of the three qol_index dimensions in gaia-world-model PR #41; must aggregate from human-digital-twin education state. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:qol-dim-education:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The education dimension of the global QoL index, aggregated from human-digital-twin state.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The qol_index.education dimension; a twin-state read, not an asserted constant.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-state aggregation binding anchor",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "asserting the dimension instead of aggregating from twin state",
+        "load-bearing quotation without review",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:qol-dim-education:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:qol-dim-education",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, a registration receipt, and a twin-state aggregation binding."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:qol-dim-education:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of qol_index dimension token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:7a92f95790e1518aa42f8878a0431aadbd6b09fafdf4698ef07757e7090e0a8c"
+    },
+    {
+      "@id": "systema:concept:galactic-space-twin",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:galactic-space-twin",
+      "skos:prefLabel": "Galactic / Space Twin",
+      "skos:altLabel": [
+        "galactic_space_twin",
+        "outermost twin scale"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:galactic-space-twin:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#world_model_ref",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Outermost twin-scale token in the value-flow binding's twin hierarchy (gaia-world-model PR #41). Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:galactic-space-twin:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The outermost scale of the twin hierarchy: the galactic/space twin that contains the world economic twin.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The 'galactic_space_twin' scale token; the containing world-state twin that grounds the value-flow substrate at cosmic scale.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-hierarchy scale reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:galactic-space-twin:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:galactic-space-twin",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:galactic-space-twin:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of twin-scale token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:0d3cca6e13f98265ed3c19325fb9747e6fd65bf3f1d15ec832b9efc3f543f9e7"
+    },
+    {
+      "@id": "systema:concept:world-economic-twin",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:world-economic-twin",
+      "skos:prefLabel": "World Economic Twin",
+      "skos:altLabel": [
+        "world_economic_twin",
+        "economic world-state twin"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:world-economic-twin:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#economic_spine_ref",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Middle twin-scale token: the world economic twin is exactly the value-flow subsystem the economic spine binds into (gaia-world-model PR #41). Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:world-economic-twin:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The middle scale of the twin hierarchy: the world economic twin, i.e. the value-flow subsystem of the world model that the economic spine populates.",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The 'world_economic_twin' scale token; the world model's value-flow subsystem, consumer of the economic-prophet spine by reference.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-hierarchy scale reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:world-economic-twin:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:world-economic-twin",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:world-economic-twin:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of twin-scale token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:356483ecdea888f270c269f9ac7e4cbd232eada91568660ece9fdc8eb2bc2aea"
+    },
+    {
+      "@id": "systema:concept:human-digital-twin",
+      "@type": "ConceptEntry",
+      "conceptId": "systema:concept:human-digital-twin",
+      "skos:prefLabel": "Human Digital Twin",
+      "skos:altLabel": [
+        "human_digital_twin",
+        "innermost twin scale",
+        "population = sum of twins"
+      ],
+      "sourceAnchor": [
+        {
+          "@id": "systema:source-anchor:human-digital-twin:gaia41",
+          "@type": "SourceAnchor",
+          "sourceRef": "SocioProphet/gaia-world-model#41:schemas/economy/value_flow_binding.v1.schema.json#qol_index",
+          "sourceKind": "world_model_binding_contract",
+          "extractionConfidence": "C",
+          "reviewState": "candidate",
+          "quoteBoundary": "operational_translation",
+          "uncertaintyNote": "Innermost twin-scale token: QoL dimensions aggregate from human_digital_twin state (population = sum of twins) per gaia-world-model PR #41; see project_digital_health_twin. Candidate until PR #41 merges."
+        }
+      ],
+      "definition": [
+        {
+          "@id": "systema:definition:human-digital-twin:v0-1",
+          "@type": "ConceptDefinition",
+          "definitionText": "The innermost scale of the twin hierarchy: the human digital twin, from whose state the global QoL index aggregates (population = sum of twins).",
+          "claimLevel": "operational_definition"
+        }
+      ],
+      "operationalDefinition": "The 'human_digital_twin' scale token; the unit whose aggregated state supplies the QoL objective's dimensions.",
+      "allowedUse": [
+        "governed concept ID that gaia-world-model #41 references instead of a bare string",
+        "twin-hierarchy scale reference",
+        "Sherlock evaluated concept results"
+      ],
+      "forbiddenUse": [
+        "load-bearing quotation without review",
+        "analogy as proof",
+        "unowned duplicate definition across repos"
+      ],
+      "implementationSurface": [
+        {
+          "@id": "systema:surface:human-digital-twin:gaia-41",
+          "@type": "ImplementationSurface",
+          "ownerRepo": "SocioProphet/gaia-world-model",
+          "surfacePath": "schemas/economy/value_flow_binding.v1.schema.json"
+        }
+      ],
+      "evidenceRequirement": [
+        {
+          "@id": "systema:evidence-requirement:human-digital-twin",
+          "@type": "EvidenceRequirement",
+          "evidenceRequirementText": "Promotion requires the introducing PR/contract as source anchor, extraction confidence, review state, provenance class, version, and a registration receipt."
+        }
+      ],
+      "promotionState": "source_anchored",
+      "provenanceClass": "learned",
+      "conceptVersion": "0.1.0",
+      "revision": [
+        {
+          "@id": "systema:revision:human-digital-twin:v0-1",
+          "@type": "ConceptRevision",
+          "revisionNote": "Learned extraction of twin-scale token from gaia #41.",
+          "revisionDate": "2026-08-03"
+        }
+      ],
+      "receipt": "sha256:44c064967fe54704797a7212a379e915685fb5c8389dfdcba22a469382e0333e"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "@context": "../../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:no-receipt-ftp",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:no-receipt-ftp",
+  "skos:prefLabel": "Registration with no receipt",
+  "sourceAnchor": [{"@id": "systema:source-anchor:no-receipt:v0-1", "@type": "SourceAnchor", "sourceRef": "SocioProphet/economic-prophet#44:src/open_ep_framework/ftp_curve.py", "sourceKind": "merged_pr_contract", "extractionConfidence": "B", "reviewState": "candidate", "quoteBoundary": "operational_translation", "uncertaintyNote": "Has an anchor but no registration receipt."}],
+  "definition": [{"@id": "systema:definition:no-receipt:v0-1", "@type": "ConceptDefinition", "definitionText": "A concept registered without a content-hash receipt.", "claimLevel": "operational_definition"}],
+  "operationalDefinition": "Must be rejected: a registration without a receipt is inadmissible.",
+  "allowedUse": ["(none — should not be admitted)"],
+  "forbiddenUse": ["registration without a receipt"],
+  "implementationSurface": [{"@id": "systema:surface:no-receipt:x", "@type": "ImplementationSurface", "ownerRepo": "SocioProphet/economic-prophet", "surfacePath": "src/open_ep_framework/ftp_curve.py"}],
+  "evidenceRequirement": [{"@id": "systema:evidence-requirement:no-receipt", "@type": "EvidenceRequirement", "evidenceRequirementText": "Requires a registration receipt."}],
+  "promotionState": "source_anchored",
+  "provenanceClass": "learned",
+  "conceptVersion": "0.1.0",
+  "revision": [{"@id": "systema:revision:no-receipt:v0-1", "@type": "ConceptRevision", "revisionNote": "Negative fixture: no receipt.", "revisionDate": "2026-08-03"}]
+}

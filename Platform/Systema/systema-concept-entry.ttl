@@ -7,9 +7,9 @@
 
 <https://socioprophet.github.io/ontogenesis/platform/systema-concept-entry>
     a owl:Ontology ;
-    owl:versionInfo "0.1.0" ;
+    owl:versionInfo "0.2.0" ;
     rdfs:label "Systema Concept Entry ontology" ;
-    rdfs:comment "Source-anchored concept dictionary model for Systema doctrine-bearing concepts." .
+    rdfs:comment "Source-anchored concept dictionary model for Systema doctrine-bearing concepts. v0.2 adds per-entry governance provenance: provenanceClass (learned|human_authored|imported), conceptVersion, and a content-hash registration receipt." .
 
 systema:SystemaConceptEntry
     a owl:Class ;
@@ -164,6 +164,27 @@ systema:promotionState
     rdfs:domain systema:SystemaConceptEntry ;
     rdfs:range xsd:string ;
     rdfs:label "promotion state" .
+
+systema:provenanceClass
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "provenance class" ;
+    rdfs:comment "How the concept record itself came to be: learned (extracted by pipeline from a source, candidate by default), human_authored (a human wrote or reviewed the definition), or imported (brought in from an external ontology). A human_authored revision may supersede a learned one; the prior ConceptRevision is retained." .
+
+systema:conceptVersion
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "concept version" ;
+    rdfs:comment "SemVer-style version of this concept record. Bumped on every ConceptRevision so a superseding revision is addressable and the prior version stays referenceable." .
+
+systema:receipt
+    a owl:DatatypeProperty ;
+    rdfs:domain systema:SystemaConceptEntry ;
+    rdfs:range xsd:string ;
+    rdfs:label "registration receipt" ;
+    rdfs:comment "Content-hash registration receipt of the form sha256:<hex>, computed over the canonical entry with the receipt field removed. Tamper-evident: a mismatch or absent receipt fails admission. A word without a receipt is not a registered concept." .
 
 systema:revision
     a owl:ObjectProperty ;

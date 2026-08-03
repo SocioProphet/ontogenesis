@@ -1,0 +1,60 @@
+{
+  "@context": "../../../contexts/systema-concept.context.jsonld",
+  "@id": "systema:concept:missing-provenance-ecap",
+  "@type": "ConceptEntry",
+  "conceptId": "systema:concept:missing-provenance-ecap",
+  "skos:prefLabel": "Registration with missing provenance class",
+  "sourceAnchor": [
+    {
+      "@id": "systema:source-anchor:missing-prov:v0-1",
+      "@type": "SourceAnchor",
+      "sourceRef": "SocioProphet/economic-prophet#42:src/open_ep_framework/regulatory_capital.py",
+      "sourceKind": "merged_pr_contract",
+      "extractionConfidence": "B",
+      "reviewState": "candidate",
+      "quoteBoundary": "operational_translation",
+      "uncertaintyNote": "Has an anchor and receipt but no provenance class."
+    }
+  ],
+  "definition": [
+    {
+      "@id": "systema:definition:missing-prov:v0-1",
+      "@type": "ConceptDefinition",
+      "definitionText": "A concept registered without declaring learned|human_authored|imported.",
+      "claimLevel": "operational_definition"
+    }
+  ],
+  "operationalDefinition": "Must be rejected: a registered concept must declare a provenance class.",
+  "allowedUse": [
+    "(none — should not be admitted)"
+  ],
+  "forbiddenUse": [
+    "registration without a provenance class"
+  ],
+  "implementationSurface": [
+    {
+      "@id": "systema:surface:missing-prov:x",
+      "@type": "ImplementationSurface",
+      "ownerRepo": "SocioProphet/economic-prophet",
+      "surfacePath": "src/open_ep_framework/regulatory_capital.py"
+    }
+  ],
+  "evidenceRequirement": [
+    {
+      "@id": "systema:evidence-requirement:missing-prov",
+      "@type": "EvidenceRequirement",
+      "evidenceRequirementText": "Requires a provenance class."
+    }
+  ],
+  "promotionState": "source_anchored",
+  "conceptVersion": "0.1.0",
+  "revision": [
+    {
+      "@id": "systema:revision:missing-prov:v0-1",
+      "@type": "ConceptRevision",
+      "revisionNote": "Negative fixture: missing provenance class.",
+      "revisionDate": "2026-08-03"
+    }
+  ],
+  "receipt": "sha256:346f8f1daf49fed3561471e244385aea01db9d9efce9af65874b7feba00da019"
+}

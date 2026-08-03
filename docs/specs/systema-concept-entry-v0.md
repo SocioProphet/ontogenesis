@@ -44,6 +44,19 @@ Every `systema:SystemaConceptEntry` should include:
 - at least one `systema:implementationSurface`
 - at least one `systema:evidenceRequirement`
 
+### v0.2 governance fields (added)
+
+Every registered `systema:SystemaConceptEntry` also carries:
+
+- `systema:provenanceClass` — `learned | human_authored | imported`;
+- `systema:conceptVersion` — SemVer of the concept record (bumped per revision);
+- `systema:receipt` — content-hash registration receipt `sha256:<hex>` over the
+  canonical entry (tamper-evident).
+
+A concept with no `SourceAnchor`, no receipt, or no provenance class is inadmissible;
+a concept may not be promoted past `reviewed_definition` on an unreviewed anchor.
+See `docs/specs/finance-arc-concept-registration.md`.
+
 ## Promotion states
 
 ```text
